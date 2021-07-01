@@ -1,0 +1,93 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Docker 伺服</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201227173504-847cs1q" type="doc" updated="20210502171807" data-n-id="20201227173504-847cs1q"><h1 data-type="NodeDocument" data-n-id="20201227173504-847cs1q" type="doc" updated="20210502171807" data-n-id="20201227173504-847cs1q">Docker 伺服</h1>
+<p updated="20210302223601" data-type="NodeParagraph" data-n-id="20201227173504-opkavin">在服务器上伺服思源笔记最简单的方案是通过 Docker 部署，镜像名称是 <code data-type="NodeCodeSpan">b3log/siyuan</code>，目前没有版本标签，只有最新版。</p>
+<h2 id="文件结构" data-type="NodeHeading" data-n-id="20201227174700-39dg7ur">文件结构<a id="vditorAnchor-文件结构" class="vditor-anchor" href="#文件结构"><img src="./../assets/icon/alink.png" /></a></h2>
+<p data-type="NodeParagraph" data-n-id="20201227174134-hptryqy">整体程序位于 <code data-type="NodeCodeSpan">/opt/siyuan/</code> 下，基本上就是 Electron 安装包 resources 文件夹下的结构：</p>
+<ul data-type="NodeList" data-n-id="20201227174705-0hl54vz">
+<li data-type="NodeListItem" data-n-id="20201227174714-t7ew8rk"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-jwvzb91">appearance：图标、主题、多语言</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227174726-zztkpj2"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-em39k3o">guide：帮助文档</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227174744-z7qo4j2"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-1tyrmez">stage：界面和静态资源</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227174842-tr8u7q0"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-99h8xv0">kernel：内核程序</p>
+</li>
+</ul>
+<h2 id="启动入口" data-type="NodeHeading" data-n-id="20201227174908-s19h988">启动入口<a id="vditorAnchor-启动入口" class="vditor-anchor" href="#启动入口"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210301202239" data-type="NodeParagraph" data-n-id="20201227180709-rglrztt">构建 Docker 镜像时设置了入口：<code data-type="NodeCodeSpan">ENTRYPOINT [ &quot;/opt/siyuan/kernel&quot; ]</code>，使用 <code data-type="NodeCodeSpan">docker run b3log/siyuan</code> 并带参即可启动：</p>
+<ul data-type="NodeList" data-n-id="20201227201453-yh75kqd">
+<li data-type="NodeListItem" data-n-id="20201227201514-c7brkss"><span class="ListItemDot"></span>
+<p updated="20210502164159" data-type="NodeParagraph" data-n-id="20210208145140-7f45i9c"><code data-type="NodeCodeSpan">--workspace</code> 指定工作空间文件夹路径，在宿主机上通过 <code data-type="NodeCodeSpan">-v</code> 挂载到容器中</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227201521-fs7hlwf"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-tgabyhf"><code data-type="NodeCodeSpan">--resident</code> 指定为 true 常驻内存</p>
+</li>
+</ul>
+<p updated="20210502164429" data-type="NodeParagraph" data-n-id="20210301201353-sffb1m7">更多的参数可参考<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%90%af%e5%8a%a8%e5%8f%82%e6%95%b0.html#20201225172241-ifgc4hm" title="这里"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%90%af%e5%8a%a8%e5%8f%82%e6%95%b0.html#20201225172241-ifgc4hm">这里</a></oceanpress-block-ref >。下面是一条启动命令示例：<code data-type="NodeCodeSpan">docker run -v workspace_dir_host:workspace_dir_container -p 6806:6806 b3log/siyuan --resident=true --workspace=workspace_dir_container</code></p>
+<ul data-type="NodeList" data-n-id="20201227174657-0k1ruhd">
+<li data-type="NodeListItem" data-n-id="20201227193950-dp2hioi"><span class="ListItemDot"></span>
+<p updated="20210502164152" data-type="NodeParagraph" data-n-id="20210208145140-w9i02jr"><code data-type="NodeCodeSpan">workspace_dir_host</code>：宿主机上的工作空间文件夹路径</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227194032-68h45ue"><span class="ListItemDot"></span>
+<p updated="20210502164311" data-type="NodeParagraph" data-n-id="20210208145140-2ave4tv"><code data-type="NodeCodeSpan">workspace_dir_container</code>：容器内工作空间文件夹路径，和后面 <code data-type="NodeCodeSpan">--workspace</code> 指定成一样的</p>
+</li>
+</ul>
+<p updated="20210502171807" data-type="NodeParagraph" data-n-id="20201227194509-hdnzkry">为了简化，建议将 workspace 文件夹路径在宿主机和容器上配置为一致的，比如将 <code data-type="NodeCodeSpan">workspace_dir_host</code> 和 <code data-type="NodeCodeSpan">workspace_dir_container</code> 都配置为 <code data-type="NodeCodeSpan">/siyuan/workspace</code>，对应的启动命令示例：<code data-type="NodeCodeSpan">docker run -v /siyuan/workspace:/siyuan/workspace -p 6806:6806 b3log/siyuan --resident=true --workspace=/siyuan/workspace/</code></p>
+<h2 id="内核-API" data-type="NodeHeading" data-n-id="20201227194925-7ipoiv6">内核 API<a id="vditorAnchor-内核-API" class="vditor-anchor" href="#内核-API"><img src="./../assets/icon/alink.png" /></a></h2>
+<h3 id="打开文件夹" data-type="NodeHeading" data-n-id="20201227195443-zxgp2sw">打开文件夹<a id="vditorAnchor-打开文件夹" class="vditor-anchor" href="#打开文件夹"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201227195224-cnwhfri">POST <code data-type="NodeCodeSpan">/notebook/mount</code>，参数：</p>
+<ul data-type="NodeList" data-n-id="20201227195500-v08m84n">
+<li data-type="NodeListItem" data-n-id="20201227195626-jsv1r80"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-lxewxwx"><code data-type="NodeCodeSpan">url</code>：固定传入 <code data-type="NodeCodeSpan">http://127.0.0.1:6806/siyuan/</code>，即 box.url</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201227195644-i7xcm1g"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-vcsnpch"><code data-type="NodeCodeSpan">path</code>：内核数据文件夹下的某个文件夹路径，即 box.path</p>
+</li>
+</ul>
+<h3 id="关闭文件夹" data-type="NodeHeading" data-n-id="20201227195737-xbkf95m">关闭文件夹<a id="vditorAnchor-关闭文件夹" class="vditor-anchor" href="#关闭文件夹"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201227195742-df6gznf">POST <code data-type="NodeCodeSpan">/notebook/unmount</code>，参数：</p>
+<ul data-type="NodeList" data-n-id="20201227195758-qsyk4py">
+<li data-type="NodeListItem" data-n-id="20201227195805-rq7h6m9"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210208145140-qaqj3jl"><code data-type="NodeCodeSpan">url</code>：固定传入 <code data-type="NodeCodeSpan">http://127.0.0.1:6806/siyuan/</code>，即 box.url</p>
+</li>
+</ul>
+</main><div class="oceanpress-backLink"></div>
+</main>

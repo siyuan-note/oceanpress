@@ -1,0 +1,159 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>0 数据库表</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201222093044-rx4zjoy" type="doc" updated="20210321225614" data-n-id="20201222093044-rx4zjoy"><h1 data-type="NodeDocument" data-n-id="20201222093044-rx4zjoy" type="doc" updated="20210321225614" data-n-id="20201222093044-rx4zjoy">0 数据库表</h1>
+<h2 id="-表" data-type="NodeHeading" data-n-id="20201117103851-l9cahuc"><code data-type="NodeCodeSpan">blocks</code> 表<a id="vditorAnchor--表" class="vditor-anchor" href="#-表"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210302223329" data-type="NodeParagraph" data-n-id="20201224120447-bx9fwlf">该表用于存储内容块数据。</p>
+<table updated="20210321225614" data-type="NodeTable" data-n-id="20201224120447-cs6ur9x">
+<thead>
+<tr>
+<th align="right">字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">id</td>
+<td>内容块 ID</td>
+</tr>
+<tr>
+<td align="right">parent_id</td>
+<td>父块 ID，如果内容块是文档块则该字段为空</td>
+</tr>
+<tr>
+<td align="right">root_id</td>
+<td>根块 ID，即文档块 ID</td>
+</tr>
+<tr>
+<td align="right">box</td>
+<td>笔记本名</td>
+</tr>
+<tr>
+<td align="right">path</td>
+<td>内容块所在文档路径</td>
+</tr>
+<tr>
+<td align="right">name</td>
+<td>内容块名称</td>
+</tr>
+<tr>
+<td align="right">alias</td>
+<td>内容块别名</td>
+</tr>
+<tr>
+<td align="right">memo</td>
+<td>内容块备注</td>
+</tr>
+<tr>
+<td align="right">content</td>
+<td>去除了 Markdown 标记符的文本</td>
+</tr>
+<tr>
+<td align="right">markdown</td>
+<td>包含完整 Markdown 标记符的文本</td>
+</tr>
+<tr>
+<td align="right">length</td>
+<td>Markdown 文本长度</td>
+</tr>
+<tr>
+<td align="right">type</td>
+<td>内容块类型，参考<oceanpress-block-ref src="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/1%20%e7%b1%bb%e5%9e%8b%e8%bf%87%e6%bb%a4.html#20210210103523-ombf290" title="这里"><a href="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/1%20%e7%b1%bb%e5%9e%8b%e8%bf%87%e6%bb%a4.html#20210210103523-ombf290">这里</a></oceanpress-block-ref ></td>
+</tr>
+<tr>
+<td align="right">subtype</td>
+<td>内容块子类型，参考<oceanpress-block-ref src="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/1%20%e7%b1%bb%e5%9e%8b%e8%bf%87%e6%bb%a4.html#20210210103411-tcbcjja" title="这里"><a href="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/1%20%e7%b1%bb%e5%9e%8b%e8%bf%87%e6%bb%a4.html#20210210103411-tcbcjja">这里</a></oceanpress-block-ref ></td>
+</tr>
+<tr>
+<td align="right">ial</td>
+<td>内联属性列表，形如 <code data-type="NodeCodeSpan">{: name=&quot;value&quot;}</code></td>
+</tr>
+<tr>
+<td align="right">sort</td>
+<td>排序用，数值越小排序越靠前</td>
+</tr>
+<tr>
+<td align="right">created</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td align="right">updated</td>
+<td>更新时间</td>
+</tr>
+</tbody>
+</table>
+<h2 id="默认值" data-type="NodeHeading" data-n-id="20201224120447-lezmdb3">默认值<a id="vditorAnchor-默认值" class="vditor-anchor" href="#默认值"><img src="./../assets/icon/alink.png" /></a></h2>
+<ul data-type="NodeList" data-n-id="20201224120447-ij3ivd5">
+<li data-type="NodeListItem" data-n-id="20201224120447-u4tbyb3"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-n6gscfx">如果不指定 <code data-type="NodeCodeSpan">LIMIT</code>，则最多只返回前 32 条结果</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160050-sd8nvwk"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-4q63z1f"><code data-type="NodeCodeSpan">sort</code> 字段</p>
+<ul data-type="NodeList" data-n-id="20210112160059-bc0lg2b">
+<li data-type="NodeListItem" data-n-id="20210112160058-9fxe2cs"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-i2foidw">文档块：<code data-type="NodeCodeSpan">0</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160120-74nf28j"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-f9jdxfd">标题块：<code data-type="NodeCodeSpan">5</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160128-ajksb4l"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-8wel0el">列表块：<code data-type="NodeCodeSpan">10</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160134-jegbp95"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-9ea3c68">列表项块：<code data-type="NodeCodeSpan">15</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160148-bgv6nmp"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-xl25mej">代码块：<code data-type="NodeCodeSpan">20</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160155-vwh31wo"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-j8ezlwx">数学公式块：<code data-type="NodeCodeSpan">25</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160211-ny8ss1u"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-3qq7tgh">表格块：<code data-type="NodeCodeSpan">30</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160220-6gthmlb"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-hk5c2ws">引述块：<code data-type="NodeCodeSpan">35</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160228-qiq0ink"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-ssvttec">超级块：<code data-type="NodeCodeSpan">40</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210112160238-ngi9f2u"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103236-7f2kvb2">段落块：<code data-type="NodeCodeSpan">45</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</main><div class="oceanpress-backLink"></div>
+</main>

@@ -1,0 +1,104 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板片段</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201204181006-7bkppue" type="doc" updated="20210504093332" data-n-id="20201204181006-7bkppue"><h1 data-type="NodeDocument" data-n-id="20201204181006-7bkppue" type="doc" updated="20210504093332" data-n-id="20201204181006-7bkppue">模板片段</h1>
+<h2 id="概述" id="20210428214921-3rfhrt6" data-type="NodeHeading" data-n-id="20210428214921-3rfhrt6">概述<a id="vditorAnchor-概述" class="vditor-anchor" href="#概述"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210428230754" data-type="NodeParagraph" data-n-id="20210104091309-h61sdjr">模板片段用于在光标插入符位置快速插入之前设置好的文本内容，支持变量。模板片段使用 <code data-type="NodeCodeSpan">.md</code> 后缀文件，存放在工作空间 data/templates 文件夹下。</p>
+<p updated="20210428230924" data-type="NodeParagraph" data-n-id="20210428230842-g4pxf4a">目前请使用其他文本编辑器编写模板，后续思源将支持内置编辑。<em data-type="NodeTag">#TODO#</em></p>
+<h2 id="编写模板" data-type="NodeHeading" data-n-id="20210104091309-fhb549c">编写模板<a id="vditorAnchor-编写模板" class="vditor-anchor" href="#编写模板"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210502204926" data-type="NodeParagraph" data-n-id="20210104091309-siekt4x">模板使用的是 <a href="https://golang.org/pkg/text/template/">Go 编程语言的文本模板</a>进行实现，如果你对此有了解的话，可以实现一些程序逻辑在里面，比如比较逻辑、迭代逻辑等。另外，为了避免语法冲突，模板语法使用 <code data-type="NodeCodeSpan">.action{action}</code>（而不是 <code data-type="NodeCodeSpan">{{action}}</code>）。</p>
+<p updated="20210502204943" data-type="NodeParagraph" data-n-id="20210104091309-mvyh081">我们通过开源项目 <a href="https://github.com/Masterminds/sprig">Sprig</a> 内置了一些变量和函数来丰富模板。比如可通过 <code data-type="NodeCodeSpan">.action{now | date &quot;2006-01-02 15:04:05​&quot;}</code> 来渲染当前时间，更多用法请参考 <a href="http://masterminds.github.io/sprig/">Sprig 帮助文档</a>。</p>
+<p updated="20210428223417" data-type="NodeParagraph" data-n-id="20210104091309-vnxe81t">关于日期时间格式化有个细节需要<em data-type="NodeTag">#注意#</em>：Go 编程语言的格式化比较特殊：不是使用 <code data-type="NodeCodeSpan">yyyy-MM-dd HH:mm:ss</code>，而是使用 <code data-type="NodeCodeSpan">2006-01-02 15:04:05</code> 这个固定时间格式（<a href="https://www.zhihu.com/question/366830553">知乎讨论</a>）。</p>
+<p data-type="NodeParagraph" data-n-id="20210104091309-os47lco">除了 Sprig 内置的变量和函数，还支持如下变量和函数：</p>
+<ul data-type="NodeList" data-n-id="20210104091309-gjkg3u5">
+<li data-type="NodeListItem" data-n-id="20210104091309-p88fqma"><span class="ListItemDot"></span>
+<p updated="20210502204955" data-type="NodeParagraph" data-n-id="20210131155558-loq0tt3"><code data-type="NodeCodeSpan">title</code>：该变量用于插入当前文档名。比如模板内容为 <code data-type="NodeCodeSpan"># .action{.title}</code>，则调用后会以一级标题语法插入到当前文档内容中</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210221131427-rfs2tcl"><span class="ListItemDot"></span>
+<p updated="20210428223457" data-type="NodeParagraph" data-n-id="20210221131427-mx22ukt"><code data-type="NodeCodeSpan">id</code>：该变量用于插入当前文档 ID</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210121193601-uwo8s5h"><span class="ListItemDot"></span>
+<p updated="20210504092933" data-type="NodeParagraph" data-n-id="20210131155558-ghlchbx"><code data-type="NodeCodeSpan">queryBlocks</code>：该函数用于查询数据库，返回值为 blocks 列表，参数为 SQL 语句：<code data-type="NodeCodeSpan">.action{sql &quot;SELECT * FROM blocks LIMIT 7&quot;}</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210504093313-4aoyxd0"><span class="ListItemDot"></span>
+<p updated="20210504093332" data-type="NodeParagraph" data-n-id="20210504093313-ya53o58"><code data-type="NodeCodeSpan">querySpans</code>：该函数用于查询数据库，返回值为 spans 列表，参数为 SQL 语句：<code data-type="NodeCodeSpan">.action{sql &quot;SELECT * FROM spans LIMIT 7&quot;}</code></p>
+</li>
+</ul>
+<h2 id="调用模板" data-type="NodeHeading" data-n-id="20210104091309-h71ogwf">调用模板<a id="vditorAnchor-调用模板" class="vditor-anchor" href="#调用模板"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210428221604" data-type="NodeParagraph" data-n-id="20210104091309-l9wcdtk">在光标插入符位置，通过 <code data-type="NodeCodeSpan">/</code> 选择模板来触发模板搜索，找到需要插入的模板后回车即可。</p>
+<h2 id="一个示例" data-type="NodeHeading" data-n-id="20210104091309-2p68yju">一个示例<a id="vditorAnchor-一个示例" class="vditor-anchor" href="#一个示例"><img src="./../assets/icon/alink.png" /></a></h2>
+<pre data-type="NodeCodeBlock" data-n-id="20210104091309-9ppkq6j" class="code-block" data-language="plaintext"><code>.action{$before := (div (now.Sub (toDate &quot;2006-01-02&quot; &quot;2020-02-19&quot;)).Hours 24)}
+
+.action{$after := (div ((toDate &quot;2006-01-02&quot; &quot;2048-02-19&quot;).Sub now).Hours 24)}
+今天是 `.action{now | date &quot;2006-01-02&quot;}`。
+
+* 距离 `2020-02-19` 已经过去 `.action{$before}` 天
+* 距离 `2048-02-19` 还剩 `.action{$after}` 天
+</code></pre>
+<p data-type="NodeParagraph" data-n-id="20210104091309-06sv04x"><code data-type="NodeCodeSpan">$before</code> 和 <code data-type="NodeCodeSpan">$after</code> 定义了两个变量，分别记录当前日期距离 2020 年和 2048 年的天数。</p>
+<h2 id="上架模板集市" data-type="NodeHeading" data-n-id="20210131162925-p51ey8q">上架模板集市<a id="vditorAnchor-上架模板集市" class="vditor-anchor" href="#上架模板集市"><img src="./../assets/icon/alink.png" /></a></h2>
+<p data-type="NodeParagraph" data-n-id="20210131162925-ececb6c">上架前请确认你的模板仓库根路径下至少包含这两个文件（<a href="https://github.com/88250/November-Rain">仓库示例</a>）：</p>
+<ul data-type="NodeList" data-n-id="20210131162925-lyyl9sm">
+<li data-type="NodeListItem" data-n-id="20210131162925-mzvnu0y"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210131162925-owpf9yl">template.json（请确保 JSON 格式正确）</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210131162925-kvgwgr7"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210131162925-m5sxpc7">preview.png（请压缩图片大小在 128 KB 以内）</p>
+</li>
+</ul>
+<p data-type="NodeParagraph" data-n-id="20210131162925-ld2wv38">确认无误以后请通过对<a href="https://github.com/siyuan-note/bazaar">社区集市</a>仓库<a href="https://docs.github.com/cn/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request">发起 pull request</a>，修改 templates.json 文件。该文件是所有社区模板仓库的索引，格式为：</p>
+<pre data-type="NodeCodeBlock" data-n-id="20210131162925-01ixzvb" class="code-block" data-language="json"><code>{
+  &quot;repos&quot;: [
+    &quot;username/reponame@commithash&quot;
+  ]
+}
+</code></pre>
+<p data-type="NodeParagraph" data-n-id="20210131162925-tos2g00">其中 <code data-type="NodeCodeSpan">commithash</code> 请填写你的模板仓库上最近一次发布版本的 Git 提交哈希值，请使用完整哈希值，不要使用 7 位短值。</p>
+<h4 id="更新" data-type="NodeHeading" data-n-id="20210131162925-e2aq6sa">更新<a id="vditorAnchor-更新" class="vditor-anchor" href="#更新"><img src="./../assets/icon/alink.png" /></a></h4>
+<p data-type="NodeParagraph" data-n-id="20210131162925-1q8zsu9">如果你开发的模板更新了版本，请记得：</p>
+<ul data-type="NodeList" data-n-id="20210131162925-z512z4z">
+<li data-type="NodeListItem" data-n-id="20210131162925-kxy0t2r"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210131162925-vg6sggf">更新你的模板配置 template.json 中的 version 字段</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210131162925-g7efau2"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210131162925-3qgjytc">再次对社区集市发起 Pull Request</p>
+</li>
+</ul>
+</main><div class="oceanpress-backLink"><h2>链接到此文档的相关文档</h2>
+<oceanpress-embedded-block src="../3%20%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e7%ad%94.html#20210428213944-7a9j1uc" title="../3 常见问题与解答.html#20210428213944-7a9j1uc">
+    <p updated="20210428222707" data-type="NodeParagraph" data-n-id="20210428213944-7a9j1uc"><code data-type="NodeCodeSpan">templates</code> 用于保存<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e6%a8%a1%e6%9d%bf%e7%89%87%e6%ae%b5.html#20201204181006-7bkppue" title="模板片段"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e6%a8%a1%e6%9d%bf%e7%89%87%e6%ae%b5.html#20201204181006-7bkppue">模板片段</a></oceanpress-block-ref ></p>
+</oceanpress-embedded-block>
+</div>
+</main>

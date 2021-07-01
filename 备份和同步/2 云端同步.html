@@ -1,0 +1,94 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2 云端同步</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201002090736-ausltg7" type="doc" updated="20210501163256" data-n-id="20201002090736-ausltg7"><h1 data-type="NodeDocument" data-n-id="20201002090736-ausltg7" type="doc" updated="20210501163256" data-n-id="20201002090736-ausltg7">2 云端同步</h1>
+<h2 id="数据同步" updated="20210226094055" data-type="NodeHeading" data-n-id="20210104090536-acjo6y9">数据同步<a id="vditorAnchor-数据同步" class="vditor-anchor" href="#数据同步"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210315222554" data-type="NodeParagraph" data-n-id="20210104090536-2cgwojq">数据同步功能是思源笔记的<a href="https://b3log.org/siyuan/advanced_features.html">高级特性</a>，需要付费才能使用。同步分为上传和下载两个方向：</p>
+<ul updated="20210315222550" data-type="NodeList" data-n-id="20210226094137-sbo9zgf">
+<li data-type="NodeListItem" data-n-id="20210315222550-2dx5or8"><span class="ListItemDot"></span>
+<p updated="20210315222618" data-type="NodeParagraph" data-n-id="20210315222550-xaglslj">执行上传时会用本地数据覆盖云端数据</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210315222550-ismws2t"><span class="ListItemDot"></span>
+<p updated="20210323173309" data-type="NodeParagraph" data-n-id="20210315222550-dcuzp8q">执行下载时会用云端数据覆盖本地数据。出现冲突时，被覆盖的本地数据会自动备份到笔记本 <code data-type="NodeCodeSpan">.siyuan/backup/</code> 文件夹下，执行上传时该文件夹不会被上传到云端，也就是说备份仅在当前本地端上存在</p>
+</li>
+</ul>
+<h2 id="云端空间大小" updated="20210226095026" data-type="NodeHeading" data-n-id="20210104090536-glx26lw">云端空间大小<a id="vditorAnchor-云端空间大小" class="vditor-anchor" href="#云端空间大小"><img src="./../assets/icon/alink.png" /></a></h2>
+<ul data-type="NodeList" data-n-id="20210104090536-4rge55p">
+<li data-type="NodeListItem" data-n-id="20210104090536-9mfin9z"><span class="ListItemDot"></span>
+<p updated="20210315222738" data-type="NodeParagraph" data-n-id="20210204192116-mqravc2">同一用户下所有笔记本加起来最大存储空间为 <code data-type="NodeCodeSpan">8G</code>。可通过推荐新的付费订阅用户进行扩容，每推荐一个新订阅用户，则双方都奖励 500M 存储空间以及延长 7 天使用。每个账号的推荐上限次数为 32 次，也就是说理论上可以免费扩容到 <code data-type="NodeCodeSpan">24G</code></p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210104090536-vqkaomb"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210204192116-6646hl3">付费订阅到期以后，会保留数据 1 个月，如果在此期间没有续费，1 个月以后将彻底删除数据</p>
+</li>
+</ul>
+<h2 id="同步使用流程" data-type="NodeHeading" data-n-id="20210104090536-6v8ljkd">同步使用流程<a id="vditorAnchor-同步使用流程" class="vditor-anchor" href="#同步使用流程"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210327175154" data-type="NodeParagraph" data-n-id="20210226095102-j0kgnh4">需要在文件树上选择需要同步的笔记本，在右键下拉菜单中选择设置，并在设置界面中打开同步选项，这样该笔记本才会被纳入到同步中。</p>
+<p updated="20210327174112" data-type="NodeParagraph" data-n-id="20210327174016-tjfw4g9">同步分为两种模式，手动同步模式（默认）和自动同步模式。</p>
+<ul updated="20210327180822" data-type="NodeList" data-n-id="20210327174103-2ddxf3l">
+<li data-type="NodeListItem" data-n-id="20210327180822-lpcb4t8"><span class="ListItemDot"></span>
+<p updated="20210327180826" data-type="NodeParagraph" data-n-id="20210327180822-9rsu8av">手动同步：点击同步按钮，选择需要上传或者下载</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210327180827-780qbsp"><span class="ListItemDot"></span>
+<p updated="20210327182051" data-type="NodeParagraph" data-n-id="20210327180827-nlc2i3e">自动同步：打开设置 - 同步 - 自动同步开关。自动同步每隔 30 秒进行一次扫描</p>
+<ul data-type="NodeList" data-n-id="20210327180917-2fng95p">
+<li data-type="NodeListItem" data-n-id="20210327180917-loj7451"><span class="ListItemDot"></span>
+<p updated="20210501163253" data-type="NodeParagraph" data-n-id="20210327180917-lvypo37">如果发现云端数据有新的变更，则会自动下载</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210327180927-l05c1kp"><span class="ListItemDot"></span>
+<p updated="20210501163256" data-type="NodeParagraph" data-n-id="20210327180927-ahny42b">如果发现本地数据有新的变更，则会自动上传</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="新设备上初次下载" updated="20210327175302" data-type="NodeHeading" data-n-id="20210327175244-ayhis2q">新设备上初次下载<a id="vditorAnchor-新设备上初次下载" class="vditor-anchor" href="#新设备上初次下载"><img src="./../assets/icon/alink.png" /></a></h3>
+<p updated="20210327181104" data-type="NodeParagraph" data-n-id="20210204192116-5b8yk4s">在新设备上点击设置 - 同步 - 云端笔记本 - 从云端下载。</p>
+<h2 id="同步注意事项" updated="20210327175812" data-type="NodeHeading" data-n-id="20210327175742-m0opu7e">同步<em data-type="NodeTag">#注意#</em>事项<a id="vditorAnchor-同步注意事项" class="vditor-anchor" href="#同步注意事项"><img src="./../assets/icon/alink.png" /></a></h2>
+<ul updated="20210327180150" data-type="NodeList" data-n-id="20210327175756-haewzrs">
+<li data-type="NodeListItem" data-n-id="20210327175815-j3ijo3s"><span class="ListItemDot"></span>
+<p updated="20210331084510" data-type="NodeParagraph" data-n-id="20210327175815-uwj22cl">移动端同步不支持笔记本名称包含空格</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210327180022-jrrh0nq"><span class="ListItemDot"></span>
+<p updated="20210327180621" data-type="NodeParagraph" data-n-id="20210327180022-uayeqo4">使用手动同步模式时请注意确认方向（是上传还是下载），因为目标侧数据会被覆盖</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210327180720-nwqp5hc"><span class="ListItemDot"></span>
+<p updated="20210327182524" data-type="NodeParagraph" data-n-id="20210327180720-vzfoy2u">使用自动同步模式时，请确保各个设备的时间是一致的</p>
+</li>
+</ul>
+</main><div class="oceanpress-backLink"><h2>链接到此文档的相关文档</h2>
+<oceanpress-embedded-block src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20210104090909-7bnc3wb" title="../通用操作/在浏览器上使用.html#20210104090909-7bnc3wb">
+    <p updated="20210327181823" data-type="NodeParagraph" data-n-id="20210104090909-7bnc3wb">付费用户除了可以使用思源在线工作空间，还可以使用分享发布功能。在笔记本上右键下拉菜单中选择设置，然后打开分享发布开关。分享发布依赖<oceanpress-block-ref src="../%e5%a4%87%e4%bb%bd%e5%92%8c%e5%90%8c%e6%ad%a5/2%20%e4%ba%91%e7%ab%af%e5%90%8c%e6%ad%a5.html#20201002090736-ausltg7" title="云端同步"><a href="../%e5%a4%87%e4%bb%bd%e5%92%8c%e5%90%8c%e6%ad%a5/2%20%e4%ba%91%e7%ab%af%e5%90%8c%e6%ad%a5.html#20201002090736-ausltg7">云端同步</a></oceanpress-block-ref >，需要将本地数据上传到云端。</p>
+</oceanpress-embedded-block>
+</div>
+</main>

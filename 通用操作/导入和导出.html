@@ -1,0 +1,82 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导入和导出</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20200813125307-pxsjela" type="doc" updated="20210417113254" data-n-id="20200813125307-pxsjela"><h1 data-type="NodeDocument" data-n-id="20200813125307-pxsjela" type="doc" updated="20210417113254" data-n-id="20200813125307-pxsjela">导入和导出</h1>
+<h2 id="导入" data-type="NodeHeading" data-n-id="20201229120428-dgzkno8">导入<a id="vditorAnchor-导入" class="vditor-anchor" href="#导入"><img src="./../assets/icon/alink.png" /></a></h2>
+<p data-type="NodeParagraph" data-n-id="20210120161018-1mdw4fy">在文件树上选择文件夹后右键选择“导入”，二级菜单可选择导入文件夹或者导入单个文件。</p>
+<p updated="20210302223616" data-type="NodeParagraph" data-n-id="20210120153405-vzgduc3">导入过程主要完成如下转换处理：</p>
+<ul data-type="NodeList" data-n-id="20210120153519-rld70zm">
+<li data-type="NodeListItem" data-n-id="20210120153519-8ge83a5"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-c5lcift">解析并生成内容块</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210120153519-k5hgpvy"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-0pmcoee">将 <code data-type="NodeCodeSpan">[[link|text]]</code> 转换为内容块引用</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210120153519-zf0asi8"><span class="ListItemDot"></span>
+<p updated="20210417113254" data-type="NodeParagraph" data-n-id="20210302223614-29zn3z6">将 <code data-type="NodeCodeSpan">#tag </code> 转换为 <code data-type="NodeCodeSpan">#tag#</code></p>
+</li>
+</ul>
+<p data-type="NodeParagraph" data-n-id="20210127230439-67tpryr"><em data-type="NodeTag">#注意#</em>：在系统上直接将标准 Markdown 文件拷贝到笔记本文件夹下不会自动转换，必须使用导入功能。</p>
+<h2 id="导出" data-type="NodeHeading" data-n-id="20201229120428-9k34lga">导出<a id="vditorAnchor-导出" class="vditor-anchor" href="#导出"><img src="./../assets/icon/alink.png" /></a></h2>
+<h3 id="编辑内容复制" data-type="NodeHeading" data-n-id="20210120154937-u6g9q4l">编辑内容复制<a id="vditorAnchor-编辑内容复制" class="vditor-anchor" href="#编辑内容复制"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201229120428-uk4lxtt">在编辑器中选择内容后右键菜单中可以看到复制选项：</p>
+<ul data-type="NodeList" data-n-id="20210120154922-7odfdje">
+<li data-type="NodeListItem" data-n-id="20210120154923-qyvocvc"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-1gevaqf">复制：主要用于思源内部（kramdown）</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210120154924-a1hs4ib"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-itzq64j">复制为标准 Markdown：复制到思源以外的其他地方</p>
+</li>
+</ul>
+<h3 id="全文导出" data-type="NodeHeading" data-n-id="20210120154948-gl0hxz6">全文导出<a id="vditorAnchor-全文导出" class="vditor-anchor" href="#全文导出"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201229120428-ysyvyt4">在文件树上选择文档后右键选择“导出”：</p>
+<ul data-type="NodeList" data-n-id="20201229120428-sokahme">
+<li data-type="NodeListItem" data-n-id="20201229120428-3zal4fw"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-aj1pupk">Markdown：遵循 GFM/CommonMark 标准的 Markdown 文件</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201229120428-xmlcn3a"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-5xw32nw"><a href="http://textbundle.org">TextBundle</a>：打包 Markdown 及其关联的资源文件，以提供更好的 Markdown 迁移性</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20201229120428-rbzugkm"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-6mzkgcu">PDF</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210120155702-mhp0c0s"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223614-zc7v8ds">HTML</p>
+</li>
+</ul>
+<p data-type="NodeParagraph" data-n-id="20201229120428-gjqhua5">如果需要导出更多格式，请通过 <a href="https://pandoc.org">Pandoc</a> 完成。</p>
+<p data-type="NodeParagraph" data-n-id="20210117224547-1m32ykj">在文件树上选择文件夹后右键选择“导出”是批量导出操作，导出的是标准 Markdown 文件压缩包。</p>
+</main><div class="oceanpress-backLink"></div>
+</main>

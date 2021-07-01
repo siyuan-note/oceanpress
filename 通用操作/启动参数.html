@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>启动参数</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20200828105441-r76vmu5" type="doc" updated="20210502164212" data-n-id="20200828105441-r76vmu5"><h1 data-type="NodeDocument" data-n-id="20200828105441-r76vmu5" type="doc" updated="20210502164212" data-n-id="20200828105441-r76vmu5">启动参数</h1>
+<h2 id="思源内核" data-type="NodeHeading" data-n-id="20201225172241-ifgc4hm">思源内核<a id="vditorAnchor-思源内核" class="vditor-anchor" href="#思源内核"><img src="./../assets/icon/alink.png" /></a></h2>
+<h3 id="" updated="20210502162554" data-type="NodeHeading" data-n-id="20201225172241-7rtm3t1"><code data-type="NodeCodeSpan">--workspace</code><a id="vditorAnchor-" class="vditor-anchor" href="#"><img src="./../assets/icon/alink.png" /></a></h3>
+<p updated="20210502164212" data-type="NodeParagraph" data-n-id="20201225172241-yg7dr9h">用于指定工作空间文件夹路径，不指定时的默认值是 <code data-type="NodeCodeSpan">~/Documents/SiYuan/</code>。</p>
+<h3 id="-" data-type="NodeHeading" data-n-id="20201225172241-xmughi5"><code data-type="NodeCodeSpan">--wd</code><a id="vditorAnchor--" class="vditor-anchor" href="#-"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172241-hmpvq05">内核工作目录路径，不指定时按内核可执行文件入口自动获取。</p>
+<h3 id="--" data-type="NodeHeading" data-n-id="20201225172241-fcg3fsk"><code data-type="NodeCodeSpan">--servePath</code><a id="vditorAnchor---" class="vditor-anchor" href="#--"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172241-lvrwm82">用于指定伺服路径，默认值为 <code data-type="NodeCodeSpan">window.location.hostname+&quot;:6806&quot;</code>。</p>
+<p data-type="NodeParagraph" data-n-id="20201225172241-qobh9gl">如果需要使用 <code data-type="NodeCodeSpan">xxx.com/custom/</code> 作为虚拟目录或 location 时请指定该参数。</p>
+<h3 id="---" data-type="NodeHeading" data-n-id="20201225172241-opf042s"><code data-type="NodeCodeSpan">--resident</code><a id="vditorAnchor----" class="vditor-anchor" href="#---"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172241-84qsa3m">使用 <code data-type="NodeCodeSpan">--resident=true</code> 指定后内核将常驻内存，默认 <code data-type="NodeCodeSpan">true</code>。</p>
+<p data-type="NodeParagraph" data-n-id="20201225172241-t7tw5b8">设置为 <code data-type="NodeCodeSpan">false</code> 后会每隔 30 秒检查一次活动会话列表，如果没有活动会话则退出内核进程。</p>
+<h3 id="----" data-type="NodeHeading" data-n-id="20201225172241-n1lxchm"><code data-type="NodeCodeSpan">--readonly</code><a id="vditorAnchor-----" class="vditor-anchor" href="#----"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172241-5nmdh8n">使用 <code data-type="NodeCodeSpan">--readonly=true</code> 指定后内核将以只读模式运行，所有写入操作将被禁止。</p>
+<h3 id="-----" data-type="NodeHeading" data-n-id="20210117224112-8i8ptea"><code data-type="NodeCodeSpan">--authCode</code><a id="vditorAnchor------" class="vditor-anchor" href="#-----"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20210117224121-gtdkur4">用于指定浏览器访问<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20210104090909-20f2hvi" title="鉴权密码"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20210104090909-20f2hvi">鉴权密码</a></oceanpress-block-ref >，设置后会覆盖 conf.json 中的 authCode。</p>
+<h3 id="------" data-type="NodeHeading" data-n-id="20201225172241-vxb8nxf"><code data-type="NodeCodeSpan">--auth</code><a id="vditorAnchor-------" class="vditor-anchor" href="#------"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172241-dczo2za">使用 <code data-type="NodeCodeSpan">--auth=true</code> 后将使用 conf.json 中 user 数据进行鉴权，该参数主要用于思源在线空间鉴权，自助伺服时请勿指定。</p>
+<h3 id="-------" data-type="NodeHeading" data-n-id="20201225172417-1j2r118"><code data-type="NodeCodeSpan">--ssl</code><a id="vditorAnchor--------" class="vditor-anchor" href="#-------"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201225172431-z7yelgn">使用 <code data-type="NodeCodeSpan">--ssl=true</code> 后将使用 https 和 wss 协议进行伺服。</p>
+<p data-type="NodeParagraph" data-n-id="20210208145159-6odj0h1"></p>
+</main><div class="oceanpress-backLink"></div>
+</main>

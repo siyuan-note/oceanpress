@@ -1,0 +1,64 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>0 什么是内容块</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20200813004931-q4cu8na" type="doc" updated="20210501172546" data-n-id="20200813004931-q4cu8na"><h1 data-type="NodeDocument" data-n-id="20200813004931-q4cu8na" type="doc" updated="20210501172546" data-n-id="20200813004931-q4cu8na">0 什么是内容块</h1>
+<h2 id="内容块定义" data-type="NodeHeading" data-n-id="20210118100623-i00rgj0">内容块定义<a id="vditorAnchor-内容块定义" class="vditor-anchor" href="#内容块定义"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210415202214" data-type="NodeParagraph" data-n-id="20210118100631-nhy9fe2">“<em data-type="NodeTag">#内容块#</em>”指的是一块内容，每块这样的内容通过一个全局唯一的 ID 进行标识。ID 是程序自动生成的，形如： <code data-type="NodeCodeSpan">202008250000-a1b2c3d</code>，由时间和 7 位随机字符组成。</p>
+<h2 id="内容块类型" id="20210104090752-2n7t087" data-type="NodeHeading" data-n-id="20210104090752-2n7t087">内容块类型<a id="vditorAnchor-内容块类型" class="vditor-anchor" href="#内容块类型"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210415202512" data-type="NodeParagraph" data-n-id="20210104090752-98ivtnt">最常见的内容块就是我们所熟悉的段落（Paragraph）。在中文传统排版中，段落通常是通过段首缩进（空两格）来表示，随着互联网的发展，逐渐影响了段落的表示。现在使用较多的方式是增加段落之间的行距，或者使用空行来分隔段落。</p>
+<p data-type="NodeParagraph" data-n-id="20210104090752-7efgvis">实际使用时，仅仅靠段落排版是不够的，往往还需要用到标题（Heading）、列表（List）、表格（Table）、块引用（Blockquote）等来丰富我们的排版。这些排版样式除了视觉上的不同，更重要的是它们在一定程度上表达了内容的语义。比如在看到无序列表时，我们可以知道每个列表项是不分先后的平级关系，而在看到有序列表时则相反。</p>
+<p updated="20210415202309" data-type="NodeParagraph" data-n-id="20210104090752-c49qfvi">所以，内容块存在<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/1%20%e5%86%85%e5%ae%b9%e5%9d%97%e7%b1%bb%e5%9e%8b.html#20200905090211-2vixtlf" title="很多类型"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/1%20%e5%86%85%e5%ae%b9%e5%9d%97%e7%b1%bb%e5%9e%8b.html#20200905090211-2vixtlf">很多类型</a></oceanpress-block-ref >，不同的排版格式会形成不同的内容块。<em data-type="NodeTag">#内容块/类型#</em></p>
+<h2 id="组合内容块" data-type="NodeHeading" data-n-id="20210104090752-qxk7yz6">组合内容块<a id="vditorAnchor-组合内容块" class="vditor-anchor" href="#组合内容块"><img src="./../assets/icon/alink.png" /></a></h2>
+<p data-type="NodeParagraph" data-n-id="20210104090752-cg21nhc">一篇文档是一些内容块的组合，内容块是基本单位。这就好比乐高积木，可以使用不同的基本模块进行组合。<em data-type="NodeTag">#注意#</em>：文档本身也是一种内容块，更准确地说，文档块、列表块、引述块这三种内容块是容器块，他们可以包含其他任意类型的内容块。<em data-type="NodeTag">#内容块/组合#</em></p>
+<p data-type="NodeParagraph" data-n-id="20210104090752-hjcn822">至此，我们已经能够用内容块来描述所有的内容了，这样就能通过统一的用法来<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813013559-sgbzl5k" title="链接内容块"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813013559-sgbzl5k">链接内容块</a></oceanpress-block-ref >了。逻辑上没有页面（Page）概念，减少使用中不必要的负担，让用户将注意力集中在内容块上。</p>
+<h2 id="命名和备注" data-type="NodeHeading" data-n-id="20210118101911-tbt6kkp">命名和备注<a id="vditorAnchor-命名和备注" class="vditor-anchor" href="#命名和备注"><img src="./../assets/icon/alink.png" /></a></h2>
+<p memo="备注通常是一句简短的话。" data-type="NodeParagraph" data-n-id="20210118101917-4n4ygss">我们可以为每个内容块命名、添加别名和备注。命名和别名主要用于反链<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/3%20%e5%9c%a8%e5%86%85%e5%ae%b9%e5%9d%97%e4%b8%ad%e9%81%a8%e6%b8%b8.html#20210106201736-oyu11fw" title="提及"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/3%20%e5%9c%a8%e5%86%85%e5%ae%b9%e5%9d%97%e4%b8%ad%e9%81%a8%e6%b8%b8.html#20210106201736-oyu11fw">提及</a></oceanpress-block-ref >搜索，备注用于记录一些不便在内容区中出现的信息。</p>
+<p data-type="NodeParagraph" data-n-id="20210118102327-mybetkv">在设置 - 编辑器中打开显示书签、命名、别名标识选项后，被命名的内容块在编辑器中会被加上外框显示。如果对文档块进行命名和备注，则当鼠标悬浮文件树文档上时将浮出该文档的相关命名和备注信息。</p>
+<p updated="20210501172546" data-type="NodeParagraph" data-n-id="20210118103020-bjtu89u">可使用<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum">内容块嵌入</a></oceanpress-block-ref >对命名和备注进行搜索汇总，比如列出备注中包含 <code data-type="NodeCodeSpan">简短</code> 关键字的内容块：</p>
+
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20210118101917-4n4ygss" title="../内容块/0 什么是内容块.html#20210118101917-4n4ygss">
+    <p memo="备注通常是一句简短的话。" data-type="NodeParagraph" data-n-id="20210118101917-4n4ygss">我们可以为每个内容块命名、添加别名和备注。命名和别名主要用于反链<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/3%20%e5%9c%a8%e5%86%85%e5%ae%b9%e5%9d%97%e4%b8%ad%e9%81%a8%e6%b8%b8.html#20210106201736-oyu11fw" title="提及"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/3%20%e5%9c%a8%e5%86%85%e5%ae%b9%e5%9d%97%e4%b8%ad%e9%81%a8%e6%b8%b8.html#20210106201736-oyu11fw">提及</a></oceanpress-block-ref >搜索，备注用于记录一些不便在内容区中出现的信息。</p>
+</oceanpress-embedded-block>
+<p data-type="NodeParagraph" data-n-id="20210127204409-yjgww90"></p>
+</main><div class="oceanpress-backLink"><h2>链接到此文档的相关文档</h2>
+<oceanpress-embedded-block src="../0%20%e8%af%b7%e4%bb%8e%e8%bf%99%e9%87%8c%e5%bc%80%e5%a7%8b.html#20210428212840-8rqwn5o" title="../0 请从这里开始.html#20210428212840-8rqwn5o">
+    <p updated="20210428213045" data-type="NodeParagraph" data-n-id="20210428212840-8rqwn5o">在思源笔记中，唯一重要的核心概念是<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na" title="内容块"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na">内容块</a></oceanpress-block-ref >。通过排版格式即可形成内容块，在内容块的粒度上对思绪和知识进行整理，同时也能方便长文输出。</p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20210104090557-841hf2w" title="../内容块/2 链接内容块.html#20210104090557-841hf2w">
+    <p data-type="NodeParagraph" data-n-id="20210104090557-841hf2w">对于<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na" title="内容块"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na">内容块</a></oceanpress-block-ref > ，最富有价值的使用方式就是通过<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200817123136-in6y5m1" title="内容块引用"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200817123136-in6y5m1">内容块引用</a></oceanpress-block-ref >和<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200920190726-xw7fial" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20200920190726-xw7fial">内容块嵌入</a></oceanpress-block-ref >来链接它们。建立好的链接是有方向的：</p>
+</oceanpress-embedded-block>
+</div>
+</main>

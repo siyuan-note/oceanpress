@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5 内容块嵌入</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201117101902-2ewjjum" type="doc" updated="20210503152123" data-n-id="20201117101902-2ewjjum"><h1 data-type="NodeDocument" data-n-id="20201117101902-2ewjjum" type="doc" updated="20210503152123" data-n-id="20201117101902-2ewjjum">5 内容块嵌入</h1>
+<h2 id="语法" data-type="NodeHeading" data-n-id="20210111224435-y1fesd1">语法<a id="vditorAnchor-语法" class="vditor-anchor" href="#语法"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210503150741" data-type="NodeParagraph" data-n-id="20201224120447-1ros46z">内容块嵌入主要用于汇总所需内容块，通过 <code data-type="NodeCodeSpan">{{</code> 和 <code data-type="NodeCodeSpan">}}</code> 将 SQL 脚本包裹起来并独占一行：<code data-type="NodeCodeSpan">{{ SELECT * FROM blocks WHERE content LIKE '%关键字%' }}</code>，数据库表请参考<oceanpress-block-ref src="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/0%20%e6%95%b0%e6%8d%ae%e5%ba%93%e8%a1%a8.html#20201117103851-l9cahuc" title="这里"><a href="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/0%20%e6%95%b0%e6%8d%ae%e5%ba%93%e8%a1%a8.html#20201117103851-l9cahuc">这里</a></oceanpress-block-ref >。</p>
+<h2 id="示例" data-type="NodeHeading" data-n-id="20201224120447-e6zyfti">示例<a id="vditorAnchor-示例" class="vditor-anchor" href="#示例"><img src="./../assets/icon/alink.png" /></a></h2>
+<ul updated="20210503152123" data-type="NodeList" data-n-id="20201224120447-znjkoy5">
+<li data-type="NodeListItem" data-n-id="20201224120447-n30ybcs"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20201224120447-qmgtpok">查询内容中包含 <code data-type="NodeCodeSpan">内容块</code> 的列表项：</p>
+<pre data-type="NodeCodeBlock" data-n-id="20201224120447-7zxu4l5" class="code-block" data-language="sql"><code>{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND type = 'i' }}
+</code></pre></li>
+<li data-type="NodeListItem" data-n-id="20201224120447-s8m8new"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20201224120447-5c10xrv">查询内容中同时包含 <code data-type="NodeCodeSpan">内容块</code> 和 <code data-type="NodeCodeSpan">引用</code> 段落块：</p>
+<pre data-type="NodeCodeBlock" data-n-id="20201224120447-0y91i5d" class="code-block" data-language="sql"><code>{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%引用%' AND type = 'p') }}
+</code></pre></li>
+<li data-type="NodeListItem" data-n-id="20201224120447-7lzhgko"><span class="ListItemDot"></span>
+<p updated="20210503151034" data-type="NodeParagraph" data-n-id="20201224120447-pnqwe31">查询内容中同时包含 <code data-type="NodeCodeSpan">内容块</code> 和 <code data-type="NodeCodeSpan">嵌入</code> 的标题块并按更新时间降序结果取前 2 条：</p>
+<pre data-type="NodeCodeBlock" data-n-id="20201224120447-zgg5lvx" class="code-block" data-language="sql"><code>{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%嵌入%' AND type = 'h' ORDER BY updated DESC LIMIT 2 }}
+</code></pre></li>
+</ul>
+<h3 id="案例一" data-type="NodeHeading" data-n-id="20201224120447-fnapz6h">案例一<a id="vditorAnchor-案例一" class="vditor-anchor" href="#案例一"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201224120447-acd7hwp">查询同时包含 <code data-type="NodeCodeSpan">在思源笔记中</code> 和 <code data-type="NodeCodeSpan">核心概念</code> 文本的段落块，并排除当前文档（否则当段落块也会包含到结果集中，因为当前段落同样包含了这两个文本，下面的案例类似）：</p>
+
+<oceanpress-embedded-block src="../0%20%e8%af%b7%e4%bb%8e%e8%bf%99%e9%87%8c%e5%bc%80%e5%a7%8b.html#20210428212840-8rqwn5o" title="../0 请从这里开始.html#20210428212840-8rqwn5o">
+    <p updated="20210428213045" data-type="NodeParagraph" data-n-id="20210428212840-8rqwn5o">在思源笔记中，唯一重要的核心概念是<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na" title="内容块"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20200813004931-q4cu8na">内容块</a></oceanpress-block-ref >。通过排版格式即可形成内容块，在内容块的粒度上对思绪和知识进行整理，同时也能方便长文输出。</p>
+</oceanpress-embedded-block>
+<h3 id="案例二" data-type="NodeHeading" data-n-id="20201224120447-ickbh88">案例二<a id="vditorAnchor-案例二" class="vditor-anchor" href="#案例二"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201224120447-53y8c84">查询同时包含标签 <code data-type="NodeCodeSpan">#内容块/嵌入#</code> 和 <code data-type="NodeCodeSpan">#内容块/引用#</code> 的段落块：</p>
+
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20210104090557-s8jwrnu" title="../内容块/2 链接内容块.html#20210104090557-s8jwrnu">
+    <p data-type="NodeParagraph" data-n-id="20210104090557-s8jwrnu">内容块引用的完整语法是：<code data-type="NodeCodeSpan"> ((id &quot;text&quot;))</code>，其中 <code data-type="NodeCodeSpan">id</code> 形如： <code data-type="NodeCodeSpan">202008250000-a1b2c3d</code>，由时间和 7 位随机字符组成，内容块 id 是在创建内容块时就会自动生成的；后面的 <code data-type="NodeCodeSpan">text</code> 是在引用处对该内容块的自定义锚文本。建立好内容块引用后，鼠标悬浮在锚文本上后将弹出预览浮层，展现被引用的内容块。<em data-type="NodeTag">#内容块/引用#</em></p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20210104090557-hxmlvry" title="../内容块/2 链接内容块.html#20210104090557-hxmlvry">
+    <p updated="20210501172636" data-type="NodeParagraph" data-n-id="20210104090557-hxmlvry">在新一行的开始处输入 <code data-type="NodeCodeSpan">{{</code> 后将触发内容块嵌入搜索，和内容块引用一样，在搜索结果中选择需要的内容块就可以完成嵌入了，更多细节请参考<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum">内容块嵌入</a></oceanpress-block-ref >。嵌入操作完成后下方将直接展现被嵌入的内容块。<em data-type="NodeTag">#内容块/嵌入#</em></p>
+</oceanpress-embedded-block>
+<h3 id="案例三" data-type="NodeHeading" data-n-id="20201224120447-v7yfh5v">案例三<a id="vditorAnchor-案例三" class="vditor-anchor" href="#案例三"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20201224120447-s5zmpsa">有时候我们可能需要随机漫游显示内容块，以方便回顾。</p>
+
+<oceanpress-embedded-block src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%af%bc%e5%85%a5%e5%92%8c%e5%af%bc%e5%87%ba.html#20210302223614-aj1pupk" title="../通用操作/导入和导出.html#20210302223614-aj1pupk">
+    <p data-type="NodeParagraph" data-n-id="20210302223614-aj1pupk">Markdown：遵循 GFM/CommonMark 标准的 Markdown 文件</p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e6%90%9c%e7%b4%a2%e8%bf%9b%e9%98%b6/1%20%e7%b1%bb%e5%9e%8b%e8%bf%87%e6%bb%a4.html#20210210103854-uecruhh" title="../搜索进阶/1 类型过滤.html#20210210103854-uecruhh">
+    <li data-type="NodeListItem" data-n-id="20210210103854-uecruhh"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210210103854-5x6ed8g"><code data-type="NodeCodeSpan">h4</code>：四级</p>
+</li>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e7%bc%96%e8%be%91%e5%99%a8/2%20%e6%8e%92%e7%89%88%e6%95%99%e7%a8%8b.html#20210104091228-mrn0ben" title="../编辑器/2 排版教程.html#20210104091228-mrn0ben">
+    <pre data-type="NodeCodeBlock" data-n-id="20210104091228-mrn0ben" class="code-block" data-language=""><code>![alt 文本](http://image-path.png)
+![alt 文本](http://image-path.png &quot;图片 Title 值&quot;)
+</code></pre>
+</oceanpress-embedded-block>
+</main><div class="oceanpress-backLink"><h2>链接到此文档的相关文档</h2>
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/0%20%e4%bb%80%e4%b9%88%e6%98%af%e5%86%85%e5%ae%b9%e5%9d%97.html#20210118103020-bjtu89u" title="../内容块/0 什么是内容块.html#20210118103020-bjtu89u">
+    <p updated="20210501172546" data-type="NodeParagraph" data-n-id="20210118103020-bjtu89u">可使用<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum">内容块嵌入</a></oceanpress-block-ref >对命名和备注进行搜索汇总，比如列出备注中包含 <code data-type="NodeCodeSpan">简短</code> 关键字的内容块：</p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e5%86%85%e5%ae%b9%e5%9d%97/2%20%e9%93%be%e6%8e%a5%e5%86%85%e5%ae%b9%e5%9d%97.html#20210104090557-hxmlvry" title="../内容块/2 链接内容块.html#20210104090557-hxmlvry">
+    <p updated="20210501172636" data-type="NodeParagraph" data-n-id="20210104090557-hxmlvry">在新一行的开始处输入 <code data-type="NodeCodeSpan">{{</code> 后将触发内容块嵌入搜索，和内容块引用一样，在搜索结果中选择需要的内容块就可以完成嵌入了，更多细节请参考<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum">内容块嵌入</a></oceanpress-block-ref >。嵌入操作完成后下方将直接展现被嵌入的内容块。<em data-type="NodeTag">#内容块/嵌入#</em></p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e6%97%a5%e8%ae%b0.html#20210110180249-yz7jbt6" title="../通用操作/日记.html#20210110180249-yz7jbt6">
+    <p updated="20210501172601" data-type="NodeParagraph" data-n-id="20210110180249-yz7jbt6">小提示：在指定的模板使用<oceanpress-block-ref src="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum" title="内容块嵌入"><a href="../%e5%86%85%e5%ae%b9%e5%9d%97/5%20%e5%86%85%e5%ae%b9%e5%9d%97%e5%b5%8c%e5%85%a5.html#20201117101902-2ewjjum">内容块嵌入</a></oceanpress-block-ref >，可以汇总待办事项或者需要每日查看的内容块。</p>
+</oceanpress-embedded-block>
+</div>
+</main>

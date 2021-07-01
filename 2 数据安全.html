@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2 数据安全</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./assets/js_css/theme.css">
+    <link rel="stylesheet" href="./assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20210117211155-56n4odu" type="doc" updated="20210501163203" data-n-id="20210117211155-56n4odu"><h1 data-type="NodeDocument" data-n-id="20210117211155-56n4odu" type="doc" updated="20210501163203" data-n-id="20210117211155-56n4odu">2 数据安全</h1>
+<h2 id="概述" data-type="NodeHeading" data-n-id="20210117212652-vpmkfab">概述<a id="vditorAnchor-概述" class="vditor-anchor" href="#概述"><img src="./assets/icon/alink.png" /></a></h2>
+<p updated="20210302223432" data-type="NodeParagraph" data-n-id="20210117212533-b9xm7h6">数据安全主要分为两方面：</p>
+<ol data-type="NodeList" data-n-id="20210117212708-r91v56h">
+<li data-type="NodeListItem" data-n-id="20210117212709-9pqqca2"><span class="ListItemDot">1.</span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-kskwppo">可用性：数据不丢失、不冲突，保持数据的完整和一致</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117212736-zxyunns"><span class="ListItemDot">2.</span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-u69b9pd">机密性：数据不被泄漏、不被篡改</p>
+</li>
+</ol>
+<p data-type="NodeParagraph" data-n-id="20210117213032-48sgu29">思源笔记对这两方面都进行了一定支持，但限于环境因素，我们只能尽量做到我们能做的范围。下面我们描述安全方面的一些限制和使用建议。</p>
+<h2 id="明文存储" data-type="NodeHeading" data-n-id="20210117213252-rjh6iu2">明文存储<a id="vditorAnchor-明文存储" class="vditor-anchor" href="#明文存储"><img src="./assets/icon/alink.png" /></a></h2>
+<ul data-type="NodeList" data-n-id="20210117213258-m2gevi3">
+<li data-type="NodeListItem" data-n-id="20210117213526-cy3oj8v"><span class="ListItemDot"></span>
+<p updated="20210501163156" data-type="NodeParagraph" data-n-id="20210302223430-44dbhvt">数据是明文保存在文本文件中的，任何能够访问这些文本文件的人或软件都读取其中的数据</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117213528-fp23mvh"><span class="ListItemDot"></span>
+<p updated="20210501163203" data-type="NodeParagraph" data-n-id="20210302223430-1hpa148">数据的可用性依赖于硬件磁盘和操作系统的可用性</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117213559-nxqexcx"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-rpniezx">数据完整性和一致性同上。这里需要特别说明：如果本地启用了同步网盘，可能会降低一致性（同步盘可能会产生多份数据副本）</p>
+</li>
+</ul>
+<h2 id="云端同步" data-type="NodeHeading" data-n-id="20210117211513-nelhsjf">云端同步<a id="vditorAnchor-云端同步" class="vditor-anchor" href="#云端同步"><img src="./assets/icon/alink.png" /></a></h2>
+<ul data-type="NodeList" data-n-id="20210117211549-zwzqxal">
+<li data-type="NodeListItem" data-n-id="20210117211626-ancm11q"><span class="ListItemDot"></span>
+<p updated="20210402001600" data-type="NodeParagraph" data-n-id="20210302223430-xxbtwgy">通过 SSH 协议实现安全网络传输</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117220437-9peylmh"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-ay6t3m6">云端使用了阿里云提供的块存储服务和每三天一次的磁盘快照，理论上可靠性能够保障</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117211627-x8eeqxr"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-6ypcozu">云端仓库没有加密，思源笔记团队的两个核心开发者以及阿里云相关运维人员能够看到数据</p>
+</li>
+</ul>
+<p data-type="NodeParagraph" data-n-id="20210117211706-91vtya7">如果有需要保密的内容，请勿使用云端同步功能。这里主要受限于网络相关法律法规：作为服务提供商，我们需要在必要的时候能够看到数据明文。这一点适用于所有在中国大陆地区合规运营的互联网服务。</p>
+<h2 id="建议" data-type="NodeHeading" data-n-id="20210117212440-bkk6f95">建议<a id="vditorAnchor-建议" class="vditor-anchor" href="#建议"><img src="./assets/icon/alink.png" /></a></h2>
+<ul data-type="NodeList" data-n-id="20210117214728-szj3mg9">
+<li data-type="NodeListItem" data-n-id="20210117215237-1mbl2ly"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-wz2k547">数据定期备份到多个离线设备上</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210117214814-lm8tmiq"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223430-u4v0huy">如果数据非常重要（比如重要密码、密钥或者核心机密等），不要使用任何软件或服务保存（操作系统软件、网络环境等都有安全风险）</p>
+</li>
+</ul>
+</main><div class="oceanpress-backLink"></div>
+</main>

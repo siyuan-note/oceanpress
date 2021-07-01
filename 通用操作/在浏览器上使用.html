@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="zh">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>在浏览器上使用</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    
+
+    
+
+    
+    <script src="./../assets/front-end-lib/all_components.js"></script>
+    
+        
+        
+        
+
+
+    
+
+    <link rel="stylesheet" href="./../assets/js_css/theme.css">
+    <link rel="stylesheet" href="./../assets/js_css/github-markdown-css.css">
+</head>
+
+
+
+<main id="static_app_llej" class="markdown-body">
+    <main data-type="NodeDocument" data-n-id="20201004184819-nj8ibyg" type="doc" updated="20210501194730" data-n-id="20201004184819-nj8ibyg"><h1 data-type="NodeDocument" data-n-id="20201004184819-nj8ibyg" type="doc" updated="20210501194730" data-n-id="20201004184819-nj8ibyg">在浏览器上使用</h1>
+<h2 id="浏览器用法" updated="20210501194730" data-type="NodeHeading" data-n-id="20210104090909-6pyfjgx">浏览器用法<a id="vditorAnchor-浏览器用法" class="vditor-anchor" href="#浏览器用法"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210302223612" data-type="NodeParagraph" data-n-id="20210104090909-3fkdb8b">思源笔记桌面端是基于 <a href="https://www.electronjs.org">Electron</a> 打包的独立应用，但这并不唯一的使用方式。只要启动思源笔记内核后，就能在浏览器上直接使用了，支持移动端浏览器。</p>
+<ul data-type="NodeList" data-n-id="20210104090909-z9210o7">
+<li data-type="NodeListItem" data-n-id="20210104090909-5occty9"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223610-ngnee0k">桌面端网页版：使用体验几乎和 Electron 独立应用一致</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210104090909-ipt2k4r"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223610-hnshr1s">移动端网页版：为移动端使用体验设计</p>
+</li>
+</ul>
+<p data-type="NodeParagraph" data-n-id="20210104090909-5ucwkfd">访问 <code data-type="NodeCodeSpan">http://127.0.0.1:6806/</code> 后会自动根据浏览器版本切换桌面端或移动端。</p>
+<p data-type="NodeParagraph" data-n-id="20210104090909-z2r76p3">如果需要在局域网内使用，将 <code data-type="NodeCodeSpan">127.0.0.1</code> 换成局域网 IP 地址即可。除了本地局域网使用，这里提供两个自助方案实现公网使用：</p>
+<ul data-type="NodeList" data-n-id="20210104090909-dcl5tif">
+<li data-type="NodeListItem" data-n-id="20210104090909-qoham0m"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223610-18yksf1">通过“内网穿透”技术将本地内核服务发布在公网上（较为麻烦且不稳定，不推荐）</p>
+</li>
+<li data-type="NodeListItem" data-n-id="20210104090909-mtbso6l"><span class="ListItemDot"></span>
+<p data-type="NodeParagraph" data-n-id="20210302223610-l2uqi6m">自行搭建思源笔记服务端（推荐）</p>
+</li>
+</ul>
+<p updated="20210501194658" data-type="NodeParagraph" data-n-id="20210104090909-9ldxx4v">在着手前，请从了解<a href="https://ld246.com/article/1619868273581#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84">思源笔记技术架构</a>开始。除以上方案外，付费用户可以直接使用我们伺服的网页端<a href="https://ld246.com/xanadu/">思源在线工作空间</a>以实现全端使用。</p>
+<h3 id="访问鉴权" data-type="NodeHeading" data-n-id="20210104090909-9x9sqe8">访问鉴权<a id="vditorAnchor-访问鉴权" class="vditor-anchor" href="#访问鉴权"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20210104090909-20f2hvi">在设置 - 关于中可配置浏览器访问鉴权密码，留空表示不启用鉴权。这在开放网络（比如办公场所和公网）会比较有用，只有鉴权通过后才能进入工作空间。</p>
+<h2 id="分享发布" data-type="NodeHeading" data-n-id="20210104090909-vicbrf5">分享发布<a id="vditorAnchor-分享发布" class="vditor-anchor" href="#分享发布"><img src="./../assets/icon/alink.png" /></a></h2>
+<p updated="20210327181823" data-type="NodeParagraph" data-n-id="20210104090909-7bnc3wb">付费用户除了可以使用思源在线工作空间，还可以使用分享发布功能。在笔记本上右键下拉菜单中选择设置，然后打开分享发布开关。分享发布依赖<oceanpress-block-ref src="../%e5%a4%87%e4%bb%bd%e5%92%8c%e5%90%8c%e6%ad%a5/2%20%e4%ba%91%e7%ab%af%e5%90%8c%e6%ad%a5.html#20201002090736-ausltg7" title="云端同步"><a href="../%e5%a4%87%e4%bb%bd%e5%92%8c%e5%90%8c%e6%ad%a5/2%20%e4%ba%91%e7%ab%af%e5%90%8c%e6%ad%a5.html#20201002090736-ausltg7">云端同步</a></oceanpress-block-ref >，需要将本地数据上传到云端。</p>
+<p data-type="NodeParagraph" data-n-id="20210104090909-8oacpxn">分享发布空间不需要登录即可访问，访客以只读模式浏览，支持大部分特性，比如浏览关系图、搜索、浏览标签书签、多窗口页签等。</p>
+<p data-type="NodeParagraph" data-n-id="20210104090909-nfbbkpz"><em data-type="NodeTag">#注意#</em>：如果要分享链接给别人，请使用你的分享发布入口链接（<code data-type="NodeCodeSpan">https://ld246.com/udanax/你的uid</code>），不要使用进入主界面以后的链接（即不要使用带 <code data-type="NodeCodeSpan">/stage/</code> 的链接）。</p>
+<h3 id="内容块-URL" data-type="NodeHeading" data-n-id="20210104090909-07x6jec">内容块 URL<a id="vditorAnchor-内容块-URL" class="vditor-anchor" href="#内容块-URL"><img src="./../assets/icon/alink.png" /></a></h3>
+<p data-type="NodeParagraph" data-n-id="20210104090909-wmjxs94">通过访问 <code data-type="NodeCodeSpan">/blocks/{id}</code> 后在编辑器页签中打开，该 URL 可以提供给其他软件进行内容块定位，或者用于局域网分享。</p>
+<p data-type="NodeParagraph" data-n-id="20210104090909-pgobimr">在文件树上选中文档右键然后在选择“复制 URL”即可获取到该文档的 URL，可以在浏览器上打开。其他类型的内容块 id 可以在编辑器中点击内容块标识后看到“复制 URL”。</p>
+<p data-type="NodeParagraph" data-n-id="20210117210851-87cdi7m"></p>
+</main><div class="oceanpress-backLink"><h2>链接到此文档的相关文档</h2>
+<oceanpress-embedded-block src="../3%20%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e7%ad%94.html#20201224120447-pm4sntk" title="../3 常见问题与解答.html#20201224120447-pm4sntk">
+    <p data-type="NodeParagraph" data-n-id="20201224120447-pm4sntk">思源笔记支持<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20201004184819-nj8ibyg" title="在浏览器上使用"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20201004184819-nj8ibyg">在浏览器上使用</a></oceanpress-block-ref >，可以通过浏览器插件来扩展功能。我们很期待其他开发者为思源笔记编写浏览器插件。随着<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/Docker%20%e4%bc%ba%e6%9c%8d.html#20201227194925-7ipoiv6" title="内核 API"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/Docker%20%e4%bc%ba%e6%9c%8d.html#20201227194925-7ipoiv6">内核 API</a></oceanpress-block-ref > 的逐步提供，后续我们会引入插件机制。</p>
+</oceanpress-embedded-block>
+
+<oceanpress-embedded-block src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e7%aa%97%e5%8f%a3%e5%92%8c%e9%a1%b5%e7%ad%be.html#20210104091259-86iaf33" title="../通用操作/窗口和页签.html#20210104091259-86iaf33">
+    <p updated="20210401004103" data-type="NodeParagraph" data-n-id="20210104091259-86iaf33">如果你正在使用的设备屏幕较小，可以考虑<oceanpress-block-ref src="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20201004184819-nj8ibyg" title="通过浏览器使用"><a href="../%e9%80%9a%e7%94%a8%e6%93%8d%e4%bd%9c/%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8a%e4%bd%bf%e7%94%a8.html#20201004184819-nj8ibyg">通过浏览器使用</a></oceanpress-block-ref >，这样就能通过浏览器实例进行界面切换。</p>
+</oceanpress-embedded-block>
+</div>
+</main>
