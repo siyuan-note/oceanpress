@@ -1,0 +1,7 @@
+mode:
+  - http
+
+malagu:
+  cloud:
+    region: us-east-1
+
