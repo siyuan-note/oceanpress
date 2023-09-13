@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: yarn && yarn workspace frontend build
 
-      # 2、部署到 dist 分支
+      # 2、部署到 gh-pages 分支
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
