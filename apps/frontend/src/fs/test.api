@@ -1,0 +1,4 @@
+POST http://127.0.0.1:60023/api/filetree/getDoc HTTP/1.1
+content-type: application/json
+
+{"id":"20200813093015-u6bopdt","isBacklink":false,"mode":0,"size":48}
