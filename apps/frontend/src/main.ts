@@ -4,15 +4,11 @@ import App from "./App.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 // 1. 定义路由组件.
 // 也可以从其他文件导入
-import steps from "@/pages/steps.vue";
-import preview from "@/pages/preview.vue";
+import steps from "@/pages/steps/steps.vue";
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
-const routes = [
-  { path: "/", component: steps },
-  { path: "/preview/:path", component: preview, props: true  },
-];
+const routes = [{ path: "/", component: steps }];
 // 3. 创建路由实例并传递 `routes` 配置
 // 你可以在这里输入更多的配置，但我们在这里
 // 暂时保持简单

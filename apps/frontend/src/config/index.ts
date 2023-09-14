@@ -1,5 +1,6 @@
-import { computed, reactive, watch } from "vue";
+import { computed, reactive, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
+import { setAuthorizedToken } from "@/fs/siyuan_api";
 
 export const configs = reactive({
   __current__: "default" as const,
@@ -28,6 +29,7 @@ export const saveConfig = () => {
 export const currentConfig = computed(() => {
   return configs[configs.__current__];
 });
+watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 let timer: NodeJS.Timeout | null = null;
 /** 防抖的保存配置 */
