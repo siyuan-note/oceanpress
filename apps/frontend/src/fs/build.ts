@@ -1,9 +1,10 @@
+import { htmlTemplate } from "./htmlTemplate";
 import { API } from "./siyuan_api";
-import { notebook } from "./siyuan_type";
+import { DB_block, notebook } from "./siyuan_type";
 import JSZip from "jszip";
 
 export interface docTree {
-  [docPath: string]: { docHTML: string };
+  [docPath: string]: { docHTML: string; title: string };
 }
 export async function* build(book: notebook) {
   const docTree = {} as docTree;
@@ -14,42 +15,55 @@ export async function* build(book: notebook) {
   };
   yield emit;
   yield `=== 开始编译 ${book.name} ===`;
-  const r = await API.filetree_listDocsByPath({ notebook: book.id, path: "/" });
-  for (const file of r.files) {
+  /** 查询所有文档级block */
+  const r: DB_block[] = await API.query_sql({
+    stmt: `
+    SELECT *
+    from blocks
+    WHERE box = '${book.id}'
+        AND type = 'd'
+  `,
+  });
+  console.log(r);
+
+  for (const docBlock of r) {
     const doc = await API.filetree_getDoc({
-      id: file.id,
+      id: docBlock.id,
       isBacklink: false,
       mode: 0,
       size: 48,
     });
-    docTree[(await API.filetree_getHPathByID({ id: file.id })) + ".html"] = {
+    docTree[docBlock.hpath + ".html"] = {
       docHTML: doc.content,
+      title: docBlock.fcontent,
     };
 
-    yield `处理： ${file.name} ${file.id}`;
+    yield `处理： ${docBlock.name}: ${docBlock.id}`;
   }
+  downloadZIP(docTree);
   yield "ok";
 }
 /** 下载zip */
-export async function downloadZIP() {
+export async function downloadZIP(docTree: docTree) {
   const zip = new JSZip();
-  const presetZip = await (await fetch("/常见问题.zip")).arrayBuffer();
-  zip.loadAsync(presetZip);
-  // zip.file(
-  //   (await API.filetree_getHPathByID({ id: file.id })) + ".html",
-  //   htmlTemplate({ title: file.name, html: doc.content })
-  // );
-
-  // emit.zip
-  // .generateAsync({ type: "blob" })
-  // .then((content) => {
-  //   // 将ZIP文件保存为下载
-  //   const link = document.createElement("a");
-  //   link.href = URL.createObjectURL(content);
-  //   link.download = "example.zip";
-  //   link.click();
-  // })
-  // .catch((error) => {
-  //   console.error(error);
-  // });
+  const presetZip = await (await fetch("/public.zip")).arrayBuffer();
+  await zip.loadAsync(presetZip);
+  for (const [path, { docHTML, title }] of Object.entries(docTree)) {
+    zip.file(
+      path,
+      htmlTemplate({ title, html: docHTML, level: path.split("/").length - 2 /** 最开头有一个 / 所以减二 */ }),
+    );
+  }
+  zip
+    .generateAsync({ type: "blob" })
+    .then((content) => {
+      // 将ZIP文件保存为下载
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(content);
+      link.download = "notebook.zip";
+      link.click();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }

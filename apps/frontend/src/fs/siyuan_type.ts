@@ -6,14 +6,16 @@ export interface notebook {
   closed: false;
 }
 export interface file {
-  path: "/20210816161946-cktc4gf.sy";
+  /** "/20210816161946-cktc4gf.sy" */
+  path: string;
   name: "关于.sy";
   icon: "";
   name1: "";
   alias: "";
   memo: "";
   bookmark: "";
-  id: "20210816161946-cktc4gf";
+  /** "20210816161946-cktc4gf" */
+  id: string;
   count: 0;
   size: 362;
   hSize: "362 B";
@@ -42,4 +44,28 @@ export interface NodeDocument {
   rootID: "20230519105228-hm0y74i";
   scroll: false;
   type: "NodeDocument";
+}
+
+export interface DB_block {
+  alias: "";
+  box: "20210816161940-3mfvumm";
+  content: "自述";
+  created: "20201125202944";
+  fcontent: "自述";
+  hash: "922ee83";
+  hpath: "/计算机基础课/自述";
+  ial: '{: id="20201125202944-01mdxqn" title="自述" type="doc" updated="20201125202944"}';
+  id: "20201125202944-01mdxqn";
+  length: 2;
+  markdown: "";
+  memo: "";
+  name: "";
+  parent_id: "";
+  path: "/20210816161944-io0cgn6/20201125202944-01mdxqn.sy";
+  root_id: "20201125202944-01mdxqn";
+  sort: 0;
+  subtype: "";
+  tag: "";
+  type: "d";
+  updated: "20201125202944";
 }

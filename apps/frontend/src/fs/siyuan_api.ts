@@ -26,39 +26,24 @@ export interface api {
     path: "/";
   };
   filetree_getHPathByID(p: { id: file["id"] }): "/foo/bar";
-  filetree_getDoc(p: {
-    id: file["id"];
-    isBacklink: false;
-    mode: 0;
-    size: 48;
-  }): NodeDocument;
+  filetree_getDoc(p: { id: file["id"]; isBacklink: false; mode: 0; size: 48 }): NodeDocument;
+  query_sql(p: { /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string }): any[];
 }
 type apiPromisify = {
-  readonly [K in keyof api]: (
-    ...arg: Parameters<api[K]>
-  ) => Promise<unPromise<ReturnType<api[K]>>>;
+  readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Promise<unPromise<ReturnType<api[K]>>>;
 };
 
 /** 解开 promise 类型包装 */
 declare type unPromise<T> = T extends Promise<infer R> ? R : T;
 
 async function rpc(method: string, arg: any) {
-  const res = await fetch(
-    `http://127.0.0.1:6806/api/${method.replace(/_/g, "/")}`,
-    {
-      headers: {
-        accept: "*/*",
-        "accept-language": "zh-CN",
-        "content-type": "text/plain;charset=UTF-8",
-        "sec-ch-ua": '"Not.A/Brand";v="8", "Chromium";v="114"',
-        Authorization: `Token ${Authorization}`,
-      },
-      referrerPolicy: "strict-origin-when-cross-origin",
-      body: JSON.stringify(arg[0]),
-      method: "POST",
-      mode: "cors",
-    }
-  );
+  const res = await fetch(`http://127.0.0.1:6806/api/${method.replace(/_/g, "/")}`, {
+    headers: {
+      Authorization: `Token ${Authorization}`,
+    },
+    body: JSON.stringify(arg[0]),
+    method: "POST",
+  });
   const json = await res.json();
   if (json.code !== 0) {
     throw new Error(json.msg);
@@ -73,13 +58,11 @@ export const API = new Proxy(
     get(_, method: string) {
       return (...arg: any) => rpc(method, arg);
     },
-  }
+  },
 ) as apiPromisify;
 
 type vApi = {
-  readonly [K in keyof api]: (
-    ...arg: Parameters<api[K]>
-  ) => Ref<PromiseObj<unPromise<ReturnType<api[K]>>, Error>>;
+  readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Ref<PromiseObj<unPromise<ReturnType<api[K]>>, Error>>;
 };
 /** 使用 usePromiseComputed 包装的方法，便于使用  */
 export const vApi = new Proxy(
@@ -88,5 +71,5 @@ export const vApi = new Proxy(
     get(_, method: string) {
       return (...arg: any) => usePromiseComputed.fn(() => rpc(method, arg));
     },
-  }
+  },
 ) as vApi;

@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "test",
+            "database": "${workspaceFolder:oceanPress_js}/siyuan.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

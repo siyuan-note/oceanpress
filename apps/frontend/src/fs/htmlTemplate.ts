@@ -1,4 +1,10 @@
-export function htmlTemplate(p: { html: string; title: string }) {
+export function htmlTemplate(p: { html: string; title: string; level: number }) {
+  /** 根据level有几级返回多少个 '../' ,用于解决 file协议打开html文档无法征程 */
+  let prePath = "";
+  for (let i = 0; i < p.level; i++) {
+    prePath += "../";
+  }
+
   return `<!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
     <head>
@@ -8,8 +14,8 @@ export function htmlTemplate(p: { html: string; title: string }) {
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/daylight/theme.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="${prePath}appearance/themes/daylight/theme.css?2.10.2"/>
 
         <title>${p.title}</title>
         <style>
@@ -40,9 +46,9 @@ export function htmlTemplate(p: { html: string; title: string }) {
     ${p.html}
 
     </div>
-    <script src="appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="stage/protyle/js/lute/lute.min.js?2.10.2"></script>
+    <script src="${prePath}appearance/icons/material/icon.js?2.10.2"></script>
+    <script src="${prePath}stage/build/export/protyle-method.js?2.10.2"></script>
+    <script src="${prePath}stage/protyle/js/lute/lute.min.js?2.10.2"></script>
     <script>
         window.siyuan = {
           config: {
