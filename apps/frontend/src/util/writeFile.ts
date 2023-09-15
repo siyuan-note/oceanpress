@@ -1,0 +1,6 @@
+export async function writeFile(_: { path: string; data: string }) {
+  return fetch(`http://127.0.0.1:3000`, {
+    method: "POST",
+    body: JSON.stringify(_),
+  }).then((res) => res.text());
+}

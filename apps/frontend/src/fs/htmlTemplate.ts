@@ -1,4 +1,4 @@
-export function htmlTemplate(p: { htmlContent: string; title: string; level: number }) {
+export async function htmlTemplate(p: { htmlContent: string; title: string; level: number }) {
   /** 根据level有几级返回多少个 '../' ,用于解决 file协议打开html文档无法正常加载资源 */
   let prePath = "";
   for (let i = 0; i < p.level; i++) {
@@ -6,16 +6,30 @@ export function htmlTemplate(p: { htmlContent: string; title: string; level: num
   }
   const version = "2.10.5";
   const html = String.raw;
+
   return html`<!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?${version}" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="${prePath}stage/build/export/base.css?${version}"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -104,7 +118,11 @@ export function htmlTemplate(p: { htmlContent: string; title: string; level: num
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
           ${p.htmlContent}
         </div>
         <script src="${prePath}appearance/icons/material/icon.js?${version}"></script>
@@ -113,7 +131,11 @@ export function htmlTemplate(p: { htmlContent: string; title: string; level: num
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -137,7 +159,9 @@ export function htmlTemplate(p: { htmlContent: string; title: string; level: num
           Protyle.plantumlRender(previewElement, "${prePath}stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });

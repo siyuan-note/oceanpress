@@ -1,6 +1,6 @@
 import { Ref } from "vue";
 import { PromiseObj, usePromiseComputed } from "../components/data_promise";
-import { NodeDocument, file, notebook } from "./siyuan_type";
+import { NodeDocument, S_Node, file, notebook } from "./siyuan_type";
 let Authorization = "";
 export function setAuthorizedToken(s: string) {
   Authorization = s;
@@ -37,7 +37,10 @@ export interface api {
     id: "20200825162036-4dx365o";
     name: "排版元素";
   };
-  query_sql(p: { /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string }): any[];
+  query_sql(p: {
+    /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string;
+  }): any[];
+  file_getFile(p: { path: string }): S_Node;
 }
 type apiPromisify = {
   readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Promise<unPromise<ReturnType<api[K]>>>;
@@ -55,6 +58,9 @@ async function rpc(method: string, arg: any) {
     method: "POST",
   });
   const json = await res.json();
+  if (method === "file_getFile") {
+    return json;
+  }
   if (json.code !== 0) {
     throw new Error(json.msg);
   }
@@ -72,7 +78,9 @@ export const API = new Proxy(
 ) as apiPromisify;
 
 type vApi = {
-  readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Ref<PromiseObj<unPromise<ReturnType<api[K]>>, Error>>;
+  readonly [K in keyof api]: (
+    ...arg: Parameters<api[K]>
+  ) => Ref<PromiseObj<unPromise<ReturnType<api[K]>>, Error>>;
 };
 /** 使用 usePromiseComputed 包装的方法，便于使用  */
 export const vApi = new Proxy(

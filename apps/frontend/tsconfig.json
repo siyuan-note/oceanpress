@@ -33,7 +33,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
+, "public/dev/http.js"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
