@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+
+        <title>嵌入内容块</title>
+        <style>
+            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
+            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+            .li > .protyle-action {height:34px;line-height: 34px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
+            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
+            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
+            .protyle-wysiwyg [data-node-id] {}
+            .protyle-wysiwyg .li {min-height:34px}
+            .protyle-gutters button svg {height:26px}
+            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
+            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
+            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
+            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
+            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
+            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
+            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+        </style>
+    </head>
+    <body>
+    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+
+    <div data-subtype="h2" data-node-id="20210111224435-y1fesd1" data-node-index="0" data-type="NodeHeading" class="h2" updated="20210512154656"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-1ros46z" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210512154659"><div contenteditable="true" spellcheck="false">嵌入<span data-type="virtual-block-ref">内容块</span>主要用于汇总所需<span data-type="virtual-block-ref">内容块</span>，通过 <span data-type="code">​{{</span>​ 和 <span data-type="code">​}}</span>​ 将 SQL 脚本包裹起来并独占一行：<span data-type="code">​{{ SELECT * FROM blocks WHERE content LIKE '%关键字%' }}</span>​，<span data-type="virtual-block-ref">数据库表</span>请参考<span data-type="block-ref" data-subtype="s" data-id="20201117103851-l9cahuc">这里</span>。<span data-type="tag">​内容块/嵌入</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20201224120447-e6zyfti" data-node-index="2" data-type="NodeHeading" class="h2"><div contenteditable="true" spellcheck="false">示例</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20201224120447-znjkoy5" data-node-index="3" data-type="NodeList" class="list" updated="20210503152123"><div data-marker="*" data-subtype="u" data-node-id="20201224120447-n30ybcs" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20201224120447-qmgtpok" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">查询内容中包含 <span data-type="code">​内容块</span>​ 的列表项：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-7zxu4l5" data-type="NodeCodeBlock" class="code-block"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--first protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--last protyle-action__menu"><svg><use xlink:href="#iconMore"></use></svg></span></div><div class="hljs" contenteditable="true" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND type = 'i' }}
+</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20201224120447-s8m8new" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20201224120447-5c10xrv" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">查询内容中同时包含 <span data-type="code">​内容块</span>​ 和 <span data-type="code">​引用</span>​ 段落块：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-0y91i5d" data-type="NodeCodeBlock" class="code-block"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--first protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--last protyle-action__menu"><svg><use xlink:href="#iconMore"></use></svg></span></div><div class="hljs" contenteditable="true" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%引用%' AND type = 'p') }}
+</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20201224120447-7lzhgko" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20201224120447-pnqwe31" data-type="NodeParagraph" class="p" updated="20210503151034"><div contenteditable="true" spellcheck="false">查询内容中同时包含 <span data-type="code">​内容块</span>​ 和 <span data-type="code">​嵌入</span>​ 的标题块并按更新时间降序结果取前 2 条：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-zgg5lvx" data-type="NodeCodeBlock" class="code-block"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--first protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--last protyle-action__menu"><svg><use xlink:href="#iconMore"></use></svg></span></div><div class="hljs" contenteditable="true" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%嵌入%' AND type = 'h' ORDER BY updated DESC LIMIT 2 }}
+</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201224120447-fnapz6h" data-node-index="4" data-type="NodeHeading" class="h3"><div contenteditable="true" spellcheck="false">案例一</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-acd7hwp" data-node-index="5" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">查询同时包含 <span data-type="code">​在思源中</span>​ 和 <span data-type="code">​核心概念</span>​ 文本的段落块，并排除当前文档（否则当段落块也会包含到结果集中，因为当前段落同样包含了这两个文本，下面的案例类似）：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-content="SELECT * FROM blocks WHERE content LIKE '%在思源中%' AND content LIKE '%核心概念%' AND hpath NOT LIKE '%嵌入内容块%'" data-node-id="20210111224926-ju1sd4d" data-node-index="6" data-type="NodeBlockQueryEmbed" class="render-node" updated="20211222185346"><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201224120447-ickbh88" data-node-index="7" data-type="NodeHeading" class="h3"><div contenteditable="true" spellcheck="false">案例二</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-53y8c84" data-node-index="8" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">查询同时包含标签 <span data-type="code">​#内容块/嵌入#</span>​ 和 <span data-type="code">​#内容块/引用#</span>​ 的段落块：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-content="SELECT * FROM blocks WHERE (content LIKE '%#内容块/嵌入#%' OR content LIKE '%#内容块/引用#%') AND hpath NOT LIKE '%嵌入内容块%'" data-node-id="20201224120447-veyqmvr" data-node-index="9" data-type="NodeBlockQueryEmbed" class="render-node" updated="20211222185428"><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201224120447-v7yfh5v" data-node-index="10" data-type="NodeHeading" class="h3"><div contenteditable="true" spellcheck="false">案例三</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201224120447-s5zmpsa" data-node-index="11" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">有时候我们可能需要随机漫游显示<span data-type="virtual-block-ref">内容块</span>，以方便回顾。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-content="SELECT * FROM blocks ORDER BY random() LIMIT 3" data-node-id="20201224120447-kewa9nr" data-node-index="12" data-type="NodeBlockQueryEmbed" class="render-node"><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20210630172050-m3pgmkt" data-node-index="13" data-type="NodeHeading" class="h3" updated="20210630172057"><div contenteditable="true" spellcheck="false">案例四</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210630172058-rpr2p31" data-node-index="14" data-type="NodeParagraph" class="p" updated="20210630172500"><div contenteditable="true" spellcheck="false">查询未完成的任务列表项，<span data-type="virtual-block-ref">这里</span>需要使用 <span data-type="code">​markdown</span>​ 字段而不是 <span data-type="code">​content</span>​ 字段：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-content="SELECT * FROM blocks WHERE markdown LIKE '%[ ]%' AND subtype = 't' AND type = 'i'" data-node-id="20210630172118-iu2hsz3" data-node-index="15" data-type="NodeBlockQueryEmbed" class="render-node" updated="20211008203521"><div class="protyle-attr" contenteditable="false">​</div></div>
+
+    </div>
+    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
+    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
+    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
+    <script>
+        window.siyuan = {
+          config: {
+            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+            editor: {
+              codeLineWrap: true,
+              codeLigatures: false,
+              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+              codeSyntaxHighlightLineNum: true,
+              katexMacros: JSON.stringify({}),
+            }
+          },
+          languages: {copy:"复制"}
+        };
+        const previewElement = document.getElementById('preview');
+        Protyle.highlightRender(previewElement, "stage/protyle");
+        Protyle.mathRender(previewElement, "stage/protyle", false);
+        Protyle.mermaidRender(previewElement, "stage/protyle");
+        Protyle.flowchartRender(previewElement, "stage/protyle");
+        Protyle.graphvizRender(previewElement, "stage/protyle");
+        Protyle.chartRender(previewElement, "stage/protyle");
+        Protyle.mindmapRender(previewElement, "stage/protyle");
+        Protyle.abcRender(previewElement, "stage/protyle");
+        Protyle.htmlRender(previewElement);
+        Protyle.plantumlRender(previewElement, "stage/protyle");
+        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+          item.addEventListener("click", (event) => {
+                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+                event.preventDefault();
+                event.stopPropagation();
+          })
+        });
+    </script></body></html>

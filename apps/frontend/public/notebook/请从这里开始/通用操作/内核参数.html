@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+
+        <title>内核参数</title>
+        <style>
+            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
+            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+            .li > .protyle-action {height:34px;line-height: 34px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
+            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
+            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
+            .protyle-wysiwyg [data-node-id] {}
+            .protyle-wysiwyg .li {min-height:34px}
+            .protyle-gutters button svg {height:26px}
+            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
+            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
+            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
+            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
+            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
+            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
+            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+        </style>
+    </head>
+    <body>
+    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+
+    <div data-subtype="h3" data-node-id="20201225172241-7rtm3t1" data-node-index="0" data-type="NodeHeading" class="h3" updated="20210502162554"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--workspace</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201225172241-yg7dr9h" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210502164212"><div contenteditable="true" spellcheck="false">用于指定<span data-type="virtual-block-ref">工作空间</span>文件夹路径，不指定时的默认值是 <span data-type="code" id="">​~/SiYuan/</span>​。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201225172241-xmughi5" data-node-index="2" data-type="NodeHeading" class="h3" updated="20201225172241"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--wd</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201225172241-hmpvq05" data-node-index="3" data-type="NodeParagraph" class="p" updated="20201225172241"><div contenteditable="true" spellcheck="false">内核工作目录路径，不指定时按内核可执行文件入口自动获取。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201225172241-n1lxchm" data-node-index="4" data-type="NodeHeading" class="h3" updated="20201225172241"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--readonly</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201225172241-5nmdh8n" data-node-index="5" data-type="NodeParagraph" class="p" updated="20201225172241"><div contenteditable="true" spellcheck="false">使用 <span data-type="code" id="">​--readonly=true</span>​ 指定后内核将以只读模式运行，所有写入操作将被禁止。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20210117224112-8i8ptea" data-node-index="6" data-type="NodeHeading" class="h3" updated="20210728171326"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--accessAuthCode</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210117224121-gtdkur4" data-node-index="7" data-type="NodeParagraph" class="p" updated="20210117224121"><div contenteditable="true" spellcheck="false">用于指定浏览器访问<span data-type="block-ref" data-subtype="s" data-id="20210104090909-20f2hvi" id="">鉴权密码</span>，设置后会覆盖 conf.json 中的 authCode。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20201225172417-1j2r118" data-node-index="8" data-type="NodeHeading" class="h3" updated="20201225172417"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--ssl</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20201225172431-z7yelgn" data-node-index="9" data-type="NodeParagraph" class="p" updated="20201225172431"><div contenteditable="true" spellcheck="false">使用 <span data-type="code" id="">​--ssl=true</span>​ 后将使用 https 和 wss 协议进行伺服。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20220517143906-h2p1a5m" data-node-index="10" data-type="NodeHeading" class="h3" updated="20220517143913"><div contenteditable="true" spellcheck="false"><span data-type="code" id="">​--lang</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220517143906-cd8h1g8" data-node-index="11" data-type="NodeParagraph" class="p" updated="20220517144043"><div contenteditable="true" spellcheck="false">使用 <span data-type="code" id="">​--lang=zh_CN</span>​ 后将使用简体中文初始化外观语言，默认 <span data-type="code" id="">​en_US</span>​。目前可选值：<span data-type="code" id="">​zh_CN</span>​、<span data-type="code" id="">​zh_CHT</span>​、<span data-type="code" id="">​en_US</span>​ 和 <span data-type="code" id="">​fr_FR</span>​。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20220601085956-e4x7vfb" data-node-index="12" data-type="NodeHeading" class="h3" updated="20220601085956"><div contenteditable="true" spellcheck="false">​<span data-type="code">​--mode</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220601085956-ckohzhm" data-node-index="13" data-type="NodeParagraph" class="p" updated="20220601090148"><div contenteditable="true" spellcheck="false">使用 <span data-type="code">​--mode=dev</span>​ 后将使用开发模式运行，使用 <span data-type="code">​--mode=prod</span>​ 将使用生产模式运行，默认 <span data-type="code">​prod</span>​。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220601090153-w4lmqvd" data-node-index="14" data-type="NodeParagraph" class="p" updated="20220601091012"><div contenteditable="true" spellcheck="false">开发模式和生产模式的主要区别开发模式会使用 <span data-type="code">​工作目录/appearance/</span>​ 作为外观文件夹，而生产模式使用的是 <span data-type="code">​工作空间/conf/appearance/</span>​。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20221025095421-rl06zab" data-node-index="15" data-type="NodeHeading" class="h3" updated="20221025095440"><div contenteditable="true" spellcheck="false">​<span data-type="code">​--port</span>​​​</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20221025095536-emwgpz0" data-node-index="16" data-type="NodeParagraph" class="p" updated="20221025095536"><div contenteditable="true" spellcheck="false">用于指定监听端口，不指定时：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20221025095536-5m5f1uu" data-node-index="17" data-type="NodeList" class="list" updated="20221025095729"><div data-marker="*" data-subtype="u" data-node-id="20221025095536-xq0w85y" data-type="NodeListItem" class="li" updated="20221025095536"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20221025095536-zng5iv9" data-type="NodeParagraph" class="p" updated="20221025095536"><div contenteditable="true" spellcheck="false">桌面端使用随机端口</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20221025095536-gpuhscm" data-type="NodeListItem" class="li" updated="20221025095729"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20221025095536-76oy599" data-type="NodeParagraph" class="p" updated="20221025095729"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">Docker</span>/移动端使用 <span data-type="code">​6806</span>​​</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div>
+
+    </div>
+    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
+    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
+    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
+    <script>
+        window.siyuan = {
+          config: {
+            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+            editor: {
+              codeLineWrap: true,
+              codeLigatures: false,
+              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+              codeSyntaxHighlightLineNum: true,
+              katexMacros: JSON.stringify({}),
+            }
+          },
+          languages: {copy:"复制"}
+        };
+        const previewElement = document.getElementById('preview');
+        Protyle.highlightRender(previewElement, "stage/protyle");
+        Protyle.mathRender(previewElement, "stage/protyle", false);
+        Protyle.mermaidRender(previewElement, "stage/protyle");
+        Protyle.flowchartRender(previewElement, "stage/protyle");
+        Protyle.graphvizRender(previewElement, "stage/protyle");
+        Protyle.chartRender(previewElement, "stage/protyle");
+        Protyle.mindmapRender(previewElement, "stage/protyle");
+        Protyle.abcRender(previewElement, "stage/protyle");
+        Protyle.htmlRender(previewElement);
+        Protyle.plantumlRender(previewElement, "stage/protyle");
+        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+          item.addEventListener("click", (event) => {
+                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+                event.preventDefault();
+                event.stopPropagation();
+          })
+        });
+    </script></body></html>

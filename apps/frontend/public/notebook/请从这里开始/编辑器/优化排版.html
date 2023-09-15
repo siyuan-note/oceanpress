@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+
+        <title>优化排版</title>
+        <style>
+            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
+            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+            .li > .protyle-action {height:34px;line-height: 34px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
+            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
+            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
+            .protyle-wysiwyg [data-node-id] {}
+            .protyle-wysiwyg .li {min-height:34px}
+            .protyle-gutters button svg {height:26px}
+            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
+            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
+            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
+            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
+            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
+            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
+            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+        </style>
+    </head>
+    <body>
+    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+
+    <div data-subtype="h2" data-node-id="20220628204444-yil2u2m" data-node-index="0" data-type="NodeHeading" class="h2" updated="20220628204604"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220628204604-qom7yyl" data-node-index="1" data-type="NodeParagraph" class="p" updated="20221006214307"><div contenteditable="true" spellcheck="false">为了快速记录内容，我们时常会忽略一些排版细节，比如行级<span data-type="virtual-block-ref">代码</span>前后或者加粗前后缺少空格、中文和西文之间缺少空格。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220628205215-z3whiwr" data-node-index="2" data-type="NodeParagraph" class="p" updated="20220628215004"><div contenteditable="true" spellcheck="false">这样会导致内容排版看上去不够精致，以后浏览该内容时也有一定视觉干扰。当然，这只是我们的感触，也许这并不是问题，甚至本来就需要这样紧凑排版。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20220628205558-6krkd89" data-node-index="3" data-type="NodeHeading" class="h2" updated="20220628205611"><div contenteditable="true" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220628205611-ikc5gy0" data-node-index="4" data-type="NodeParagraph" class="p" updated="20220628205851"><div contenteditable="true" spellcheck="false">在<span data-type="virtual-block-ref">编辑器</span>右上角 <span data-type="kbd" id="">​...</span>​ 菜单中选择 <span data-type="kbd" id="">​优化排版</span>​，处理完成后文档中的如下元素前后会被自动插入一个空格：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20220628205832-odovge3" data-node-index="5" data-type="NodeList" class="list" updated="20221006214303"><div data-marker="*" data-subtype="u" data-node-id="20220628205833-kmfuhsp" data-type="NodeListItem" class="li" updated="20221006214303"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220628205833-iu4yxrq" data-type="NodeParagraph" class="p" updated="20221006214303"><div contenteditable="true" spellcheck="false">行级<span data-type="virtual-block-ref">代码</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220628205855-jp2ks1q" data-type="NodeListItem" class="li" updated="20220916195220"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220628205855-1gfuu51" data-type="NodeParagraph" class="p" updated="20220916195220"><div contenteditable="true" spellcheck="false">行级公式</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220628210000-ives8vm" data-node-index="6" data-type="NodeParagraph" class="p" updated="20220630211006"><div contenteditable="true" spellcheck="false">另外，如下元素中的中西文间也会自动插入一个空格：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20220630211006-svizyw7" data-node-index="7" data-type="NodeList" class="list" updated="20220630211109"><div data-marker="*" data-subtype="u" data-node-id="20220630211007-dsx48yk" data-type="NodeListItem" class="li" updated="20220630211007"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211007-26zt41e" data-type="NodeParagraph" class="p" updated="20220630211032"><div contenteditable="true" spellcheck="false">标签</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211033-fnlmuvi" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211033-b7xfx2z" data-type="NodeParagraph" class="p" updated="20220630211037"><div contenteditable="true" spellcheck="false">高亮</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211037-mntb5y9" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211037-lftq994" data-type="NodeParagraph" class="p" updated="20220630211045"><div contenteditable="true" spellcheck="false">删除线</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211045-4ve578l" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211045-58vch5e" data-type="NodeParagraph" class="p" updated="20220630211054"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">超链接</span>锚文本</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211054-5om39qm" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211054-tx41ceb" data-type="NodeParagraph" class="p" updated="20220630211101"><div contenteditable="true" spellcheck="false">普通文本</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211101-1txhfqw" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211101-zcj15cy" data-type="NodeParagraph" class="p" updated="20220630211108"><div contenteditable="true" spellcheck="false">强调</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220630211108-356v085" data-type="NodeListItem" class="li" updated="20220630211109"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220630211108-wlwci62" data-type="NodeParagraph" class="p" updated="20220630211109"><div contenteditable="true" spellcheck="false">加粗</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20220628210321-x8cf0vr" data-node-index="8" data-type="NodeHeading" class="h2" updated="20220628210344"><div contenteditable="true" spellcheck="false">自动<span data-type="virtual-block-ref">备份</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220628210345-fsoqtka" data-node-index="9" data-type="NodeParagraph" class="p" updated="20220628214153"><div contenteditable="true" spellcheck="false">在实际执行优化排版之前，<span data-type="virtual-block-ref">思源</span>会自动<span data-type="virtual-block-ref">备份</span>一次原有的文档，这样如果优化结果不满意也能够通过<span data-type="block-ref" data-subtype="s" data-id="20210615211733-v6rzowm">数据历史</span>进行回滚。</div><div class="protyle-attr" contenteditable="false">​</div></div>
+
+    </div>
+    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
+    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
+    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
+    <script>
+        window.siyuan = {
+          config: {
+            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+            editor: {
+              codeLineWrap: true,
+              codeLigatures: false,
+              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+              codeSyntaxHighlightLineNum: true,
+              katexMacros: JSON.stringify({}),
+            }
+          },
+          languages: {copy:"复制"}
+        };
+        const previewElement = document.getElementById('preview');
+        Protyle.highlightRender(previewElement, "stage/protyle");
+        Protyle.mathRender(previewElement, "stage/protyle", false);
+        Protyle.mermaidRender(previewElement, "stage/protyle");
+        Protyle.flowchartRender(previewElement, "stage/protyle");
+        Protyle.graphvizRender(previewElement, "stage/protyle");
+        Protyle.chartRender(previewElement, "stage/protyle");
+        Protyle.mindmapRender(previewElement, "stage/protyle");
+        Protyle.abcRender(previewElement, "stage/protyle");
+        Protyle.htmlRender(previewElement);
+        Protyle.plantumlRender(previewElement, "stage/protyle");
+        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+          item.addEventListener("click", (event) => {
+                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+                event.preventDefault();
+                event.stopPropagation();
+          })
+        });
+    </script></body></html>
