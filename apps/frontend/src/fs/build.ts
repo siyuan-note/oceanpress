@@ -27,11 +27,10 @@ export async function* build(book: notebook) {
   console.log(r);
 
   for (const docBlock of r) {
-    const doc = await API.filetree_getDoc({
+    const doc = await API.export_exportHTML({
       id: docBlock.id,
-      isBacklink: false,
-      mode: 0,
-      size: 48,
+      pdf: false,
+      savePath: "",
     });
     docTree[docBlock.hpath + ".html"] = {
       docHTML: doc.content,
@@ -51,7 +50,7 @@ export async function downloadZIP(docTree: docTree) {
   for (const [path, { docHTML, title }] of Object.entries(docTree)) {
     zip.file(
       path,
-      htmlTemplate({ title, html: docHTML, level: path.split("/").length - 2 /** 最开头有一个 / 所以减二 */ }),
+      htmlTemplate({ title, htmlContent: docHTML, level: path.split("/").length - 2 /** 最开头有一个 / 所以减二 */ }),
     );
   }
   zip

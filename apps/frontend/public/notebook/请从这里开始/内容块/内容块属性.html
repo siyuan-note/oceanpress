@@ -1,42 +1,103 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="../../appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>内容块属性</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-subtype="h2" data-node-id="20210612224500-ftupo06" data-node-index="0" data-type="NodeHeading" class="h2" updated="20210613000110"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613000111-kj7vhlk" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210613105556"><div contenteditable="true" spellcheck="false">属性以键值对（key-value）的形式存在，我们可以通过对<span data-type="virtual-block-ref">内容块</span>设置属性来丰富<span data-type="virtual-block-ref">内容块</span>的内涵。属性分为内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210613004126-79loyta" data-node-index="2" data-type="NodeHeading" class="h2" updated="20210613004130"><div contenteditable="true" spellcheck="false">内置属性</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613004249-56e0c6r" data-node-index="3" data-type="NodeTable" class="table" updated="20210613120805"><div contenteditable="false"><table contenteditable="true" spellcheck="false"><colgroup><col /><col /></colgroup><thead><tr><th align="center">属性名</th><th>描述</th></tr></thead><tbody><tr><td align="center">name</td><td><span data-type="virtual-block-ref">内容块</span>的命名</td></tr><tr><td align="center">alias</td><td><span data-type="virtual-block-ref">内容块</span>的别名</td></tr><tr><td align="center">memo</td><td><span data-type="virtual-block-ref">内容块</span>的备注</td></tr><tr><td align="center">bookmark</td><td><span data-type="virtual-block-ref">内容块</span>的书签</td></tr></tbody></table><div class="protyle-action__table"><div class="table__resize"></div><div class="table__select"></div></div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210613004117-1jnl9m0" data-node-index="4" data-type="NodeHeading" class="h2" updated="20210613004135"><div contenteditable="true" spellcheck="false">自定义属性</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613004135-7td7u1o" data-node-index="5" data-type="NodeParagraph" class="p" updated="20210613122309"><div contenteditable="true" spellcheck="false">自定义属性由用户通过 <span data-type="code">​块标菜单</span>​ - <span data-type="code">​属性</span>​ 进行设置，属性名仅允许使用英文字母和阿拉伯数字（例如 <span data-type="code">​doing</span>​、<span data-type="code">​ 7days</span>​）。设置后，<span data-type="virtual-block-ref">思源</span>会自动在属性名前加上前缀 <span data-type="code">​custom-</span>​，以区分内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210613010024-s480zvu" data-node-index="6" data-type="NodeHeading" class="h2" updated="20210613120902"><div contenteditable="true" spellcheck="false">使用属性</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613102636-nmps3i3" data-node-index="7" data-type="NodeParagraph" class="p" updated="20210824200842"><div contenteditable="true" spellcheck="false">属性主要有两个使用场景：根据属性查询<span data-type="virtual-block-ref">内容块</span>和存储<span data-type="virtual-block-ref">挂件</span>数据。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20210613105627-xbzpkz0" data-node-index="8" data-type="NodeHeading" class="h3" updated="20210613105851"><div contenteditable="true" spellcheck="false">根据属性查询<span data-type="virtual-block-ref">内容块</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613010047-clw1kra" data-node-index="9" data-type="NodeParagraph" class="p" updated="20210613102634"><div contenteditable="true" spellcheck="false">例如，当我们为<span data-type="virtual-block-ref">内容块</span>设置了 <span data-type="code">​progress=30</span>​、 <span data-type="code">​priority=2</span>​ 属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的<span data-type="virtual-block-ref">内容块</span>：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613012911-qdrxc6w" data-node-index="10" data-type="NodeCodeBlock" class="code-block" updated="20210613105821"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--first protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--last protyle-action__menu"><svg><use xlink:href="#iconMore"></use></svg></span></div><div class="hljs" contenteditable="true" spellcheck="false">SELECT *
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20210612224500-ywcms1m" data-type="NodeHeading" class="h1" id="20210612224500-ywcms1m" title="内容块属性" updated="20211223192459"><div contenteditable="false" spellcheck="false">内容块属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" class="h2" updated="20210613000110" id="20210612224500-ftupo06"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613000111-kj7vhlk" data-type="NodeParagraph" class="p" id="20210613000111-kj7vhlk" updated="20210613105556"><div contenteditable="false" spellcheck="false">属性以键值对（key-value）的形式存在，我们可以通过对内容块设置属性来丰富内容块的内涵。属性分为内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613004126-79loyta" data-type="NodeHeading" class="h2" id="20210613004126-79loyta" updated="20210613004130"><div contenteditable="false" spellcheck="false">内置属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613004249-56e0c6r" data-type="NodeTable" class="table" id="20210613004249-56e0c6r" updated="20210613120805"><div contenteditable="false"><table contenteditable="false" spellcheck="false"><colgroup><col /><col /></colgroup><thead><tr><th align="center">属性名</th><th>描述</th></tr></thead><tbody><tr><td align="center">name</td><td>内容块的命名</td></tr><tr><td align="center">alias</td><td>内容块的别名</td></tr><tr><td align="center">memo</td><td>内容块的备注</td></tr><tr><td align="center">bookmark</td><td>内容块的书签</td></tr></tbody></table><div class="protyle-action__table"><div class="table__resize"></div><div class="table__select"></div></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613004117-1jnl9m0" data-type="NodeHeading" class="h2" id="20210613004117-1jnl9m0" updated="20210613004135"><div contenteditable="false" spellcheck="false">自定义属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613004135-7td7u1o" data-type="NodeParagraph" class="p" id="20210613004135-7td7u1o" updated="20210613122309"><div contenteditable="false" spellcheck="false">自定义属性由用户通过 <span data-type="code">块标菜单</span> - <span data-type="code">属性</span> 进行设置，属性名仅允许使用英文字母和阿拉伯数字（例如 <span data-type="code">doing</span>、<span data-type="code"> 7days</span>）。设置后，思源会自动在属性名前加上前缀 <span data-type="code">custom-</span>，以区分内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613010024-s480zvu" data-type="NodeHeading" class="h2" id="20210613010024-s480zvu" updated="20210613120902"><div contenteditable="false" spellcheck="false">使用属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613102636-nmps3i3" data-type="NodeParagraph" class="p" updated="20210824200842" id="20210613102636-nmps3i3"><div contenteditable="false" spellcheck="false">属性主要有两个使用场景：根据属性查询内容块和存储挂件数据。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210613105627-xbzpkz0" data-type="NodeHeading" class="h3" id="20210613105627-xbzpkz0" updated="20210613105851"><div contenteditable="false" spellcheck="false">根据属性查询内容块</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613010047-clw1kra" data-type="NodeParagraph" class="p" id="20210613010047-clw1kra" updated="20210613102634"><div contenteditable="false" spellcheck="false">例如，当我们为内容块设置了 <span data-type="code">progress=30</span>、 <span data-type="code">priority=2</span> 属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的内容块：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613012911-qdrxc6w" data-type="NodeCodeBlock" class="code-block" id="20210613012911-qdrxc6w" updated="20210613105821"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span></div><div class="hljs" contenteditable="false" spellcheck="false">SELECT *
 FROM blocks
 WHERE id IN (
     SELECT block_id
@@ -46,42 +107,43 @@ WHERE id IN (
     GROUP BY block_id
     HAVING count(block_id) = 2
 );
-</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20210613105822-z219hfe" data-node-index="11" data-type="NodeHeading" class="h3" updated="20210824200723"><div contenteditable="true" spellcheck="false">存储<span data-type="virtual-block-ref">挂件</span>数据</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210613105905-k6pckoi" data-node-index="12" data-type="NodeParagraph" class="p" updated="20210824200729"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">挂件</span>可以通过接口来设置属性，具体请参考开发文档。</div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210613105822-z219hfe" data-type="NodeHeading" class="h3" id="20210613105822-z219hfe" updated="20210824200723"><div contenteditable="false" spellcheck="false">存储挂件数据</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613105905-k6pckoi" data-type="NodeParagraph" class="p" id="20210613105905-k6pckoi" updated="20210824200729"><div contenteditable="false" spellcheck="false">挂件可以通过接口来设置属性，具体请参考开发文档。</div><div class="protyle-attr" contenteditable="false"></div></div>
+        </div>
+        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "../../stage/protyle");
+          Protyle.mathRender(previewElement, "../../stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "../../stage/protyle");
+          Protyle.flowchartRender(previewElement, "../../stage/protyle");
+          Protyle.graphvizRender(previewElement, "../../stage/protyle");
+          Protyle.chartRender(previewElement, "../../stage/protyle");
+          Protyle.mindmapRender(previewElement, "../../stage/protyle");
+          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>

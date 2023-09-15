@@ -1,77 +1,139 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>性能优化</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-subtype="h2" data-node-id="20230405155631-0xw341e" data-node-index="0" data-type="NodeHeading" class="h2" updated="20230405163058"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230405155721-ljxfaat" data-node-index="1" data-type="NodeParagraph" class="p" updated="20230405165112"><div contenteditable="true" spellcheck="false">不同硬件配置、不同操作系统平台上性能表现是不一样的。另外，随着数据增多，性能下降无法避免。所以我们可能需要改变使用方式并调整一些配置项来提升性能，以获得更流畅的使用体验。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20230405171357-3f1dyix" data-node-index="2" data-type="NodeHeading" class="h3" updated="20230405171401"><div contenteditable="true" spellcheck="false">整体性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230405161606-12co6vz" data-node-index="3" data-type="NodeList" class="list" updated="20230405165154"><div data-marker="*" data-subtype="u" data-node-id="20230405165154-mwfival" data-type="NodeListItem" class="li" updated="20230405165154"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165154-d502q9w" data-type="NodeParagraph" class="p" updated="20230405165259"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">内容块</span>数量：<span data-type="virtual-block-ref">内容块</span>数量对性能影响范围较大，比如<span data-type="virtual-block-ref">展开</span>文档树、<span data-type="virtual-block-ref">搜索</span>、数据写入等。但也不必太过担心，通常情况下<span data-type="virtual-block-ref">内容块</span>数量在百万这个量级下不会产生太大影响，除非每个块的大小较大</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165845-6y2mv74" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165845-53u31cu" data-type="NodeParagraph" class="p" updated="20230405170104"><div contenteditable="true" spellcheck="false">系统<span data-type="virtual-block-ref">环境</span>：操作系统当前负载会影响整体性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165808-5wngzx8" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165808-3zntfkm" data-type="NodeParagraph" class="p" updated="20230405170039"><div contenteditable="true" spellcheck="false">网络<span data-type="virtual-block-ref">环境</span>：通过 <span data-type="kbd">​网络伺服</span>​​ 使用时网络质量会影响请求响应时间</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230405171454-ymftblp" data-node-index="4" data-type="NodeParagraph" class="p" updated="20230405171510"><div contenteditable="true" spellcheck="false">优化建议：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230405164011-8ne0vie" data-node-index="5" data-type="NodeList" class="list" updated="20230405172057"><div data-marker="*" data-subtype="u" data-node-id="20230405170328-57e3msy" data-type="NodeListItem" class="li" updated="20230405170328"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170328-1l9e6jo" data-type="NodeParagraph" class="p" updated="20230405171925"><div contenteditable="true" spellcheck="false">将不常用的文档或者<span data-type="virtual-block-ref">剪藏</span>的文档单独放置到 <span data-type="code">​存档笔记本</span>​​ 或 <span data-type="code">​剪藏笔记本</span>​​ 中，关闭它后将减少数据库索引数量以提升性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170332-ngntw8m" data-type="NodeListItem" class="li" updated="20230405172057"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170332-6ua0c94" data-type="NodeParagraph" class="p" updated="20230405172057"><div contenteditable="true" spellcheck="false">调小 <span data-type="kbd">​搜索结果显示数</span>​​，我们会对<span data-type="virtual-block-ref">搜索</span>请求响应时间进行性能监控，如果响应时间超过阈值，则会弹出提示用户调小该配置项</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230405170338-shctk9a" data-type="NodeParagraph" class="p" updated="20230405170348"><div contenteditable="true" spellcheck="false">性能监控阈值可以通过<span data-type="virtual-block-ref">环境</span>变量 <span data-type="code">​SIYUAN_PERFORMANCE_TIMING</span>​​ 设置，单位毫秒，默认为 15000，即 15 秒</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405171957-iig6haf" data-type="NodeListItem" class="li" updated="20230405171957"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405171957-h8eamky" data-type="NodeParagraph" class="p" updated="20230405171957"><div contenteditable="true" spellcheck="false">保持足够的系统<span data-type="virtual-block-ref">资源</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170348-hai4iv6" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170348-xnkii3v" data-type="NodeParagraph" class="p" updated="20230405170613"><div contenteditable="true" spellcheck="false">使用固态硬盘，将<span data-type="virtual-block-ref">工作空间</span>放置在固态硬盘上能够有效提升整体性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170559-t1q23kt" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170559-azo1ee4" data-type="NodeParagraph" class="p" updated="20230405170603"><div contenteditable="true" spellcheck="false">升级硬件，这是提升性能最快的方式</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20230405171407-ltaakx8" data-node-index="6" data-type="NodeHeading" class="h3" updated="20230405171419"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">编辑器</span>性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230405171343-t3v7zis" data-node-index="7" data-type="NodeList" class="list" updated="20230405165229"><div data-marker="*" data-subtype="u" data-node-id="20230405165213-7f2mie7" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165213-tb7ozhd" data-type="NodeParagraph" class="p" updated="20230405165216"><div contenteditable="true" spellcheck="false">叶子块大小：单个叶子块大小主要影响<span data-type="virtual-block-ref">编辑器</span>性能，如果一个叶子块包含了大量字符，那么<span data-type="virtual-block-ref">编辑器</span>可能会卡顿</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170653-z2vsmgf" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170653-xsogb1v" data-type="NodeParagraph" class="p" updated="20230405171038"><div contenteditable="true" spellcheck="false">动态加载块数：加载块数主要影响<span data-type="virtual-block-ref">编辑器</span>性能，特别是对于公式块、<span data-type="virtual-block-ref">代码</span>块和图表块较多的情况，如果加载较多块，那么<span data-type="virtual-block-ref">编辑器</span>可能会卡顿</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165219-ssntm64" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165219-tu1gvvv" data-type="NodeParagraph" class="p" updated="20230405165223"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">代码</span>块行号：<span data-type="virtual-block-ref">代码</span>块行号主要影响<span data-type="virtual-block-ref">编辑器</span>性能，如果一个<span data-type="virtual-block-ref">代码</span>块内容较多且开启了行号显示，那么<span data-type="virtual-block-ref">编辑器</span>可能会卡顿</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165226-j1zfdmb" data-type="NodeListItem" class="li" updated="20230405165229"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165226-tc75whx" data-type="NodeParagraph" class="p" updated="20230405165229"><div contenteditable="true" spellcheck="false">图片和图表：图片和图表主要影响<span data-type="virtual-block-ref">编辑器</span>性能，如果文档中包含了大量图片和图表，那么<span data-type="virtual-block-ref">编辑器</span>可能会卡顿</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230405161457-3yp9do2" data-node-index="8" data-type="NodeParagraph" class="p" updated="20230405171525"><div contenteditable="true" spellcheck="false">优化建议：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230405171539-llfg8mm" data-node-index="9" data-type="NodeList" class="list" updated="20230406155719"><div data-marker="*" data-subtype="u" data-node-id="20230405170725-q5rqhcg" data-type="NodeListItem" class="li" updated="20230406155719"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170725-tys4mfj" data-type="NodeParagraph" class="p" updated="20230406155719"><div contenteditable="true" spellcheck="false">避免使用过多软换行，虽然不使用软换行会增加块数，但是少使用软换行可以减小段落块大小避免<span data-type="virtual-block-ref">编辑器</span>卡顿</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230405171028-7xg5r4d" data-type="NodeListItem" class="li" updated="20230405171758"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405171028-dbqll81" data-type="NodeParagraph" class="p" updated="20230405171758"><div contenteditable="true" spellcheck="false">调小 <span data-type="kbd">​动态加载块数</span>​​​，特别是对于公式块、<span data-type="virtual-block-ref">代码</span>块或图表块较多的使用场景</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230406155101-uk1h843" data-type="NodeListItem" class="li" updated="20230406155342"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230406155101-n6ptkcm" data-type="NodeParagraph" class="p" updated="20230406155342"><div contenteditable="true" spellcheck="false">通过 <span data-type="kbd">​聚焦</span>​​ 减少元素从而提升<span data-type="virtual-block-ref">编辑器</span>性能</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20230405155631-leo4vc6" data-type="NodeHeading" class="h1" icon="1f680" id="20230405155631-leo4vc6" title="性能优化" updated="20230406155719"><div contenteditable="false" spellcheck="false">性能优化</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230405155631-0xw341e" data-type="NodeHeading" class="h2" id="20230405155631-0xw341e" updated="20230405163058"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230405155721-ljxfaat" data-type="NodeParagraph" class="p" id="20230405155721-ljxfaat" updated="20230405165112"><div contenteditable="false" spellcheck="false">不同硬件配置、不同操作系统平台上性能表现是不一样的。另外，随着数据增多，性能下降无法避免。所以我们可能需要改变使用方式并调整一些配置项来提升性能，以获得更流畅的使用体验。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20230405171357-3f1dyix" data-type="NodeHeading" class="h3" id="20230405171357-3f1dyix" updated="20230405171401"><div contenteditable="false" spellcheck="false">整体性能</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230405161606-12co6vz" data-type="NodeList" class="list" id="20230405161606-12co6vz" updated="20230405165154"><div data-marker="*" data-subtype="u" data-node-id="20230405165154-mwfival" data-type="NodeListItem" class="li" id="20230405165154-mwfival" updated="20230405165154"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165154-d502q9w" data-type="NodeParagraph" class="p" id="20230405165154-d502q9w" updated="20230405165259"><div contenteditable="false" spellcheck="false">内容块数量：内容块数量对性能影响范围较大，比如展开文档树、搜索、数据写入等。但也不必太过担心，通常情况下内容块数量在百万这个量级下不会产生太大影响，除非每个块的大小较大</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165845-6y2mv74" data-type="NodeListItem" class="li" id="20230405165845-6y2mv74"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165845-53u31cu" data-type="NodeParagraph" class="p" id="20230405165845-53u31cu" updated="20230405170104"><div contenteditable="false" spellcheck="false">系统环境：操作系统当前负载会影响整体性能</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165808-5wngzx8" data-type="NodeListItem" class="li" id="20230405165808-5wngzx8"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165808-3zntfkm" data-type="NodeParagraph" class="p" id="20230405165808-3zntfkm" updated="20230405170039"><div contenteditable="false" spellcheck="false">网络环境：通过 <span data-type="kbd">网络伺服</span>​ 使用时网络质量会影响请求响应时间</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230405171454-ymftblp" data-type="NodeParagraph" class="p" id="20230405171454-ymftblp" updated="20230405171510"><div contenteditable="false" spellcheck="false">优化建议：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230405164011-8ne0vie" data-type="NodeList" class="list" id="20230405164011-8ne0vie" updated="20230405172057"><div data-marker="*" data-subtype="u" data-node-id="20230405170328-57e3msy" data-type="NodeListItem" class="li" id="20230405170328-57e3msy" updated="20230405170328"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170328-1l9e6jo" data-type="NodeParagraph" class="p" id="20230405170328-1l9e6jo" updated="20230405171925"><div contenteditable="false" spellcheck="false">将不常用的文档或者剪藏的文档单独放置到 <span data-type="code">存档笔记本</span>​ 或 <span data-type="code">剪藏笔记本</span>​ 中，关闭它后将减少数据库索引数量以提升性能</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170332-ngntw8m" data-type="NodeListItem" class="li" id="20230405170332-ngntw8m" updated="20230405172057"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170332-6ua0c94" data-type="NodeParagraph" class="p" id="20230405170332-6ua0c94" updated="20230405172057"><div contenteditable="false" spellcheck="false">调小 <span data-type="kbd">搜索结果显示数</span>​，我们会对搜索请求响应时间进行性能监控，如果响应时间超过阈值，则会弹出提示用户调小该配置项</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230405170338-shctk9a" data-type="NodeParagraph" class="p" id="20230405170338-shctk9a" updated="20230405170348"><div contenteditable="false" spellcheck="false">性能监控阈值可以通过环境变量 <span data-type="code">SIYUAN_PERFORMANCE_TIMING</span>​ 设置，单位毫秒，默认为 15000，即 15 秒</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405171957-iig6haf" data-type="NodeListItem" class="li" id="20230405171957-iig6haf" updated="20230405171957"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405171957-h8eamky" data-type="NodeParagraph" class="p" id="20230405171957-h8eamky" updated="20230405171957"><div contenteditable="false" spellcheck="false">保持足够的系统资源</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170348-hai4iv6" data-type="NodeListItem" class="li" id="20230405170348-hai4iv6"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170348-xnkii3v" data-type="NodeParagraph" class="p" id="20230405170348-xnkii3v" updated="20230405170613"><div contenteditable="false" spellcheck="false">使用固态硬盘，将工作空间放置在固态硬盘上能够有效提升整体性能</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170559-t1q23kt" data-type="NodeListItem" class="li" id="20230405170559-t1q23kt"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170559-azo1ee4" data-type="NodeParagraph" class="p" updated="20230405170603" id="20230405170559-azo1ee4"><div contenteditable="false" spellcheck="false">升级硬件，这是提升性能最快的方式</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20230405171407-ltaakx8" data-type="NodeHeading" class="h3" id="20230405171407-ltaakx8" updated="20230405171419"><div contenteditable="false" spellcheck="false">编辑器性能</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230405171343-t3v7zis" data-type="NodeList" class="list" id="20230405171343-t3v7zis" updated="20230405165229"><div data-marker="*" data-subtype="u" data-node-id="20230405165213-7f2mie7" data-type="NodeListItem" class="li" id="20230405165213-7f2mie7"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165213-tb7ozhd" data-type="NodeParagraph" class="p" id="20230405165213-tb7ozhd" updated="20230405165216"><div contenteditable="false" spellcheck="false">叶子块大小：单个叶子块大小主要影响编辑器性能，如果一个叶子块包含了大量字符，那么编辑器可能会卡顿</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405170653-z2vsmgf" data-type="NodeListItem" class="li" id="20230405170653-z2vsmgf"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170653-xsogb1v" data-type="NodeParagraph" class="p" id="20230405170653-xsogb1v" updated="20230405171038"><div contenteditable="false" spellcheck="false">动态加载块数：加载块数主要影响编辑器性能，特别是对于公式块、代码块和图表块较多的情况，如果加载较多块，那么编辑器可能会卡顿</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165219-ssntm64" data-type="NodeListItem" class="li" id="20230405165219-ssntm64"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165219-tu1gvvv" data-type="NodeParagraph" class="p" id="20230405165219-tu1gvvv" updated="20230405165223"><div contenteditable="false" spellcheck="false">代码块行号：代码块行号主要影响编辑器性能，如果一个代码块内容较多且开启了行号显示，那么编辑器可能会卡顿</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405165226-j1zfdmb" data-type="NodeListItem" class="li" id="20230405165226-j1zfdmb" updated="20230405165229"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405165226-tc75whx" data-type="NodeParagraph" class="p" id="20230405165226-tc75whx" updated="20230405165229"><div contenteditable="false" spellcheck="false">图片和图表：图片和图表主要影响编辑器性能，如果文档中包含了大量图片和图表，那么编辑器可能会卡顿</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230405161457-3yp9do2" data-type="NodeParagraph" class="p" id="20230405161457-3yp9do2" updated="20230405171525"><div contenteditable="false" spellcheck="false">优化建议：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230405171539-llfg8mm" data-type="NodeList" class="list" id="20230405171539-llfg8mm" updated="20230406155719"><div data-marker="*" data-subtype="u" data-node-id="20230405170725-q5rqhcg" data-type="NodeListItem" class="li" id="20230405170725-q5rqhcg" updated="20230406155719"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405170725-tys4mfj" data-type="NodeParagraph" class="p" id="20230405170725-tys4mfj" updated="20230406155719"><div contenteditable="false" spellcheck="false">避免使用过多软换行，虽然不使用软换行会增加块数，但是少使用软换行可以减小段落块大小避免编辑器卡顿</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230405171028-7xg5r4d" data-type="NodeListItem" class="li" id="20230405171028-7xg5r4d" updated="20230405171758"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230405171028-dbqll81" data-type="NodeParagraph" class="p" id="20230405171028-dbqll81" updated="20230405171758"><div contenteditable="false" spellcheck="false">调小 <span data-type="kbd">动态加载块数</span>​​，特别是对于公式块、代码块或图表块较多的使用场景</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230406155101-uk1h843" data-type="NodeListItem" class="li" id="20230406155101-uk1h843" updated="20230406155342"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230406155101-n6ptkcm" data-type="NodeParagraph" class="p" id="20230406155101-n6ptkcm" updated="20230406155342"><div contenteditable="false" spellcheck="false">通过 <span data-type="kbd">聚焦</span>​ 减少元素从而提升编辑器性能</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div>
+        </div>
+        <script src="appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "stage/protyle");
+          Protyle.mathRender(previewElement, "stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "stage/protyle");
+          Protyle.flowchartRender(previewElement, "stage/protyle");
+          Protyle.graphvizRender(previewElement, "stage/protyle");
+          Protyle.chartRender(previewElement, "stage/protyle");
+          Protyle.mindmapRender(previewElement, "stage/protyle");
+          Protyle.abcRender(previewElement, "stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>

@@ -1,77 +1,142 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="../../appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>挂件</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-subtype="h2" data-node-id="20210824201352-apdkqps" data-node-index="0" data-type="NodeHeading" class="h2" updated="20210824201352"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210824201352-z3731rx" data-node-index="1" data-type="NodeParagraph" class="p" updated="20230512170805"><div contenteditable="true" spellcheck="false">挂件是<span data-type="virtual-block-ref">思源</span>内核伺服的静态网页，它通过 API 存取数据，通过 <span data-type="code">​&lt;iframe&gt;</span>​​ 进行渲染展现。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230512170809-69w37zm" data-node-index="2" data-type="NodeParagraph" class="p" updated="20230512194517"><div contenteditable="true" spellcheck="false">相较于<span data-type="block-ref" data-subtype="s" data-id="20230506210010-houyyvy">插件</span>而言，挂件是一种<span data-type="virtual-block-ref">内容块</span>，遵循块的索引和渲染规则，挂件主要面向<span data-type="virtual-block-ref">内容块</span><span data-type="virtual-block-ref">扩展</span>，不面向程序功能<span data-type="virtual-block-ref">扩展</span>。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210824201352-9vey615" data-node-index="3" data-type="NodeHeading" class="h2" updated="20210824202222"><div contenteditable="true" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210824201352-xhr1kmi" data-node-index="4" data-type="NodeParagraph" class="p" updated="20230506210708"><div contenteditable="true" spellcheck="false">挂件通过挂件集市安装，安装后挂件将被放置到 <span data-type="code">​工作空间/widgets/</span>​​ 文件夹下。在<span data-type="virtual-block-ref">编辑器</span>中使用斜杆菜单触发调用<span data-type="virtual-block-ref">搜索</span>，选择需要的挂件后该挂件就会以挂件块的形式插入到文档中。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20211222095016-3jjm95h" data-node-index="5" data-type="NodeHeading" class="h2" updated="20211222095023"><div contenteditable="true" spellcheck="false">上架挂件集市</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20221114172636-pirwdpa" data-node-index="6" data-type="NodeParagraph" class="p" updated="20230820184200"><div contenteditable="true" spellcheck="false">请参考<span data-type="a" data-href="https://b3log.org/siyuan/community.html">社区集市仓库</span>。</div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20210824201257-cy7icrc" data-type="NodeHeading" class="h1" updated="20230820184200" id="20210824201257-cy7icrc" title="挂件"><div contenteditable="false" spellcheck="false">挂件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210824201352-apdkqps" data-type="NodeHeading" class="h2" id="20210824201352-apdkqps" updated="20210824201352"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210824201352-z3731rx" data-type="NodeParagraph" class="p" id="20210824201352-z3731rx" updated="20230512170805"><div contenteditable="false" spellcheck="false">挂件是思源内核伺服的静态网页，它通过 API 存取数据，通过 <span data-type="code">&lt;iframe&gt;</span>​ 进行渲染展现。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230512170809-69w37zm" data-type="NodeParagraph" class="p" id="20230512170809-69w37zm" updated="20230512194517"><div contenteditable="false" spellcheck="false">相较于插件<sup class="footnotes-ref" id="footnotes-ref-1"><a href="#footnotes-def-1">1</a></sup>而言，挂件是一种内容块，遵循块的索引和渲染规则，挂件主要面向内容块扩展，不面向程序功能扩展。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210824201352-9vey615" data-type="NodeHeading" class="h2" id="20210824201352-9vey615" updated="20210824202222"><div contenteditable="false" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210824201352-xhr1kmi" data-type="NodeParagraph" class="p" id="20210824201352-xhr1kmi" updated="20230506210708"><div contenteditable="false" spellcheck="false">挂件通过挂件集市安装，安装后挂件将被放置到 <span data-type="code">工作空间/widgets/</span>​ 文件夹下。在编辑器中使用斜杆菜单触发调用搜索，选择需要的挂件后该挂件就会以挂件块的形式插入到文档中。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20211222095016-3jjm95h" data-type="NodeHeading" class="h2" id="20211222095016-3jjm95h" updated="20211222095023"><div contenteditable="false" spellcheck="false">上架挂件集市</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20221114172636-pirwdpa" data-type="NodeParagraph" class="p" id="20221114172636-pirwdpa" updated="20230820184200"><div contenteditable="false" spellcheck="false">请参考<a href="https://b3log.org/siyuan/community.html">社区集市仓库</a>。</div><div class="protyle-attr" contenteditable="false"></div></div><div class="footnotes-defs-div"><hr class="footnotes-defs-hr" />
+<ol class="footnotes-defs-ol"><li><div data-subtype="h1" data-node-id="20230915114759-8fo68ei" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-1"></span>插件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230506210021-udp6q1j" data-type="NodeHeading" class="h2" id="20230506210021-udp6q1j" updated="20230506210021"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230506210021-1ngx24g" data-type="NodeParagraph" class="p" id="20230506210021-1ngx24g" updated="20230506211757"><div contenteditable="false" spellcheck="false">插件主要用于扩展思源整体功能。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230512170814-itmsfoy" data-type="NodeParagraph" class="p" id="20230512170814-itmsfoy" updated="20230512171323"><div contenteditable="false" spellcheck="false">相较于挂件<sup class="footnotes-ref" id="footnotes-ref-2"><a href="#footnotes-def-2">2</a></sup>而言，插件主要面向程序功能扩展，不面向内容块扩展。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230506210021-04aesus" data-type="NodeHeading" class="h2" id="20230506210021-04aesus" updated="20230506210021"><div contenteditable="false" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230506210021-tk7w2m5" data-type="NodeParagraph" class="p" id="20230506210021-tk7w2m5" updated="20230506210853"><div contenteditable="false" spellcheck="false">插件通过插件集市安装，安装后插件将被放置到 <span data-type="code">工作空间/plugins/</span>​ 文件夹下，你可以在 <span data-type="kbd">插件集市</span>​ - <span data-type="kbd">已下载</span>​ - <span data-type="kbd">插件</span>​ 中启用或禁用插件。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230506210021-f12gucj" data-type="NodeHeading" class="h2" id="20230506210021-f12gucj" updated="20230506210911"><div contenteditable="false" spellcheck="false">上架插件集市</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230506210021-jimdgxy" data-type="NodeParagraph" class="p" id="20230506210021-jimdgxy" updated="20230820184204"><div contenteditable="false" spellcheck="false">请参考<a href="https://b3log.org/siyuan/community.html">社区集市仓库</a>。</div><div class="protyle-attr" contenteditable="false"></div></div></li>
+<li><div data-subtype="h1" data-node-id="20230915114759-i3220x4" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-2"></span>挂件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210824201352-apdkqps" data-type="NodeHeading" class="h2" id="20210824201352-apdkqps" updated="20210824201352"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210824201352-z3731rx" data-type="NodeParagraph" class="p" id="20210824201352-z3731rx" updated="20230512170805"><div contenteditable="false" spellcheck="false">挂件是思源内核伺服的静态网页，它通过 API 存取数据，通过 <span data-type="code">&lt;iframe&gt;</span>​ 进行渲染展现。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230512170809-69w37zm" data-type="NodeParagraph" class="p" id="20230512170809-69w37zm" updated="20230512194517"><div contenteditable="false" spellcheck="false">相较于插件<sup class="footnotes-ref" id="footnotes-ref-1"><a href="#footnotes-def-1">1</a></sup>而言，挂件是一种内容块，遵循块的索引和渲染规则，挂件主要面向内容块扩展，不面向程序功能扩展。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210824201352-9vey615" data-type="NodeHeading" class="h2" id="20210824201352-9vey615" updated="20210824202222"><div contenteditable="false" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210824201352-xhr1kmi" data-type="NodeParagraph" class="p" id="20210824201352-xhr1kmi" updated="20230506210708"><div contenteditable="false" spellcheck="false">挂件通过挂件集市安装，安装后挂件将被放置到 <span data-type="code">工作空间/widgets/</span>​ 文件夹下。在编辑器中使用斜杆菜单触发调用搜索，选择需要的挂件后该挂件就会以挂件块的形式插入到文档中。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20211222095016-3jjm95h" data-type="NodeHeading" class="h2" id="20211222095016-3jjm95h" updated="20211222095023"><div contenteditable="false" spellcheck="false">上架挂件集市</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20221114172636-pirwdpa" data-type="NodeParagraph" class="p" id="20221114172636-pirwdpa" updated="20230820184200"><div contenteditable="false" spellcheck="false">请参考<a href="https://b3log.org/siyuan/community.html">社区集市仓库</a>。</div><div class="protyle-attr" contenteditable="false"></div></div></li>
+</ol></div>
+        </div>
+        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "../../stage/protyle");
+          Protyle.mathRender(previewElement, "../../stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "../../stage/protyle");
+          Protyle.flowchartRender(previewElement, "../../stage/protyle");
+          Protyle.graphvizRender(previewElement, "../../stage/protyle");
+          Protyle.chartRender(previewElement, "../../stage/protyle");
+          Protyle.mindmapRender(previewElement, "../../stage/protyle");
+          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>

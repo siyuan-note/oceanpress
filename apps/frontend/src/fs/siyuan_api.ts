@@ -27,6 +27,16 @@ export interface api {
   };
   filetree_getHPathByID(p: { id: file["id"] }): "/foo/bar";
   filetree_getDoc(p: { id: file["id"]; isBacklink: false; mode: 0; size: 48 }): NodeDocument;
+  export_exportHTML(p: {
+    id: file["id"];
+    pdf: false;
+    /** 为空时思源不会写文件 https://github.com/siyuan-note/siyuan/blob/master/kernel/model/export.go ：ExportHTML */
+    savePath: "";
+  }): {
+    content: "<html>";
+    id: "20200825162036-4dx365o";
+    name: "排版元素";
+  };
   query_sql(p: { /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string }): any[];
 }
 type apiPromisify = {

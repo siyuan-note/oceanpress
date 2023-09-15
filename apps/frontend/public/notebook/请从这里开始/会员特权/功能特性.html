@@ -1,77 +1,143 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="../../appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>功能特性</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-node-id="20230805225107-s1aayx7" data-node-index="0" data-type="NodeParagraph" class="p" updated="20230805225850"><div contenteditable="true" spellcheck="false">会员功能特性包括：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230805225851-hxq8pfu" data-node-index="1" data-type="NodeList" class="list" updated="20230805230246"><div data-marker="*" data-subtype="u" data-node-id="20230805225851-2cy2td5" data-type="NodeListItem" class="li" updated="20230805230212"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805225851-l9ldcop" data-type="NodeParagraph" class="p" updated="20230805230212"><div contenteditable="true" spellcheck="false"><span data-type="block-ref" data-subtype="s" data-id="20230805230131-sn7obzb">对接第三方云端存储</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230805225905-gbfjrph" data-type="NodeListItem" class="li" updated="20230805230246"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805225905-bf2ssno" data-type="NodeParagraph" class="p" updated="20230805230246"><div contenteditable="true" spellcheck="false"><span data-type="block-ref" data-subtype="s" data-id="20230805230218-aea8icj">搜索资源文件内容</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20230805230303-k4vgo4x" data-node-index="2" data-type="NodeParagraph" class="p" updated="20230805230342"><div contenteditable="true" spellcheck="false">会员功能特需要付费后才能使用：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20230805230303-u8181k5" data-node-index="3" data-type="NodeList" class="list" updated="20230805230402"><div data-marker="*" data-subtype="u" data-node-id="20230805230303-sfyss28" data-type="NodeListItem" class="li" updated="20230805230358"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230303-9eii3uh" data-type="NodeParagraph" class="p" updated="20230805230358"><div contenteditable="true" spellcheck="false"><span data-type="a" data-href="https://ld246.com/one-time-pay/siyuan">中国大陆地区</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20230805230303-zs0uzdy" data-type="NodeListItem" class="li" updated="20230805230402"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230303-2ouubfq" data-type="NodeParagraph" class="p" updated="20230805230402"><div contenteditable="true" spellcheck="false"><span data-type="a" data-href="https://liuyun.io/one-time-pay/siyuan">非中国大陆地区</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20230805225107-qm1m2f5" data-type="NodeHeading" class="h1" updated="20230805230402" icon="1f387" id="20230805225107-qm1m2f5" title="功能特性"><div contenteditable="false" spellcheck="false">功能特性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230805225107-s1aayx7" data-type="NodeParagraph" class="p" id="20230805225107-s1aayx7" updated="20230805225850"><div contenteditable="false" spellcheck="false">会员功能特性包括：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230805225851-hxq8pfu" data-type="NodeList" class="list" id="20230805225851-hxq8pfu" updated="20230805230246"><div data-marker="*" data-subtype="u" data-node-id="20230805225851-2cy2td5" data-type="NodeListItem" class="li" id="20230805225851-2cy2td5" updated="20230805230212"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805225851-l9ldcop" data-type="NodeParagraph" class="p" id="20230805225851-l9ldcop" updated="20230805230212"><div contenteditable="false" spellcheck="false">对接第三方云端存储<sup class="footnotes-ref" id="footnotes-ref-1"><a href="#footnotes-def-1">1</a></sup></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230805225905-gbfjrph" data-type="NodeListItem" class="li" id="20230805225905-gbfjrph" updated="20230805230246"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805225905-bf2ssno" data-type="NodeParagraph" class="p" id="20230805225905-bf2ssno" updated="20230805230246"><div contenteditable="false" spellcheck="false">搜索资源文件内容<sup class="footnotes-ref" id="footnotes-ref-3"><a href="#footnotes-def-3">3</a></sup></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230805230303-k4vgo4x" data-type="NodeParagraph" class="p" updated="20230805230342" id="20230805230303-k4vgo4x"><div contenteditable="false" spellcheck="false">会员功能特需要付费后才能使用：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230805230303-u8181k5" data-type="NodeList" class="list" id="20230805230303-u8181k5" updated="20230805230402"><div data-marker="*" data-subtype="u" data-node-id="20230805230303-sfyss28" data-type="NodeListItem" class="li" id="20230805230303-sfyss28" updated="20230805230358"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230303-9eii3uh" data-type="NodeParagraph" class="p" id="20230805230303-9eii3uh" updated="20230805230358"><div contenteditable="false" spellcheck="false"><a href="https://ld246.com/one-time-pay/siyuan">中国大陆地区</a></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230805230303-zs0uzdy" data-type="NodeListItem" class="li" id="20230805230303-zs0uzdy" updated="20230805230402"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230303-2ouubfq" data-type="NodeParagraph" class="p" id="20230805230303-2ouubfq" updated="20230805230402"><div contenteditable="false" spellcheck="false"><a href="https://liuyun.io/one-time-pay/siyuan">非中国大陆地区</a></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="footnotes-defs-div"><hr class="footnotes-defs-hr" />
+<ol class="footnotes-defs-ol"><li><div data-subtype="h1" data-node-id="20230915114759-6txykts" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-1"></span>对接第三方云端存储</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230805230131-14bfide" data-type="NodeParagraph" class="p" updated="20230805230825" id="20230805230131-14bfide"><div contenteditable="false" spellcheck="false">请在 <span data-type="kbd">设置</span>​ - <span data-type="kbd">云端</span>​ - <span data-type="kbd">云端存储服务提供商</span>​ 中进行选择和配置，目前已经支持：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230805230746-4q9cmrb" data-type="NodeList" class="list" id="20230805230746-4q9cmrb" updated="20230805230746"><div data-marker="*" data-subtype="u" data-node-id="20230805230746-7xcfbue" data-type="NodeListItem" class="li" id="20230805230746-7xcfbue" updated="20230805230746"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230746-fejfd76" data-type="NodeParagraph" class="p" id="20230805230746-fejfd76" updated="20230805230746"><div contenteditable="false" spellcheck="false">S3 兼容的对象存储服务，比如<a href="https://s.qiniu.com/VbQfeu">七牛云</a>、<a href="https://www.aliyun.com/product/oss?userCode=yqovuas2">阿里云 OSS</a>、<a href="https://www.cloudflare.com/">Cloudflare R2</a></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230805230746-zb33erf" data-type="NodeListItem" class="li" id="20230805230746-zb33erf" updated="20230805230746"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805230746-i9fzmzi" data-type="NodeParagraph" class="p" id="20230805230746-i9fzmzi" updated="20230805230746"><div contenteditable="false" spellcheck="false">WebDAV 协议，比如 <a href="https://infini-cloud.net/">InfiniCLOUD</a></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230805230746-pq0po1p" data-type="NodeParagraph" class="p" id="20230805230746-pq0po1p" updated="20230828111951"><div contenteditable="false" spellcheck="false">通过第三方云端存储服务同步数据同样是端到端加密<sup class="footnotes-ref" id="footnotes-ref-2"><a href="#footnotes-def-2">2</a></sup>的，第三方云端存储服务提供商无法获得我们的明文数据。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230805233629-s9vc1t4" data-type="NodeParagraph" class="p" id="20230805233629-s9vc1t4" updated="20230805233629"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：为了保障数据同步的可用性，请确保：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230805233629-cefelxe" data-type="NodeList" class="list" updated="20230805233629" id="20230805233629-cefelxe"><div data-marker="*" data-subtype="u" data-node-id="20230805233629-74eufrs" data-type="NodeListItem" class="li" id="20230805233629-74eufrs" updated="20230805233629"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805233629-sednxlz" data-type="NodeParagraph" class="p" updated="20230805233629" id="20230805233629-sednxlz"><div contenteditable="false" spellcheck="false">多设备系统时间一致，误差请控制在一分钟以内</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230805233629-ojkqvj5" data-type="NodeListItem" class="li" updated="20230805233629" id="20230805233629-ojkqvj5"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230805233629-av1keyv" data-type="NodeParagraph" class="p" id="20230805233629-av1keyv" updated="20230805233629"><div contenteditable="false" spellcheck="false">网络稳定（比如中国大陆地区请勿使用非中大陆地区的服务）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div></li>
+<li><div data-subtype="h2" data-node-id="20230808120347-lael5oq" data-type="NodeHeading" class="h2" id="20230808120347-lael5oq" updated="20220708095720"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-2"></span>端到端加密</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120347-uu7s8bu" data-type="NodeParagraph" class="p" id="20230808120347-uu7s8bu" updated="20220708095808"><div contenteditable="false" spellcheck="false">同步数据和备份数据使用端到端加密传输，云端不保存任何明文数据。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230808120347-y98y0ta" data-type="NodeList" class="list" id="20230808120347-y98y0ta" updated="20210525220426"><div data-marker="*" data-subtype="u" data-node-id="20230808120347-oqle51w" data-type="NodeListItem" class="li" id="20230808120347-oqle51w" updated="20220703222217"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120347-4yl157x" data-type="NodeParagraph" class="p" id="20230808120347-4yl157x" updated="20220703222217"><div contenteditable="false" spellcheck="false">密钥仅存储在本地，不会上传到云端</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230808120347-zfcvqhd" data-type="NodeListItem" class="li" id="20230808120347-zfcvqhd" updated="20210721111300"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120347-w7bsuof" data-type="NodeParagraph" class="p" id="20230808120347-w7bsuof" updated="20210721111300"><div contenteditable="false" spellcheck="false">加密和解密过程完全在本地设备上进行</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230808120347-1zl88rg" data-type="NodeListItem" class="li" id="20230808120347-1zl88rg" updated="20210525220426"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120347-boqoxyc" data-type="NodeParagraph" class="p" id="20230808120347-boqoxyc" updated="20210525220426"><div contenteditable="false" spellcheck="false">加密算法为业界公认安全的 AES GCM</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div></li>
+<li><div data-subtype="h1" data-node-id="20230915114759-ycqss05" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-3"></span>搜索资源文件内容</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230818101510-yjc0r0h" data-type="NodeParagraph" class="p" id="20230818101510-yjc0r0h" updated="20230821123142"><div contenteditable="false" spellcheck="false">在 <span data-type="kbd">搜索</span>​ 界面右上角可以将搜索功能切换到 <span data-type="kbd">搜索资源文件内容</span>​，目前支持如下格式的资源文件内容搜索：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230818101450-4a6lzdg" data-type="NodeList" class="list" id="20230818101450-4a6lzdg" updated="20230818101545"><div data-marker="*" data-subtype="u" data-node-id="20230818101510-rfacaaf" data-type="NodeListItem" class="li" updated="20230818101800" id="20230818101510-rfacaaf"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230818101510-duzarcy" data-type="NodeParagraph" class="p" updated="20230818101800" id="20230818101510-duzarcy"><div contenteditable="false" spellcheck="false">文本文件（.txt、.md、.json、.log、.sql、.html、.xml、.java、.h、.c、.cpp、.go、.rs、.swift、.kt、.py、.php、.js、.css、.ts、.sh、.bat、.cmd、.ini、.yaml、.rst、.adoc、.textile、.opml、.org、.wiki）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230818101513-x5baw16" data-type="NodeListItem" class="li" id="20230818101513-x5baw16"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230818101513-558ntbl" data-type="NodeParagraph" class="p" id="20230818101513-558ntbl" updated="20230818101520"><div contenteditable="false" spellcheck="false">.docx</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230818101521-n1r8yqv" data-type="NodeListItem" class="li" id="20230818101521-n1r8yqv"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230818101521-mutuxqo" data-type="NodeParagraph" class="p" id="20230818101521-mutuxqo" updated="20230818101526"><div contenteditable="false" spellcheck="false">.pptx</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230818101526-oortrwo" data-type="NodeListItem" class="li" id="20230818101526-oortrwo"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230818101526-t4uvb3w" data-type="NodeParagraph" class="p" id="20230818101526-t4uvb3w" updated="20230818101529"><div contenteditable="false" spellcheck="false">.xlsx</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230818101543-ejcoq3j" data-type="NodeListItem" class="li" id="20230818101543-ejcoq3j" updated="20230818101545"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230818101543-36waszk" data-type="NodeParagraph" class="p" id="20230818101543-36waszk" updated="20230818101545"><div contenteditable="false" spellcheck="false">.pdf</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230903112236-sl6rni1" data-type="NodeParagraph" class="p" id="20230903112236-sl6rni1" updated="20230903112241"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230903112243-pwm33kc" data-type="NodeList" class="list" id="20230903112243-pwm33kc" updated="20230903112313"><div data-marker="*" data-subtype="u" data-node-id="20230903112244-2ye7sed" data-type="NodeListItem" class="li" id="20230903112244-2ye7sed" updated="20230903112313"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230903112244-ux44rel" data-type="NodeParagraph" class="p" id="20230903112244-ux44rel" updated="20230903112313"><div contenteditable="false" spellcheck="false">Android/iOS 端不支持 PDF 资源文件内容搜索</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div></li>
+</ol></div>
+        </div>
+        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "../../stage/protyle");
+          Protyle.mathRender(previewElement, "../../stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "../../stage/protyle");
+          Protyle.flowchartRender(previewElement, "../../stage/protyle");
+          Protyle.graphvizRender(previewElement, "../../stage/protyle");
+          Protyle.chartRender(previewElement, "../../stage/protyle");
+          Protyle.mindmapRender(previewElement, "../../stage/protyle");
+          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>
