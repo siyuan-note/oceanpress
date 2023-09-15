@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="../../stage/build/export/base.css?2.10.5"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -96,18 +109,85 @@
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-          <div data-subtype="h1" data-node-id="20210612224500-ywcms1m" data-type="NodeHeading" class="h1" id="20210612224500-ywcms1m" title="内容块属性" updated="20211223192459"><div contenteditable="false" spellcheck="false">内容块属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" class="h2" updated="20210613000110" id="20210612224500-ftupo06"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613000111-kj7vhlk" data-type="NodeParagraph" class="p" id="20210613000111-kj7vhlk" updated="20210613105556"><div contenteditable="false" spellcheck="false">属性以键值对（key-value）的形式存在，我们可以通过对内容块设置属性来丰富内容块的内涵。属性分为内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613004126-79loyta" data-type="NodeHeading" class="h2" id="20210613004126-79loyta" updated="20210613004130"><div contenteditable="false" spellcheck="false">内置属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613004249-56e0c6r" data-type="NodeTable" class="table" id="20210613004249-56e0c6r" updated="20210613120805"><div contenteditable="false"><table contenteditable="false" spellcheck="false"><colgroup><col /><col /></colgroup><thead><tr><th align="center">属性名</th><th>描述</th></tr></thead><tbody><tr><td align="center">name</td><td>内容块的命名</td></tr><tr><td align="center">alias</td><td>内容块的别名</td></tr><tr><td align="center">memo</td><td>内容块的备注</td></tr><tr><td align="center">bookmark</td><td>内容块的书签</td></tr></tbody></table><div class="protyle-action__table"><div class="table__resize"></div><div class="table__select"></div></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613004117-1jnl9m0" data-type="NodeHeading" class="h2" id="20210613004117-1jnl9m0" updated="20210613004135"><div contenteditable="false" spellcheck="false">自定义属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613004135-7td7u1o" data-type="NodeParagraph" class="p" id="20210613004135-7td7u1o" updated="20210613122309"><div contenteditable="false" spellcheck="false">自定义属性由用户通过 <span data-type="code">块标菜单</span> - <span data-type="code">属性</span> 进行设置，属性名仅允许使用英文字母和阿拉伯数字（例如 <span data-type="code">doing</span>、<span data-type="code"> 7days</span>）。设置后，思源会自动在属性名前加上前缀 <span data-type="code">custom-</span>，以区分内置属性和自定义属性。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210613010024-s480zvu" data-type="NodeHeading" class="h2" id="20210613010024-s480zvu" updated="20210613120902"><div contenteditable="false" spellcheck="false">使用属性</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613102636-nmps3i3" data-type="NodeParagraph" class="p" updated="20210824200842" id="20210613102636-nmps3i3"><div contenteditable="false" spellcheck="false">属性主要有两个使用场景：根据属性查询内容块和存储挂件数据。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210613105627-xbzpkz0" data-type="NodeHeading" class="h3" id="20210613105627-xbzpkz0" updated="20210613105851"><div contenteditable="false" spellcheck="false">根据属性查询内容块</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613010047-clw1kra" data-type="NodeParagraph" class="p" id="20210613010047-clw1kra" updated="20210613102634"><div contenteditable="false" spellcheck="false">例如，当我们为内容块设置了 <span data-type="code">progress=30</span>、 <span data-type="code">priority=2</span> 属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的内容块：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613012911-qdrxc6w" data-type="NodeCodeBlock" class="code-block" id="20210613012911-qdrxc6w" updated="20210613105821"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span></div><div class="hljs" contenteditable="false" spellcheck="false">SELECT *
-FROM blocks
-WHERE id IN (
-    SELECT block_id
-    FROM attributes AS a
-    WHERE (a.name = 'custom-progress' AND a.value = '30')
-       OR (a.name = 'custom-priority' AND a.value = '2')
-    GROUP BY block_id
-    HAVING count(block_id) = 2
-);
-</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210613105822-z219hfe" data-type="NodeHeading" class="h3" id="20210613105822-z219hfe" updated="20210824200723"><div contenteditable="false" spellcheck="false">存储挂件数据</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210613105905-k6pckoi" data-type="NodeParagraph" class="p" id="20210613105905-k6pckoi" updated="20210824200729"><div contenteditable="false" spellcheck="false">挂件可以通过接口来设置属性，具体请参考开发文档。</div><div class="protyle-attr" contenteditable="false"></div></div>
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
+          <div
+      id="20210612224500-ywcms1m" data-node-id="20210612224500-ywcms1m" data-type="NodeDocument" updated="20211223192459" data-subtype="h1" class="h1" 
+      icon="1f4f0"
+      title="内容块属性"
+      type="doc"
+    >
+      <div style="height:25vh;undefined"></div>
+      <div>内容块属性</div>
+    </div>
+    <div id="20210612224500-ftupo06" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" updated="20210613000110" data-subtype="h2" class="h2" >
+      <div>概述
+</div>
+    </div>
+<div id="20210613000111-kj7vhlk" data-node-id="20210613000111-kj7vhlk" data-type="NodeParagraph" updated="20210613105556" class="p" >属性以键值对（key-value）的形式存在，我们可以通过对内容块设置属性来丰富内容块的内涵。属性分为内置属性和自定义属性。
+</div>
+<div id="20210613004126-79loyta" data-node-id="20210613004126-79loyta" data-type="NodeHeading" updated="20210613004130" data-subtype="h2" class="h2" >
+      <div>内置属性
+</div>
+    </div>
+=== 没有找到对应的渲染器 NodeTable ===
+<div id="20210613004117-1jnl9m0" data-node-id="20210613004117-1jnl9m0" data-type="NodeHeading" updated="20210613004135" data-subtype="h2" class="h2" >
+      <div>自定义属性
+</div>
+    </div>
+<div id="20210613004135-7td7u1o" data-node-id="20210613004135-7td7u1o" data-type="NodeParagraph" updated="20210613122309" class="p" >自定义属性由用户通过 
+<span style="undefined" data-type="code"
+        >块标菜单</span
+      >
+ - 
+<span style="undefined" data-type="code"
+        >属性</span
+      >
+ 进行设置，属性名仅允许使用英文字母和阿拉伯数字（例如 
+<span style="undefined" data-type="code"
+        >doing</span
+      >
+、
+<span style="undefined" data-type="code"
+        > 7days</span
+      >
+）。设置后，思源会自动在属性名前加上前缀 
+<span style="undefined" data-type="code"
+        >custom-</span
+      >
+，以区分内置属性和自定义属性。
+</div>
+<div id="20210613010024-s480zvu" data-node-id="20210613010024-s480zvu" data-type="NodeHeading" updated="20210613120902" data-subtype="h2" class="h2" >
+      <div>使用属性
+</div>
+    </div>
+<div id="20210613102636-nmps3i3" data-node-id="20210613102636-nmps3i3" data-type="NodeParagraph" updated="20210824200842" class="p" >属性主要有两个使用场景：根据属性查询内容块和存储挂件数据。
+</div>
+<div id="20210613105627-xbzpkz0" data-node-id="20210613105627-xbzpkz0" data-type="NodeHeading" updated="20210613105851" data-subtype="h3" class="h3" >
+      <div>根据属性查询内容块
+</div>
+    </div>
+<div id="20210613010047-clw1kra" data-node-id="20210613010047-clw1kra" data-type="NodeParagraph" updated="20210613102634" class="p" >例如，当我们为内容块设置了 
+<span style="undefined" data-type="code"
+        >progress=30</span
+      >
+、 
+<span style="undefined" data-type="code"
+        >priority=2</span
+      >
+ 属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的内容块：
+</div>
+=== 没有找到对应的渲染器 NodeCodeBlock ===
+<div id="20210613105822-z219hfe" data-node-id="20210613105822-z219hfe" data-type="NodeHeading" updated="20210824200723" data-subtype="h3" class="h3" >
+      <div>存储挂件数据
+</div>
+    </div>
+<div id="20210613105905-k6pckoi" data-node-id="20210613105905-k6pckoi" data-type="NodeParagraph" updated="20210824200729" class="p" >挂件可以通过接口来设置属性，具体请参考开发文档。
+</div>
+
         </div>
         <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
         <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
@@ -115,7 +195,11 @@ WHERE id IN (
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -139,7 +223,9 @@ WHERE id IN (
           Protyle.plantumlRender(previewElement, "../../stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });

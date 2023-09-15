@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="../../stage/build/export/base.css?2.10.5"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -96,10 +109,210 @@
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-          <div data-subtype="h1" data-node-id="20200813125307-pxsjela" data-type="NodeHeading" class="h1" id="20200813125307-pxsjela" title="导入和导出" type="doc" updated="20220511190018"><div contenteditable="false" spellcheck="false">导入和导出</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20201229120428-dgzkno8" data-type="NodeHeading" class="h2" id="20201229120428-dgzkno8" updated="20201229120428"><div contenteditable="false" spellcheck="false">导入</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20220511184321-um53ppo" data-type="NodeHeading" class="h3" updated="20220511184328" id="20220511184321-um53ppo"><div contenteditable="false" spellcheck="false">Markdown</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210120161018-1mdw4fy" data-type="NodeParagraph" class="p" id="20210120161018-1mdw4fy" updated="20220511190018"><div contenteditable="false" spellcheck="false">思源支持导入 Markdown 文件。所以如果你需要导入其他笔记软件的数据，请先将数据转换为 Markdown 文件。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220317221825-c0ydyo2" data-type="NodeParagraph" class="p" id="20220317221825-c0ydyo2" updated="20220317223800"><div contenteditable="false" spellcheck="false">导入时如果遇到形如 <span data-type="code">![foo](images/bar.png)</span> 的图片语法（本地相对路径），则思源会将 <span data-type="code">images/bar.png</span> 转换为资源文件<sup class="footnotes-ref" id="footnotes-ref-1"><a href="#footnotes-def-1">1</a></sup>。但是如果是 <span data-type="code">.images/bar.png</span> 则不会转换，因为 <span data-type="code">.</span> 开头的路径文件属于隐藏文件，思源不会进行处理。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20220511184340-6w8o7kg" data-type="NodeHeading" class="h3" id="20220511184340-6w8o7kg" updated="20220511184359"><div contenteditable="false" spellcheck="false">Data</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220511184359-mea18d0" data-type="NodeParagraph" class="p" id="20220511184359-mea18d0" updated="20220511184938"><div contenteditable="false" spellcheck="false">在桌面端 <span data-type="kbd">设置 </span>- <span data-type="kbd">导出</span>、移动端右侧栏 <span data-type="kbd">关于</span> 中可以进行数据导入和导出。这里的导出会将 <span data-type="code">工作空间/data/</span> 文件夹完整复制并打包为 zip 压缩包。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220511184941-kxdmrtc" data-type="NodeParagraph" class="p" id="20220511184941-kxdmrtc" updated="20220511185824"><div contenteditable="false" spellcheck="false"><span data-type="kbd">导入 Data</span> 功能仅支持处理以上步骤导出的 Data 压缩包。导入按压缩包中的文件路径复制到当前 <span data-type="code">工作空间/data/</span> 文件夹：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220511185356-4tsyhu8" data-type="NodeList" class="list" id="20220511185356-4tsyhu8" updated="20220511185914"><div data-marker="*" data-subtype="u" data-node-id="20220511185357-fw8xf5g" data-type="NodeListItem" class="li" id="20220511185357-fw8xf5g" updated="20220511185459"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220511185357-gp14zkk" data-type="NodeParagraph" class="p" id="20220511185357-gp14zkk" updated="20220511185459"><div contenteditable="false" spellcheck="false">重复的文件进行覆盖</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220511185359-3ygpkgm" data-type="NodeListItem" class="li" id="20220511185359-3ygpkgm" updated="20220511185502"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220511185359-26rtw7w" data-type="NodeParagraph" class="p" id="20220511185359-26rtw7w" updated="20220511185502"><div contenteditable="false" spellcheck="false">不存在的文件进行新增</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220511185425-lrj9vu4" data-type="NodeListItem" class="li" id="20220511185425-lrj9vu4" updated="20220511185914"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220511185425-zhhh2s5" data-type="NodeParagraph" class="p" id="20220511185425-zhhh2s5" updated="20220511185914"><div contenteditable="false" spellcheck="false">已有的文件不做任何处理</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220511185359-zc5av9q" data-type="NodeParagraph" class="p" id="20220511185359-zc5av9q" updated="20220511185406"><div contenteditable="false" spellcheck="false"><span data-type="tag">注意</span>：使用前请务必留意，避免已有数据被覆盖无法恢复。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20201229120428-9k34lga" data-type="NodeHeading" class="h2" id="20201229120428-9k34lga"><div contenteditable="false" spellcheck="false">导出</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210120154937-u6g9q4l" data-type="NodeHeading" class="h3" id="20210120154937-u6g9q4l"><div contenteditable="false" spellcheck="false">编辑内容复制</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20201229120428-uk4lxtt" data-type="NodeParagraph" class="p" id="20201229120428-uk4lxtt" updated="20220317223050"><div contenteditable="false" spellcheck="false">选择内容后使用复制快捷键 <span data-type="kbd">Ctrl+C</span> 即可，剪切板中是标准 Markdown 文本。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220317223052-qrqe13g" data-type="NodeParagraph" class="p" id="20220317223052-qrqe13g" updated="20220317224423"><div contenteditable="false" spellcheck="false">如果你需要复制 HTML 内容，请在编辑器页签右上角的 <span data-type="kbd">...</span> 菜单中的 <span data-type="kbd">模式切换</span> 切换到 <span data-type="kbd">导出预览</span> 后再进行复制。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210120154948-gl0hxz6" data-type="NodeHeading" class="h3" id="20210120154948-gl0hxz6"><div contenteditable="false" spellcheck="false">全文导出</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20201229120428-ysyvyt4" data-type="NodeParagraph" class="p" id="20201229120428-ysyvyt4" updated="20220317224436"><div contenteditable="false" spellcheck="false">在文档树上选择文档后右键选择 <span data-type="kbd">导出</span> 或者编辑器页签右上角的 <span data-type="kbd">...</span> 菜单中选择 <span data-type="kbd">导出</span>：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20201229120428-sokahme" data-type="NodeList" class="list" id="20201229120428-sokahme" updated="20220317223356"><div data-marker="*" data-subtype="u" data-node-id="20201229120428-3zal4fw" data-type="NodeListItem" class="li" id="20201229120428-3zal4fw"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223614-aj1pupk" data-type="NodeParagraph" class="p" id="20210302223614-aj1pupk" updated="20211130233541"><div contenteditable="false" spellcheck="false">Markdown</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20201229120428-rbzugkm" data-type="NodeListItem" class="li" id="20201229120428-rbzugkm"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223614-6mzkgcu" data-type="NodeParagraph" class="p" id="20210302223614-6mzkgcu"><div contenteditable="false" spellcheck="false">PDF</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210120155702-mhp0c0s" data-type="NodeListItem" class="li" id="20210120155702-mhp0c0s"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223614-zc7v8ds" data-type="NodeParagraph" class="p" id="20210302223614-zc7v8ds"><div contenteditable="false" spellcheck="false">HTML</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220317223347-co3uufi" data-type="NodeListItem" class="li" id="20220317223347-co3uufi" updated="20220317223356"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220317223347-842ufju" data-type="NodeParagraph" class="p" id="20220317223347-842ufju" updated="20220317223356"><div contenteditable="false" spellcheck="false">Word .docx</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220317224209-iw0imsf" data-type="NodeParagraph" class="p" id="20220317224209-iw0imsf" updated="20220317225002"><div contenteditable="false" spellcheck="false">在 <span data-type="kbd">设置</span> - <span data-type="kbd">导出</span> 中有一些选项可以进行导出处理配置，细节请参考该界面上的提示信息。</div><div class="protyle-attr" contenteditable="false"></div></div><div class="footnotes-defs-div"><hr class="footnotes-defs-hr" />
-<ol class="footnotes-defs-ol"><li><div data-subtype="h1" data-node-id="20230915114758-7pqm1sm" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-1"></span>资源文件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210503095355-r83044o" data-type="NodeHeading" class="h2" id="20210503095355-r83044o" updated="20210503095726"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210503095358-zr3uijl" data-type="NodeParagraph" class="p" id="20210503095358-zr3uijl" updated="20220711121657"><div contenteditable="false" spellcheck="false">通过编辑器插入的附件会被认为是资源文件，默认放置在 <span data-type="code">工作空间/data/assets/</span> 文件夹下。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20201210194734-lr6v0s2" data-type="NodeHeading" class="h2" id="20201210194734-lr6v0s2" updated="20220824171919"><div contenteditable="false" spellcheck="false">插入图片或文件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104091255-8s7avcx" data-type="NodeParagraph" class="p" id="20210104091255-8s7avcx" updated="20220905215650"><div contenteditable="false" spellcheck="false">在编辑器中可以直接粘贴系统剪切板中复制好的图片或文件（Linux 端不支持），或者通过拖拽图片或文件到编辑器中也可以实现插入。插入时有两个选择：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220824172203-etwu4qu" data-type="NodeList" class="list" id="20220824172203-etwu4qu" updated="20220902215702"><div data-marker="*" data-subtype="u" data-node-id="20220824172204-xxh346y" data-type="NodeListItem" class="li" id="20220824172204-xxh346y" updated="20220824172527"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220824172204-fct1t0t" data-type="NodeParagraph" class="p" id="20220824172204-fct1t0t" updated="20220824172527"><div contenteditable="false" spellcheck="false"><span data-type="kbd">复制为资源文件并插入</span>：将图片或文件复制为资源文件并插入，快捷键 <span data-type="kbd">Ctrl+V</span></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220824172403-agsj358" data-type="NodeListItem" class="li" id="20220824172403-agsj358" updated="20220902215702"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220824172403-0fkrw8o" data-type="NodeParagraph" class="p" id="20220824172403-0fkrw8o" updated="20220902215702"><div contenteditable="false" spellcheck="false"><span data-type="kbd">使用 file:// 绝对路径并链接</span>：将图片或文件以本地绝对路径方式插入超链接，快捷键 <span data-type="kbd">Ctrl+Shift+V</span>，或者按住 <span data-type="kbd">Alt</span> 后拖入</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104091255-7fwvx7a" data-type="NodeParagraph" class="p" id="20210104091255-7fwvx7a" updated="20220824172301"><div contenteditable="false" spellcheck="false">对于图片，如果排版时指定了图片标题，则标题会被渲染在图片下方作为图注。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210512171633-u3iy2xx" data-type="NodeParagraph" class="p" id="20210512171633-u3iy2xx" updated="20230505083901"><div contenteditable="false" spellcheck="false"><span contenteditable="false" data-type="img" class="img" style="display: block;"><span> </span><span><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/siyuan-128-20210604092205-djd749a.png" data-src="assets/siyuan-128-20210604092205-djd749a.png" alt="siyuan-128.png" title="源于思考，饮水思源" style="display: block;" /><span class="protyle-action__drag"></span><span class="protyle-action__title">源于思考，饮水思源</span></span><span> </span></span></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230505083902-s5e711d" data-type="NodeParagraph" class="p" id="20230505083902-s5e711d" updated="20230505083923"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：插入图片不会进行压缩处理，所有图片和文件都以原始数据进行保存。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210115222011-bzsftun" data-type="NodeHeading" class="h2" id="20210115222011-bzsftun"><div contenteditable="false" spellcheck="false">清理未引用资源</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210115222053-i62ppkz" data-type="NodeParagraph" class="p" id="20210115222053-i62ppkz" updated="20210503095856"><div contenteditable="false" spellcheck="false">“引用”指的是通过超链接、插入图片或者 HTML 标签（例如 <span data-type="code">&lt;img&gt;</span> 、<span data-type="code">&lt;iframe&gt;</span>）的属性 <span data-type="code">src</span> 对资源文件进行链接。这里分为两种情况：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="o" data-node-id="20210115222514-tqfsawm" data-type="NodeList" class="list" id="20210115222514-tqfsawm" updated="20220711121929"><div data-marker="1." data-subtype="o" data-node-id="20210115222515-47r5lop" data-type="NodeListItem" class="li" id="20210115222515-47r5lop" updated="20220711121929"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20210204172443-a8xpkb9" data-type="NodeParagraph" class="p" id="20210204172443-a8xpkb9" updated="20220711121929"><div contenteditable="false" spellcheck="false">引用具体的资源文件，比如图片或者文件。如果资源文件是 PDF 且做过标注，那么无论它是否被引用都不会计入清理</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="2." data-subtype="o" data-node-id="20210115222545-nilj84d" data-type="NodeListItem" class="li" updated="20220711121528" id="20210115222545-nilj84d"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20210204172443-zyll68d" data-type="NodeParagraph" class="p" id="20210204172443-zyll68d" updated="20220711121528"><div contenteditable="false" spellcheck="false">引用资源文件夹（在 assets 文件夹下的子文件夹），必须以 <span data-type="code">/</span> 结尾，比如 <span data-type="code">[foo](assets/bar/)</span>。一个资源文件夹如果被引用，则下面所有资源文件无论是否被单独引用，都会被算作已经引用</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210115223610-ffnxstf" data-type="NodeParagraph" class="p" id="20210115223610-ffnxstf" updated="20220711122042"><div contenteditable="false" spellcheck="false">在 <span data-type="kbd">设置</span> - <span data-type="kbd">资源</span> 中可以一键清理未引用资源，如果需要找回被误删的文件，请通过回滚。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210130103406-8jfbo6k" data-type="NodeParagraph" class="p" id="20210130103406-8jfbo6k" updated="20210512160659"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：使用绝对路径（本地路径或者是网络路径）不会纳入清理计算。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230604115545-plxx5iu" data-type="NodeHeading" class="h2" id="20230604115545-plxx5iu" updated="20230604115551"><div contenteditable="false" spellcheck="false">查看丢失资源</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230604115552-qqg9s4j" data-type="NodeParagraph" class="p" id="20230604115552-qqg9s4j" updated="20230604115947"><div contenteditable="false" spellcheck="false">在<span data-type="kbd">设置</span>​ - <span data-type="kbd">资源</span>​ 中可以查看丢失的资源，复制路径后可以在全局搜索中找到引用处。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230604115950-hru51yy" data-type="NodeParagraph" class="p" id="20230604115950-hru51yy" updated="20230604120815"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：搜索资源文件路径需要先启用 <span data-type="kbd">设置</span>​ - <span data-type="kbd">搜索</span>​ - <span data-type="kbd">索引</span>​ - <span data-type="kbd">资源文件路径</span>​。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210615102657-kampx8a" data-type="NodeHeading" class="h2" id="20210615102657-kampx8a" updated="20220503121605"><div contenteditable="false" spellcheck="false">笔记本级资源文件</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210615102703-7wghhgm" data-type="NodeParagraph" class="p" id="20210615102703-7wghhgm" updated="20210626153454"><div contenteditable="false" spellcheck="false">如果需要默认将插入的资源文件放置在文档同级 assets 文件夹下，则需要先手动创建名为 assets 的文件夹，这样思源会优先选择该 assets 文件夹来存放资源文件。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220503120950-4e9vwxq" data-type="NodeParagraph" class="p" id="20220503120950-4e9vwxq" updated="20220503121613"><div contenteditable="false" spellcheck="false">建议尽量不要使用笔记本级资源文件，因为这会带来一些副作用：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220503121213-afjyt05" data-type="NodeList" class="list" id="20220503121213-afjyt05" updated="20220715105016"><div data-marker="*" data-subtype="u" data-node-id="20220503121214-haxyvyt" data-type="NodeListItem" class="li" id="20220503121214-haxyvyt" updated="20220503121401"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220503121214-cmqtvby" data-type="NodeParagraph" class="p" id="20220503121214-cmqtvby" updated="20220503121401"><div contenteditable="false" spellcheck="false">删除该笔记本时，为保证跨笔记本资源文件引用正常工作，该笔记本下的资源文件会被批量复制到全局 assets 中</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220503121359-3hqko22" data-type="NodeListItem" class="li" id="20220503121359-3hqko22" updated="20220503121834"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220503121359-amc47nl" data-type="NodeParagraph" class="p" id="20220503121359-amc47nl" updated="20220503121834"><div contenteditable="false" spellcheck="false">不支持在数据历史中查看笔记本级资源文件历史</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220715092717-dbd9ih9" data-type="NodeListItem" class="li" id="20220715092717-dbd9ih9" updated="20220715092726"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220715092717-btrw2bk" data-type="NodeParagraph" class="p" id="20220715092717-btrw2bk" updated="20220715092726"><div contenteditable="false" spellcheck="false">不支持使用 <span data-type="code">/资源</span> 搜索</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220715105014-5jfe0bz" data-type="NodeListItem" class="li" id="20220715105014-5jfe0bz" updated="20220715105016"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220715105014-3r1es71" data-type="NodeParagraph" class="p" id="20220715105014-3r1es71" updated="20220715105016"><div contenteditable="false" spellcheck="false">不支持重命名</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230117002036-vmc0mx4" data-type="NodeHeading" class="h2" id="20230117002036-vmc0mx4" updated="20230117002509"><div contenteditable="false" spellcheck="false">图片 OCR 提取文本</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230117002059-ssmlejt" data-type="NodeParagraph" class="p" id="20230117002059-ssmlejt" updated="20230820185522"><div contenteditable="false" spellcheck="false">该特性仅在桌面端支持，并且需要先手动安装 <span data-type="em">Tesseract OCR</span> 程序。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230202231304-22lvszc" data-type="NodeParagraph" class="p" updated="20230202231309" id="20230202231304-22lvszc"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230202231309-pcjl7c2" data-type="NodeList" class="list" id="20230202231309-pcjl7c2" updated="20230211103308"><div data-marker="*" data-subtype="u" data-node-id="20230202231311-7qdk1za" data-type="NodeListItem" class="li" updated="20230211103308" id="20230202231311-7qdk1za"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230202231311-n1pf7in" data-type="NodeParagraph" class="p" id="20230202231311-n1pf7in" updated="20230211103308"><div contenteditable="false" spellcheck="false">在安装 Tesseract OCR 时需要勾选你需要的语言包，并将安装后的 Tesseract-OCR 目录路径添加到环境变量 <span data-type="code">PATH</span>​ 中，这样思源才能直接调用 <span data-type="code">tesseract</span>​ 命令进行图片 OCR 提取文本。如果安装正常的话，在内核启动日志中可以搜索到 <span data-type="code">tesseract-ocr enabled</span>​</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230202231321-q1b1tza" data-type="NodeListItem" class="li" id="20230202231321-q1b1tza" updated="20230211103207"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230202231321-5ugmgf0" data-type="NodeParagraph" class="p" id="20230202231321-5ugmgf0" updated="20230211103207"><div contenteditable="false" spellcheck="false">思源并不会启用所有已安装的语言包，因为语言包太多的话会导致 OCR 缓慢甚至超时返回空结果，并且占用过多的系统资源，所以默认最多只会启用 <span data-type="code">eng</span>​、<span data-type="code">chi*</span>​、<span data-type="code">fra</span>​、<span data-type="code">spa</span>​、<span data-type="code">deu</span>​、<span data-type="code">rus</span>​ 和 <span data-type="code">osd</span>​，如果你需要更准确的语言支持，可以通过配置环境变量 <span data-type="code">SIYUAN_TESSERACT_LANGS</span>​ 来指定语言包，比如 <span data-type="code">SIYUAN_TESSERACT_LANGS=chi_sim+eng</span>​</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230211102440-0qik4dd" data-type="NodeListItem" class="li" id="20230211102440-0qik4dd" updated="20230211102642"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230211102440-09cmf75" data-type="NodeParagraph" class="p" id="20230211102440-09cmf75" updated="20230211102642"><div contenteditable="false" spellcheck="false">仅支持 png 和 jpg 格式的图片</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230211102601-ifl3ojm" data-type="NodeListItem" class="li" id="20230211102601-ifl3ojm" updated="20230211102744"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230211102601-npe6hvh" data-type="NodeParagraph" class="p" updated="20230211102744" id="20230211102601-npe6hvh"><div contenteditable="false" spellcheck="false">默认只对 2MB 以下的图片进行处理，如果需要调整，可以通过环境变量 <span data-type="code">SIYUAN_TESSERACT_MAX_SIZE</span>​ 设置，值的单位是字节，比如：<span data-type="code">SIYUAN_TESSERACT_MAX_SIZE=4000000</span>​ 将上限调整为 4MB</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230117002511-ex9qrjy" data-type="NodeParagraph" class="p" id="20230117002511-ex9qrjy" updated="20230117003207"><div contenteditable="false" spellcheck="false">图片 OCR 提取文本过程是自动在后台进行的，目前仅支持 PNG、JPG 图片。提取的文本会被用于搜索功能，这样就能通过文本关键字来定位图片。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20230414202710-a51lo76" data-type="NodeHeading" class="h3" id="20230414202710-a51lo76" updated="20230414202726"><div contenteditable="false" spellcheck="false">手动调整 OCR 结果</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230117003118-da7wjvx" data-type="NodeParagraph" class="p" id="20230117003118-da7wjvx" updated="20230414202825"><div contenteditable="false" spellcheck="false">OCR 的结果保存在 <span data-type="code">工作空间/data/assets/ocr-texts.json</span>​ 中，可通过下面的方式调整 OCR 结果：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230414202215-wv6v759" data-type="NodeList" class="list" id="20230414202215-wv6v759" updated="20230414203014"><div data-marker="*" data-subtype="u" data-node-id="20230414202216-6ib46sp" data-type="NodeListItem" class="li" id="20230414202216-6ib46sp" updated="20230414203014"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230414202216-7lh8lft" data-type="NodeParagraph" class="p" id="20230414202216-7lh8lft" updated="20230414203014"><div contenteditable="false" spellcheck="false">退出思源后下在文件系统上修改该文件（请注意 JSON 格式的正确性）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230414202222-wbxjz0f" data-type="NodeListItem" class="li" id="20230414202222-wbxjz0f" updated="20230414202849"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230414202222-oelakfd" data-type="NodeParagraph" class="p" id="20230414202222-oelakfd" updated="20230414202849"><div contenteditable="false" spellcheck="false">或者在编辑器中的图片元素菜单中选择 <span data-type="kbd">OCR</span>​</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230414202749-qbcnypq" data-type="NodeParagraph" class="p" id="20230414202749-qbcnypq" updated="20230414202900"><div contenteditable="false" spellcheck="false">调整完以后需要手动重建索引。</div><div class="protyle-attr" contenteditable="false"></div></div></li>
-</ol></div>
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
+          <div
+      id="20200813125307-pxsjela" data-node-id="20200813125307-pxsjela" data-type="NodeDocument" updated="20220511190018" data-subtype="h1" class="h1" 
+      icon="1f4f0"
+      title="导入和导出"
+      type="doc"
+    >
+      <div style="height:25vh;undefined"></div>
+      <div>导入和导出</div>
+    </div>
+    <div id="20201229120428-dgzkno8" data-node-id="20201229120428-dgzkno8" data-type="NodeHeading" updated="20201229120428" data-subtype="h2" class="h2" >
+      <div>导入
+</div>
+    </div>
+<div id="20220511184321-um53ppo" data-node-id="20220511184321-um53ppo" data-type="NodeHeading" updated="20220511184328" data-subtype="h3" class="h3" >
+      <div>Markdown
+</div>
+    </div>
+<div id="20210120161018-1mdw4fy" data-node-id="20210120161018-1mdw4fy" data-type="NodeParagraph" updated="20220511190018" class="p" >思源支持导入 Markdown 文件。所以如果你需要导入其他笔记软件的数据，请先将数据转换为 Markdown 文件。
+</div>
+<div id="20220317221825-c0ydyo2" data-node-id="20220317221825-c0ydyo2" data-type="NodeParagraph" updated="20220317223800" class="p" >导入时如果遇到形如 
+<span style="undefined" data-type="code"
+        >![foo](images/bar.png)</span
+      >
+ 的图片语法（本地相对路径），则思源会将 
+<span style="undefined" data-type="code"
+        >images/bar.png</span
+      >
+ 转换为
+<span
+        data-type="block-ref"
+        data-subtype="s"
+        data-id="20200915214115-42b8zma"
+      >
+        <a href="./请从这里开始/通用操作/资源文件.html">资源文件</a>
+      </span>
+。但是如果是 
+<span style="undefined" data-type="code"
+        >.images/bar.png</span
+      >
+ 则不会转换，因为 
+<span style="undefined" data-type="code"
+        >.</span
+      >
+ 开头的路径文件属于隐藏文件，思源不会进行处理。
+</div>
+<div id="20220511184340-6w8o7kg" data-node-id="20220511184340-6w8o7kg" data-type="NodeHeading" updated="20220511184359" data-subtype="h3" class="h3" >
+      <div>Data
+</div>
+    </div>
+<div id="20220511184359-mea18d0" data-node-id="20220511184359-mea18d0" data-type="NodeParagraph" updated="20220511184938" class="p" >在桌面端 
+<span style="undefined" data-type="kbd"
+        >设置 </span
+      >
+- 
+<span style="undefined" data-type="kbd"
+        >导出</span
+      >
+、移动端右侧栏 
+<span style="undefined" data-type="kbd"
+        >关于</span
+      >
+ 中可以进行数据导入和导出。这里的导出会将 
+<span style="undefined" data-type="code"
+        >工作空间/data/</span
+      >
+ 文件夹完整复制并打包为 zip 压缩包。
+</div>
+<div id="20220511184941-kxdmrtc" data-node-id="20220511184941-kxdmrtc" data-type="NodeParagraph" updated="20220511185824" class="p" ><span style="undefined" data-type="kbd"
+        >导入 Data</span
+      >
+ 功能仅支持处理以上步骤导出的 Data 压缩包。导入按压缩包中的文件路径复制到当前 
+<span style="undefined" data-type="code"
+        >工作空间/data/</span
+      >
+ 文件夹：
+</div>
+<div id="20220511185356-4tsyhu8" data-node-id="20220511185356-4tsyhu8" data-type="NodeList" updated="20220511185914" data-subtype="u" class="list" ><div id="20220511185357-fw8xf5g" data-node-id="20220511185357-fw8xf5g" data-type="NodeListItem" updated="20220511185459" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220511185357-gp14zkk" data-node-id="20220511185357-gp14zkk" data-type="NodeParagraph" updated="20220511185459" class="p" >重复的文件进行覆盖
+</div>
+
+    </div>
+<div id="20220511185359-3ygpkgm" data-node-id="20220511185359-3ygpkgm" data-type="NodeListItem" updated="20220511185502" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220511185359-26rtw7w" data-node-id="20220511185359-26rtw7w" data-type="NodeParagraph" updated="20220511185502" class="p" >不存在的文件进行新增
+</div>
+
+    </div>
+<div id="20220511185425-lrj9vu4" data-node-id="20220511185425-lrj9vu4" data-type="NodeListItem" updated="20220511185914" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220511185425-zhhh2s5" data-node-id="20220511185425-zhhh2s5" data-type="NodeParagraph" updated="20220511185914" class="p" >已有的文件不做任何处理
+</div>
+
+    </div>
+</div>
+<div id="20220511185359-zc5av9q" data-node-id="20220511185359-zc5av9q" data-type="NodeParagraph" updated="20220511185406" class="p" ><span style="undefined" data-type="tag"
+        >注意</span
+      >
+：使用前请务必留意，避免已有数据被覆盖无法恢复。
+</div>
+<div id="20201229120428-9k34lga" data-node-id="20201229120428-9k34lga" data-type="NodeHeading" data-subtype="h2" class="h2" >
+      <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
+导出
+</div>
+    </div>
+<div id="20210120154937-u6g9q4l" data-node-id="20210120154937-u6g9q4l" data-type="NodeHeading" data-subtype="h3" class="h3" >
+      <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
+编辑内容复制
+</div>
+    </div>
+<div id="20201229120428-uk4lxtt" data-node-id="20201229120428-uk4lxtt" data-type="NodeParagraph" updated="20220317223050" class="p" >选择内容后使用复制快捷键 
+<span style="undefined" data-type="kbd"
+        >Ctrl+C</span
+      >
+ 即可，剪切板中是标准 Markdown 文本。
+</div>
+<div id="20220317223052-qrqe13g" data-node-id="20220317223052-qrqe13g" data-type="NodeParagraph" updated="20220317224423" class="p" >如果你需要复制 HTML 内容，请在编辑器页签右上角的 
+<span style="undefined" data-type="kbd"
+        >...</span
+      >
+ 菜单中的 
+<span style="undefined" data-type="kbd"
+        >模式切换</span
+      >
+ 切换到 
+<span style="undefined" data-type="kbd"
+        >导出预览</span
+      >
+ 后再进行复制。
+</div>
+<div id="20210120154948-gl0hxz6" data-node-id="20210120154948-gl0hxz6" data-type="NodeHeading" data-subtype="h3" class="h3" >
+      <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
+全文导出
+</div>
+    </div>
+<div id="20201229120428-ysyvyt4" data-node-id="20201229120428-ysyvyt4" data-type="NodeParagraph" updated="20220317224436" class="p" >在文档树上选择文档后右键选择 
+<span style="undefined" data-type="kbd"
+        >导出</span
+      >
+ 或者编辑器页签右上角的 
+<span style="undefined" data-type="kbd"
+        >...</span
+      >
+ 菜单中选择 
+<span style="undefined" data-type="kbd"
+        >导出</span
+      >
+：
+</div>
+<div id="20201229120428-sokahme" data-node-id="20201229120428-sokahme" data-type="NodeList" updated="20220317223356" data-subtype="u" class="list" ><div id="20201229120428-3zal4fw" data-node-id="20201229120428-3zal4fw" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223614-aj1pupk" data-node-id="20210302223614-aj1pupk" data-type="NodeParagraph" updated="20211130233541" class="p" >Markdown
+</div>
+
+    </div>
+<div id="20201229120428-rbzugkm" data-node-id="20201229120428-rbzugkm" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223614-6mzkgcu" data-node-id="20210302223614-6mzkgcu" data-type="NodeParagraph" class="p" >PDF
+</div>
+
+    </div>
+<div id="20210120155702-mhp0c0s" data-node-id="20210120155702-mhp0c0s" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223614-zc7v8ds" data-node-id="20210302223614-zc7v8ds" data-type="NodeParagraph" class="p" >HTML
+</div>
+
+    </div>
+<div id="20220317223347-co3uufi" data-node-id="20220317223347-co3uufi" data-type="NodeListItem" updated="20220317223356" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220317223347-842ufju" data-node-id="20220317223347-842ufju" data-type="NodeParagraph" updated="20220317223356" class="p" >Word .docx
+</div>
+
+    </div>
+</div>
+<div id="20220317224209-iw0imsf" data-node-id="20220317224209-iw0imsf" data-type="NodeParagraph" updated="20220317225002" class="p" >在 
+<span style="undefined" data-type="kbd"
+        >设置</span
+      >
+ - 
+<span style="undefined" data-type="kbd"
+        >导出</span
+      >
+ 中有一些选项可以进行导出处理配置，细节请参考该界面上的提示信息。
+</div>
+
         </div>
         <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
         <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
@@ -107,7 +320,11 @@
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -131,7 +348,9 @@
           Protyle.plantumlRender(previewElement, "../../stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });

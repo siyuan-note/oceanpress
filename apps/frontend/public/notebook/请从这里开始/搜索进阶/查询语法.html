@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="../../stage/build/export/base.css?2.10.5"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -96,19 +109,344 @@
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-          <div data-subtype="h1" data-node-id="20220415190432-r3xqn3r" data-type="NodeHeading" class="h1" id="20220415190432-r3xqn3r" title="查询语法" updated="20230820184739"><div contenteditable="false" spellcheck="false">查询语法</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" class="h2" id="20220415192036-99dwwdh" updated="20220415201012"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415190432-6g68nr6" data-type="NodeParagraph" class="p" id="20220415190432-6g68nr6" updated="20220415232302"><div contenteditable="false" spellcheck="false">全局搜索 <span data-type="kbd">Ctrl+P</span> 支持通过查询语法（Query Syntax）进行高级搜索，以便实现一些逻辑操作，比如包含关键字 <span data-type="code">foo</span> 并且不包含关键字 <span data-type="code">bar</span> 的查询语法为 <span data-type="code">foo NOT bar</span>。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415192336-wmv15ws" data-type="NodeParagraph" class="p" id="20220415192336-wmv15ws" updated="20220415193228"><div contenteditable="false" spellcheck="false">在使用查询语法之前，我们先大致了解一下该语法的构成：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220415192647-hkh18bj" data-type="NodeList" class="list" id="20220415192647-hkh18bj" updated="20220415203608"><div data-marker="*" data-subtype="u" data-node-id="20220415192835-v9z0h2o" data-type="NodeListItem" class="li" id="20220415192835-v9z0h2o" updated="20220415193354"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415192835-3x0xhs3" data-type="NodeParagraph" class="p" id="20220415192835-3x0xhs3" updated="20220415193354"><div contenteditable="false" spellcheck="false">字符串（String）：由字母、数字等构成</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415192649-4tbip4m" data-type="NodeListItem" class="li" id="20220415192649-4tbip4m" updated="20220415203608"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415192649-vwqnvuj" data-type="NodeParagraph" class="p" id="20220415192649-vwqnvuj" updated="20220415203608"><div contenteditable="false" spellcheck="false">短语（Phrase）：由字符串构成</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415192752-qzh0tjm" data-type="NodeListItem" class="li" id="20220415192752-qzh0tjm" updated="20220415193404"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415192752-tqimcdr" data-type="NodeParagraph" class="p" id="20220415192752-tqimcdr" updated="20220415193404"><div contenteditable="false" spellcheck="false">查询（Query）：由短语构成，多个查询可通过 <span data-type="code">AND</span>、<span data-type="code">OR</span> 和 <span data-type="code">NOT</span> 组合为新的查询</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415192934-mlqzc8m" data-type="NodeParagraph" class="p" id="20220415192934-mlqzc8m" updated="20220415232006"><div contenteditable="false" spellcheck="false">下面我们分别介绍它们的细节。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20220415194256-qagtnkz" data-type="NodeHeading" class="h2" id="20220415194256-qagtnkz" updated="20220415194259"><div contenteditable="false" spellcheck="false">字符串</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415194259-bvrexhp" data-type="NodeParagraph" class="p" id="20220415194259-bvrexhp" updated="20220415194339"><div contenteditable="false" spellcheck="false">字符串可由两种方式指定：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220415194339-m0g962e" data-type="NodeList" class="list" updated="20220415232543" id="20220415194339-m0g962e"><div data-marker="*" data-subtype="u" data-node-id="20220415194342-0tzonkx" data-type="NodeListItem" class="li" id="20220415194342-0tzonkx" updated="20220415202647"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415194342-etshgq1" data-type="NodeParagraph" class="p" id="20220415194342-etshgq1" updated="20220415202647"><div contenteditable="false" spellcheck="false">通过英文双引号 <span data-type="code">"</span> 包裹起来的字符。其中如果需要使用 <span data-type="code">"</span> 本身，则可通过 SQL 风格转义（再加一个<span data-type="code">"</span>），例如 <span data-type="code">"foo""bar"""</span> 将搜索命中 <span data-type="code">foo"bar"</span></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415194739-jngjmqt" data-type="NodeListItem" class="li" id="20220415194739-jngjmqt" updated="20220415232543"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415194739-bupb792" data-type="NodeParagraph" class="p" id="20220415194739-bupb792" updated="20220415232543"><div contenteditable="false" spellcheck="false">由非 <span data-type="code">AND</span>、<span data-type="code">OR</span> 和 <span data-type="code">NOT</span> 字符组成，并且这些字符必须是：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220415195209-5yhjye3" data-type="NodeList" class="list" id="20220415195209-5yhjye3"><div data-marker="*" data-subtype="u" data-node-id="20220415195209-k7w0u65" data-type="NodeListItem" class="li" id="20220415195209-k7w0u65"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415195209-uselyqc" data-type="NodeParagraph" class="p" id="20220415195209-uselyqc" updated="20220415195300"><div contenteditable="false" spellcheck="false">所有非 ASCII 字符，或者</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415195315-pabtfkj" data-type="NodeListItem" class="li" id="20220415195315-pabtfkj"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415195315-8xo8n7w" data-type="NodeParagraph" class="p" updated="20220415195527" id="20220415195315-8xo8n7w"><div contenteditable="false" spellcheck="false">属于 52 个大小写英文字符（<span data-type="code">A-Za-z</span>），或者</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415195343-32719dk" data-type="NodeListItem" class="li" id="20220415195343-32719dk"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415195343-813xgm5" data-type="NodeParagraph" class="p" id="20220415195343-813xgm5" updated="20220415195537"><div contenteditable="false" spellcheck="false">属于 10 个 ASCII 数字字符（<span data-type="code">0-9</span>），或者</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415195453-3jooj2k" data-type="NodeListItem" class="li" id="20220415195453-3jooj2k"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415195453-xcob0p8" data-type="NodeParagraph" class="p" id="20220415195453-xcob0p8" updated="20220415195503"><div contenteditable="false" spellcheck="false">是下划线 <span data-type="code">_</span>，或者</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415195546-k0kd2dp" data-type="NodeListItem" class="li" id="20220415195546-k0kd2dp"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415195546-ovm4ei3" data-type="NodeParagraph" class="p" id="20220415195546-ovm4ei3" updated="20220415195626"><div contenteditable="false" spellcheck="false">是替换符（ASCII 26）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415202537-i16tvjh" data-type="NodeParagraph" class="p" id="20220415202537-i16tvjh" updated="20220415202830"><div contenteditable="false" spellcheck="false">对于非上述的其他字符构成的字符串，必须使用 <span data-type="code">"</span> 包裹起来，比如包含了 <span data-type="code">-</span>、<span data-type="code">*</span> 等符号的字符串。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20220415192040-apqa2u0" data-type="NodeHeading" class="h2" updated="20220415192043" id="20220415192040-apqa2u0"><div contenteditable="false" spellcheck="false">短语</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415192311-5fv8kjl" data-type="NodeParagraph" class="p" id="20220415192311-5fv8kjl" updated="20230820184739"><div contenteditable="false" spellcheck="false">短语由字符串构成，可由 <span data-type="code">+</span>​ 进行连接。一个短语是由一些记号（Token）有序构成，这些记号由用户的输入文本通过分词器处理得到。思源使用的分词器为了让中文搜索好用（支持单字搜索），所以实现方式是按照字分词的，也就是说每个汉字或者英文字母都会被拆分为一个记号。这对 <span data-type="code">+</span>​ 连接会产生一些影响，所以如果不确定的话，建议不要使用 <span data-type="code">+</span>​ 组合多个短语。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20220415192044-9d8ou1j" data-type="NodeHeading" class="h2" id="20220415192044-9d8ou1j" updated="20220415192101"><div contenteditable="false" spellcheck="false">查询</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415192101-lezi6pd" data-type="NodeParagraph" class="p" id="20220415192101-lezi6pd" updated="20220415211942"><div contenteditable="false" spellcheck="false">查询由多个短语构成，可通过操作符 <span data-type="code">AND</span>、<span data-type="code">OR</span> 和 <span data-type="code">NOT</span> 组合为新的查询。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415211911-abpzhkl" data-type="NodeTable" class="table" colgroup="|" id="20220415211911-abpzhkl" updated="20220415233018"><div contenteditable="false"><table contenteditable="false" spellcheck="false"><colgroup><col /><col /></colgroup><thead><tr><th>操作符</th><th>功能</th></tr></thead><tbody><tr><td><span data-type="code"><query1> AND <query2></span></td><td>query1 和 query2 同时匹配</td></tr><tr><td><span data-type="code"><query1> OR <query2></span></td><td>query1 或者 query2 匹配</td></tr><tr><td><span data-type="code"><query1> NOT <query2></span></td><td>query1 匹配同时 query2 不匹配</td></tr></tbody></table><div class="protyle-action__table"><div class="table__resize"></div><div class="table__select"></div></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415212140-piktfs5" data-type="NodeParagraph" class="p" id="20220415212140-piktfs5" updated="20220415212238"><div contenteditable="false" spellcheck="false">使用英文圆括号 <span data-type="code">()</span> 可以组合查询的优先级，例如：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415212235-jon9dnr" data-type="NodeCodeBlock" class="code-block" id="20220415212235-jon9dnr" updated="20220502163519"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span></div><div class="hljs" contenteditable="false" spellcheck="false">-- 匹配包含 &quot;one&quot; 或者 &quot;two&quot; 的块，不匹配包含 &quot;three&quot; 的块
-'one OR two NOT three'
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
+          <div
+      id="20220415190432-r3xqn3r" data-node-id="20220415190432-r3xqn3r" data-type="NodeDocument" updated="20230820184739" data-subtype="h1" class="h1" 
+      icon="1f4f0"
+      title="查询语法"
+      type="doc"
+    >
+      <div style="height:25vh;undefined"></div>
+      <div>查询语法</div>
+    </div>
+    <div id="20220415192036-99dwwdh" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" updated="20220415201012" data-subtype="h2" class="h2" >
+      <div>概述
+</div>
+    </div>
+<div id="20220415190432-6g68nr6" data-node-id="20220415190432-6g68nr6" data-type="NodeParagraph" updated="20220415232302" class="p" >全局搜索 
+<span style="undefined" data-type="kbd"
+        >Ctrl+P</span
+      >
+ 支持通过查询语法（Query Syntax）进行高级搜索，以便实现一些逻辑操作，比如包含关键字 
+<span style="undefined" data-type="code"
+        >foo</span
+      >
+ 并且不包含关键字 
+<span style="undefined" data-type="code"
+        >bar</span
+      >
+ 的查询语法为 
+<span style="undefined" data-type="code"
+        >foo NOT bar</span
+      >
+。
+</div>
+<div id="20220415192336-wmv15ws" data-node-id="20220415192336-wmv15ws" data-type="NodeParagraph" updated="20220415193228" class="p" >在使用查询语法之前，我们先大致了解一下该语法的构成：
+</div>
+<div id="20220415192647-hkh18bj" data-node-id="20220415192647-hkh18bj" data-type="NodeList" updated="20220415203608" data-subtype="u" class="list" ><div id="20220415192835-v9z0h2o" data-node-id="20220415192835-v9z0h2o" data-type="NodeListItem" updated="20220415193354" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415192835-3x0xhs3" data-node-id="20220415192835-3x0xhs3" data-type="NodeParagraph" updated="20220415193354" class="p" >字符串（String）：由字母、数字等构成
+</div>
 
--- 匹配包含 &quot;one&quot; 或者包含 &quot;two&quot; 且不包含 &quot;three&quot; 的块
-'one OR (two NOT three)'
-</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415225818-8llyxls" data-type="NodeParagraph" class="p" id="20220415225818-8llyxls" updated="20220415225927"><div contenteditable="false" spellcheck="false">使用空格分隔的多个短语默认使用 <span data-type="code">AND</span> 连接，比如：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415225927-10jqrs9" data-type="NodeCodeBlock" class="code-block" id="20220415225927-10jqrs9" updated="20220502163531"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">sql</span><span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span></div><div class="hljs" contenteditable="false" spellcheck="false">'one two three'         -- 'one AND two AND three'
-'three &quot;one two&quot;'       -- 'three AND &quot;one two&quot;'
-'one OR two three'      -- 'one OR two AND three'
+    </div>
+<div id="20220415192649-4tbip4m" data-node-id="20220415192649-4tbip4m" data-type="NodeListItem" updated="20220415203608" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415192649-vwqnvuj" data-node-id="20220415192649-vwqnvuj" data-type="NodeParagraph" updated="20220415203608" class="p" >短语（Phrase）：由字符串构成
+</div>
 
-'(one OR two) three'    -- 语法错误！
-'func(one two)'         -- 语法错误！
-</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20220415195733-gb4mj1a" data-type="NodeHeading" class="h2" id="20220415195733-gb4mj1a" updated="20220415234700"><div contenteditable="false" spellcheck="false">技术实现</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415195737-mo3ya7g" data-type="NodeParagraph" class="p" id="20220415195737-mo3ya7g" updated="20220415230645"><div contenteditable="false" spellcheck="false">我们通过 <a href="https://www.sqlite.org/fts5.html">SQLite FTS5</a> 实现了全局搜索。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415200915-g1un9h6" data-type="NodeParagraph" class="p" id="20220415200915-g1un9h6" updated="20220415200915"><div contenteditable="false" spellcheck="false">系统生成的查询语句关键部分大致是 <span data-type="code">MATCH '{content name alias memo}:" + query</span>，<span data-type="code">query</span> 即用户输入部分，对于<a href="https://www.sqlite.org/fts5.html#fts5_column_filters">列过滤器</a> <span data-type="code">{content name alias memo}:</span> 是通过 <span data-type="kbd">设置</span> -<span data-type="kbd"> 搜索</span> - <span data-type="kbd">属性</span> 生成的。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415200742-2l1tkjr" data-type="NodeParagraph" class="p" id="20220415200742-2l1tkjr" updated="20220415202247"><div contenteditable="false" spellcheck="false">了解到这些以后，我们就可以通过查询语法来实现查询嵌入块，这样查询性能会更好：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230915114758-q2l1cvz" data-type="NodeBlockquote" class="bq" id="20230915114758-q2l1cvz" updated="20230915114758"><div data-node-id="20230915114758-iwae33t" data-type="NodeParagraph" class="p" id="20230915114758-iwae33t" updated="20230915114758"><div contenteditable="false" spellcheck="false">全局搜索 <span data-type="kbd">Ctrl+P</span> 支持通过查询语法（Query Syntax）进行高级搜索，以便实现一些逻辑操作，比如包含关键字 <span data-type="code">foo</span> 并且不包含关键字 <span data-type="code">bar</span> 的查询语法为 <span data-type="code">foo NOT bar</span>。</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415202144-mc7e5xh" data-type="NodeParagraph" class="p" id="20220415202144-mc7e5xh" updated="20220415202331"><div contenteditable="false" spellcheck="false">除此以外，API 也支持使用 FTS 查询。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20220415230035-u0oui0b" data-type="NodeHeading" class="h3" id="20220415230035-u0oui0b" updated="20220415230221"><div contenteditable="false" spellcheck="false">大小写敏感</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415230042-zzlr04p" data-type="NodeParagraph" class="p" id="20220415230042-zzlr04p" updated="20220415230236"><div contenteditable="false" spellcheck="false">如果开启了 <span data-type="kbd">设置</span> - <span data-type="kbd">搜索</span> - <span data-type="kbd">区分大小写</span> 选项，则搜索会区分大小写，默认该选项是关闭的，即不区分大小写。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415230602-jrrha1j" data-type="NodeParagraph" class="p" id="20220415230602-jrrha1j" updated="20220415230942"><div contenteditable="false" spellcheck="false">由于分词器是区分大小写的，所以我们构建了两张虚拟表来分别索引：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20220415230020-e6368ni" data-type="NodeList" class="list" id="20220415230020-e6368ni" updated="20220415231331"><div data-marker="*" data-subtype="u" data-node-id="20220415230947-ckedfb7" data-type="NodeListItem" class="li" id="20220415230947-ckedfb7" updated="20220415230947"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415230947-wz2s44w" data-type="NodeParagraph" class="p" updated="20220415231012" id="20220415230947-wz2s44w"><div contenteditable="false" spellcheck="false"><span data-type="code">blocks_fts</span>：按字符原样分词</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20220415230955-u91qki7" data-type="NodeListItem" class="li" id="20220415230955-u91qki7" updated="20220415231331"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220415230955-x5pw61i" data-type="NodeParagraph" class="p" id="20220415230955-x5pw61i" updated="20220415231331"><div contenteditable="false" spellcheck="false"><span data-type="code">blocks_fts_case_insensitive</span>：将英文字母转换为小写分词</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415231036-fa3a3bu" data-type="NodeParagraph" class="p" id="20220415231036-fa3a3bu" updated="20230802221513"><div contenteditable="false" spellcheck="false">这样做的缺点是增加了磁盘空间占用和降低了索引性能，但是目前暂时没有更好的方案，所以只能先这样了。另外，不支持变音符号，仅支持忽略大小写。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220415232054-zr76p9s" data-type="NodeParagraph" class="p" id="20220415232054-zr76p9s" updated="20220415232120"><div contenteditable="false" spellcheck="false">如果你有更好的实现方案，欢迎告诉我们，非常感谢。</div><div class="protyle-attr" contenteditable="false"></div></div>
+    </div>
+<div id="20220415192752-qzh0tjm" data-node-id="20220415192752-qzh0tjm" data-type="NodeListItem" updated="20220415193404" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415192752-tqimcdr" data-node-id="20220415192752-tqimcdr" data-type="NodeParagraph" updated="20220415193404" class="p" >查询（Query）：由短语构成，多个查询可通过 
+<span style="undefined" data-type="code"
+        >AND</span
+      >
+、
+<span style="undefined" data-type="code"
+        >OR</span
+      >
+ 和 
+<span style="undefined" data-type="code"
+        >NOT</span
+      >
+ 组合为新的查询
+</div>
+
+    </div>
+</div>
+<div id="20220415192934-mlqzc8m" data-node-id="20220415192934-mlqzc8m" data-type="NodeParagraph" updated="20220415232006" class="p" >下面我们分别介绍它们的细节。
+</div>
+<div id="20220415194256-qagtnkz" data-node-id="20220415194256-qagtnkz" data-type="NodeHeading" updated="20220415194259" data-subtype="h2" class="h2" >
+      <div>字符串
+</div>
+    </div>
+<div id="20220415194259-bvrexhp" data-node-id="20220415194259-bvrexhp" data-type="NodeParagraph" updated="20220415194339" class="p" >字符串可由两种方式指定：
+</div>
+<div id="20220415194339-m0g962e" data-node-id="20220415194339-m0g962e" data-type="NodeList" updated="20220415232543" data-subtype="u" class="list" ><div id="20220415194342-0tzonkx" data-node-id="20220415194342-0tzonkx" data-type="NodeListItem" updated="20220415202647" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415194342-etshgq1" data-node-id="20220415194342-etshgq1" data-type="NodeParagraph" updated="20220415202647" class="p" >通过英文双引号 
+<span style="undefined" data-type="code"
+        >"</span
+      >
+ 包裹起来的字符。其中如果需要使用 
+<span style="undefined" data-type="code"
+        >"</span
+      >
+ 本身，则可通过 SQL 风格转义（再加一个
+<span style="undefined" data-type="code"
+        >"</span
+      >
+），例如 
+<span style="undefined" data-type="code"
+        >"foo""bar"""</span
+      >
+ 将搜索命中 
+<span style="undefined" data-type="code"
+        >foo"bar"</span
+      >
+</div>
+
+    </div>
+<div id="20220415194739-jngjmqt" data-node-id="20220415194739-jngjmqt" data-type="NodeListItem" updated="20220415232543" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415194739-bupb792" data-node-id="20220415194739-bupb792" data-type="NodeParagraph" updated="20220415232543" class="p" >由非 
+<span style="undefined" data-type="code"
+        >AND</span
+      >
+、
+<span style="undefined" data-type="code"
+        >OR</span
+      >
+ 和 
+<span style="undefined" data-type="code"
+        >NOT</span
+      >
+ 字符组成，并且这些字符必须是：
+</div>
+<div id="20220415195209-5yhjye3" data-node-id="20220415195209-5yhjye3" data-type="NodeList" data-subtype="u" class="list" ><div id="20220415195209-k7w0u65" data-node-id="20220415195209-k7w0u65" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415195209-uselyqc" data-node-id="20220415195209-uselyqc" data-type="NodeParagraph" updated="20220415195300" class="p" >所有非 ASCII 字符，或者
+</div>
+
+    </div>
+<div id="20220415195315-pabtfkj" data-node-id="20220415195315-pabtfkj" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415195315-8xo8n7w" data-node-id="20220415195315-8xo8n7w" data-type="NodeParagraph" updated="20220415195527" class="p" >属于 52 个大小写英文字符（
+<span style="undefined" data-type="code"
+        >A-Za-z</span
+      >
+），或者
+</div>
+
+    </div>
+<div id="20220415195343-32719dk" data-node-id="20220415195343-32719dk" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415195343-813xgm5" data-node-id="20220415195343-813xgm5" data-type="NodeParagraph" updated="20220415195537" class="p" >属于 10 个 ASCII 数字字符（
+<span style="undefined" data-type="code"
+        >0-9</span
+      >
+），或者
+</div>
+
+    </div>
+<div id="20220415195453-3jooj2k" data-node-id="20220415195453-3jooj2k" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415195453-xcob0p8" data-node-id="20220415195453-xcob0p8" data-type="NodeParagraph" updated="20220415195503" class="p" >是下划线 
+<span style="undefined" data-type="code"
+        >_</span
+      >
+，或者
+</div>
+
+    </div>
+<div id="20220415195546-k0kd2dp" data-node-id="20220415195546-k0kd2dp" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415195546-ovm4ei3" data-node-id="20220415195546-ovm4ei3" data-type="NodeParagraph" updated="20220415195626" class="p" >是替换符（ASCII 26）
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+<div id="20220415202537-i16tvjh" data-node-id="20220415202537-i16tvjh" data-type="NodeParagraph" updated="20220415202830" class="p" >对于非上述的其他字符构成的字符串，必须使用 
+<span style="undefined" data-type="code"
+        >"</span
+      >
+ 包裹起来，比如包含了 
+<span style="undefined" data-type="code"
+        >-</span
+      >
+、
+<span style="undefined" data-type="code"
+        >*</span
+      >
+ 等符号的字符串。
+</div>
+<div id="20220415192040-apqa2u0" data-node-id="20220415192040-apqa2u0" data-type="NodeHeading" updated="20220415192043" data-subtype="h2" class="h2" >
+      <div>短语
+</div>
+    </div>
+<div id="20220415192311-5fv8kjl" data-node-id="20220415192311-5fv8kjl" data-type="NodeParagraph" updated="20230820184739" class="p" >短语由字符串构成，可由 
+<span style="undefined" data-type="code"
+        >+</span
+      >
+​ 进行连接。一个短语是由一些记号（Token）有序构成，这些记号由用户的输入文本通过分词器处理得到。思源使用的分词器为了让中文搜索好用（支持单字搜索），所以实现方式是按照字分词的，也就是说每个汉字或者英文字母都会被拆分为一个记号。这对 
+<span style="undefined" data-type="code"
+        >+</span
+      >
+​ 连接会产生一些影响，所以如果不确定的话，建议不要使用 
+<span style="undefined" data-type="code"
+        >+</span
+      >
+​ 组合多个短语。
+</div>
+<div id="20220415192044-9d8ou1j" data-node-id="20220415192044-9d8ou1j" data-type="NodeHeading" updated="20220415192101" data-subtype="h2" class="h2" >
+      <div>查询
+</div>
+    </div>
+<div id="20220415192101-lezi6pd" data-node-id="20220415192101-lezi6pd" data-type="NodeParagraph" updated="20220415211942" class="p" >查询由多个短语构成，可通过操作符 
+<span style="undefined" data-type="code"
+        >AND</span
+      >
+、
+<span style="undefined" data-type="code"
+        >OR</span
+      >
+ 和 
+<span style="undefined" data-type="code"
+        >NOT</span
+      >
+ 组合为新的查询。
+</div>
+=== 没有找到对应的渲染器 NodeTable ===
+<div id="20220415212140-piktfs5" data-node-id="20220415212140-piktfs5" data-type="NodeParagraph" updated="20220415212238" class="p" >使用英文圆括号 
+<span style="undefined" data-type="code"
+        >()</span
+      >
+ 可以组合查询的优先级，例如：
+</div>
+=== 没有找到对应的渲染器 NodeCodeBlock ===
+<div id="20220415225818-8llyxls" data-node-id="20220415225818-8llyxls" data-type="NodeParagraph" updated="20220415225927" class="p" >使用空格分隔的多个短语默认使用 
+<span style="undefined" data-type="code"
+        >AND</span
+      >
+ 连接，比如：
+</div>
+=== 没有找到对应的渲染器 NodeCodeBlock ===
+<div id="20220415195733-gb4mj1a" data-node-id="20220415195733-gb4mj1a" data-type="NodeHeading" updated="20220415234700" data-subtype="h2" class="h2" >
+      <div>技术实现
+</div>
+    </div>
+<div id="20220415195737-mo3ya7g" data-node-id="20220415195737-mo3ya7g" data-type="NodeParagraph" updated="20220415230645" class="p" >我们通过 
+<a href="https://www.sqlite.org/fts5.html">SQLite FTS5</a>
+ 实现了全局搜索。
+</div>
+<div id="20220415200915-g1un9h6" data-node-id="20220415200915-g1un9h6" data-type="NodeParagraph" updated="20220415200915" class="p" >系统生成的查询语句关键部分大致是 
+<span style="undefined" data-type="code"
+        >MATCH '{content name alias memo}:" + query</span
+      >
+，
+<span style="undefined" data-type="code"
+        >query</span
+      >
+ 即用户输入部分，对于
+<a href="https://www.sqlite.org/fts5.html#fts5_column_filters">列过滤器</a>
+ 
+<span style="undefined" data-type="code"
+        >{content name alias memo}:</span
+      >
+ 是通过 
+<span style="undefined" data-type="kbd"
+        >设置</span
+      >
+ -
+<span style="undefined" data-type="kbd"
+        > 搜索</span
+      >
+ - 
+<span style="undefined" data-type="kbd"
+        >属性</span
+      >
+ 生成的。
+</div>
+<div id="20220415200742-2l1tkjr" data-node-id="20220415200742-2l1tkjr" data-type="NodeParagraph" updated="20220415202247" class="p" >了解到这些以后，我们就可以通过查询语法来实现查询嵌入块，这样查询性能会更好：
+</div>
+=== 没有找到对应的渲染器 NodeBlockQueryEmbed ===
+<div id="20220415202144-mc7e5xh" data-node-id="20220415202144-mc7e5xh" data-type="NodeParagraph" updated="20220415202331" class="p" >除此以外，API 也支持使用 FTS 查询。
+</div>
+<div id="20220415230035-u0oui0b" data-node-id="20220415230035-u0oui0b" data-type="NodeHeading" updated="20220415230221" data-subtype="h3" class="h3" >
+      <div>大小写敏感
+</div>
+    </div>
+<div id="20220415230042-zzlr04p" data-node-id="20220415230042-zzlr04p" data-type="NodeParagraph" updated="20220415230236" class="p" >如果开启了 
+<span style="undefined" data-type="kbd"
+        >设置</span
+      >
+ - 
+<span style="undefined" data-type="kbd"
+        >搜索</span
+      >
+ - 
+<span style="undefined" data-type="kbd"
+        >区分大小写</span
+      >
+ 选项，则搜索会区分大小写，默认该选项是关闭的，即不区分大小写。
+</div>
+<div id="20220415230602-jrrha1j" data-node-id="20220415230602-jrrha1j" data-type="NodeParagraph" updated="20220415230942" class="p" >由于分词器是区分大小写的，所以我们构建了两张虚拟表来分别索引：
+</div>
+<div id="20220415230020-e6368ni" data-node-id="20220415230020-e6368ni" data-type="NodeList" updated="20220415231331" data-subtype="u" class="list" ><div id="20220415230947-ckedfb7" data-node-id="20220415230947-ckedfb7" data-type="NodeListItem" updated="20220415230947" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415230947-wz2s44w" data-node-id="20220415230947-wz2s44w" data-type="NodeParagraph" updated="20220415231012" class="p" ><span style="undefined" data-type="code"
+        >blocks_fts</span
+      >
+：按字符原样分词
+</div>
+
+    </div>
+<div id="20220415230955-u91qki7" data-node-id="20220415230955-u91qki7" data-type="NodeListItem" updated="20220415231331" data-subtype="u" class="li" data-marker="*" >
+      <div class="protyle-action" draggable="true">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220415230955-x5pw61i" data-node-id="20220415230955-x5pw61i" data-type="NodeParagraph" updated="20220415231331" class="p" ><span style="undefined" data-type="code"
+        >blocks_fts_case_insensitive</span
+      >
+：将英文字母转换为小写分词
+</div>
+
+    </div>
+</div>
+<div id="20220415231036-fa3a3bu" data-node-id="20220415231036-fa3a3bu" data-type="NodeParagraph" updated="20230802221513" class="p" >这样做的缺点是增加了磁盘空间占用和降低了索引性能，但是目前暂时没有更好的方案，所以只能先这样了。另外，不支持变音符号，仅支持忽略大小写。
+</div>
+<div id="20220415232054-zr76p9s" data-node-id="20220415232054-zr76p9s" data-type="NodeParagraph" updated="20220415232120" class="p" >如果你有更好的实现方案，欢迎告诉我们，非常感谢。
+</div>
+
         </div>
         <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
         <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
@@ -116,7 +454,11 @@
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -140,7 +482,9 @@
           Protyle.plantumlRender(previewElement, "../../stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });

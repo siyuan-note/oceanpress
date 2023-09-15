@@ -19,16 +19,16 @@
           rel="stylesheet"
           type="text/css"
           id="baseStyle"
-          href="../../stage/build/export/base.css?2.10.5"
+          href="stage/build/export/base.css?2.10.5"
         />
         <link
           rel="stylesheet"
           type="text/css"
           id="themeDefaultStyle"
-          href="../../appearance/themes/daylight/theme.css?2.10.5"
+          href="appearance/themes/daylight/theme.css?2.10.5"
         />
 
-        <title>排版元素</title>
+        <title>测试用页面</title>
         <style>
           body {
             background-color: var(--b3-theme-background);
@@ -837,9 +837,9 @@
 </div>
 
         </div>
-        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script src="appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="stage/protyle/js/lute/lute.min.js?2.10.5"></script>
         <script>
           window.siyuan = {
             config: {
@@ -859,16 +859,16 @@
             languages: { copy: "复制" },
           };
           const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "../../stage/protyle");
-          Protyle.mathRender(previewElement, "../../stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "../../stage/protyle");
-          Protyle.flowchartRender(previewElement, "../../stage/protyle");
-          Protyle.graphvizRender(previewElement, "../../stage/protyle");
-          Protyle.chartRender(previewElement, "../../stage/protyle");
-          Protyle.mindmapRender(previewElement, "../../stage/protyle");
-          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.highlightRender(previewElement, "stage/protyle");
+          Protyle.mathRender(previewElement, "stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "stage/protyle");
+          Protyle.flowchartRender(previewElement, "stage/protyle");
+          Protyle.graphvizRender(previewElement, "stage/protyle");
+          Protyle.chartRender(previewElement, "stage/protyle");
+          Protyle.mindmapRender(previewElement, "stage/protyle");
+          Protyle.abcRender(previewElement, "stage/protyle");
           Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          Protyle.plantumlRender(previewElement, "stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
               navigator.clipboard.writeText(
