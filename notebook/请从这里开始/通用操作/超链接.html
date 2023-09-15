@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
+        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+
+        <title>超链接</title>
+        <style>
+            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
+            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+            .li > .protyle-action {height:34px;line-height: 34px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
+            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
+            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
+            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
+            .protyle-wysiwyg [data-node-id] {}
+            .protyle-wysiwyg .li {min-height:34px}
+            .protyle-gutters button svg {height:26px}
+            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
+            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
+            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
+            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
+            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
+            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
+            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+        </style>
+    </head>
+    <body>
+    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+
+    <div data-subtype="h2" data-node-id="20210331200225-rckl95w" data-node-index="0" data-type="NodeHeading" class="h2" updated="20210331200233"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210331200042-chf3lo7" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210331200225"><div contenteditable="true" spellcheck="false">如果你需要在其他地方（比如浏览器或者支持超链接跳转的软件）拉起<span data-type="virtual-block-ref">思源</span>桌面端应用程序，可以使用 <span data-type="code">​siyuan://</span>​ 超链接。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210331200221-h942rq7" data-node-index="2" data-type="NodeHeading" class="h2" updated="20210331200305"><div contenteditable="true" spellcheck="false">链接格式</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210331200402-vrkloc7" data-node-index="3" data-type="NodeParagraph" class="p" updated="20210502203017"><div contenteditable="true" spellcheck="false">​<span data-type="code">​siyuan://blocks/{id}</span>​：直接打开<span data-type="virtual-block-ref">内容块</span>，需要该块所在笔记本已经处于打开状态。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220312232623-xhnu1dy" data-node-index="4" data-type="NodeParagraph" class="p" updated="20220312232838"><div contenteditable="true" spellcheck="false">加入查询字符串参数 <span data-type="code">​focus=1</span>​ （<span data-type="code">​siyuan://blocks/{id}?focus=1</span>​）表示聚焦打开。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210331200402-sk21ug4" data-node-index="5" data-type="NodeHeading" class="h2" updated="20210331200839"><div contenteditable="true" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210331200839-18k56cs" data-node-index="6" data-type="NodeList" class="list" updated="20220407101632"><div data-marker="*" data-subtype="u" data-node-id="20210331200851-ie56mj1" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210331200851-azjogkc" data-type="NodeParagraph" class="p" updated="20220407095654"><div contenteditable="true" spellcheck="false">在 Windows 和 macOS 上启动后会自动向系统申请注册 <span data-type="code">​siyuan://</span>​ 协议</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220407095655-sr6hd3r" data-type="NodeListItem" class="li" updated="20220407101446"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220407095655-521ktn5" data-type="NodeParagraph" class="p" updated="20220407100259"><div contenteditable="true" spellcheck="false">在 Linux 上请尝试如下步骤</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20220407100259-nnwljox" data-type="NodeList" class="list" updated="20220407101446"><div data-marker="*" data-subtype="u" data-node-id="20220407100259-j2b8ewc" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220407100259-gv36o92" data-type="NodeParagraph" class="p" updated="20220407101001"><div contenteditable="true" spellcheck="false">创建或者找到 <span data-type="code">​siyuan.desktop</span>​ 文件，并打开编辑</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20220407100937-7ksbzt4" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20220407100940-s2nsbc1" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220407100940-vt8pfeb" data-type="NodeParagraph" class="p" updated="20220407101010"><div contenteditable="true" spellcheck="false">​<span data-type="code">​MimeType=MimeType=x-scheme-handler/siyuan;</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220407100936-vwx517w" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220407100936-h54bt1i" data-type="NodeParagraph" class="p" updated="20220407100947"><div contenteditable="true" spellcheck="false">​<span data-type="code">​Exec</span>​ 末尾加入 <span data-type="code">​%u</span>​，即 <span data-type="code">​Exec=可执行文件路径 %u</span>​</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20220407100916-s199ym5" data-type="NodeListItem" class="li" updated="20220407101446"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20220407100916-wte0ctv" data-type="NodeParagraph" class="p" updated="20220407101446"><div contenteditable="true" spellcheck="false">执行以下命令</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220407101054-kcbh16x" data-type="NodeCodeBlock" class="code-block" updated="20220407101120"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">java</span><span class="fn__flex-1"></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--first protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span><span class="b3-tooltips__nw b3-tooltips protyle-icon protyle-icon--last protyle-action__menu"><svg><use xlink:href="#iconMore"></use></svg></span></div><div class="hljs" contenteditable="true" spellcheck="false">sudo update-desktop-database
+xdg-mime default siyuan.desktop x-scheme-handler/siyuan
+xdg-settings set default-url-scheme-handler siyuan siyuan.desktop
+</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220407101138-rh7endq" data-type="NodeParagraph" class="p" updated="20220407101208"><div contenteditable="true" spellcheck="false">更多细节可参考 <span data-type="a" data-href="https://www.freedesktop.org/wiki/Software/xdg-utils/">xdg-utils</span>。</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210331201016-h8i10b1" data-type="NodeListItem" class="li" updated="20220407101632"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210331201016-k6nnbcd" data-type="NodeParagraph" class="p" updated="20220407101632"><div contenteditable="true" spellcheck="false">块标菜单 - 复制 - 复制块超链接</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div>
+
+    </div>
+    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
+    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
+    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
+    <script>
+        window.siyuan = {
+          config: {
+            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+            editor: {
+              codeLineWrap: true,
+              codeLigatures: false,
+              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+              codeSyntaxHighlightLineNum: true,
+              katexMacros: JSON.stringify({}),
+            }
+          },
+          languages: {copy:"复制"}
+        };
+        const previewElement = document.getElementById('preview');
+        Protyle.highlightRender(previewElement, "stage/protyle");
+        Protyle.mathRender(previewElement, "stage/protyle", false);
+        Protyle.mermaidRender(previewElement, "stage/protyle");
+        Protyle.flowchartRender(previewElement, "stage/protyle");
+        Protyle.graphvizRender(previewElement, "stage/protyle");
+        Protyle.chartRender(previewElement, "stage/protyle");
+        Protyle.mindmapRender(previewElement, "stage/protyle");
+        Protyle.abcRender(previewElement, "stage/protyle");
+        Protyle.htmlRender(previewElement);
+        Protyle.plantumlRender(previewElement, "stage/protyle");
+        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+          item.addEventListener("click", (event) => {
+                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+                event.preventDefault();
+                event.stopPropagation();
+          })
+        });
+    </script></body></html>
