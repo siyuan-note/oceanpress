@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="stage/build/export/base.css?2.10.5"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -96,8 +109,25 @@
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-          <div data-subtype="h1" data-node-id="20201121212605-9td1a62" data-type="NodeHeading" class="h1" icon="1f64f" id="20201121212605-9td1a62" title="致谢" type="doc" updated="20230821234646"><div contenteditable="false" spellcheck="false">致谢</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210924163203-lxaclhb" data-type="NodeParagraph" class="p" updated="20230821234646" id="20210924163203-lxaclhb"><div contenteditable="false" spellcheck="false">思源的诞生离不开众多的开源项目和贡献者，请参考项目源代码 kernel/go.mod、app/package.json 和项目首页。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230820173510-7yqgjxi" data-type="NodeParagraph" class="p" id="20230820173510-7yqgjxi" updated="20230820175936"><div contenteditable="false" spellcheck="false">思源的成长离不开用户的反馈和宣传推广，感谢所有人对思源的帮助 ❤</div><div class="protyle-attr" contenteditable="false"></div></div>
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
+          <div
+      id="20201121212605-9td1a62" data-node-id="20201121212605-9td1a62" data-type="NodeDocument" updated="20230821234646" data-subtype="h1" class="h1" 
+      icon="1f4f0"
+      title="致谢"
+      type="doc"
+    >
+      <div style="height:25vh;undefined"></div>
+      <div>致谢</div>
+    </div>
+    <div id="20210924163203-lxaclhb" data-node-id="20210924163203-lxaclhb" data-type="NodeParagraph" updated="20230821234646" class="p" >思源的诞生离不开众多的开源项目和贡献者，请参考项目源代码 kernel/go.mod、app/package.json 和项目首页。
+</div>
+<div id="20230820173510-7yqgjxi" data-node-id="20230820173510-7yqgjxi" data-type="NodeParagraph" updated="20230820175936" class="p" >思源的成长离不开用户的反馈和宣传推广，感谢所有人对思源的帮助 ❤
+</div>
+
         </div>
         <script src="appearance/icons/material/icon.js?2.10.5"></script>
         <script src="stage/build/export/protyle-method.js?2.10.5"></script>
@@ -105,7 +135,11 @@
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -129,7 +163,9 @@
           Protyle.plantumlRender(previewElement, "stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });

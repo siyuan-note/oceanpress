@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-    <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+    <html
+      lang="zh_CN"
+      data-theme-mode="light"
+      data-light-theme="daylight"
+      data-dark-theme="midnight"
+    >
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="baseStyle"
+          href="../stage/build/export/base.css?2.10.5"
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -96,8 +109,22 @@
         </style>
       </head>
       <body>
-        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-          <div data-subtype="h1" data-node-id="20210808180321-hbvl5c2" data-type="NodeHeading" class="h1" icon="1f68c" id="20210808180321-hbvl5c2" title="通用操作" updated="20210814001414"><div contenteditable="false" spellcheck="false">通用操作</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210808180321-nvp3dph" data-type="NodeParagraph" class="p" updated="20210814001414" id="20210808180321-nvp3dph"><div contenteditable="false" spellcheck="false">‍</div><div class="protyle-attr" contenteditable="false"></div></div>
+        <div
+          class="protyle-wysiwyg protyle-wysiwyg--attr"
+          style="max-width: 800px;margin: 0 auto;"
+          id="preview"
+        >
+          <div
+      id="20210808180321-hbvl5c2" data-node-id="20210808180321-hbvl5c2" data-type="NodeDocument" updated="20210814001414" data-subtype="h1" class="h1" 
+      icon="1f4f0"
+      title="通用操作"
+      type="doc"
+    >
+      <div style="height:25vh;undefined"></div>
+      <div>通用操作</div>
+    </div>
+    <div id="20210808180321-nvp3dph" data-node-id="20210808180321-nvp3dph" data-type="NodeParagraph" updated="20210814001414" class="p" ></div>
+
         </div>
         <script src="../appearance/icons/material/icon.js?2.10.5"></script>
         <script src="../stage/build/export/protyle-method.js?2.10.5"></script>
@@ -105,7 +132,11 @@
         <script>
           window.siyuan = {
             config: {
-              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              appearance: {
+                mode: 0,
+                codeBlockThemeDark: "base16/dracula",
+                codeBlockThemeLight: "github",
+              },
               editor: {
                 codeLineWrap: true,
                 codeLigatures: false,
@@ -129,7 +160,9 @@
           Protyle.plantumlRender(previewElement, "../stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              navigator.clipboard.writeText(
+                item.parentElement.nextElementSibling.textContent.trimEnd(),
+              );
               event.preventDefault();
               event.stopPropagation();
             });
