@@ -1,77 +1,145 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="../../appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>剪藏</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-subtype="h2" data-node-id="20210505163604-9bqjti3" data-node-index="0" data-type="NodeHeading" class="h2" updated="20210505163607"><div contenteditable="true" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210505163537-f04zpvo" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210505163740"><div contenteditable="true" spellcheck="false">“剪藏”是指将 Web 页面上的内容复制到<span data-type="virtual-block-ref">思源</span>中，并尽量保持其原始格式。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210505163741-w3p5lx5" data-node-index="2" data-type="NodeHeading" class="h2" updated="20210505163757"><div contenteditable="true" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210505164024-uwvunwm" data-node-index="3" data-type="NodeList" class="list" updated="20230621111754"><div data-marker="*" data-subtype="u" data-node-id="20210505164206-jydol2d" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210505164206-6jpvjkl" data-type="NodeParagraph" class="p" updated="20210505164440"><div contenteditable="true" spellcheck="false">如果不需要将剪藏内容中包含的图片拉取到本地，可直接在浏览器中选择复制，然后在<span data-type="virtual-block-ref">思源</span>中进行粘贴</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210505164209-g9651e2" data-type="NodeListItem" class="li" updated="20230621111754"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210505164209-s3gbivw" data-type="NodeParagraph" class="p" updated="20230621111754"><div contenteditable="true" spellcheck="false">如果需要将剪藏内容中包含的图片拉取到本地，可使用<span data-type="a" data-href="https://ld246.com/article/1629423901669">思源 Chrome 扩展</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20210531180555-mcz0ihc" data-node-index="4" data-type="NodeHeading" class="h3" updated="20210724233556"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">思源</span> Chrome <span data-type="virtual-block-ref">扩展</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="o" data-node-id="20210531180907-u4jeq2k" data-node-index="5" data-type="NodeList" class="list" updated="20210820171805"><div data-marker="1." data-subtype="o" data-node-id="20210820171356-ky8ms7s" data-type="NodeListItem" class="li" updated="20210820171805"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20210820171356-8doieb3" data-type="NodeParagraph" class="p" updated="20210820171805"><div contenteditable="true" spellcheck="false">安装<span data-type="virtual-block-ref">扩展</span>，在<span data-type="virtual-block-ref">扩展</span>的选项中配置 API token（token 可在<span data-type="virtual-block-ref">思源</span>设置 - <span data-type="virtual-block-ref">关于</span>中查看）</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="2." data-subtype="o" data-node-id="20210531180907-oidarsc" data-type="NodeListItem" class="li"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20210531180907-61e9zd1" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">在 Web 页面上选择需要剪藏的内容，然后在右键菜单中选择 “Copy to SiYuan”</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="3." data-subtype="o" data-node-id="20210531180916-9agoxnr" data-type="NodeListItem" class="li" updated="20210531180941"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">3.</div><div data-node-id="20210531180916-pa8wha1" data-type="NodeParagraph" class="p" updated="20210531180941"><div contenteditable="true" spellcheck="false">在<span data-type="virtual-block-ref">思源</span>中粘贴</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20211019234857-y3dcex1" data-node-index="6" data-type="NodeParagraph" class="p" updated="20211019235043"><div contenteditable="true" spellcheck="false">如果需要剪藏整篇文章，可在<span data-type="virtual-block-ref">扩展</span>上直接点击“Send to SiYuan”。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h3" data-node-id="20220420001516-9rek6if" data-node-index="7" data-type="NodeHeading" class="h3" updated="20220420001521"><div contenteditable="true" spellcheck="false">移动端剪藏</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20220420001522-igble2k" data-node-index="8" data-type="NodeParagraph" class="p" updated="20230905090027"><div contenteditable="true" spellcheck="false">如果需要在手机上进行剪藏，请使用<span data-type="block-ref" data-subtype="s" data-id="20230808120348-hynr7og">收集箱</span>。</div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20210505163537-oo97zov" data-type="NodeHeading" class="h1" title="剪藏" type="doc" updated="20230905090027" id="20210505163537-oo97zov"><div contenteditable="false" spellcheck="false">剪藏</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210505163604-9bqjti3" data-type="NodeHeading" class="h2" id="20210505163604-9bqjti3" updated="20210505163607"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210505163537-f04zpvo" data-type="NodeParagraph" class="p" id="20210505163537-f04zpvo" updated="20210505163740"><div contenteditable="false" spellcheck="false">“剪藏”是指将 Web 页面上的内容复制到思源中，并尽量保持其原始格式。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210505163741-w3p5lx5" data-type="NodeHeading" class="h2" id="20210505163741-w3p5lx5" updated="20210505163757"><div contenteditable="false" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210505164024-uwvunwm" data-type="NodeList" class="list" id="20210505164024-uwvunwm" updated="20230621111754"><div data-marker="*" data-subtype="u" data-node-id="20210505164206-jydol2d" data-type="NodeListItem" class="li" id="20210505164206-jydol2d"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210505164206-6jpvjkl" data-type="NodeParagraph" class="p" id="20210505164206-6jpvjkl" updated="20210505164440"><div contenteditable="false" spellcheck="false">如果不需要将剪藏内容中包含的图片拉取到本地，可直接在浏览器中选择复制，然后在思源中进行粘贴</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210505164209-g9651e2" data-type="NodeListItem" class="li" id="20210505164209-g9651e2" updated="20230621111754"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210505164209-s3gbivw" data-type="NodeParagraph" class="p" id="20210505164209-s3gbivw" updated="20230621111754"><div contenteditable="false" spellcheck="false">如果需要将剪藏内容中包含的图片拉取到本地，可使用<a href="https://ld246.com/article/1629423901669">思源 Chrome 扩展</a></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20210531180555-mcz0ihc" data-type="NodeHeading" class="h3" id="20210531180555-mcz0ihc" updated="20210724233556"><div contenteditable="false" spellcheck="false">思源 Chrome 扩展</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="o" data-node-id="20210531180907-u4jeq2k" data-type="NodeList" class="list" id="20210531180907-u4jeq2k" updated="20210820171805"><div data-marker="1." data-subtype="o" data-node-id="20210820171356-ky8ms7s" data-type="NodeListItem" class="li" id="20210820171356-ky8ms7s" updated="20210820171805"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20210820171356-8doieb3" data-type="NodeParagraph" class="p" id="20210820171356-8doieb3" updated="20210820171805"><div contenteditable="false" spellcheck="false">安装扩展，在扩展的选项中配置 API token（token 可在思源设置 - 关于中查看）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="2." data-subtype="o" data-node-id="20210531180907-oidarsc" data-type="NodeListItem" class="li" id="20210531180907-oidarsc"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20210531180907-61e9zd1" data-type="NodeParagraph" class="p" id="20210531180907-61e9zd1"><div contenteditable="false" spellcheck="false">在 Web 页面上选择需要剪藏的内容，然后在右键菜单中选择 “Copy to SiYuan”</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="3." data-subtype="o" data-node-id="20210531180916-9agoxnr" data-type="NodeListItem" class="li" id="20210531180916-9agoxnr" updated="20210531180941"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">3.</div><div data-node-id="20210531180916-pa8wha1" data-type="NodeParagraph" class="p" id="20210531180916-pa8wha1" updated="20210531180941"><div contenteditable="false" spellcheck="false">在思源中粘贴</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20211019234857-y3dcex1" data-type="NodeParagraph" class="p" id="20211019234857-y3dcex1" updated="20211019235043"><div contenteditable="false" spellcheck="false">如果需要剪藏整篇文章，可在扩展上直接点击“Send to SiYuan”。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20220420001516-9rek6if" data-type="NodeHeading" class="h3" id="20220420001516-9rek6if" updated="20220420001521"><div contenteditable="false" spellcheck="false">移动端剪藏</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20220420001522-igble2k" data-type="NodeParagraph" class="p" id="20220420001522-igble2k" updated="20230905090027"><div contenteditable="false" spellcheck="false">如果需要在手机上进行剪藏，请使用收集箱<sup class="footnotes-ref" id="footnotes-ref-1"><a href="#footnotes-def-1">1</a></sup>。</div><div class="protyle-attr" contenteditable="false"></div></div><div class="footnotes-defs-div"><hr class="footnotes-defs-hr" />
+<ol class="footnotes-defs-ol"><li><div data-subtype="h1" data-node-id="20230915114759-q7e8zv4" data-type="NodeHeading" class="h1"><div contenteditable="false" spellcheck="false"><span id="footnotes-def-1"></span>收集箱</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230808120348-acmzrvi" data-type="NodeHeading" class="h2" id="20230808120348-acmzrvi" updated="20220414110720"><div contenteditable="false" spellcheck="false">概述</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-n9cbk6m" data-type="NodeParagraph" class="p" updated="20220414111303" id="20230808120348-n9cbk6m"><div contenteditable="false" spellcheck="false">我们可以通过云端收集箱对外部数据进行收集，然后在思源中通过收集箱面板从云端获取这些数据并发送到笔记本中进行进一步整理。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20230808120348-4fzvj00" data-type="NodeHeading" class="h2" id="20230808120348-4fzvj00" updated="20220414110726"><div contenteditable="false" spellcheck="false">使用方式</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-8bke4u1" data-type="NodeParagraph" class="p" id="20230808120348-8bke4u1" updated="20220414111331"><div contenteditable="false" spellcheck="false">目前提供以下两种方式进行数据接入。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20230808120348-jx88s8k" data-type="NodeHeading" class="h3" id="20230808120348-jx88s8k" updated="20220803163214"><div contenteditable="false" spellcheck="false">微信输入</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="o" data-node-id="20230808120348-36js739" data-type="NodeList" class="list" updated="20220420002346" id="20230808120348-36js739"><div data-marker="1." data-subtype="o" data-node-id="20230808120348-eusvjur" data-type="NodeListItem" class="li" id="20230808120348-eusvjur" updated="20220420002346"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20230808120348-7ned990" data-type="NodeParagraph" class="p" id="20230808120348-7ned990" updated="20220420002346"><div contenteditable="false" spellcheck="false">在 <a href="https://ld246.com/settings/account">链滴 - 设置 - 账号</a> 中绑定微信</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="2." data-subtype="o" data-node-id="20230808120348-qj3s8nv" data-type="NodeListItem" class="li" id="20230808120348-qj3s8nv" updated="20220414111447"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20230808120348-je6pvfj" data-type="NodeParagraph" class="p" id="20230808120348-je6pvfj" updated="20220414111447"><div contenteditable="false" spellcheck="false">关注 <span data-type="code">B3log开源</span> 公众号</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-q3mlobm" data-type="NodeParagraph" class="p" id="20230808120348-q3mlobm" updated="20220414111447"><div contenteditable="false" spellcheck="false"><span contenteditable="false" data-type="img" class="img"><span> </span><span><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20220119231125-qt2ooye.png" data-src="assets/image-20220119231125-qt2ooye.png" alt="image.png" /><span class="protyle-action__drag"></span><span class="protyle-action__title"></span></span><span> </span></span>​</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="3." data-subtype="o" data-node-id="20230808120348-369kixi" data-type="NodeListItem" class="li" id="20230808120348-369kixi"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">3.</div><div data-node-id="20230808120348-i0k95p5" data-type="NodeParagraph" class="p" id="20230808120348-i0k95p5"><div contenteditable="false" spellcheck="false">关注后点击右下角绑定账号</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="4." data-subtype="o" data-node-id="20230808120348-oisdiw6" data-type="NodeListItem" class="li" id="20230808120348-oisdiw6"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">4.</div><div data-node-id="20230808120348-vgnod3s" data-type="NodeParagraph" class="p" id="20230808120348-vgnod3s" updated="20220414111616"><div contenteditable="false" spellcheck="false">对该公众号发送消息（可从收藏中选择待发送消息），仅支持文本、图片和超链接</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="5." data-subtype="o" data-node-id="20230808120348-bwadia9" data-type="NodeListItem" class="li" updated="20220414111650" id="20230808120348-bwadia9"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">5.</div><div data-node-id="20230808120348-0nar5il" data-type="NodeParagraph" class="p" id="20230808120348-0nar5il" updated="20220414111650"><div contenteditable="false" spellcheck="false">在思源中打开收集箱面板（Alt+6）</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-bgc22ov" data-type="NodeParagraph" class="p" id="20230808120348-bgc22ov" updated="20220803163323"><div contenteditable="false" spellcheck="false">关注公众号并绑定账号后除了可以通过公众号输入，也可以通过添加 <span data-type="code">思源小助手</span> 为联系人后输入，这样可以直接转发聊天记录。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-sgs1od3" data-type="NodeParagraph" class="p" id="20230808120348-sgs1od3" updated="20220803164829"><div contenteditable="false" spellcheck="false"><span contenteditable="false" data-type="img" class="img"><span> </span><span><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20220803164829-wrh3h5w.png" data-src="assets/image-20220803164829-wrh3h5w.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"></span></span><span> </span></span></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-4sudh2q" data-type="NodeParagraph" class="p" id="20230808120348-4sudh2q" updated="20221022010553"><div contenteditable="false" spellcheck="false">支持的消息类型为文本、图片、语音、视频和文件，单个图片、语音、视频和文件的大小不超过 10M。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h3" data-node-id="20230808120348-nr87lcz" data-type="NodeHeading" class="h3" id="20230808120348-nr87lcz" updated="20220414111351"><div contenteditable="false" spellcheck="false">API</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230808120348-3os6f8y" data-type="NodeList" class="list" updated="20220420002338" id="20230808120348-3os6f8y"><div data-marker="*" data-subtype="u" data-node-id="20230808120348-odp49x3" data-type="NodeListItem" class="li" id="20230808120348-odp49x3" updated="20220419193441"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120348-7do558a" data-type="NodeParagraph" class="p" id="20230808120348-7do558a" updated="20220419193441"><div contenteditable="false" spellcheck="false">POST <span data-type="code">https://ld246.com/apis/siyuan/inbox/addCloudShorthand</span></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230808120348-bclrn6g" data-type="NodeListItem" class="li" id="20230808120348-bclrn6g"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120348-nlq5qiw" data-type="NodeParagraph" class="p" id="20230808120348-nlq5qiw" updated="20220419193503"><div contenteditable="false" spellcheck="false">Body</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-7j439tl" data-type="NodeCodeBlock" class="code-block" id="20230808120348-7j439tl" updated="20220419193522"><div class="protyle-action"><span class="protyle-action--first protyle-action__language" contenteditable="false">json</span><span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span></div><div class="hljs" contenteditable="false" spellcheck="false">{
+    &quot;title&quot;: &quot;A simple text title&quot;,
+    &quot;content&quot;: &quot;Content with **Markdown**.&quot;
+}
+</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20230808120348-9h6ee98" data-type="NodeListItem" class="li" id="20230808120348-9h6ee98" updated="20220420002338"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120348-bw0eiza" data-type="NodeParagraph" class="p" id="20230808120348-bw0eiza" updated="20220420002338"><div contenteditable="false" spellcheck="false">鉴权方式为 HTTP 请求标头 <span data-type="code">Authorization</span>，值为 <span data-type="code">token {Your API Token}</span>（注意大小写和空格），API Token 可以 <a href="https://ld246.com/settings/account">链滴 - 设置 - 账号</a> 中找到</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-q3ir0il" data-type="NodeParagraph" class="p" id="20230808120348-q3ir0il" updated="20230802115243"><div contenteditable="false" spellcheck="false">​<span data-type="tag">注意</span>​：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20230808120348-yjvbip7" data-type="NodeList" class="list" id="20230808120348-yjvbip7" updated="20220419193608"><div data-marker="*" data-subtype="u" data-node-id="20230808120348-wgpteh3" data-type="NodeListItem" class="li" updated="20220419193608" id="20230808120348-wgpteh3"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20230808120348-vycxbo0" data-type="NodeParagraph" class="p" id="20230808120348-vycxbo0" updated="20220419193608"><div contenteditable="false" spellcheck="false">频率限制：每 24 小时最多插入 128 条</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20230808120348-qxwlf1n" data-type="NodeParagraph" class="p" id="20230808120348-qxwlf1n" updated="20220419112427"><div contenteditable="false" spellcheck="false">‍</div><div class="protyle-attr" contenteditable="false"></div></div></li>
+</ol></div>
+        </div>
+        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "../../stage/protyle");
+          Protyle.mathRender(previewElement, "../../stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "../../stage/protyle");
+          Protyle.flowchartRender(previewElement, "../../stage/protyle");
+          Protyle.graphvizRender(previewElement, "../../stage/protyle");
+          Protyle.chartRender(previewElement, "../../stage/protyle");
+          Protyle.mindmapRender(previewElement, "../../stage/protyle");
+          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>

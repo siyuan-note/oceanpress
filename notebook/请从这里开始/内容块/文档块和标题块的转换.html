@@ -1,77 +1,139 @@
 <!DOCTYPE html>
     <html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.2"/>
-        <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/daylight/theme.css?2.10.2"/>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          id="themeDefaultStyle"
+          href="../../appearance/themes/daylight/theme.css?2.10.5"
+        />
 
         <title>文档块和标题块的转换</title>
         <style>
-            body {background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
-            .b3-typography, .protyle-wysiwyg, .protyle-title {font-size:16px !important}
-            .b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
-            .li > .protyle-action {height:34px;line-height: 34px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:34px;}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: 16px;width: 16px;margin:-8px 0 0 -8px}
-            .protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: 14px}
-            .protyle-wysiwyg [data-node-id].li:before {height: calc(100% - 34px);top:34px}
-            .protyle-wysiwyg [data-node-id] [spellcheck] {min-height:26px;}
-            .protyle-wysiwyg [data-node-id] {}
-            .protyle-wysiwyg .li {min-height:34px}
-            .protyle-gutters button svg {height:26px}
-            .protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:18px}
-            .protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:35px}
-            .protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:31px}
-            .protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:27px}
-            .protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:25px}
-            .protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:22px}
-            .protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:20px}
+          body {
+            background-color: var(--b3-theme-background);
+            color: var(--b3-theme-on-background);
+          }
+          .b3-typography,
+          .protyle-wysiwyg,
+          .protyle-title {
+            font-size: 16px !important;
+          }
+          .b3-typography code:not(.hljs),
+          .protyle-wysiwyg span[data-type~="code"] {
+            font-variant-ligatures: normal;
+          }
+          .li > .protyle-action {
+            height: 34px;
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
+            line-height: 34px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
+            height: 16px;
+            width: 16px;
+            margin: -8px 0 0 -8px;
+          }
+          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
+            height: 14px;
+          }
+          .protyle-wysiwyg [data-node-id].li:before {
+            height: calc(100% - 34px);
+            top: 34px;
+          }
+          .protyle-wysiwyg [data-node-id] [spellcheck] {
+            min-height: 26px;
+          }
+          .protyle-wysiwyg [data-node-id] {
+          }
+          .protyle-wysiwyg .li {
+            min-height: 34px;
+          }
+          .protyle-gutters button svg {
+            height: 26px;
+          }
+          .protyle-wysiwyg img.emoji,
+          .b3-typography img.emoji {
+            width: 18px;
+          }
+          .protyle-wysiwyg .h1 img.emoji,
+          .b3-typography h1 img.emoji {
+            width: 35px;
+          }
+          .protyle-wysiwyg .h2 img.emoji,
+          .b3-typography h2 img.emoji {
+            width: 31px;
+          }
+          .protyle-wysiwyg .h3 img.emoji,
+          .b3-typography h3 img.emoji {
+            width: 27px;
+          }
+          .protyle-wysiwyg .h4 img.emoji,
+          .b3-typography h4 img.emoji {
+            width: 25px;
+          }
+          .protyle-wysiwyg .h5 img.emoji,
+          .b3-typography h5 img.emoji {
+            width: 22px;
+          }
+          .protyle-wysiwyg .h6 img.emoji,
+          .b3-typography h6 img.emoji {
+            width: 20px;
+          }
         </style>
-    </head>
-    <body>
-    <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
-
-    <div data-subtype="h2" data-node-id="20210104090801-7whehbb" data-node-index="0" data-type="NodeHeading" class="h2"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">文档块</span>和标题块的对应关系</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-1dpx3hw" data-node-index="1" data-type="NodeParagraph" class="p" updated="20210302223315"><div contenteditable="true" spellcheck="false">标题块和<span data-type="virtual-block-ref">文档块</span>具有天然的对应关系，因为：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210104090801-ixsk5op" data-node-index="2" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-54u65x0" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-sdi6o2t" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">每一个<span data-type="virtual-block-ref">文档块</span>都有一个名称</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-5lx1ywu" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-bsreel3" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">每一个标题块也都有一个名称</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-b9mbgmu" data-node-index="3" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">所以我们可以在<span data-type="virtual-block-ref">文档块</span>和标题块之间进行相互转换。另外，因为<span data-type="virtual-block-ref">内容块</span>是根据 id 进行<span data-type="virtual-block-ref">引用</span>的，所以转换过程不会破坏已有的<span data-type="virtual-block-ref">引用</span>关系。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210104090801-tojy8es" data-node-index="4" data-type="NodeHeading" class="h2"><div contenteditable="true" spellcheck="false">将<span data-type="virtual-block-ref">文档块</span>转换为标题块</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-q0rn7el" data-node-index="5" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">在文档树上，选择需要转换为标题块的文档，然后将其拖拽到<span data-type="virtual-block-ref">编辑器</span>页签中需要插入的位置。<span data-type="virtual-block-ref">这里</span>有两种情况：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="o" data-node-id="20210104090801-3ousg98" data-node-index="6" data-type="NodeList" class="list"><div data-marker="1." data-subtype="o" data-node-id="20210104090801-6whvehe" data-type="NodeListItem" class="li"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20210302223313-lve2bd1" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">将<span data-type="virtual-block-ref">文档块</span>放置到已有标题块上，此时<span data-type="virtual-block-ref">文档块</span>将作为该标题块的平级节点插入到下方</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="2." data-subtype="o" data-node-id="20210104090801-mf8nr7i" data-type="NodeListItem" class="li"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20210302223313-f0k4v2v" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">将<span data-type="virtual-block-ref">文档块</span>放置到非标题块上，此时<span data-type="virtual-block-ref">文档块</span>将作为该块所属标题块的子节点插入</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-e7sxz6z" data-node-index="7" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false"><span data-type="virtual-block-ref">文档块</span>转换为标题块后：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210104090801-2ddk3ds" data-node-index="8" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-jz1znbt" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-cdy6sgh" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">原文档名将变为标题名</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-ndykhp0" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-vjvzwqe" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">逻辑上<span data-type="virtual-block-ref">文档块</span>是一级标题，会根据插入位置进行相对层级变更</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-b2nqr6d" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-i6rh8oh" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">原文档内的各标题层级会根据插入位置进行调整</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210104090801-1q24tjm" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-036y0g8" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-des2ctj" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">对于上述情况一：比如原文档内包含一、二、三级标题，插入位置是一个二级标题，则<span data-type="virtual-block-ref">文档块</span>转换后的标题块会是一个二级标题，原来内容中的一、二、三级标题会变为二、三、四级标题</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-3xknfkq" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-ls5q1hm" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">对于上述情况二：比如原文档内包含一、二、三级标题，插入位置是一个二级标题下的段落块，则<span data-type="virtual-block-ref">文档块</span>转换后的标题块会是一个三级标题，原来内容中的 一、二、三级标题会变为三、四、五级标题</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="h2" data-node-id="20210104090801-s48mpeu" data-node-index="9" data-type="NodeHeading" class="h2"><div contenteditable="true" spellcheck="false">将标题块转换为<span data-type="virtual-block-ref">文档块</span></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-9kyqggg" data-node-index="10" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">在<span data-type="virtual-block-ref">编辑器</span>页签中选择需要转换的标题块，按住该标题块标识<span data-type="virtual-block-ref">图标</span>，然后将其拖拽到文档树需要放置的文件夹中。如果需要放置到笔记本根文件夹上，就将标题块标识<span data-type="virtual-block-ref">图标</span>拖动到顶层的笔记本<span data-type="virtual-block-ref">图标</span>这一行上。</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-node-id="20210104090801-z3yxgmt" data-node-index="11" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">标题块转换为<span data-type="virtual-block-ref">文档块</span>后：</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210104090801-2clqrmr" data-node-index="12" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-u88ud0z" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-c3uu9qe" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">标题名将变为文档名</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-yg8oign" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-g1q27b1" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">原标题块下如果有子标题，则会按照这些子标题中最大的层级作为新文档中一级标题，其余子标题会根据相对层级进行调整</div><div class="protyle-attr" contenteditable="false">​</div></div><div data-subtype="u" data-node-id="20210104090801-p8uc6ob" data-type="NodeList" class="list"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-q88ezjk" data-type="NodeListItem" class="li"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-6qh35f3" data-type="NodeParagraph" class="p"><div contenteditable="true" spellcheck="false">比如原标题块下包含了三、四、五级子标题，则转换为<span data-type="virtual-block-ref">文档块</span>后会将这些子标题转换为一、二、三级标题</div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div><div class="protyle-attr" contenteditable="false">​</div></div>
-
-    </div>
-    <script src="../../appearance/icons/material/icon.js?2.10.2"></script>
-    <script src="../../stage/build/export/protyle-method.js?2.10.2"></script>
-    <script src="../../stage/protyle/js/lute/lute.min.js?2.10.2"></script>
-    <script>
-        window.siyuan = {
-          config: {
-            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
-            editor: {
-              codeLineWrap: true,
-              codeLigatures: false,
-              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-              codeSyntaxHighlightLineNum: true,
-              katexMacros: JSON.stringify({}),
-            }
-          },
-          languages: {copy:"复制"}
-        };
-        const previewElement = document.getElementById('preview');
-        Protyle.highlightRender(previewElement, "stage/protyle");
-        Protyle.mathRender(previewElement, "stage/protyle", false);
-        Protyle.mermaidRender(previewElement, "stage/protyle");
-        Protyle.flowchartRender(previewElement, "stage/protyle");
-        Protyle.graphvizRender(previewElement, "stage/protyle");
-        Protyle.chartRender(previewElement, "stage/protyle");
-        Protyle.mindmapRender(previewElement, "stage/protyle");
-        Protyle.abcRender(previewElement, "stage/protyle");
-        Protyle.htmlRender(previewElement);
-        Protyle.plantumlRender(previewElement, "stage/protyle");
-        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-          item.addEventListener("click", (event) => {
-                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
-                event.preventDefault();
-                event.stopPropagation();
-          })
-        });
-    </script></body></html>
+      </head>
+      <body>
+        <div class="protyle-wysiwyg protyle-wysiwyg--attr" style="max-width: 800px;margin: 0 auto;" id="preview">
+          <div data-subtype="h1" data-node-id="20201210103036-1x3vm8t" data-type="NodeHeading" class="h1" id="20201210103036-1x3vm8t" title="文档块和标题块的转换" type="doc" updated="20211223192452"><div contenteditable="false" spellcheck="false">文档块和标题块的转换</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210104090801-7whehbb" data-type="NodeHeading" class="h2" id="20210104090801-7whehbb"><div contenteditable="false" spellcheck="false">文档块和标题块的对应关系</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-1dpx3hw" data-type="NodeParagraph" class="p" id="20210104090801-1dpx3hw" updated="20210302223315"><div contenteditable="false" spellcheck="false">标题块和文档块具有天然的对应关系，因为：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210104090801-ixsk5op" data-type="NodeList" class="list" id="20210104090801-ixsk5op"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-54u65x0" data-type="NodeListItem" class="li" id="20210104090801-54u65x0"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-sdi6o2t" data-type="NodeParagraph" class="p" id="20210302223313-sdi6o2t"><div contenteditable="false" spellcheck="false">每一个文档块都有一个名称</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-5lx1ywu" data-type="NodeListItem" class="li" id="20210104090801-5lx1ywu"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-bsreel3" data-type="NodeParagraph" class="p" id="20210302223313-bsreel3"><div contenteditable="false" spellcheck="false">每一个标题块也都有一个名称</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-b9mbgmu" data-type="NodeParagraph" class="p" id="20210104090801-b9mbgmu"><div contenteditable="false" spellcheck="false">所以我们可以在文档块和标题块之间进行相互转换。另外，因为内容块是根据 id 进行引用的，所以转换过程不会破坏已有的引用关系。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210104090801-tojy8es" data-type="NodeHeading" class="h2" id="20210104090801-tojy8es"><div contenteditable="false" spellcheck="false">将文档块转换为标题块</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-q0rn7el" data-type="NodeParagraph" class="p" id="20210104090801-q0rn7el"><div contenteditable="false" spellcheck="false">在文档树上，选择需要转换为标题块的文档，然后将其拖拽到编辑器页签中需要插入的位置。这里有两种情况：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="o" data-node-id="20210104090801-3ousg98" data-type="NodeList" class="list" id="20210104090801-3ousg98"><div data-marker="1." data-subtype="o" data-node-id="20210104090801-6whvehe" data-type="NodeListItem" class="li" id="20210104090801-6whvehe"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">1.</div><div data-node-id="20210302223313-lve2bd1" data-type="NodeParagraph" class="p" id="20210302223313-lve2bd1"><div contenteditable="false" spellcheck="false">将文档块放置到已有标题块上，此时文档块将作为该标题块的平级节点插入到下方</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="2." data-subtype="o" data-node-id="20210104090801-mf8nr7i" data-type="NodeListItem" class="li" id="20210104090801-mf8nr7i"><div class="protyle-action protyle-action--order" contenteditable="false" draggable="true">2.</div><div data-node-id="20210302223313-f0k4v2v" data-type="NodeParagraph" class="p" id="20210302223313-f0k4v2v"><div contenteditable="false" spellcheck="false">将文档块放置到非标题块上，此时文档块将作为该块所属标题块的子节点插入</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-e7sxz6z" data-type="NodeParagraph" class="p" id="20210104090801-e7sxz6z"><div contenteditable="false" spellcheck="false">文档块转换为标题块后：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210104090801-2ddk3ds" data-type="NodeList" class="list" id="20210104090801-2ddk3ds"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-jz1znbt" data-type="NodeListItem" class="li" id="20210104090801-jz1znbt"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-cdy6sgh" data-type="NodeParagraph" class="p" id="20210302223313-cdy6sgh"><div contenteditable="false" spellcheck="false">原文档名将变为标题名</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-ndykhp0" data-type="NodeListItem" class="li" id="20210104090801-ndykhp0"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-vjvzwqe" data-type="NodeParagraph" class="p" id="20210302223313-vjvzwqe"><div contenteditable="false" spellcheck="false">逻辑上文档块是一级标题，会根据插入位置进行相对层级变更</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-b2nqr6d" data-type="NodeListItem" class="li" id="20210104090801-b2nqr6d"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-i6rh8oh" data-type="NodeParagraph" class="p" id="20210302223313-i6rh8oh"><div contenteditable="false" spellcheck="false">原文档内的各标题层级会根据插入位置进行调整</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210104090801-1q24tjm" data-type="NodeList" class="list" id="20210104090801-1q24tjm"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-036y0g8" data-type="NodeListItem" class="li" id="20210104090801-036y0g8"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-des2ctj" data-type="NodeParagraph" class="p" id="20210302223313-des2ctj"><div contenteditable="false" spellcheck="false">对于上述情况一：比如原文档内包含一、二、三级标题，插入位置是一个二级标题，则文档块转换后的标题块会是一个二级标题，原来内容中的一、二、三级标题会变为二、三、四级标题</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-3xknfkq" data-type="NodeListItem" class="li" id="20210104090801-3xknfkq"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-ls5q1hm" data-type="NodeParagraph" class="p" id="20210302223313-ls5q1hm"><div contenteditable="false" spellcheck="false">对于上述情况二：比如原文档内包含一、二、三级标题，插入位置是一个二级标题下的段落块，则文档块转换后的标题块会是一个三级标题，原来内容中的 一、二、三级标题会变为三、四、五级标题</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="h2" data-node-id="20210104090801-s48mpeu" data-type="NodeHeading" class="h2" id="20210104090801-s48mpeu"><div contenteditable="false" spellcheck="false">将标题块转换为文档块</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-9kyqggg" data-type="NodeParagraph" class="p" id="20210104090801-9kyqggg"><div contenteditable="false" spellcheck="false">在编辑器页签中选择需要转换的标题块，按住该标题块标识图标，然后将其拖拽到文档树需要放置的文件夹中。如果需要放置到笔记本根文件夹上，就将标题块标识图标拖动到顶层的笔记本图标这一行上。</div><div class="protyle-attr" contenteditable="false"></div></div><div data-node-id="20210104090801-z3yxgmt" data-type="NodeParagraph" class="p" id="20210104090801-z3yxgmt"><div contenteditable="false" spellcheck="false">标题块转换为文档块后：</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210104090801-2clqrmr" data-type="NodeList" class="list" id="20210104090801-2clqrmr"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-u88ud0z" data-type="NodeListItem" class="li" id="20210104090801-u88ud0z"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-c3uu9qe" data-type="NodeParagraph" class="p" id="20210302223313-c3uu9qe"><div contenteditable="false" spellcheck="false">标题名将变为文档名</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div data-marker="*" data-subtype="u" data-node-id="20210104090801-yg8oign" data-type="NodeListItem" class="li" id="20210104090801-yg8oign"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-g1q27b1" data-type="NodeParagraph" class="p" id="20210302223313-g1q27b1"><div contenteditable="false" spellcheck="false">原标题块下如果有子标题，则会按照这些子标题中最大的层级作为新文档中一级标题，其余子标题会根据相对层级进行调整</div><div class="protyle-attr" contenteditable="false"></div></div><div data-subtype="u" data-node-id="20210104090801-p8uc6ob" data-type="NodeList" class="list" id="20210104090801-p8uc6ob"><div data-marker="*" data-subtype="u" data-node-id="20210104090801-q88ezjk" data-type="NodeListItem" class="li" id="20210104090801-q88ezjk"><div class="protyle-action" draggable="true"><svg><use xlink:href="#iconDot"></use></svg></div><div data-node-id="20210302223313-6qh35f3" data-type="NodeParagraph" class="p" id="20210302223313-6qh35f3"><div contenteditable="false" spellcheck="false">比如原标题块下包含了三、四、五级子标题，则转换为文档块后会将这些子标题转换为一、二、三级标题</div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div><div class="protyle-attr" contenteditable="false"></div></div>
+        </div>
+        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script>
+          window.siyuan = {
+            config: {
+              appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+              editor: {
+                codeLineWrap: true,
+                codeLigatures: false,
+                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+                codeSyntaxHighlightLineNum: true,
+                katexMacros: JSON.stringify({}),
+              },
+            },
+            languages: { copy: "复制" },
+          };
+          const previewElement = document.getElementById("preview");
+          Protyle.highlightRender(previewElement, "../../stage/protyle");
+          Protyle.mathRender(previewElement, "../../stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "../../stage/protyle");
+          Protyle.flowchartRender(previewElement, "../../stage/protyle");
+          Protyle.graphvizRender(previewElement, "../../stage/protyle");
+          Protyle.chartRender(previewElement, "../../stage/protyle");
+          Protyle.mindmapRender(previewElement, "../../stage/protyle");
+          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.htmlRender(previewElement);
+          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+              event.preventDefault();
+              event.stopPropagation();
+            });
+          });
+        </script>
+      </body>
+    </html>
