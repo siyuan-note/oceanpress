@@ -9,6 +9,7 @@
       <div>
         查看生成结果预览
         <a href="/notebook/请从这里开始.html"> 《思源笔记用户指南》： 请从这里开始.html </a>
+        <a href="/notebook/请从这里开始/编辑器/排版元素.html"> 《思源笔记用户指南》： 排版元素.html </a>
       </div>
 
       <template #footer>
