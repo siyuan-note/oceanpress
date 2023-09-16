@@ -96,7 +96,7 @@ export interface S_Node {
   CodeBlockFenceLen?: number;
   CodeBlockFenceOffset?: number;
   CodeBlockOpenFence?: number[];
-  CodeBlockInfo?: number[];
+  CodeBlockInfo?: string; // Z28= | atob = 'go'
   CodeBlockCloseFence?: number[];
   HtmlBlockType?: number;
   ListData?: ListData;
@@ -126,7 +126,7 @@ export interface S_Node {
     "parent-style"?: "max-width: 137px;";
     style?: "display: block;";
   };
-  TextMarkType?: "block-ref" | "a";
+  TextMarkType?: "block-ref" | "a" | "tag" | "inline-math" | "inline-memo";
   TextMarkAHref?: string;
   TextMarkATitle?: string;
   TextMarkInlineMathContent?: string;
@@ -151,7 +151,7 @@ interface ListData {
   Padding?: number; // 列表内部缩进空格数（包含标识符长度，即规范中的 W+N）
   MarkerOffset?: number; // 标识符（* - + 或者 1 2 3）相对缩进空格数
   Checked?: boolean; // 任务列表项是否勾选
-  Marker?: number[]; // 列表标识符
+  Marker?: string; // 列表标识符
   Num?: number; // 有序列表项修正过的序号
 }
 

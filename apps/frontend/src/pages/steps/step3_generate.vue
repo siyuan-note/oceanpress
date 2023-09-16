@@ -16,7 +16,7 @@
         :percentage="percentage"
         :indicator-placement="'inside'"
       />
-      <NLog :log="log" language="naive-log" trim />
+      <NLog :log="log" language="naive-log"  trim />
     </div>
   </NStep>
 </template>

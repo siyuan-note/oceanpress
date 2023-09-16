@@ -25,16 +25,17 @@ export async function* build(book: notebook) {
   `,
   });
   yield `=== 查询文档级block完成 ===`;
-
-  for (const docBlock of r) {
+  for (let i = 0; i < r.length; i++) {
+    const docBlock = r[i];
     const path = DB_block_path(docBlock);
     const sy = await API.file_getFile({
       path,
     });
     docTree[docBlock.hpath] = { sy };
-
+    emit.percentage((i / r.length) * 100);
     yield `处理： ${docBlock.fcontent}: ${docBlock.id}`;
   }
+
   downloadZIP(docTree);
   yield "ok";
 }
@@ -67,7 +68,8 @@ export async function downloadZIP(docTree: docTree) {
     });
 }
 
-export async function renderHTML(sy: S_Node): Promise<string> {
+export async function renderHTML(sy: S_Node | undefined): Promise<string> {
+  if (sy === undefined) return "";
   if (sy.Type in render) {
     //@ts-ignore
     return await render[sy.Type](sy);
@@ -76,6 +78,17 @@ export async function renderHTML(sy: S_Node): Promise<string> {
     return `=== 没有找到对应的渲染器 ${sy.Type} ===`;
   }
   return "";
+}
+function isRenderCode(sy: S_Node) {
+  const mark = atob(
+    sy.CodeBlockInfo ??
+      sy.Children?.find((el) => el.Type === "NodeCodeBlockFenceInfoMarker")?.CodeBlockInfo ??
+      "",
+  );
+  return [
+    ["mindmap", "mermaid", "echarts", "abc", "graphviz", "flowchart", "plantuml"].includes(mark),
+    mark,
+  ] as const;
 }
 const html = String.raw;
 async function childRender(sy: S_Node) {
@@ -88,60 +101,112 @@ async function childRender(sy: S_Node) {
 }
 function strAttr(sy: S_Node) {
   const subtype_class = (() => {
+    const typ_subtype =
+      sy.ListData?.Typ === 1
+        ? /** 有序列表 */ "o"
+        : sy.ListData?.Typ === 3
+        ? /** 任务列表 */ "t"
+        : /** 无序列表 */ "u";
+
     if (sy.Type === "NodeDocument") return "h1";
     else if (sy.Type === "NodeHeading") return `h${sy.HeadingLevel}`;
-    else if (sy.Type === "NodeList") return ["u", `list`];
-    else if (sy.Type === "NodeListItem") return ["u", `li`];
-    else if (sy.Type === "NodeParagraph") return ["", `p`];
-    else if (sy.Type === "NodeImage") return ["", `img`];
+    else if (sy.Type === "NodeList") return [typ_subtype, "list"];
+    else if (sy.Type === "NodeListItem") return [typ_subtype, "li"];
+    else if (sy.Type === "NodeParagraph") return ["", "p"];
+    else if (sy.Type === "NodeImage") return ["", "img"];
+    else if (sy.Type === "NodeBlockquote") return ["", "bq"];
+    else if (sy.Type === "NodeSuperBlock") return ["", "sb"];
+    else if (sy.Type === "NodeCodeBlock") {
+      const [yes, mark] = isRenderCode(sy);
+      if (yes) {
+        /** 脑图等需要渲染的块 */
+        return [mark, "render-node"];
+      } else {
+        return ["", "code-block"];
+      }
+    } else if (sy.Type === "NodeTable") return ["", "table"];
+    else if (sy.Type === "NodeThematicBreak") return ["", "hr"];
+    else if (sy.Type === "NodeMathBlock") return ["math", "render-node"];
+    else if (sy.Type === "NodeIFrame") return ["", "iframe"];
+    else if (sy.Type === "NodeVideo") return ["", "iframe"];
     else return "";
   })();
-  let attr = "";
-  function addAttr(s: string) {
-    attr += s + " ";
+  const attrObj = {} as { [k: string]: string };
+
+  function addAttr(key: string, value: string) {
+    attrObj[key] = value;
   }
-  if (sy.ID) addAttr(`id="${sy.ID}" data-node-id="${sy.ID}"`);
-  addAttr(`data-type="${sy.Type}"`);
-  if (sy.Properties?.updated) addAttr(`updated="${sy.Properties?.updated}"`);
+  if (sy.ID) {
+    addAttr("id", sy.ID);
+    addAttr("data-node-id", sy.ID);
+  }
+
+  if (sy?.TextMarkType === "tag") {
+    addAttr(`data-type`, sy.TextMarkType ?? "");
+  } else {
+    addAttr(`data-type`, sy.Type);
+  }
+  if (sy.Properties?.updated) addAttr("updated", sy.Properties.updated);
   if (subtype_class !== "") {
     if (typeof subtype_class === "string") {
-      addAttr(`data-subtype="${subtype_class}" class="${subtype_class}"`);
+      addAttr("data-subtype", subtype_class);
+      addAttr("class", subtype_class);
     } else {
-      if (subtype_class[0] !== "") addAttr(`data-subtype="${subtype_class[0]}"`);
-      if (subtype_class[1] !== "") addAttr(`class="${subtype_class[1]}"`);
+      if (subtype_class[0] !== "") addAttr("data-subtype", subtype_class[0]);
+      if (subtype_class[1] !== "") addAttr("class", subtype_class[1]);
     }
   }
-  if (sy.ListData?.BulletChar)
-    addAttr(`data-marker="${String.fromCharCode(sy.ListData.BulletChar)}"`);
-
-  return attr;
+  if (sy.Properties) {
+    Object.entries(sy.Properties).forEach(([k, v]) => addAttr(k, v));
+  }
+  if (sy.ListData?.Marker) addAttr("data-marker", atob(sy.ListData.Marker));
+  if (
+    /** 任务列表 */ sy.ListData?.Typ === 3 &&
+    /** 该项被选中 */ sy.Children?.find((el) => el.Type === "NodeTaskListItemMarker")
+      ?.TaskListItemChecked
+  ) {
+    attrObj["class"] = (attrObj["class"] ?? "") + " protyle-task--done ";
+  }
+  /** 不折叠任何项目 */ delete attrObj["fold"];
+  return Object.entries(attrObj)
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(" ");
 }
-const render = {
-  NodeDocument: async (sy: S_Node) => html`<div
-      ${strAttr(sy)}
-      icon="1f4f0"
-      title="${sy.Properties?.title}"
-      type="doc"
-    >
+/** 返回空字符串，一般用于不用解析的节点 */
+const _emptyString = async (_sy: S_Node) => "";
+const _dataString = async (sy: S_Node) => sy.Data ?? "";
+
+const render: { [key: string]: (sy: S_Node) => Promise<string> } = {
+  NodeDocument: async (sy) => html`<div ${strAttr(sy)} icon="1f4f0" type="doc">
       <div style="height:25vh;${sy.Properties?.["title-img"]}"></div>
       <div>${sy.Properties?.title}</div>
     </div>
     ${await childRender(sy)}`,
-  NodeHeading: async (sy: S_Node) =>
+  NodeHeading: async (sy) =>
     html`<div ${strAttr(sy)}>
       <div>${await childRender(sy)}</div>
     </div>`,
-  NodeText: async (sy: S_Node) => sy.Data,
-  NodeList: async (sy: S_Node) => html`<div ${strAttr(sy)}>${await childRender(sy)}</div>`,
-  NodeListItem: async (sy: S_Node) =>
+  NodeText: _dataString,
+  NodeList: async (sy) => html`<div ${strAttr(sy)}>${await childRender(sy)}</div>`,
+  NodeListItem: async (sy) =>
     html`<div ${await strAttr(sy)}>
-      <div class="protyle-action" draggable="true">
-        <svg><use xlink:href="#iconDot"></use></svg>
+      <div class="protyle-action">
+        ${sy.ListData?.Typ === 1
+          ? /** 有序列表 */ atob(sy.ListData?.Marker ?? "")
+          : sy.ListData?.Typ === 3
+          ? /** 任务列表 */ `<svg><use xlink:href="#${
+              sy.Children?.find((el) => el.Type === "NodeTaskListItemMarker")?.TaskListItemChecked
+                ? "iconCheck"
+                : "iconUncheck"
+            }"></use></svg>`
+          : /** 无序列表 */ `<svg><use xlink:href="#iconDot"></use></svg>`}
       </div>
       ${await childRender(sy)}
     </div>`,
-  NodeParagraph: async (sy: S_Node) => html`<div ${strAttr(sy)}>${await childRender(sy)}</div>`,
-  NodeTextMark: async (sy: S_Node) => {
+  NodeTaskListItemMarker: _emptyString,
+
+  NodeParagraph: async (sy) => html`<div ${strAttr(sy)}>${await childRender(sy)}</div>`,
+  NodeTextMark: async (sy) => {
     if (sy.TextMarkType === "block-ref") {
       let href = ".";
       if (sy.TextMarkBlockRefID) {
@@ -174,8 +239,8 @@ const render = {
         "code",
       ].includes(sy?.TextMarkType ?? "")
     ) {
-      /** 颜色 //TODO 应该设计一个统一的 Properties 附加 */
-      return html`<span style="${sy.Properties?.style}" data-type="${sy.TextMarkType}"
+      /** 颜色 */
+      return html`<span ${strAttr(sy)} data-type="${sy.TextMarkType}"
         >${sy.TextMarkTextContent}</span
       >`;
     } else if (sy.TextMarkType === "inline-math") {
@@ -192,7 +257,7 @@ const render = {
       return "";
     }
   },
-  NodeImage: async (sy: S_Node) => {
+  NodeImage: async (sy) => {
     let link = "";
     const LinkDest = sy.Children?.filter((c) => c.Type === "NodeLinkDest");
     if (LinkDest?.length === 1) {
@@ -217,7 +282,137 @@ const render = {
       /><span class="protyle-action__title">${title}</span></span
     >`;
   },
-  NodeLinkDest: async (sy: S_Node) => sy.Data,
-  NodeLinkTitle: async (sy: S_Node) => sy.Data,
-  NodeKramdownSpanIAL: async (_sy: S_Node) => "",
+  NodeLinkDest: _dataString,
+  NodeLinkTitle: _dataString,
+  NodeKramdownSpanIAL: _emptyString,
+  NodeSuperBlock: async (sy) => html`<div
+    ${strAttr(sy)}
+    data-sb-layout="${childDateByType(sy, "NodeSuperBlockLayoutMarker")}"
+  >
+    ${await childRender(sy)}
+  </div>`,
+  NodeSuperBlockOpenMarker: _emptyString,
+  NodeSuperBlockCloseMarker: _emptyString,
+  NodeSuperBlockLayoutMarker: _emptyString,
+  NodeBlockQueryEmbed: async (sy) =>
+    html`<div ${strAttr(sy)} data-type="NodeBlockquote" class="bq">${await childRender(sy)}</div>`,
+  NodeOpenBrace: _emptyString,
+  NodeCloseBrace: _emptyString,
+  NodeBlockQueryEmbedScript: async (sy) => {
+    const sql = sy.Data;
+    if (!sql) {
+      console.log("no sql", sy);
+      return html`<pre>${sql}</pre>`;
+    }
+    let htmlStr = "";
+    const blocks: DB_block[] = await API.query_sql({ stmt: sql });
+    for (const block of blocks) {
+      const sub_sy_root = await API.file_getFile({ path: `data/${block.box}${block.path}` });
+      const node = findNodeByID(sub_sy_root, block.id);
+      if (!node) {
+        console.log("no node", block);
+        return "";
+      }
+      // TODO: 这是会存在引用链接层级的问题，打算在使用链接的地方（块引用）统一进行处理，思路：
+      // 通过 比较 sy root 节点的链接来处理
+      htmlStr += await renderHTML(node);
+    }
+
+    return htmlStr;
+  },
+  NodeBlockquote: async (sy) => html`<div ${strAttr(sy)}>${await childRender(sy)}</div>`,
+  NodeBlockquoteMarker: _emptyString,
+  NodeCodeBlock: async (sy) => {
+    const [yes, _] = isRenderCode(sy);
+    if (yes) {
+      return `<div ${strAttr(sy)} data-content="${(
+        sy.Children?.find((el) => el.Type === "NodeCodeBlockCode")?.Data ?? ""
+      )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")}">
+      <div spin="1"></div>
+      <div class="protyle-attr" contenteditable="false"></div>
+    </div>`;
+    }
+    //TODO 语法高亮没有正确触发
+    return `<div ${strAttr(sy)}>
+      <div class="protyle-action">
+        <span class="protyle-action--first protyle-action__language">
+        ${await renderHTML(sy.Children?.find((el) => el.Type === "NodeCodeBlockFenceInfoMarker"))}
+        </span>
+          <span class="fn__flex-1"></span>
+          <span class="protyle-icon protyle-icon--only protyle-action__copy">
+          <svg><use xlink:href="#iconCopy"></use></svg>
+        </span>
+      </div>
+      ${await renderHTML(sy.Children?.find((el) => el.Type === "NodeCodeBlockCode"))}
+    </div>`;
+  },
+  NodeCodeBlockFenceInfoMarker: async (sy) => atob(sy.CodeBlockInfo ?? ""),
+  NodeCodeBlockCode: async (sy) => `<div class="hljs" spellcheck="false">${sy.Data}</div>`,
+  NodeCodeBlockFenceOpenMarker: _emptyString,
+  NodeCodeBlockFenceCloseMarker: _emptyString,
+  NodeTable: async (sy) => `<div ${strAttr(sy)}>
+  <div>
+    <table spellcheck="false">
+      <colgroup>
+      ${sy.TableAligns?.map(() => "<col />").join("")}
+      </colgroup>
+      ${await renderHTML(sy.Children?.find((el) => el.Type === "NodeTableHead"))}
+      <tbody>
+      ${(
+        await Promise.all(
+          sy.Children?.filter((el) => el.Type === "NodeTableRow").map(renderHTML) ?? [],
+        )
+      ).join("\n")}
+      </tbody>
+    </table>
+  </div>
+</div>`,
+  NodeTableHead: async (sy) => `<${sy.Data}>${await childRender(sy)}</${sy.Data}>`,
+  NodeTableRow: async (sy) => `<tr>${await childRender(sy)}</tr>`,
+  NodeTableCell: async (sy) => `<td>${await childRender(sy)}</td>`,
+  NodeHTMLBlock: async (sy) => `<div ${strAttr(sy)}>${sy.Data}</div>`,
+  NodeThematicBreak: async (sy) => `<div ${strAttr(sy)}><div></div></div>`,
+  NodeMathBlock: async (sy) => `<div ${strAttr(sy)} data-content="${childDateByType(
+    sy,
+    "NodeMathBlockContent",
+  )}">
+  <div spin="1"></div>
+</div>`,
+  NodeMathBlockOpenMarker: _emptyString,
+  NodeMathBlockCloseMarker: _emptyString,
+  NodeIFrame: async (sy) => ` <div ${strAttr(sy)}>
+  <div class="iframe-content">
+  ${sy.Data}
+  </div>
+</div>`,
+  //TODO 音视频的链接需要重写
+  NodeVideo: async (sy) => `<div  ${strAttr(sy)}>
+  <div class="iframe-content">
+    ${sy.Data}
+  </div>
+</div>`,
+  NodeAudio: async (sy) => `<div  ${strAttr(sy)}>
+  <div class="iframe-content">
+    ${sy.Data}
+  </div>
+</div>`,
 };
+function findNodeByID(sy: S_Node, id: string): S_Node | undefined {
+  if (sy.ID === id) return sy;
+  if (sy.Children) {
+    for (const child of sy.Children) {
+      const node = findNodeByID(child, id);
+      if (node) return node;
+    }
+  }
+  return undefined;
+}
+
+/** 获取sy节点的child中第一个type类型节点的data */
+function childDateByType(sy: S_Node, type: S_Node["Type"]) {
+  return sy.Children?.find((el) => el.Type === type)?.Data;
+}

@@ -3,7 +3,7 @@
   <NButton @click="copy(JSON.stringify(sy.data))">复制原始</NButton>
   <NButton @click="sy.reLoad">reLoad</NButton>
 
-  <iframe style="width: 80vw;height: 70vh;" :src="'/notebook/test.html?t=' + Date.now()"></iframe>
+  <iframe style="width: 80vw; height: 70vh" :src="'/notebook/test.html?t=' + Date.now()"></iframe>
 </template>
 <script setup lang="ts">
   import { htmlTemplate } from "@/fs/htmlTemplate";

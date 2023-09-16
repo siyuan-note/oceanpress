@@ -32,6 +32,11 @@
     const res = build(book);
     const emitRes = res.next();
     const emit = (await emitRes).value;
+    if (emit instanceof Object) {
+      emit.percentage = (s) => {
+        percentage.value = s;
+      };
+    }
     for await (const r of res) {
       log.value += r + "\n";
     }
@@ -57,7 +62,12 @@
         />
         <NButton type="primary" ghost @click="_notebooks.reLoad"> 确定 </NButton>
       </NInputGroup>
-      <NAlert v-if="currentConfig.authorized === ''" title="存在安全风险" type="warning" style="max-width: 400px">
+      <NAlert
+        v-if="currentConfig.authorized === ''"
+        title="存在安全风险"
+        type="warning"
+        style="max-width: 400px"
+      >
         看起来您似乎没有开启siyuan访问授权，这会导致您的数据可能被他人获取，建议您开启授权码。
         <hr />
         在没有开启的情况下，任意一个网页都能访问您的数据，包括您的笔记内容。
@@ -72,6 +82,10 @@
     />
     <Step2_preview :notebook="currentNoteBook.data" />
     <n-step title="其他配置"></n-step>
-    <Step3_generate :percentage="percentage" :log="log" @generate-click="genHTML(currentNoteBook.data)" />
+    <Step3_generate
+      :percentage="percentage"
+      :log="log"
+      @generate-click="genHTML(currentNoteBook.data)"
+    />
   </NSteps>
 </template>

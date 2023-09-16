@@ -40,6 +40,7 @@ export interface api {
   query_sql(p: {
     /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string;
   }): any[];
+  // TODO 考虑增加缓存，因为嵌入块等原因可能会反复调用这个
   file_getFile(p: { path: string }): S_Node;
 }
 type apiPromisify = {
