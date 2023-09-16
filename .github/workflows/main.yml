@@ -7,7 +7,7 @@ permissions:
 on:
   push:
     tags:
-      - main
+      - '*'
 
 # 任务
 jobs:
