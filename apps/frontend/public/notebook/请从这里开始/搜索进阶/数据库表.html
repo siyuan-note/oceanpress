@@ -114,180 +114,321 @@
           style="max-width: 800px;margin: 0 auto;"
           id="preview"
         >
-          <div
-      id="20201222093044-rx4zjoy" data-node-id="20201222093044-rx4zjoy" data-type="NodeDocument" updated="20221014133123" data-subtype="h1" class="h1" 
-      icon="1f4f0"
-      title="数据库表"
-      type="doc"
-    >
+          <div id="20201222093044-rx4zjoy" data-node-id="20201222093044-rx4zjoy" data-type="NodeDocument" updated="20221014133123" data-subtype="h1" class="h1" title="数据库表" type="doc" icon="1f4f0" type="doc">
       <div style="height:25vh;undefined"></div>
       <div>数据库表</div>
     </div>
-    <div id="20201117103851-l9cahuc" data-node-id="20201117103851-l9cahuc" data-type="NodeHeading" data-subtype="h2" class="h2" >
+    <div id="20201117103851-l9cahuc" data-node-id="20201117103851-l9cahuc" data-type="NodeHeading" data-subtype="h2" class="h2">
       <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
-<span style="undefined" data-type="code"
+<span data-type="NodeTextMark" data-type="code"
         >blocks</span
       >
  表
 </div>
     </div>
-<div id="20201224120447-bx9fwlf" data-node-id="20201224120447-bx9fwlf" data-type="NodeParagraph" updated="20210302223329" class="p" >该表用于存储内容块数据。
+<div id="20201224120447-bx9fwlf" data-node-id="20201224120447-bx9fwlf" data-type="NodeParagraph" updated="20210302223329" class="p">该表用于存储内容块数据。
 </div>
-=== 没有找到对应的渲染器 NodeTable ===
-<div id="20201224120447-lezmdb3" data-node-id="20201224120447-lezmdb3" data-type="NodeHeading" data-subtype="h2" class="h2" >
+<div id="20201224120447-cs6ur9x" data-node-id="20201224120447-cs6ur9x" data-type="NodeTable" updated="20221014133123" class="table" colgroup="|">
+  <div>
+    <table spellcheck="false">
+      <colgroup>
+      <col /><col />
+      </colgroup>
+      <thead><tr><td>字段
+</td>
+<td>说明
+</td>
+</tr>
+</thead>
+      <tbody>
+      <tr><td>id
+</td>
+<td>内容块 ID
+</td>
+</tr>
+<tr><td>parent_id
+</td>
+<td>父块的 ID，如果内容块是文档块则该字段为空
+</td>
+</tr>
+<tr><td>root_id
+</td>
+<td>根块 ID，即文档块 ID
+</td>
+</tr>
+<tr><td>hash
+</td>
+<td>content 的 SHA256 校验和
+</td>
+</tr>
+<tr><td>box
+</td>
+<td>笔记本 ID
+</td>
+</tr>
+<tr><td>path
+</td>
+<td>内容块所在文档路径
+</td>
+</tr>
+<tr><td>hpath
+</td>
+<td>人类可读的内容块所在文档路径
+</td>
+</tr>
+<tr><td>name
+</td>
+<td>内容块名称
+</td>
+</tr>
+<tr><td>alias
+</td>
+<td>内容块别名
+</td>
+</tr>
+<tr><td>memo
+</td>
+<td>内容块备注
+</td>
+</tr>
+<tr><td>content
+</td>
+<td>去除了 Markdown 标记符的文本
+</td>
+</tr>
+<tr><td>fcontent
+</td>
+<td>第一个子块去除了 Markdown 标记符的文本
+</td>
+</tr>
+<tr><td>markdown
+</td>
+<td>包含完整 Markdown 标记符的文本
+</td>
+</tr>
+<tr><td>length
+</td>
+<td>​
+<span data-type="NodeTextMark" data-type="code"
+        >fcontent</span
+      >
+​ 长度
+</td>
+</tr>
+<tr><td>type
+</td>
+<td>内容块类型，参考
+<span
+        data-type="block-ref"
+        data-subtype="s"
+        data-id="20210210103523-ombf290"
+      >
+        <a href="./请从这里开始/搜索进阶/类型过滤.html">这里</a>
+      </span>
+</td>
+</tr>
+<tr><td>subtype
+</td>
+<td>内容块子类型，参考
+<span
+        data-type="block-ref"
+        data-subtype="s"
+        data-id="20210210103411-tcbcjja"
+      >
+        <a href="./请从这里开始/搜索进阶/类型过滤.html">这里</a>
+      </span>
+</td>
+</tr>
+<tr><td>ial
+</td>
+<td>内联属性列表，形如 
+<span data-type="NodeTextMark" data-type="code"
+        >{: name=&quot;value&quot;}</span
+      >
+​
+</td>
+</tr>
+<tr><td>sort
+</td>
+<td>排序用，数值越小排序越靠前
+</td>
+</tr>
+<tr><td>created
+</td>
+<td>创建时间，例如 
+<span data-type="NodeTextMark" data-type="code"
+        >20221013202001</span
+      >
+​
+</td>
+</tr>
+<tr><td>updated
+</td>
+<td>更新时间，例如 
+<span data-type="NodeTextMark" data-type="code"
+        >20221013202001</span
+      >
+​
+</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="20201224120447-lezmdb3" data-node-id="20201224120447-lezmdb3" data-type="NodeHeading" data-subtype="h2" class="h2">
       <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
 默认值
 </div>
     </div>
-<div id="20201224120447-ij3ivd5" data-node-id="20201224120447-ij3ivd5" data-type="NodeList" updated="20220427104619" data-subtype="u" class="list" data-marker="*" ><div id="20201224120447-u4tbyb3" data-node-id="20201224120447-u4tbyb3" data-type="NodeListItem" updated="20220427104619" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20201224120447-ij3ivd5" data-node-id="20201224120447-ij3ivd5" data-type="NodeList" updated="20220427104619" data-subtype="u" class="list" data-marker="*"><div id="20201224120447-u4tbyb3" data-node-id="20201224120447-u4tbyb3" data-type="NodeListItem" updated="20220427104619" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-n6gscfx" data-node-id="20210210103236-n6gscfx" data-type="NodeParagraph" updated="20220427104619" class="p" >如果不指定 
-<span style="undefined" data-type="code"
+      <div id="20210210103236-n6gscfx" data-node-id="20210210103236-n6gscfx" data-type="NodeParagraph" updated="20220427104619" class="p">如果不指定 
+<span data-type="NodeTextMark" data-type="code"
         >LIMIT</span
       >
 ，则最多只返回前 64 条结果，可以在 
-<span style="undefined" data-type="kbd"
+<span data-type="NodeTextMark" data-type="kbd"
         >设置</span
       >
  - 
-<span style="undefined" data-type="kbd"
+<span data-type="NodeTextMark" data-type="kbd"
         >搜索</span
       >
  - 
-<span style="undefined" data-type="kbd"
+<span data-type="NodeTextMark" data-type="kbd"
         >搜索结果显示数</span
       >
  进行调整
 </div>
 
     </div>
-<div id="20210112160050-sd8nvwk" data-node-id="20210112160050-sd8nvwk" data-type="NodeListItem" updated="20220312005741" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160050-sd8nvwk" data-node-id="20210112160050-sd8nvwk" data-type="NodeListItem" updated="20220312005741" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-4q63z1f" data-node-id="20210210103236-4q63z1f" data-type="NodeParagraph" class="p" ><span style="undefined" data-type="code"
+      <div id="20210210103236-4q63z1f" data-node-id="20210210103236-4q63z1f" data-type="NodeParagraph" class="p"><span data-type="NodeTextMark" data-type="code"
         >sort</span
       >
  字段
 </div>
-<div id="20210112160059-bc0lg2b" data-node-id="20210112160059-bc0lg2b" data-type="NodeList" updated="20220312005741" data-subtype="u" class="list" ><div id="20210112160058-9fxe2cs" data-node-id="20210112160058-9fxe2cs" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160059-bc0lg2b" data-node-id="20210112160059-bc0lg2b" data-type="NodeList" updated="20220312005741" data-subtype="u" class="list"><div id="20210112160058-9fxe2cs" data-node-id="20210112160058-9fxe2cs" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-i2foidw" data-node-id="20210210103236-i2foidw" data-type="NodeParagraph" class="p" >文档块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-i2foidw" data-node-id="20210210103236-i2foidw" data-type="NodeParagraph" class="p">文档块：
+<span data-type="NodeTextMark" data-type="code"
         >0</span
       >
 </div>
 
     </div>
-<div id="20210112160120-74nf28j" data-node-id="20210112160120-74nf28j" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160120-74nf28j" data-node-id="20210112160120-74nf28j" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-f9jdxfd" data-node-id="20210210103236-f9jdxfd" data-type="NodeParagraph" class="p" >标题块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-f9jdxfd" data-node-id="20210210103236-f9jdxfd" data-type="NodeParagraph" class="p">标题块：
+<span data-type="NodeTextMark" data-type="code"
         >5</span
       >
 </div>
 
     </div>
-<div id="20210112160238-ngi9f2u" data-node-id="20210112160238-ngi9f2u" data-type="NodeListItem" updated="20220312005648" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160238-ngi9f2u" data-node-id="20210112160238-ngi9f2u" data-type="NodeListItem" updated="20220312005648" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-7f2kvb2" data-node-id="20210210103236-7f2kvb2" data-type="NodeParagraph" updated="20220312005630" class="p" >段落块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-7f2kvb2" data-node-id="20210210103236-7f2kvb2" data-type="NodeParagraph" updated="20220312005630" class="p">段落块：
+<span data-type="NodeTextMark" data-type="code"
         >10</span
       >
 </div>
 
     </div>
-<div id="20210112160148-bgv6nmp" data-node-id="20210112160148-bgv6nmp" data-type="NodeListItem" updated="20220312005644" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160148-bgv6nmp" data-node-id="20210112160148-bgv6nmp" data-type="NodeListItem" updated="20220312005644" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-xl25mej" data-node-id="20210210103236-xl25mej" data-type="NodeParagraph" updated="20220312005644" class="p" >代码块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-xl25mej" data-node-id="20210210103236-xl25mej" data-type="NodeParagraph" updated="20220312005644" class="p">代码块：
+<span data-type="NodeTextMark" data-type="code"
         >10</span
       >
 </div>
 
     </div>
-<div id="20210112160155-vwh31wo" data-node-id="20210112160155-vwh31wo" data-type="NodeListItem" updated="20220312005701" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160155-vwh31wo" data-node-id="20210112160155-vwh31wo" data-type="NodeListItem" updated="20220312005701" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-j8ezlwx" data-node-id="20210210103236-j8ezlwx" data-type="NodeParagraph" updated="20220312005701" class="p" >数学公式块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-j8ezlwx" data-node-id="20210210103236-j8ezlwx" data-type="NodeParagraph" updated="20220312005701" class="p">数学公式块：
+<span data-type="NodeTextMark" data-type="code"
         >10</span
       >
 </div>
 
     </div>
-<div id="20210112160211-ny8ss1u" data-node-id="20210112160211-ny8ss1u" data-type="NodeListItem" updated="20220312005710" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160211-ny8ss1u" data-node-id="20210112160211-ny8ss1u" data-type="NodeListItem" updated="20220312005710" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-3qq7tgh" data-node-id="20210210103236-3qq7tgh" data-type="NodeParagraph" updated="20220312005710" class="p" >表格块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-3qq7tgh" data-node-id="20210210103236-3qq7tgh" data-type="NodeParagraph" updated="20220312005710" class="p">表格块：
+<span data-type="NodeTextMark" data-type="code"
         >10</span
       >
 </div>
 
     </div>
-<div id="20220312005543-1u73y7i" data-node-id="20220312005543-1u73y7i" data-type="NodeListItem" updated="20220312005548" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20220312005543-1u73y7i" data-node-id="20220312005543-1u73y7i" data-type="NodeListItem" updated="20220312005548" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20220312005543-ivmkmi8" data-node-id="20220312005543-ivmkmi8" data-type="NodeParagraph" updated="20220312005548" class="p" >HTML 块：
-<span style="undefined" data-type="code"
+      <div id="20220312005543-ivmkmi8" data-node-id="20220312005543-ivmkmi8" data-type="NodeParagraph" updated="20220312005548" class="p">HTML 块：
+<span data-type="NodeTextMark" data-type="code"
         >10</span
       >
 </div>
 
     </div>
-<div id="20210112160128-ajksb4l" data-node-id="20210112160128-ajksb4l" data-type="NodeListItem" updated="20220312005724" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160128-ajksb4l" data-node-id="20210112160128-ajksb4l" data-type="NodeListItem" updated="20220312005724" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-8wel0el" data-node-id="20210210103236-8wel0el" data-type="NodeParagraph" updated="20220312005724" class="p" >列表块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-8wel0el" data-node-id="20210210103236-8wel0el" data-type="NodeParagraph" updated="20220312005724" class="p">列表块：
+<span data-type="NodeTextMark" data-type="code"
         >20</span
       >
 </div>
 
     </div>
-<div id="20210112160134-jegbp95" data-node-id="20210112160134-jegbp95" data-type="NodeListItem" updated="20220312005731" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160134-jegbp95" data-node-id="20210112160134-jegbp95" data-type="NodeListItem" updated="20220312005731" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-9ea3c68" data-node-id="20210210103236-9ea3c68" data-type="NodeParagraph" updated="20220312005731" class="p" >列表项块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-9ea3c68" data-node-id="20210210103236-9ea3c68" data-type="NodeParagraph" updated="20220312005731" class="p">列表项块：
+<span data-type="NodeTextMark" data-type="code"
         >20</span
       >
 </div>
 
     </div>
-<div id="20210112160220-6gthmlb" data-node-id="20210112160220-6gthmlb" data-type="NodeListItem" updated="20220312005736" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160220-6gthmlb" data-node-id="20210112160220-6gthmlb" data-type="NodeListItem" updated="20220312005736" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-hk5c2ws" data-node-id="20210210103236-hk5c2ws" data-type="NodeParagraph" updated="20220312005736" class="p" >引述块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-hk5c2ws" data-node-id="20210210103236-hk5c2ws" data-type="NodeParagraph" updated="20220312005736" class="p">引述块：
+<span data-type="NodeTextMark" data-type="code"
         >20</span
       >
 </div>
 
     </div>
-<div id="20210112160228-qiq0ink" data-node-id="20210112160228-qiq0ink" data-type="NodeListItem" updated="20220312005741" data-subtype="u" class="li" data-marker="*" >
-      <div class="protyle-action" draggable="true">
+<div id="20210112160228-qiq0ink" data-node-id="20210112160228-qiq0ink" data-type="NodeListItem" updated="20220312005741" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210210103236-ssvttec" data-node-id="20210210103236-ssvttec" data-type="NodeParagraph" updated="20220312005741" class="p" >超级块：
-<span style="undefined" data-type="code"
+      <div id="20210210103236-ssvttec" data-node-id="20210210103236-ssvttec" data-type="NodeParagraph" updated="20220312005741" class="p">超级块：
+<span data-type="NodeTextMark" data-type="code"
         >30</span
       >
 </div>
