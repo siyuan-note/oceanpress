@@ -42,12 +42,11 @@ function node(sy: S_Node) {
   // 递归遍历 sy
   if (sy.ID) {
     id_Node.set(sy.ID, sy);
-  } else if (sy?.Children) {
-    for (const child of sy.Children) {
-      /** 附加 Parent 指向 */
-      child.Parent = sy;
-      node(child);
-    }
+  }
+  for (const child of sy?.Children ?? []) {
+    /** 附加 Parent 指向 */
+    child.Parent = sy;
+    node(child);
   }
   return sy;
 }

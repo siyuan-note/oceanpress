@@ -11,15 +11,15 @@ export async function renderHTML(
   renderInstance: typeof render = render,
 ): Promise<string> {
   if (sy === undefined) return "";
-  if (sy.Type in render) {
-    const renderObj = {
-      ...renderInstance,
-      /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里创建一个新 []  */
-      nodeStack: [...renderInstance.nodeStack],
-    };
+  const renderObj = {
+    ...renderInstance,
+    /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里创建一个新 []  */
+    nodeStack: [...renderInstance.nodeStack],
+  };
 
+  if (sy.Type in render) {
     if (renderObj[sy.Type] === undefined) {
-      return `=== 没有找到对应的渲染器 ${sy.Type} ===`;
+      return `=== 没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}===`;
     } else {
       renderObj.nodeStack.push(sy);
       const r = await renderObj[sy.Type]!(sy);
@@ -27,7 +27,7 @@ export async function renderHTML(
       return r;
     }
   } else {
-    console.log("没有找到对应的渲染器", sy.Type);
+    console.log("没有找到对应的渲染器", sy.Type, renderObj.nodeStack[0].Properties?.title);
     return `=== 没有找到对应的渲染器 ${sy.Type} ===`;
   }
 }
@@ -310,12 +310,12 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     const blocks: DB_block[] = await API.query_sql({ stmt: sql });
     for (const block of blocks) {
       const node = await getNodeByID(block.id);
-      if (!node) {
-        console.log("no node", block);
+      if (node === undefined) {
+        // 一般来说是跨笔记引用
+        // TODO 待处理跨笔记引用问题
+        console.log("跨笔记引用", block.id, sql,node);
         return "";
       }
-      // TODO: 这是会存在引用链接层级的问题，打算在使用链接的地方（块引用）统一进行处理，思路：
-      // 通过 比较 sy root 节点的链接来处理
       htmlStr += await renderHTML(node, this);
     }
 
@@ -413,6 +413,16 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
       ${sy.Data}
     </div>
   </div>`,
+  /** 虚拟链接 */
+  NodeHeadingC8hMarker: _emptyString,
+  async NodeSoftBreak(_sy) {
+    //TODO 此处实现应该有问题
+    /** https://zh.wikipedia.org/wiki/零宽空格 */
+    return "\u200B";
+  },
+  async NodeBr(sy) {
+    return `<${sy.Data}>`;
+  },
 };
 
 /** 获取sy节点的child中第一个type类型节点的data */
