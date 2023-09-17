@@ -22,12 +22,20 @@
     // path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180321-hbvl5c2/20200822191536-rm6hwid.sy",
   });
   const code = usePromiseComputed.fn(async () => {
+    const testConfig = {
+      /** 思源 js、css等文件的前缀 */
+      siyuanPrefix:
+        "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/",
+    };
     if (sy.value.fulfilled) {
-      return await htmlTemplate({
-        htmlContent: await renderHTML(sy.value.data),
-        level: 0,
-        title: "测试用页面",
-      });
+      return await htmlTemplate(
+        {
+          htmlContent: await renderHTML(sy.value.data),
+          level: 0,
+          title: "测试用页面",
+        },
+        testConfig,
+      );
     } else {
       return "<not fetch>";
     }

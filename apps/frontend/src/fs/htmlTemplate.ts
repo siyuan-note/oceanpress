@@ -1,9 +1,17 @@
-export async function htmlTemplate(p: { htmlContent: string; title: string; level: number }) {
+export async function htmlTemplate(
+  p: { htmlContent: string; title: string; level: number },
+  config?: { siyuanPrefix: string },
+) {
   /** 根据level有几级返回多少个 '../' ,用于解决 file协议打开html文档无法正常加载资源 */
   let prePath = "";
-  for (let i = 0; i < p.level; i++) {
-    prePath += "../";
+  if (config?.siyuanPrefix) {
+    prePath = config.siyuanPrefix;
+  } else {
+    for (let i = 0; i < p.level; i++) {
+      prePath += "../";
+    }
   }
+
   const version = "2.10.5";
   const html = String.raw;
 

@@ -12,7 +12,7 @@ const defaultConfig = {
   cdn: {
     /** 思源 js、css等文件的前缀 */
     siyuanPrefix:
-      "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js/main/apps/frontend/public/notebook/",
+      "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/",
     /** 思源 js、css等文件zip包地址 https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@raw/main/apps/frontend/public/public.zip */
     publicZip:
       "https://fastly.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/public.zip",
@@ -62,11 +62,14 @@ export async function* build(book: notebook, config = defaultConfig) {
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy }] = arr[i];
-    docHTML[path + ".html"] = await htmlTemplate({
-      title: sy.Properties?.title || "",
-      htmlContent: await renderHTML(sy),
-      level: path.split("/").length - 2 /** 最开头有一个 / 所以减二 */,
-    });
+    docHTML[path + ".html"] = await htmlTemplate(
+      {
+        title: sy.Properties?.title || "",
+        htmlContent: await renderHTML(sy),
+        level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
+      },
+      config.cdn,
+    );
     process(i / arr.length);
     yield `渲染： ${path}`;
   }
