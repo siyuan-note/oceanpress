@@ -19,13 +19,13 @@
           rel="stylesheet"
           type="text/css"
           id="baseStyle"
-          href="../../stage/build/export/base.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
         />
         <link
           rel="stylesheet"
           type="text/css"
           id="themeDefaultStyle"
-          href="../../appearance/themes/daylight/theme.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
         />
 
         <title>内容块属性</title>
@@ -115,10 +115,10 @@
           id="preview"
         >
           <div id="20210612224500-ywcms1m" data-node-id="20210612224500-ywcms1m" data-type="NodeDocument" updated="20211223192459" data-subtype="h1" class="h1" title="内容块属性" icon="1f4f0" type="doc">
-      <div style="height:25vh;undefined"></div>
-      <div>内容块属性</div>
-    </div>
-    <div id="20210612224500-ftupo06" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" updated="20210613000110" data-subtype="h2" class="h2">
+        <div style="height:25vh;undefined"></div>
+        <div>内容块属性</div>
+      </div>
+      <div id="20210612224500-ftupo06" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" updated="20210613000110" data-subtype="h2" class="h2">
       <div>概述
 </div>
     </div>
@@ -129,19 +129,19 @@
 </div>
     </div>
 <div id="20210613004249-56e0c6r" data-node-id="20210613004249-56e0c6r" data-type="NodeTable" updated="20210613120805" class="table">
-  <div>
-    <table spellcheck="false">
-      <colgroup>
-      <col /><col />
-      </colgroup>
-      <thead><tr><td>属性名
+    <div>
+      <table spellcheck="false">
+        <colgroup>
+        <col /><col />
+        </colgroup>
+        <thead><tr><td>属性名
 </td>
 <td>描述
 </td>
 </tr>
 </thead>
-      <tbody>
-      <tr><td>name
+        <tbody>
+        <tr><td>name
 </td>
 <td>内容块的命名
 </td>
@@ -161,10 +161,10 @@
 <td>内容块的书签
 </td>
 </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 <div id="20210613004117-1jnl9m0" data-node-id="20210613004117-1jnl9m0" data-type="NodeHeading" updated="20210613004135" data-subtype="h2" class="h2">
       <div>自定义属性
 </div>
@@ -212,16 +212,16 @@
  属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的内容块：
 </div>
 <div id="20210613012911-qdrxc6w" data-node-id="20210613012911-qdrxc6w" data-type="NodeCodeBlock" updated="20210613105821" class="code-block">
-      <div class="protyle-action">
-        <span class="protyle-action--first protyle-action__language">
-        sql
-        </span>
-          <span class="fn__flex-1"></span>
-          <span class="protyle-icon protyle-icon--only protyle-action__copy">
-          <svg><use xlink:href="#iconCopy"></use></svg>
-        </span>
-      </div>
-      <div class="hljs" spellcheck="false">SELECT *
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">
+          sql
+          </span>
+            <span class="fn__flex-1"></span>
+            <span class="protyle-icon protyle-icon--only protyle-action__copy">
+            <svg><use xlink:href="#iconCopy"></use></svg>
+          </span>
+        </div>
+        <div class="hljs" spellcheck="false">SELECT *
 FROM blocks
 WHERE id IN (
     SELECT block_id
@@ -232,7 +232,7 @@ WHERE id IN (
     HAVING count(block_id) = 2
 );
 </div>
-    </div>
+      </div>
 <div id="20210613105822-z219hfe" data-node-id="20210613105822-z219hfe" data-type="NodeHeading" updated="20210824200723" data-subtype="h3" class="h3">
       <div>存储挂件数据
 </div>
@@ -241,9 +241,9 @@ WHERE id IN (
 </div>
 
         </div>
-        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
         <script>
           window.siyuan = {
             config: {
@@ -263,16 +263,16 @@ WHERE id IN (
             languages: { copy: "复制" },
           };
           const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "../../stage/protyle");
-          Protyle.mathRender(previewElement, "../../stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "../../stage/protyle");
-          Protyle.flowchartRender(previewElement, "../../stage/protyle");
-          Protyle.graphvizRender(previewElement, "../../stage/protyle");
-          Protyle.chartRender(previewElement, "../../stage/protyle");
-          Protyle.mindmapRender(previewElement, "../../stage/protyle");
-          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.highlightRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mathRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.flowchartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.graphvizRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.chartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mindmapRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.abcRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          Protyle.plantumlRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
               navigator.clipboard.writeText(

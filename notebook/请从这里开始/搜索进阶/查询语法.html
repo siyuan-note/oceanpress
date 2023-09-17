@@ -19,13 +19,13 @@
           rel="stylesheet"
           type="text/css"
           id="baseStyle"
-          href="../../stage/build/export/base.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
         />
         <link
           rel="stylesheet"
           type="text/css"
           id="themeDefaultStyle"
-          href="../../appearance/themes/daylight/theme.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
         />
 
         <title>查询语法</title>
@@ -115,10 +115,10 @@
           id="preview"
         >
           <div id="20220415190432-r3xqn3r" data-node-id="20220415190432-r3xqn3r" data-type="NodeDocument" updated="20230820184739" data-subtype="h1" class="h1" title="查询语法" icon="1f4f0" type="doc">
-      <div style="height:25vh;undefined"></div>
-      <div>查询语法</div>
-    </div>
-    <div id="20220415192036-99dwwdh" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" updated="20220415201012" data-subtype="h2" class="h2">
+        <div style="height:25vh;undefined"></div>
+        <div>查询语法</div>
+      </div>
+      <div id="20220415192036-99dwwdh" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" updated="20220415201012" data-subtype="h2" class="h2">
       <div>概述
 </div>
     </div>
@@ -339,19 +339,19 @@
  组合为新的查询。
 </div>
 <div id="20220415211911-abpzhkl" data-node-id="20220415211911-abpzhkl" data-type="NodeTable" updated="20220415233018" class="table" colgroup="|">
-  <div>
-    <table spellcheck="false">
-      <colgroup>
-      <col /><col />
-      </colgroup>
-      <thead><tr><td>操作符
+    <div>
+      <table spellcheck="false">
+        <colgroup>
+        <col /><col />
+        </colgroup>
+        <thead><tr><td>操作符
 </td>
 <td>功能
 </td>
 </tr>
 </thead>
-      <tbody>
-      <tr><td><span data-type="NodeTextMark" data-type="code"
+        <tbody>
+        <tr><td><span data-type="NodeTextMark" data-type="code"
         ><query1> AND <query2></span
       >
 </td>
@@ -372,10 +372,10 @@
 <td>query1 匹配同时 query2 不匹配
 </td>
 </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 <div id="20220415212140-piktfs5" data-node-id="20220415212140-piktfs5" data-type="NodeParagraph" updated="20220415212238" class="p">使用英文圆括号 
 <span data-type="NodeTextMark" data-type="code"
         >()</span
@@ -383,22 +383,22 @@
  可以组合查询的优先级，例如：
 </div>
 <div id="20220415212235-jon9dnr" data-node-id="20220415212235-jon9dnr" data-type="NodeCodeBlock" updated="20220502163519" class="code-block">
-      <div class="protyle-action">
-        <span class="protyle-action--first protyle-action__language">
-        sql
-        </span>
-          <span class="fn__flex-1"></span>
-          <span class="protyle-icon protyle-icon--only protyle-action__copy">
-          <svg><use xlink:href="#iconCopy"></use></svg>
-        </span>
-      </div>
-      <div class="hljs" spellcheck="false">-- 匹配包含 "one" 或者 "two" 的块，不匹配包含 "three" 的块
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">
+          sql
+          </span>
+            <span class="fn__flex-1"></span>
+            <span class="protyle-icon protyle-icon--only protyle-action__copy">
+            <svg><use xlink:href="#iconCopy"></use></svg>
+          </span>
+        </div>
+        <div class="hljs" spellcheck="false">-- 匹配包含 "one" 或者 "two" 的块，不匹配包含 "three" 的块
 'one OR two NOT three'
 
 -- 匹配包含 "one" 或者包含 "two" 且不包含 "three" 的块
 'one OR (two NOT three)'
 </div>
-    </div>
+      </div>
 <div id="20220415225818-8llyxls" data-node-id="20220415225818-8llyxls" data-type="NodeParagraph" updated="20220415225927" class="p">使用空格分隔的多个短语默认使用 
 <span data-type="NodeTextMark" data-type="code"
         >AND</span
@@ -406,23 +406,23 @@
  连接，比如：
 </div>
 <div id="20220415225927-10jqrs9" data-node-id="20220415225927-10jqrs9" data-type="NodeCodeBlock" updated="20220502163531" class="code-block">
-      <div class="protyle-action">
-        <span class="protyle-action--first protyle-action__language">
-        sql
-        </span>
-          <span class="fn__flex-1"></span>
-          <span class="protyle-icon protyle-icon--only protyle-action__copy">
-          <svg><use xlink:href="#iconCopy"></use></svg>
-        </span>
-      </div>
-      <div class="hljs" spellcheck="false">'one two three'         -- 'one AND two AND three'
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">
+          sql
+          </span>
+            <span class="fn__flex-1"></span>
+            <span class="protyle-icon protyle-icon--only protyle-action__copy">
+            <svg><use xlink:href="#iconCopy"></use></svg>
+          </span>
+        </div>
+        <div class="hljs" spellcheck="false">'one two three'         -- 'one AND two AND three'
 'three "one two"'       -- 'three AND "one two"'
 'one OR two three'      -- 'one OR two AND three'
 
 '(one OR two) three'    -- 语法错误！
 'func(one two)'         -- 语法错误！
 </div>
-    </div>
+      </div>
 <div id="20220415195733-gb4mj1a" data-node-id="20220415195733-gb4mj1a" data-type="NodeHeading" updated="20220415234700" data-subtype="h2" class="h2">
       <div>技术实现
 </div>
@@ -462,28 +462,13 @@
 <div id="20220415200742-2l1tkjr" data-node-id="20220415200742-2l1tkjr" data-type="NodeParagraph" updated="20220415202247" class="p">了解到这些以后，我们就可以通过查询语法来实现查询嵌入块，这样查询性能会更好：
 </div>
 <div id="20220415200953-ftnqiic" data-node-id="20220415200953-ftnqiic" data-type="NodeBlockQueryEmbed" updated="20220415234532" data-type="NodeBlockquote" class="bq">
-
-<div id="20220415190432-6g68nr6" data-node-id="20220415190432-6g68nr6" data-type="NodeParagraph" updated="20220415232302" class="p">全局搜索 
-<span data-type="NodeTextMark" data-type="kbd"
-        >Ctrl+P</span
-      >
- 支持通过查询语法（Query Syntax）进行高级搜索，以便实现一些逻辑操作，比如包含关键字 
-<span data-type="NodeTextMark" data-type="code"
-        >foo</span
-      >
- 并且不包含关键字 
-<span data-type="NodeTextMark" data-type="code"
-        >bar</span
-      >
- 的查询语法为 
-<span data-type="NodeTextMark" data-type="code"
-        >foo NOT bar</span
-      >
-。
-</div>
+      
 
 
-</div>
+
+
+
+    </div>
 <div id="20220415202144-mc7e5xh" data-node-id="20220415202144-mc7e5xh" data-type="NodeParagraph" updated="20220415202331" class="p">除此以外，API 也支持使用 FTS 查询。
 </div>
 <div id="20220415230035-u0oui0b" data-node-id="20220415230035-u0oui0b" data-type="NodeHeading" updated="20220415230221" data-subtype="h3" class="h3">
@@ -535,9 +520,9 @@
 </div>
 
         </div>
-        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
         <script>
           window.siyuan = {
             config: {
@@ -557,16 +542,16 @@
             languages: { copy: "复制" },
           };
           const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "../../stage/protyle");
-          Protyle.mathRender(previewElement, "../../stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "../../stage/protyle");
-          Protyle.flowchartRender(previewElement, "../../stage/protyle");
-          Protyle.graphvizRender(previewElement, "../../stage/protyle");
-          Protyle.chartRender(previewElement, "../../stage/protyle");
-          Protyle.mindmapRender(previewElement, "../../stage/protyle");
-          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.highlightRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mathRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.flowchartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.graphvizRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.chartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mindmapRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.abcRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          Protyle.plantumlRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
               navigator.clipboard.writeText(

@@ -19,13 +19,13 @@
           rel="stylesheet"
           type="text/css"
           id="baseStyle"
-          href="../../stage/build/export/base.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
         />
         <link
           rel="stylesheet"
           type="text/css"
           id="themeDefaultStyle"
-          href="../../appearance/themes/daylight/theme.css?2.10.5"
+          href="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
         />
 
         <title>模板片段</title>
@@ -115,10 +115,10 @@
           id="preview"
         >
           <div id="20201204181006-7bkppue" data-node-id="20201204181006-7bkppue" data-type="NodeDocument" updated="20230820185615" data-subtype="h1" class="h1" title="模板片段" type="doc" icon="1f4f0" type="doc">
-      <div style="height:25vh;undefined"></div>
-      <div>模板片段</div>
-    </div>
-    <div id="20210428214921-3rfhrt6" data-node-id="20210428214921-3rfhrt6" data-type="NodeHeading" updated="20210428214924" data-subtype="h2" class="h2">
+        <div style="height:25vh;undefined"></div>
+        <div>模板片段</div>
+      </div>
+      <div id="20210428214921-3rfhrt6" data-node-id="20210428214921-3rfhrt6" data-type="NodeHeading" updated="20210428214924" data-subtype="h2" class="h2">
       <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
 概述
 </div>
@@ -277,19 +277,19 @@
  支持类似 SQL 预编译语句的变参列表，方便传入参数：
 </div>
 <div id="20210604111446-p6vadfc" data-node-id="20210604111446-p6vadfc" data-type="NodeCodeBlock" updated="20210604111632" class="code-block">
-      <div class="protyle-action">
-        <span class="protyle-action--first protyle-action__language">
-        
-        </span>
-          <span class="fn__flex-1"></span>
-          <span class="protyle-icon protyle-icon--only protyle-action__copy">
-          <svg><use xlink:href="#iconCopy"></use></svg>
-        </span>
-      </div>
-      <div class="hljs" spellcheck="false">.action{$today := now | date "20060102150405"}
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">
+          
+          </span>
+            <span class="fn__flex-1"></span>
+            <span class="protyle-icon protyle-icon--only protyle-action__copy">
+            <svg><use xlink:href="#iconCopy"></use></svg>
+          </span>
+        </div>
+        <div class="hljs" spellcheck="false">.action{$today := now | date "20060102150405"}
 .action{$blocks :=queryBlocks "SELECT * FROM blocks WHERE content LIKE '?' AND updated > '?' LIMIT ?" "%foo%" $today "3"}
 </div>
-    </div>
+      </div>
 <div id="20210104091309-h71ogwf" data-node-id="20210104091309-h71ogwf" data-type="NodeHeading" data-subtype="h2" class="h2">
       <div>=== 没有找到对应的渲染器 NodeHeadingC8hMarker ===
 调用模板
@@ -307,16 +307,16 @@
 </div>
     </div>
 <div id="20210104091309-9ppkq6j" data-node-id="20210104091309-9ppkq6j" data-type="NodeCodeBlock" class="code-block">
-      <div class="protyle-action">
-        <span class="protyle-action--first protyle-action__language">
-        plaintext
-        </span>
-          <span class="fn__flex-1"></span>
-          <span class="protyle-icon protyle-icon--only protyle-action__copy">
-          <svg><use xlink:href="#iconCopy"></use></svg>
-        </span>
-      </div>
-      <div class="hljs" spellcheck="false">.action{$before := (div (now.Sub (toDate "2006-01-02" "2020-02-19")).Hours 24)}
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">
+          plaintext
+          </span>
+            <span class="fn__flex-1"></span>
+            <span class="protyle-icon protyle-icon--only protyle-action__copy">
+            <svg><use xlink:href="#iconCopy"></use></svg>
+          </span>
+        </div>
+        <div class="hljs" spellcheck="false">.action{$before := (div (now.Sub (toDate "2006-01-02" "2020-02-19")).Hours 24)}
 
 .action{$after := (div ((toDate "2006-01-02" "2048-02-19").Sub now).Hours 24)}
 今天是 `.action{now | date "2006-01-02"}`。
@@ -324,7 +324,7 @@
 * 距离 `2020-02-19` 已经过去 `.action{$before}` 天
 * 距离 `2048-02-19` 还剩 `.action{$after}` 天
 </div>
-    </div>
+      </div>
 <div id="20210104091309-06sv04x" data-node-id="20210104091309-06sv04x" data-type="NodeParagraph" class="p"><span data-type="NodeTextMark" data-type="code"
         >$before</span
       >
@@ -344,9 +344,9 @@
 </div>
 
         </div>
-        <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
+        <script src="https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
         <script>
           window.siyuan = {
             config: {
@@ -366,16 +366,16 @@
             languages: { copy: "复制" },
           };
           const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "../../stage/protyle");
-          Protyle.mathRender(previewElement, "../../stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "../../stage/protyle");
-          Protyle.flowchartRender(previewElement, "../../stage/protyle");
-          Protyle.graphvizRender(previewElement, "../../stage/protyle");
-          Protyle.chartRender(previewElement, "../../stage/protyle");
-          Protyle.mindmapRender(previewElement, "../../stage/protyle");
-          Protyle.abcRender(previewElement, "../../stage/protyle");
+          Protyle.highlightRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mathRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle", false);
+          Protyle.mermaidRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.flowchartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.graphvizRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.chartRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.mindmapRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
+          Protyle.abcRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "../../stage/protyle");
+          Protyle.plantumlRender(previewElement, "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/stage/protyle");
           document.querySelectorAll(".protyle-action__copy").forEach((item) => {
             item.addEventListener("click", (event) => {
               navigator.clipboard.writeText(
