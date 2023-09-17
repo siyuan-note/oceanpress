@@ -1,7 +1,14 @@
 <template>
   <NModal v-model:show="showModal">
-    <NCard style="width: 600px" title="提示" :bordered="false" size="huge" role="dialog" aria-modal="true">
-      <h2>未开发完毕，暂不能正常使用</h2>
+    <NCard
+      style="width: 600px"
+      title="提示"
+      :bordered="false"
+      size="huge"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h2>未开发完毕，但勉强能看了</h2>
       <div>
         可关注
         <a href="https://ld246.com/article/1693989505448"> OceanPress_js 版的开发记录 </a>
@@ -9,7 +16,10 @@
       <div>
         查看生成结果预览
         <a href="/notebook/请从这里开始.html"> 《思源笔记用户指南》： 请从这里开始.html </a>
-        <a href="/notebook/请从这里开始/编辑器/排版元素.html"> 《思源笔记用户指南》： 排版元素.html </a>
+        <hr />
+        <a href="/notebook/请从这里开始/编辑器/排版元素.html">
+          《思源笔记用户指南》： 排版元素.html
+        </a>
       </div>
 
       <template #footer>
