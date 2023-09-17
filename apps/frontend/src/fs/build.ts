@@ -12,10 +12,10 @@ const defaultConfig = {
   cdn: {
     /** 思源 js、css等文件的前缀 */
     siyuanPrefix:
-      "https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/notebook/",
-    /** 思源 js、css等文件zip包地址 https://cdn.jsdelivr.net/gh/2234839/oceanPress_js@raw/main/apps/frontend/public/public.zip */
+      "https://cdn.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/",
+    /** 思源 js、css等文件zip包地址  */
     publicZip:
-      "https://fastly.jsdelivr.net/gh/2234839/oceanPress_js@main/apps/frontend/public/public.zip",
+      "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
   },
 };
 export async function* build(book: notebook, config = defaultConfig) {
