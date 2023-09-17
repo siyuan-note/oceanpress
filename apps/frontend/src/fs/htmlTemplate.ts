@@ -133,6 +133,12 @@ export async function htmlTemplate(
         >
           ${p.htmlContent}
         </div>
+      <footer>
+        <p style="text-align:center;margin:15px 0;">
+        技术支持： <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+        开发者： <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">OceanPress</a>
+        </p>
+      </footer>
         <script src="${prePath}appearance/icons/material/icon.js?${version}"></script>
         <script src="${prePath}stage/build/export/protyle-method.js?${version}"></script>
         <script src="${prePath}stage/protyle/js/lute/lute.min.js?${version}"></script>
