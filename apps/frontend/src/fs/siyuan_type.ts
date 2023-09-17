@@ -155,7 +155,7 @@ interface ListData {
   Num?: number; // 有序列表项修正过的序号
 }
 
-const NodeType = {
+export const NodeType = {
   NodeDocument: 0, // 根
   NodeParagraph: 1, // 段落
   NodeHeading: 2, // 标题
