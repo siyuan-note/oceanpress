@@ -398,16 +398,6 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     </div>
   </div>`,
 };
-function findNodeByID(sy: S_Node, id: string): S_Node | undefined {
-  if (sy.ID === id) return sy;
-  if (sy.Children) {
-    for (const child of sy.Children) {
-      const node = findNodeByID(child, id);
-      if (node) return node;
-    }
-  }
-  return undefined;
-}
 
 /** 获取sy节点的child中第一个type类型节点的data */
 function childDateByType(sy: S_Node, type: S_Node["Type"]) {
