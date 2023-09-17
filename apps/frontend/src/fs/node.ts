@@ -7,7 +7,13 @@ import { S_Node } from "./siyuan_type";
 
 const allSY = new Map</** 文件路径.sy */ string, S_Node>();
 const id_Node = new Map</** id */ string, S_Node>();
-
+export function getPathBySY(sy: S_Node) {
+  for (const [path, SY] of allSY) {
+    if (SY === sy) {
+      return path;
+    }
+  }
+}
 export async function getSyByPath(path: string) {
   if (allSY.has(path)) return allSY.get(path)!;
   const sy = await API.file_getFile({

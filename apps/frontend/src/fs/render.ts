@@ -1,4 +1,4 @@
-import { getNodeByID } from "./node";
+import { getNodeByID, getPathBySY } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
 
@@ -138,8 +138,25 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
    * 这样就方便解决 block-ref 等链接问题
    * */
   nodeStack: S_Node[];
+  getTopPathPrefix: () => Promise<string>;
 } = {
   nodeStack: [] as S_Node[],
+  async getTopPathPrefix() {
+    const sy = this.nodeStack[0];
+    let prefix = ".";
+    if (sy.Type === "NodeDocument" && sy.ID) {
+      /** 基于当前文档路径将 href ../ 到顶层 */
+      const level = getPathBySY(sy)!.split("/").length - 2;
+
+      for (let i = 0; i < level; i++) {
+        prefix += "/..";
+      }
+      return prefix;
+    } else {
+      console.log("未定义顶层元素非 NodeDocument 时的处理方式", sy);
+      return "";
+    }
+  },
   async NodeDocument(sy) {
     return html`<div ${strAttr(sy)} icon="1f4f0" type="doc">
         <div style="height:25vh;${sy.Properties?.["title-img"]}"></div>
@@ -185,7 +202,6 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
           /** 基于当前文档路径将 href ../ 到顶层 */
           const level =
             (await API.filetree_getHPathByID({ id: this.nodeStack[0].ID })).split("/").length - 2;
-          console.log(level, sy);
 
           for (let i = 0; i < level; i++) {
             href += "/..";
