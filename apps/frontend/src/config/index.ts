@@ -10,6 +10,19 @@ export const configs = reactive({
     name: "default",
     notebook: {} as notebook,
     authorized: "",
+    /** 打包成 zip */
+    compressedZip: true,
+    /** 不将 publicZip 打包到 zip 包中 */
+    withoutPublicZip: true,
+
+    cdn: {
+      /** 思源 js、css等文件的前缀 */
+      siyuanPrefix:
+        "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/",
+      /** 思源 js、css等文件zip包地址  */
+      publicZip:
+        "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
+    },
   },
 });
 
@@ -17,13 +30,30 @@ export const configs = reactive({
 export const loadConfig = () => {
   const localConfig = localStorage.getItem("configs");
   if (localConfig) {
-    Object.assign(configs, JSON.parse(localConfig));
+    deepAssign(configs, JSON.parse(localConfig));
+  }
+  function deepAssign(target: any, source: any) {
+    for (let key in source) {
+      if (source.hasOwnProperty(key)) {
+        if (source[key] instanceof Object && !Array.isArray(source[key])) {
+          // 如果属性是对象且不是数组，则递归执行深度合并
+          if (!target.hasOwnProperty(key)) {
+            // 如果目标对象没有该属性，直接赋值
+            target[key] = source[key];
+          } else {
+            deepAssign(target[key], source[key]);
+          }
+        } else {
+          // 如果属性不是对象或者是数组，则直接赋值
+          target[key] = source[key];
+        }
+      }
+    }
   }
 };
 
 export const saveConfig = () => {
-  if (configs.__init__ === false)
-    localStorage.setItem("configs", JSON.stringify(configs));
+  if (configs.__init__ === false) localStorage.setItem("configs", JSON.stringify(configs));
 };
 
 export const currentConfig = computed(() => {

@@ -1,3 +1,4 @@
+import { currentConfig } from "@/config";
 import { htmlTemplate } from "./htmlTemplate";
 import { getSyByPath } from "./node";
 import { renderHTML } from "./render";
@@ -8,17 +9,15 @@ import JSZip from "jszip";
 export interface docTree {
   [docPath: string]: { sy: S_Node };
 }
-const defaultConfig = {
-  cdn: {
-    /** 思源 js、css等文件的前缀 */
-    siyuanPrefix:
-      "https://cdn.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/",
-    /** 思源 js、css等文件zip包地址  */
-    publicZip:
-      "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
+
+export async function* build(
+  book: notebook,
+  config = currentConfig.value,
+  otherConfig?: {
+    /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
+    dir_ref: any;
   },
-};
-export async function* build(book: notebook, config = defaultConfig) {
+) {
   const docTree = {} as docTree;
   const emit = {
     log(_s: string) {},
@@ -29,7 +28,7 @@ export async function* build(book: notebook, config = defaultConfig) {
   let total = 0;
   /** 较为精准的估计进度 */
   function processPercentage(/**  0~1 的小数 表示这个数占整体百分之多少 */ percentage: number) {
-    total += percentage * oldPercentage;
+    total += oldPercentage;
     return (/** 0~1 的小数 */ process: number) => {
       oldPercentage = process * percentage;
       emit.percentage((total + oldPercentage) * 100);
@@ -74,11 +73,18 @@ export async function* build(book: notebook, config = defaultConfig) {
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
-  yield `=== 开始打包 zip ===`;
-  await downloadZIP(docHTML, {
-    withoutZip: true,
-    publicZip: config.cdn.publicZip,
-  });
+  yield `=== 开始输出文件 ===`;
+  if (otherConfig?.dir_ref) {
+    console.log(otherConfig);
+
+    await writeFileSystem(docHTML, otherConfig.dir_ref);
+  }
+  if (config.compressedZip) {
+    await downloadZIP(docHTML, {
+      withoutZip: config.withoutPublicZip,
+      publicZip: config.cdn.publicZip,
+    });
+  }
 
   emit.percentage(100);
   yield "ok";
@@ -108,4 +114,32 @@ export async function downloadZIP(
     .catch((error) => {
       console.error(error);
     });
+}
+
+async function writeFileSystem(docTree: { [htmlPath: string]: string }, dir_ref: any) {
+  /** 并发写文件 */
+  await Promise.all(
+    Object.entries(docTree).map(async ([path, html]) => {
+      await writeFile(dir_ref, path, html);
+    }),
+  );
+
+  async function writeFile(dir_ref: any, name: string, data: string) {
+    const pathArr = name.split("/");
+    /** 如果路径中的目录不存在则创建 */
+    if (pathArr.length > 1) {
+      for (let i = 0; i < pathArr.length - 1; i++) {
+        const dirName = pathArr[i];
+        if (dirName === "") {
+          continue;
+        }
+        dir_ref = await dir_ref.getDirectoryHandle(dirName, { create: true });
+      }
+    }
+    /** 写文件 */
+    const new_file = await dir_ref.getFileHandle(pathArr[pathArr.length - 1], { create: true });
+    const new_file_writer = await new_file.createWritable();
+    await new_file_writer.write(data);
+    await new_file_writer.close();
+  }
 }

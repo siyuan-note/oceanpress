@@ -9,7 +9,8 @@
   import { docTree } from "@/fs/build";
   import Step1_selectNote from "./step1_selectNote.vue";
   import Step2_preview from "./step2_preview.vue";
-  import Step3_generate from "./step3_generate.vue";
+  import Step4_generate from "./step4_generate.vue";
+  import Step3_config from "./step3_config.vue";
 
   const _notebooks = vApi.notebook_lsNotebooks();
   const currentNoteBook = usePromiseComputed<notebook>({});
@@ -26,10 +27,15 @@
   const log = ref("");
 
   const docTree = ref<docTree>({});
-  async function genHTML(book: notebook) {
+  async function genHTML(
+    book: notebook,
+    config?: {
+      dir_ref: any;
+    },
+  ) {
     genHTML_status.value = true;
     log.value = "";
-    const res = build(book);
+    const res = build(book, currentConfig.value,config);
     const emitRes = res.next();
     const emit = (await emitRes).value;
     if (emit instanceof Object) {
@@ -81,11 +87,12 @@
       @update="currentNoteBook.setValue"
     />
     <Step2_preview :notebook="currentNoteBook.data" />
-    <n-step title="其他配置"></n-step>
-    <Step3_generate
+    <Step3_config />
+    <Step4_generate
       :percentage="percentage"
       :log="log"
       @generate-click="genHTML(currentNoteBook.data)"
+      @save-to-disk="(dir_ref) => genHTML(currentNoteBook.data, { dir_ref })"
     />
   </NSteps>
 </template>
