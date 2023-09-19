@@ -16,7 +16,11 @@ export async function renderHTML(
     /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里创建一个新 []  */
     nodeStack: [...renderInstance.nodeStack],
   };
-
+  if (renderInstance.nodeStack.includes(sy)) {
+    // TODO 需要返回一个更好的提示
+    console.log("=== 递归渲染了相同的节点 ===", renderInstance.nodeStack);
+    return "=== 递归渲染了相同的节点 ===";
+  }
   if (sy.Type in render) {
     if (renderObj[sy.Type] === undefined) {
       return `=== 没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}===`;
@@ -313,7 +317,7 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
       if (node === undefined) {
         // 一般来说是跨笔记引用
         // TODO 待处理跨笔记引用问题
-        console.log("跨笔记引用", block.id, sql,node);
+        console.log("跨笔记引用", block.id, sql, node);
         return "";
       }
       htmlStr += await renderHTML(node, this);

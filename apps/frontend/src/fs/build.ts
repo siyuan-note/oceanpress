@@ -38,12 +38,14 @@ export async function* build(
   yield `=== 开始编译 ${book.name} ===`;
   let process = processPercentage(0.4);
   /** 查询所有文档级block */
+  // TODO 需要更换成能够完全遍历一个笔记本的写法
   const r: DB_block[] = await API.query_sql({
     stmt: `
     SELECT *
     from blocks
     WHERE box = '${book.id}'
         AND type = 'd'
+    limit 1500 OFFSET 0
   `,
   });
   yield `=== 查询文档级block完成 ===`;
@@ -61,14 +63,19 @@ export async function* build(
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy }] = arr[i];
-    docHTML[path + ".html"] = await htmlTemplate(
-      {
-        title: sy.Properties?.title || "",
-        htmlContent: await renderHTML(sy),
-        level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
-      },
-      config.cdn,
-    );
+    try {
+      docHTML[path + ".html"] = await htmlTemplate(
+        {
+          title: sy.Properties?.title || "",
+          htmlContent: await renderHTML(sy),
+          level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
+        },
+        config.cdn,
+      );
+    } catch (error) {
+      console.log(path, "渲染失败", error);
+    }
+
     process(i / arr.length);
     yield `渲染： ${path}`;
   }
@@ -123,7 +130,10 @@ async function writeFileSystem(docTree: { [htmlPath: string]: string }, dir_ref:
       await writeFile(dir_ref, path, html);
     }),
   );
-
+  // for (const [path, html] of Object.entries(docTree)) {
+  //   await writeFile(dir_ref, path, html);
+  //   console.log("写出", path);
+  // }
   async function writeFile(dir_ref: any, name: string, data: string) {
     const pathArr = name.split("/");
     /** 如果路径中的目录不存在则创建 */
