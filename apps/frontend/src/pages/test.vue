@@ -13,6 +13,7 @@
   import { renderHTML } from "@/fs/render";
   import { watchEffect } from "vue";
   import { writeFile } from "@/util/writeFile";
+  import { S_Node } from "@/fs/siyuan_type";
   const sy = vApi.file_getFile({
     /** 排版元素 */
     path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180320-abz7w6k/20200825162036-4dx365o.sy",
@@ -30,7 +31,7 @@
     if (sy.value.fulfilled) {
       return await htmlTemplate(
         {
-          htmlContent: await renderHTML(sy.value.data),
+          htmlContent: await renderHTML(sy.value.data as S_Node),
           level: 0,
           title: "测试用页面",
         },
