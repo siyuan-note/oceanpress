@@ -41,7 +41,7 @@ export interface api {
     /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string;
   }): any[];
   // TODO 考虑增加缓存，因为嵌入块等原因可能会反复调用这个
-  file_getFile(p: { path: string }): S_Node;
+  file_getFile(p: { path: string }): S_Node | ArrayBuffer;
 }
 type apiPromisify = {
   readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Promise<unPromise<ReturnType<api[K]>>>;
@@ -58,10 +58,16 @@ async function rpc(method: string, arg: any) {
     body: JSON.stringify(arg[0]),
     method: "POST",
   });
-  const json = await res.json();
   if (method === "file_getFile") {
-    return json;
+    const path = arg[0].path as string;
+    if (path.endsWith(".sy")) {
+      return await res.json();
+    } else {
+      return await res.arrayBuffer();
+    }
   }
+  const json = await res.json();
+
   if (json.code !== 0) {
     throw new Error(json.msg);
   }

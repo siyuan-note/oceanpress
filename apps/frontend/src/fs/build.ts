@@ -57,7 +57,7 @@ export async function* build(
     process(i / r.length);
     yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
   }
-  const docHTML = {} as { [htmlPath: string]: string };
+  const docHTML = {} as { [htmlPath: string]: string | ArrayBuffer };
 
   process = processPercentage(0.4);
   const arr = Object.entries(docTree);
@@ -80,10 +80,23 @@ export async function* build(
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
+  yield `=== 开始复制资源文件文件 ===`;
+  const assets: DB_block[] = await API.query_sql({
+    stmt: `SELECT *
+    from assets
+    WHERE box = '${book.id}'
+    limit 1500 OFFSET 0`,
+  });
+  for (let i = 0; i < assets.length; i++) {
+    const item = assets[i];
+    const r = (await API.file_getFile({
+      path: `data/${book.id}/${item.path}`,
+    })) as ArrayBuffer;
+    docHTML[item.path] = r;
+  }
+
   yield `=== 开始输出文件 ===`;
   if (otherConfig?.dir_ref) {
-    console.log(otherConfig);
-
     await writeFileSystem(docHTML, otherConfig.dir_ref);
   }
   if (config.compressedZip) {
@@ -98,7 +111,7 @@ export async function* build(
 }
 /** 下载zip */
 export async function downloadZIP(
-  docTree: { [htmlPath: string]: string },
+  docTree: { [htmlPath: string]: string | ArrayBuffer },
   config?: { publicZip?: string; withoutZip?: boolean },
 ) {
   const zip = new JSZip();
@@ -123,7 +136,10 @@ export async function downloadZIP(
     });
 }
 
-async function writeFileSystem(docTree: { [htmlPath: string]: string }, dir_ref: any) {
+async function writeFileSystem(
+  docTree: { [htmlPath: string]: string | ArrayBuffer },
+  dir_ref: any,
+) {
   /** 并发写文件 */
   await Promise.all(
     Object.entries(docTree).map(async ([path, html]) => {
@@ -134,7 +150,7 @@ async function writeFileSystem(docTree: { [htmlPath: string]: string }, dir_ref:
   //   await writeFile(dir_ref, path, html);
   //   console.log("写出", path);
   // }
-  async function writeFile(dir_ref: any, name: string, data: string) {
+  async function writeFile(dir_ref: any, name: string, data: string | ArrayBuffer) {
     const pathArr = name.split("/");
     /** 如果路径中的目录不存在则创建 */
     if (pathArr.length > 1) {

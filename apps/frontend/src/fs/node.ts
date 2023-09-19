@@ -5,20 +5,23 @@
 import { API } from "./siyuan_api";
 import { S_Node } from "./siyuan_type";
 
-const allSY = new Map</** 文件路径.sy */ string, S_Node>();
+/** 在 getSyByPath 函数中管理 */
+const allDocSY = new Map</** 文件路径.sy */ string, S_Node>();
+/** 在 node 函数中管理 */
 const id_Node = new Map</** id */ string, S_Node>();
-export function getPathBySY(sy: S_Node) {
-  for (const [path, SY] of allSY) {
+export function getDocPathBySY(sy: S_Node) {
+  for (const [path, SY] of allDocSY) {
     if (SY === sy) {
       return path;
     }
   }
 }
 export async function getSyByPath(path: string) {
-  if (allSY.has(path)) return allSY.get(path)!;
-  const sy = await API.file_getFile({
+  if (allDocSY.has(path)) return allDocSY.get(path)!;
+  const sy = (await API.file_getFile({
     path,
-  });
+  })) as S_Node;
+  allDocSY.set(path, sy);
   return node(sy);
 }
 export function getNodeByID(id: string) {

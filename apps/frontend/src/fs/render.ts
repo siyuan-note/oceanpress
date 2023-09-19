@@ -1,4 +1,4 @@
-import { getNodeByID, getPathBySY } from "./node";
+import { getNodeByID, getDocPathBySY } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
 
@@ -17,9 +17,8 @@ export async function renderHTML(
     nodeStack: [...renderInstance.nodeStack],
   };
   if (renderInstance.nodeStack.includes(sy)) {
-    // TODO 需要返回一个更好的提示
-    console.log("=== 递归渲染了相同的节点 ===", renderInstance.nodeStack);
-    return "=== 递归渲染了相同的节点 ===";
+    console.log("=== 存在循环引用 ===", renderInstance.nodeStack);
+    return `<div class="ft__smaller ft__secondary b3-form__space--small">存在循环引用</div>`;
   }
   if (sy.Type in render) {
     if (renderObj[sy.Type] === undefined) {
@@ -150,10 +149,13 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     let prefix = ".";
     if (sy.Type === "NodeDocument" && sy.ID) {
       /** 基于当前文档路径将 href ../ 到顶层 */
-      const level = getPathBySY(sy)!.split("/").length - 2;
-
-      for (let i = 0; i < level; i++) {
-        prefix += "/..";
+      const path = getDocPathBySY(sy);
+      if (path) {
+        /** path data/box_id/doc_id/doc_id/doc_id.sy `data/box_id/` 这一节是多出来的，所以要减3 */
+        const level = path.split("/").length - 3;
+        for (let i = 0; i < level; i++) {
+          prefix += "/..";
+        }
       }
       return prefix;
     } else {
@@ -283,7 +285,9 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
       /><span class="protyle-action__title">${title}</span></span
     >`;
   },
-  NodeLinkDest: _dataString,
+  async NodeLinkDest(sy) {
+    return `${await this.getTopPathPrefix()}/${sy.Data}`;
+  },
   NodeLinkTitle: _dataString,
   NodeKramdownSpanIAL: _emptyString,
   async NodeSuperBlock(sy) {
