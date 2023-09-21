@@ -18,7 +18,7 @@ export async function renderHTML(
   };
   if (renderInstance.nodeStack.includes(sy)) {
     console.log("=== 存在循环引用 ===", renderInstance.nodeStack);
-    return `<div class="ft__smaller ft__secondary b3-form__space--small">存在循环引用</div>`;
+    return `<div class="ft__smaller ft__secondary b3-form__space--small">循环引用</div>`;
   }
   if (sy.Type in render) {
     if (renderObj[sy.Type] === undefined) {
@@ -322,7 +322,7 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
         // 一般来说是跨笔记引用
         // TODO 待处理跨笔记引用问题
         console.log("跨笔记引用", block.id, sql, node);
-        return "";
+        return return `<div class="ft__smaller ft__secondary b3-form__space--small">跨笔记引用</div>`;;
       }
       htmlStr += await renderHTML(node, this);
     }
