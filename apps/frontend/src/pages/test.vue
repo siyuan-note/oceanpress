@@ -16,9 +16,9 @@
   import { S_Node } from "@/fs/siyuan_type";
   const sy = vApi.file_getFile({
     /** 排版元素 */
-    path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180320-abz7w6k/20200825162036-4dx365o.sy",
+    // path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180320-abz7w6k/20200825162036-4dx365o.sy",
     /** 请从这里开始 20200812220555-lj3enxa.sy */
-    // path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa.sy",
+    path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa.sy",
     /** 窗口和页签 */
     // path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180321-hbvl5c2/20200822191536-rm6hwid.sy",
   });
