@@ -81,18 +81,20 @@ export async function* build(
   }
   yield `=== 渲染文档完成 ===`;
   yield `=== 开始复制资源文件文件 ===`;
-  const assets: DB_block[] = await API.query_sql({
-    stmt: `SELECT *
+  if (config.excludeAssetsCopy === false) {
+    const assets: DB_block[] = await API.query_sql({
+      stmt: `SELECT *
     from assets
     WHERE box = '${book.id}'
     limit 1500 OFFSET 0`,
-  });
-  for (let i = 0; i < assets.length; i++) {
-    const item = assets[i];
-    const r = (await API.file_getFile({
-      path: `data/${book.id}/${item.path}`,
-    })) as ArrayBuffer;
-    docHTML[item.path] = r;
+    });
+    for (let i = 0; i < assets.length; i++) {
+      const item = assets[i];
+      const r = (await API.file_getFile({
+        path: `data/${book.id}/${item.path}`,
+      })) as ArrayBuffer;
+      docHTML[item.path] = r;
+    }
   }
 
   yield `=== 开始输出文件 ===`;

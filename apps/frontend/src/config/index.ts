@@ -14,6 +14,8 @@ export const configs = reactive({
     compressedZip: true,
     /** 不将 publicZip 打包到 zip 包中 */
     withoutPublicZip: true,
+    /** 不复制 assets/ ，勾选此选项则需要自行处理资源文件 */
+    excludeAssetsCopy: false,
 
     cdn: {
       /** 思源 js、css等文件的前缀 */
@@ -23,11 +25,13 @@ export const configs = reactive({
       publicZip:
         "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
     },
+
   },
 });
 
-/** 从本地加载配置文件 */
+/** 加载配置文件 */
 export const loadConfig = () => {
+  // TODO 在node.js环境下需要额外处理
   const localConfig = localStorage.getItem("configs");
   if (localConfig) {
     deepAssign(configs, JSON.parse(localConfig));

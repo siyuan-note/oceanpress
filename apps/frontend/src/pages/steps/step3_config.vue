@@ -13,6 +13,10 @@
           当然你如果自行部署的话也可以选这个不打包来节省时间，<br>
           这些资源一般没有变化所以部署一次即可。）
         </NCheckbox>
+        <NDivider />
+        <NCheckbox v-model:checked="currentConfig.excludeAssetsCopy">
+          不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
+        </NCheckbox>
       </NCollapseItem>
       <NCollapseItem title="CDN 配置" name="2">
         公共资源的cdn前缀<br>
