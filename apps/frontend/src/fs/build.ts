@@ -80,8 +80,8 @@ export async function* build(
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
-  yield `=== 开始复制资源文件文件 ===`;
   if (config.excludeAssetsCopy === false) {
+    yield `=== 开始复制资源文件 ===`;
     const assets: DB_block[] = await API.query_sql({
       stmt: `SELECT *
     from assets
@@ -149,8 +149,11 @@ async function writeFileSystem(
     }),
   );
   // for (const [path, html] of Object.entries(docTree)) {
-  //   await writeFile(dir_ref, path, html);
-  //   console.log("写出", path);
+  //   try {
+  //     await writeFile(dir_ref, path, html);
+  //   } catch (error) {
+  //     console.log("写文件失败", path, error);
+  //   }
   // }
   async function writeFile(dir_ref: any, name: string, data: string | ArrayBuffer) {
     const pathArr = name.split("/");

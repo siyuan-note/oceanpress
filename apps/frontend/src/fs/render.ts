@@ -1,4 +1,4 @@
-import { getNodeByID, getDocPathBySY } from "./node";
+import { getNodeByID, getDocPathBySY, getDocByChildID } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
 
@@ -54,38 +54,47 @@ async function childRender(sy: S_Node, renderInstance: typeof render) {
   }
   return h;
 }
-function strAttr(sy: S_Node) {
-  const subtype_class = (() => {
-    const typ_subtype =
-      sy.ListData?.Typ === 1
-        ? /** 有序列表 */ "o"
-        : sy.ListData?.Typ === 3
-        ? /** 任务列表 */ "t"
-        : /** 无序列表 */ "u";
+function strAttr(
+  sy: S_Node,
+  config: {
+    subtype_class?: string | [string, string];
+    data_type?: string;
+  } = {},
+) {
+  if (config?.subtype_class === undefined) {
+    config.subtype_class = (() => {
+      const typ_subtype =
+        sy.ListData?.Typ === 1
+          ? /** 有序列表 */ "o"
+          : sy.ListData?.Typ === 3
+          ? /** 任务列表 */ "t"
+          : /** 无序列表 */ "u";
 
-    if (sy.Type === "NodeDocument") return "h1";
-    else if (sy.Type === "NodeHeading") return `h${sy.HeadingLevel}`;
-    else if (sy.Type === "NodeList") return [typ_subtype, "list"];
-    else if (sy.Type === "NodeListItem") return [typ_subtype, "li"];
-    else if (sy.Type === "NodeParagraph") return ["", "p"];
-    else if (sy.Type === "NodeImage") return ["", "img"];
-    else if (sy.Type === "NodeBlockquote") return ["", "bq"];
-    else if (sy.Type === "NodeSuperBlock") return ["", "sb"];
-    else if (sy.Type === "NodeCodeBlock") {
-      const [yes, mark] = isRenderCode(sy);
-      if (yes) {
-        /** 脑图等需要渲染的块 */
-        return [mark, "render-node"];
-      } else {
-        return ["", "code-block"];
-      }
-    } else if (sy.Type === "NodeTable") return ["", "table"];
-    else if (sy.Type === "NodeThematicBreak") return ["", "hr"];
-    else if (sy.Type === "NodeMathBlock") return ["math", "render-node"];
-    else if (sy.Type === "NodeIFrame") return ["", "iframe"];
-    else if (sy.Type === "NodeVideo") return ["", "iframe"];
-    else return "";
-  })();
+      if (sy.Type === "NodeDocument") return "h1";
+      else if (sy.Type === "NodeHeading") return `h${sy.HeadingLevel}`;
+      else if (sy.Type === "NodeList") return [typ_subtype, "list"];
+      else if (sy.Type === "NodeListItem") return [typ_subtype, "li"];
+      else if (sy.Type === "NodeParagraph") return ["", "p"];
+      else if (sy.Type === "NodeImage") return ["", "img"];
+      else if (sy.Type === "NodeBlockquote") return ["", "bq"];
+      else if (sy.Type === "NodeSuperBlock") return ["", "sb"];
+      else if (sy.Type === "NodeCodeBlock") {
+        const [yes, mark] = isRenderCode(sy);
+        if (yes) {
+          /** 脑图等需要渲染的块 */
+          return [mark, "render-node"];
+        } else {
+          return ["", "code-block"];
+        }
+      } else if (sy.Type === "NodeTable") return ["", "table"];
+      else if (sy.Type === "NodeThematicBreak") return ["", "hr"];
+      else if (sy.Type === "NodeMathBlock") return ["math", "render-node"];
+      else if (sy.Type === "NodeIFrame") return ["", "iframe"];
+      else if (sy.Type === "NodeVideo") return ["", "iframe"];
+      else return "";
+    })();
+  }
+
   const attrObj = {} as { [k: string]: string };
 
   function addAttr(key: string, value: string) {
@@ -99,16 +108,16 @@ function strAttr(sy: S_Node) {
   if (sy?.TextMarkType === "tag") {
     addAttr(`data-type`, sy.TextMarkType ?? "");
   } else {
-    addAttr(`data-type`, sy.Type);
+    addAttr(`data-type`, config?.data_type ?? sy.Type);
   }
   if (sy.Properties?.updated) addAttr("updated", sy.Properties.updated);
-  if (subtype_class !== "") {
-    if (typeof subtype_class === "string") {
-      addAttr("data-subtype", subtype_class);
-      addAttr("class", subtype_class);
+  if (config?.subtype_class) {
+    if (typeof config.subtype_class === "string") {
+      addAttr("data-subtype", config.subtype_class);
+      addAttr("class", config.subtype_class);
     } else {
-      if (subtype_class[0] !== "") addAttr("data-subtype", subtype_class[0]);
-      if (subtype_class[1] !== "") addAttr("class", subtype_class[1]);
+      if (config.subtype_class[0] !== "") addAttr("data-subtype", config.subtype_class[0]);
+      if (config.subtype_class[1] !== "") addAttr("class", config.subtype_class[1]);
     }
   }
   if (sy.Properties) {
@@ -141,7 +150,8 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
    * 这样就方便解决 block-ref 等链接问题
    * */
   nodeStack: S_Node[];
-  getTopPathPrefix: () => Promise<string>;
+  /** 返回当前文档到顶层文档的路径前缀,例如： ./../..  */
+  getTopPathPrefix: (sy_doc?: S_Node) => Promise<string>;
 } = {
   nodeStack: [] as S_Node[],
   async getTopPathPrefix() {
@@ -167,7 +177,9 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     return `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
       sy,
     )}>
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${sy.Properties?.["title-img"]}"/>
+      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${
+        sy.Properties?.["title-img"]
+      }"/>
       ${
         sy.Properties?.["icon"]
           ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
@@ -208,63 +220,60 @@ ${await childRender(sy, this)}
     return html`<div ${strAttr(sy)}>${await childRender(sy, this)}</div>`;
   },
   async NodeTextMark(sy) {
-    if (sy.TextMarkType === "block-ref") {
-      let href = ".";
-      if (sy.TextMarkBlockRefID) {
-        if (this.nodeStack[0].Type === "NodeDocument" && this.nodeStack[0].ID) {
-          /** 基于当前文档路径将 href ../ 到顶层 */
-          const level =
-            (await API.filetree_getHPathByID({ id: this.nodeStack[0].ID })).split("/").length - 2;
-
-          for (let i = 0; i < level; i++) {
-            href += "/..";
-          }
-          href += (await API.filetree_getHPathByID({ id: sy.TextMarkBlockRefID })) + ".html";
-        } else {
-          console.log("未定义顶层元素非 NodeDocument 时的处理方式", sy);
-        }
+    const that = this;
+    let r: string = "";
+    /** 从后向前渲染每一层mark ，TextMarkType有可能是 `a sub` |`sub a` | `a` |`code`等 */
+    for (const type of (sy.TextMarkType?.split(" ") ?? []).reverse() as S_Node["TextMarkType"][]) {
+      if (r === "") {
+        r = await TextMarkRender(sy, type, sy.TextMarkTextContent ?? "");
+      } else {
+        r = await TextMarkRender(sy, type, r);
       }
-      return html`<span
-        data-type="${sy.TextMarkType}"
-        data-subtype="${/** "s" */ sy.TextMarkBlockRefSubtype}"
-        data-id="${/** 被引用块的id */ sy.TextMarkBlockRefID}"
-      >
-        <a href="${href}">${sy.TextMarkTextContent}</a>
-      </span>`;
-    } else if (sy.TextMarkType === "a") {
-      return html`<a href="${sy.TextMarkAHref}">${sy.TextMarkTextContent}</a>`;
-    } else if (
-      [
-        "strong",
-        "em",
-        "u",
-        "s",
-        "mark",
-        "sup",
-        "sub",
-        "kbd",
-        "tag",
-        "code",
-        "strong",
-        "code",
-      ].includes(sy?.TextMarkType ?? "")
-    ) {
-      /** 颜色 */
-      return html`<span ${strAttr(sy)} data-type="${sy.TextMarkType}"
-        >${sy.TextMarkTextContent}</span
-      >`;
-    } else if (sy.TextMarkType === "inline-math") {
-      return html`<span
-        data-type="inline-math"
-        data-subtype="math"
-        data-content="${sy.TextMarkInlineMathContent}"
-        class="render-node"
-      ></span>`;
-    } else if (sy.TextMarkType === "inline-memo" /** 备注 */) {
-      return html`${sy.TextMarkTextContent}<sup>（${sy.TextMarkInlineMemoContent}）</sup>`;
-    } else {
-      console.log("没有找到对应的渲染器 NodeTextMark.TextMarkType", sy.TextMarkType);
-      return "";
+    }
+    return r;
+    async function TextMarkRender(
+      sy: S_Node,
+      type: S_Node["TextMarkType"],
+      content: string,
+    ): Promise<string> {
+      if (type === "inline-math") {
+        return `<span data-type="inline-math" data-subtype="math" data-content="${sy.TextMarkInlineMathContent}" class="render-node"></span>`;
+      } else if (type === "inline-memo" /** 备注 */) {
+        return `${content}<sup>（${sy.TextMarkInlineMemoContent}）</sup>`;
+      } else if (type === "block-ref" /** 引用块 */) {
+        let href = "";
+        debugger
+        if (sy.TextMarkBlockRefID) {
+          const doc = getDocByChildID(sy.TextMarkBlockRefID);
+          if (doc?.ID) {
+            href = `${await that.getTopPathPrefix()}${await API.filetree_getHPathByID({
+              id: doc.ID /** 要先定位到文档，再通过下面的hash（#）定位到具体元素 */,
+            })}.html#${sy.TextMarkBlockRefID}`;
+          } else {
+            console.log("未定义顶层元素非 NodeDocument 时的处理方式", sy);
+          }
+        } else {
+          console.log("未查找到所指向的文档节点", sy);
+        }
+
+
+        return `<span data-type="${sy.TextMarkType}" \
+    data-subtype="${/** "s" */ sy.TextMarkBlockRefSubtype}" \
+    data-id="${/** 被引用块的id */ sy.TextMarkBlockRefID}">
+          <a href="${href}">${content}</a>
+  </span>`;
+      } else if (type === "a") {
+        return `<a href="${sy.TextMarkAHref}">${content}</a>`;
+      } else if (`strong em u s mark sup sub kbd tag code strong code text`.includes(type ?? "")) {
+        return `<span ${strAttr(sy, { data_type: type })}>${content}</span>`;
+      } else {
+        console.log(
+          "没有找到对应的渲染器 NodeTextMark.TextMarkType",
+          sy.TextMarkType,
+          that.nodeStack,
+        );
+        return "";
+      }
     }
   },
   async NodeImage(sy) {

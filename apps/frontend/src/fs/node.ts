@@ -24,14 +24,15 @@ export async function getSyByPath(path: string) {
   allDocSY.set(path, sy);
   return node(sy);
 }
-export function getNodeByID(id: string) {
+export function getNodeByID(id?: string) {
+  if (id === undefined) return undefined;
   return id_Node.get(id);
 }
 export function getDocByChildID(id: string) {
   const node = getNodeByID(id);
   if (node === undefined) {
     return undefined;
-  } else if ((node.Type = "NodeDocument")) {
+  } else if (node.Type === "NodeDocument") {
     return node;
   } else if (node.Parent?.ID === undefined) {
     return undefined;

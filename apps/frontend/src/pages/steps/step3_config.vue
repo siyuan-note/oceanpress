@@ -1,7 +1,7 @@
 <template>
   <NStep title="其他配置">
     <NCollapse>
-      <NCollapseItem title="zip打包选项" name="1" style="text-align: start">
+      <NCollapseItem title="打包选项" name="1" style="text-align: start">
         <NCheckbox v-model:checked="currentConfig.compressedZip">
           打包成 zip(在浏览器端打包完毕后会弹出保存对话窗口)
         </NCheckbox>
