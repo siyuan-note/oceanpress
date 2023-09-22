@@ -164,11 +164,18 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     }
   },
   async NodeDocument(sy) {
-    return html`<div ${strAttr(sy)} icon="1f4f0" type="doc">
-        <div style="height:25vh;${sy.Properties?.["title-img"]}"></div>
-        <div>${sy.Properties?.title}</div>
-      </div>
-      ${await childRender(sy, this)}`;
+    return `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
+      sy,
+    )}>
+      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${sy.Properties?.["title-img"]}"/>
+      ${
+        sy.Properties?.["icon"]
+          ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
+          : ""
+      }
+</div>
+${await childRender(sy, this)}
+`;
   },
   async NodeHeading(sy) {
     return html`<div ${strAttr(sy)}>
@@ -322,7 +329,7 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
         // 一般来说是跨笔记引用
         // TODO 待处理跨笔记引用问题
         console.log("跨笔记引用", block.id, sql, node);
-        return return `<div class="ft__smaller ft__secondary b3-form__space--small">跨笔记引用</div>`;;
+        return `<div class="ft__smaller ft__secondary b3-form__space--small">跨笔记引用</div>`;
       }
       htmlStr += await renderHTML(node, this);
     }
