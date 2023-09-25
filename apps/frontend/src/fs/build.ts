@@ -70,7 +70,10 @@ export async function* build(
           htmlContent: await renderHTML(sy),
           level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
         },
-        config.cdn,
+        {
+          ...config.cdn,
+          embedCode: config.embedCode,
+        },
       );
     } catch (error) {
       console.log(path, "渲染失败", error);

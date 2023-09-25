@@ -1,6 +1,9 @@
 export async function htmlTemplate(
   p: { htmlContent: string; title: string; level: number },
-  config?: { siyuanPrefix: string },
+  config?: {
+    siyuanPrefix: string;
+    embedCode?: { head?: string; beforeBody?: string; afterBody?: string };
+  },
 ) {
   /** 根据level有几级返回多少个 '../' ,用于解决 file协议打开html文档无法正常加载资源 */
   let prePath = "";
@@ -11,10 +14,8 @@ export async function htmlTemplate(
       prePath += "../";
     }
   }
-
   const version = "2.10.5";
   const html = String.raw;
-
   return html`<!DOCTYPE html>
     <html
       lang="zh_CN"
@@ -23,6 +24,7 @@ export async function htmlTemplate(
       data-dark-theme="midnight"
     >
       <head>
+        ${config?.embedCode?.head ?? ""}
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta
@@ -126,6 +128,7 @@ export async function htmlTemplate(
         </style>
       </head>
       <body>
+        ${config?.embedCode?.beforeBody ?? ""}
         <div
           class="protyle-wysiwyg protyle-wysiwyg--attr"
           style="max-width: 800px;margin: 0 auto;"
@@ -133,16 +136,6 @@ export async function htmlTemplate(
         >
           ${p.htmlContent}
         </div>
-        <footer>
-          <p style="text-align:center;margin:15px 0;">
-            技术支持：
-            <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-            开发者：
-            <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts"
-              >崮生（子虚）</a
-            >
-          </p>
-        </footer>
         <script src="${prePath}appearance/icons/material/icon.js?${version}"></script>
         <script src="${prePath}stage/build/export/protyle-method.js?${version}"></script>
         <script src="${prePath}stage/protyle/js/lute/lute.min.js?${version}"></script>
@@ -185,6 +178,7 @@ export async function htmlTemplate(
             });
           });
         </script>
+        ${config?.embedCode?.afterBody ?? ""}
       </body>
     </html>`;
 }

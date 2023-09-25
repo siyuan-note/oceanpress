@@ -31,6 +31,19 @@ export const configs = reactive({
       publicZip:
         "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
     },
+    /** html模板嵌入代码块，会将此处配置中的代码嵌入到生成的html所对应的位置 */
+    embedCode: {
+      head: "",
+      beforeBody: "",
+      afterBody: `<footer>
+  <p style="text-align:center;margin:15px 0;">
+    技术支持：
+    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+    开发者：
+    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+  </p>
+</footer>`,
+    },
   },
 });
 

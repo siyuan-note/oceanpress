@@ -22,6 +22,16 @@
           会根据配置文件中的__skipBuilds__字段跳过一些没有变化不需要重新输出的内容<br />
           目前可以跳过的有 assets/ 资源，当资源的 hash 值没有变化时不会再次输出
         </NCheckbox>
+        <NDivider />
+        <h3>head</h3>
+        此处的代码将添加至 head 标签顶部
+        <NInput v-model:value="currentConfig.embedCode.head" type="textarea"> </NInput>
+        <h3>beforeBody</h3>
+        此处的代码将添加至 body 标签顶部
+        <NInput v-model:value="currentConfig.embedCode.beforeBody" type="textarea"> </NInput>
+        <h3>afterBody</h3>
+        此处的代码将添加至 body 标签底部
+        <NInput v-model:value="currentConfig.embedCode.afterBody" type="textarea"> </NInput>
       </NCollapseItem>
       <NCollapseItem title="CDN 配置" name="2">
         公共资源的cdn前缀<br />
