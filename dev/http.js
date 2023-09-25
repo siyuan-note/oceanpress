@@ -12,6 +12,7 @@ const server = http.createServer((req, res) => {
   req.on("end", () => {
     // 请求体接收完毕，可以对其进行处理
     const json = JSON.parse(body);
+    console.log(`write ${json.data.length}`, json.path);
     writeFileSync(json.path, json.data);
     // 发送响应
     res.statusCode = 200;

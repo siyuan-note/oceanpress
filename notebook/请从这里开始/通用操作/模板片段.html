@@ -114,11 +114,11 @@
           style="max-width: 800px;margin: 0 auto;"
           id="preview"
         >
-          <div id="20201204181006-7bkppue" data-node-id="20201204181006-7bkppue" data-type="NodeDocument" updated="20230820185615" data-subtype="h1" class="h1" title="模板片段" type="doc" icon="1f4f0" type="doc">
-        <div style="height:25vh;undefined"></div>
-        <div>模板片段</div>
-      </div>
-      <div id="20210428214921-3rfhrt6" data-node-id="20210428214921-3rfhrt6" data-type="NodeHeading" updated="20210428214924" data-subtype="h2" class="h2">
+          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20201204181006-7bkppue" data-node-id="20201204181006-7bkppue" data-type="NodeDocument" updated="20230820185615" data-subtype="h1" class="h1" title="模板片段" type="doc">
+      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
+      
+</div>
+<div id="20210428214921-3rfhrt6" data-node-id="20210428214921-3rfhrt6" data-type="NodeHeading" updated="20210428214924" data-subtype="h2" class="h2">
       <div>
 概述
 </div>
@@ -127,9 +127,7 @@
 用于在光标插入符位置快速插入之前设置好的文本内容，支持变量。
 模板片段
 使用 
-<span data-type="NodeTextMark" data-type="code"
-        >.md</span
-      >
+<span data-type="code">.md</span>
  后缀文件，存放在工作空间 data/templates 文件夹下。
 </div>
 <div id="20210104091309-fhb549c" data-node-id="20210104091309-fhb549c" data-type="NodeHeading" data-subtype="h2" class="h2">
@@ -140,35 +138,23 @@
 <div id="20210104091309-siekt4x" data-node-id="20210104091309-siekt4x" data-type="NodeParagraph" updated="20210502204926" class="p">模板使用的是 
 <a href="https://golang.org/pkg/text/template/">Go 编程语言的文本模板</a>
 进行实现，如果你对此有了解的话，可以实现一些程序逻辑在里面，比如比较逻辑、迭代逻辑等。另外，为了避免语法冲突，模板语法使用 
-<span data-type="NodeTextMark" data-type="code"
-        >.action{action}</span
-      >
+<span data-type="code">.action{action}</span>
 （而不是 
-<span data-type="NodeTextMark" data-type="code"
-        >{{action}}</span
-      >
+<span data-type="code">{{action}}</span>
 ）。
 </div>
 <div id="20210104091309-mvyh081" data-node-id="20210104091309-mvyh081" data-type="NodeParagraph" updated="20230820185615" class="p">我们通过开源项目 Sprig (github repo: Masterminds/sprig) 内置了一些变量和函数来丰富模板。比如可通过 
-<span data-type="NodeTextMark" data-type="code"
-        >.action{now | date &quot;2006-01-02 15:04:05&quot;}</span
-      >
+<span data-type="code">.action{now | date &quot;2006-01-02 15:04:05&quot;}</span>
 ​ 来渲染当前时间，更多用法请参考 
 <a href="http://masterminds.github.io/sprig/">Sprig 帮助文档</a>
 。
 </div>
 <div id="20210104091309-vnxe81t" data-node-id="20210104091309-vnxe81t" data-type="NodeParagraph" updated="20210428223417" class="p">关于日期时间格式化有个细节需要
-<span data-type="tag" data-type="tag"
-        >注意</span
-      >
+<span data-type="tag">注意</span>
 ：Go 编程语言的格式化比较特殊：不是使用 
-<span data-type="NodeTextMark" data-type="code"
-        >yyyy-MM-dd HH:mm:ss</span
-      >
+<span data-type="code">yyyy-MM-dd HH:mm:ss</span>
 ，而是使用 
-<span data-type="NodeTextMark" data-type="code"
-        >2006-01-02 15:04:05</span
-      >
+<span data-type="code">2006-01-02 15:04:05</span>
  这个固定时间格式（
 <a href="https://www.zhihu.com/question/366830553">知乎讨论</a>
 ）。
@@ -179,13 +165,9 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210131155558-loq0tt3" data-node-id="20210131155558-loq0tt3" data-type="NodeParagraph" updated="20210502204955" class="p"><span data-type="NodeTextMark" data-type="code"
-        >title</span
-      >
+      <div id="20210131155558-loq0tt3" data-node-id="20210131155558-loq0tt3" data-type="NodeParagraph" updated="20210502204955" class="p"><span data-type="code">title</span>
 ：该变量用于插入当前文档名。比如模板内容为 
-<span data-type="NodeTextMark" data-type="code"
-        ># .action{.title}</span
-      >
+<span data-type="code"># .action{.title}</span>
 ，则调用后会以一级标题语法插入到当前文档内容中
 </div>
 
@@ -194,9 +176,7 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210221131427-mx22ukt" data-node-id="20210221131427-mx22ukt" data-type="NodeParagraph" updated="20210428223457" class="p"><span data-type="NodeTextMark" data-type="code"
-        >id</span
-      >
+      <div id="20210221131427-mx22ukt" data-node-id="20210221131427-mx22ukt" data-type="NodeParagraph" updated="20210428223457" class="p"><span data-type="code">id</span>
 ：该变量用于插入当前文档 ID
 </div>
 
@@ -205,9 +185,7 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20211213120720-bm8xbwm" data-node-id="20211213120720-bm8xbwm" data-type="NodeParagraph" updated="20211213120746" class="p"><span data-type="NodeTextMark" data-type="code"
-        >name</span
-      >
+      <div id="20211213120720-bm8xbwm" data-node-id="20211213120720-bm8xbwm" data-type="NodeParagraph" updated="20211213120746" class="p"><span data-type="code">name</span>
 ：该变量用于插入当前文档命名
 </div>
 
@@ -216,9 +194,7 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20211213120748-72e95wc" data-node-id="20211213120748-72e95wc" data-type="NodeParagraph" updated="20220605170311" class="p"><span data-type="NodeTextMark" data-type="code"
-        >alias</span
-      >
+      <div id="20211213120748-72e95wc" data-node-id="20211213120748-72e95wc" data-type="NodeParagraph" updated="20220605170311" class="p"><span data-type="code">alias</span>
 ：该变量用于插入当前文档别名
 </div>
 
@@ -227,13 +203,9 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210131155558-ghlchbx" data-node-id="20210131155558-ghlchbx" data-type="NodeParagraph" updated="20210504092933" class="p"><span data-type="NodeTextMark" data-type="code"
-        >queryBlocks</span
-      >
+      <div id="20210131155558-ghlchbx" data-node-id="20210131155558-ghlchbx" data-type="NodeParagraph" updated="20210504092933" class="p"><span data-type="code">queryBlocks</span>
 ：该函数用于查询数据库，返回值为 blocks 列表，参数为 SQL 语句：
-<span data-type="NodeTextMark" data-type="code"
-        >.action{sql "SELECT * FROM blocks LIMIT 7"}</span
-      >
+<span data-type="code">.action{sql "SELECT * FROM blocks LIMIT 7"}</span>
 </div>
 
     </div>
@@ -241,13 +213,9 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20210504093313-ya53o58" data-node-id="20210504093313-ya53o58" data-type="NodeParagraph" updated="20210504093332" class="p"><span data-type="NodeTextMark" data-type="code"
-        >querySpans</span
-      >
+      <div id="20210504093313-ya53o58" data-node-id="20210504093313-ya53o58" data-type="NodeParagraph" updated="20210504093332" class="p"><span data-type="code">querySpans</span>
 ：该函数用于查询数据库，返回值为 spans 列表，参数为 SQL 语句：
-<span data-type="NodeTextMark" data-type="code"
-        >.action{sql "SELECT * FROM spans LIMIT 7"}</span
-      >
+<span data-type="code">.action{sql "SELECT * FROM spans LIMIT 7"}</span>
 </div>
 
     </div>
@@ -255,25 +223,17 @@
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20211213120813-9ynpjax" data-node-id="20211213120813-9ynpjax" data-type="NodeParagraph" updated="20211213121154" class="p"><span data-type="NodeTextMark" data-type="code"
-        >parseTime</span
-      >
+      <div id="20211213120813-9ynpjax" data-node-id="20211213120813-9ynpjax" data-type="NodeParagraph" updated="20211213121154" class="p"><span data-type="code">parseTime</span>
 ：该函数用于将时间格式的字符串解析为 
-<span data-type="NodeTextMark" data-type="code"
-        >time.Time</span
-      >
+<span data-type="code">time.Time</span>
  类型，以便使用更多格式化方法渲染该时间
 </div>
 
     </div>
 </div>
-<div id="20210604111213-774ll6c" data-node-id="20210604111213-774ll6c" data-type="NodeParagraph" updated="20210604111557" class="p"><span data-type="NodeTextMark" data-type="code"
-        >queryBlocks</span
-      >
+<div id="20210604111213-774ll6c" data-node-id="20210604111213-774ll6c" data-type="NodeParagraph" updated="20210604111557" class="p"><span data-type="code">queryBlocks</span>
  和 
-<span data-type="NodeTextMark" data-type="code"
-        >querySpans</span
-      >
+<span data-type="code">querySpans</span>
  支持类似 SQL 预编译语句的变参列表，方便传入参数：
 </div>
 <div id="20210604111446-p6vadfc" data-node-id="20210604111446-p6vadfc" data-type="NodeCodeBlock" updated="20210604111632" class="code-block">
@@ -296,9 +256,7 @@
 </div>
     </div>
 <div id="20210104091309-l9wcdtk" data-node-id="20210104091309-l9wcdtk" data-type="NodeParagraph" updated="20210428221604" class="p">在光标插入符位置，通过 
-<span data-type="NodeTextMark" data-type="code"
-        >/</span
-      >
+<span data-type="code">/</span>
  选择模板来触发模板搜索，找到需要插入的模板后回车即可。
 </div>
 <div id="20210104091309-2p68yju" data-node-id="20210104091309-2p68yju" data-type="NodeHeading" data-subtype="h2" class="h2">
@@ -325,13 +283,9 @@
 * 距离 `2048-02-19` 还剩 `.action{$after}` 天
 </div>
       </div>
-<div id="20210104091309-06sv04x" data-node-id="20210104091309-06sv04x" data-type="NodeParagraph" class="p"><span data-type="NodeTextMark" data-type="code"
-        >$before</span
-      >
+<div id="20210104091309-06sv04x" data-node-id="20210104091309-06sv04x" data-type="NodeParagraph" class="p"><span data-type="code">$before</span>
  和 
-<span data-type="NodeTextMark" data-type="code"
-        >$after</span
-      >
+<span data-type="code">$after</span>
  定义了两个变量，分别记录当前日期距离 2020 年和 2048 年的天数。
 </div>
 <div id="20210131162925-p51ey8q" data-node-id="20210131162925-p51ey8q" data-type="NodeHeading" data-subtype="h2" class="h2">
@@ -342,6 +296,7 @@
 <a href="https://b3log.org/siyuan/community.html">社区集市仓库</a>
 。
 </div>
+
 
         </div>
         <footer>
