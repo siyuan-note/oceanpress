@@ -39,12 +39,29 @@ export function getDocByChildID(id: string) {
   } else if (node.Parent?.ID === undefined) {
     return undefined;
   } else {
-    return getDocByChildID(node.Parent?.ID);
+    return getDocByChildID(node.Parent.ID);
   }
 }
+/** @returns /测试/布局/flex */
 export function getHPathByID_Node(id_node: string | S_Node) {
-  let node = typeof id_node === "string" ? getNodeByID(id_node) : id_node;
-  return getDocPathBySY(node)?.slice(0, -3);
+  const doc = getDocByChildID(typeof id_node === "string" ? id_node : id_node.ID!);
+  const path = getDocPathBySY(doc)!;
+  const r = path.matchAll(/\d{14}-[0-9a-zA-Z]+/g);
+  /** 第一个是 笔记本 的id，跳过不用  */
+  r.next();
+  const hpath =
+    "/" +
+    [...r]
+      .map(([id]) => {
+        const title = getDocByChildID(id)?.Properties?.title;
+        if (title === undefined) {
+          throw `无法设置空路径 ${id}`;
+        }
+        return title;
+      })
+      .join("/");
+
+  return hpath;
 }
 
 /** 处理一个原始的 sy 根节点 */
