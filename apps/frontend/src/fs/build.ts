@@ -11,13 +11,13 @@ export interface docTree {
 }
 
 export async function* build(
-  book: notebook,
   config = currentConfig.value,
   otherConfig?: {
     /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
     dir_ref: any;
   },
 ) {
+  const book = config.notebook;
   const docTree = {} as docTree;
   const emit = {
     log(_s: string) {},

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import { usePromiseComputed } from "@/components/data_promise";
   import { vApi } from "@/fs/siyuan_api";
-  import { notebook } from "@/fs/siyuan_type";
   import { computed, ref } from "vue";
   import { currentConfig } from "@/config/";
   import { NSteps, NStep, NButton, NInputGroup, NInput, NAlert } from "naive-ui";
@@ -11,14 +9,13 @@
   import Step2_preview from "./step2_preview.vue";
   import Step4_generate from "./step4_generate.vue";
   import Step3_config from "./step3_config.vue";
+  import Config_tab from "@/config/config_tab.vue";
 
   const _notebooks = vApi.notebook_lsNotebooks();
-  const currentNoteBook = usePromiseComputed<notebook>({});
-
   const current = computed(() => {
     let i = 0;
     if (_notebooks.value.fulfilled) i = 2;
-    if (currentNoteBook.value.fulfilled) i = 5;
+    i = 5;
     return i;
   });
 
@@ -27,15 +24,10 @@
   const log = ref("");
 
   const docTree = ref<docTree>({});
-  async function genHTML(
-    book: notebook,
-    config?: {
-      dir_ref: any;
-    },
-  ) {
+  async function genHTML(config?: { dir_ref: any }) {
     genHTML_status.value = true;
     log.value = "";
-    const res = build(book, currentConfig.value,config);
+    const res = build(currentConfig.value, config);
     const emitRes = res.next();
     const emit = (await emitRes).value;
     if (emit instanceof Object) {
@@ -57,6 +49,7 @@
 </script>
 
 <template>
+  <Config_tab></Config_tab>
   <NSteps vertical :current="(current as number)" :status="'process'">
     <NStep title="鉴权配置">
       <NInputGroup>
@@ -81,18 +74,14 @@
         例如本页面在没有授权的情况下获取到了您的笔记本名称，事实上可以读取siyuan的任意内容。
       </NAlert>
     </NStep>
-    <Step1_selectNote
-      v-if="_notebooks.fulfilled"
-      :notebooks="_notebooks.data.notebooks"
-      @update="currentNoteBook.setValue"
-    />
-    <Step2_preview :notebook="currentNoteBook.data" />
+    <Step1_selectNote v-if="_notebooks.fulfilled" :notebooks="_notebooks.data.notebooks" />
+    <Step2_preview />
     <Step3_config />
     <Step4_generate
       :percentage="percentage"
       :log="log"
-      @generate-click="genHTML(currentNoteBook.data)"
-      @save-to-disk="(dir_ref) => genHTML(currentNoteBook.data, { dir_ref })"
+      @generate-click="genHTML"
+      @save-to-disk="(dir_ref) => genHTML({ dir_ref })"
     />
   </NSteps>
 </template>
