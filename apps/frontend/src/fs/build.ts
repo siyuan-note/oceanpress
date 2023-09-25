@@ -3,7 +3,7 @@ import { htmlTemplate } from "./htmlTemplate";
 import { getSyByPath } from "./node";
 import { renderHTML } from "./render";
 import { API } from "./siyuan_api";
-import { DB_block, DB_block_path, S_Node, notebook } from "./siyuan_type";
+import { DB_block, DB_block_path, S_Node } from "./siyuan_type";
 import JSZip from "jszip";
 
 export interface docTree {
