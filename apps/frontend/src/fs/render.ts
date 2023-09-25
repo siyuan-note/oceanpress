@@ -1,4 +1,4 @@
-import { getNodeByID, getDocPathBySY, getDocByChildID } from "./node";
+import { getNodeByID, getDocPathBySY, getDocByChildID, getHPathByID_Node } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
 
@@ -242,20 +242,18 @@ ${await childRender(sy, this)}
         return `${content}<sup>（${sy.TextMarkInlineMemoContent}）</sup>`;
       } else if (type === "block-ref" /** 引用块 */) {
         let href = "";
-        debugger
         if (sy.TextMarkBlockRefID) {
           const doc = getDocByChildID(sy.TextMarkBlockRefID);
           if (doc?.ID) {
-            href = `${await that.getTopPathPrefix()}${await API.filetree_getHPathByID({
-              id: doc.ID /** 要先定位到文档，再通过下面的hash（#）定位到具体元素 */,
-            })}.html#${sy.TextMarkBlockRefID}`;
+            href = `${await that.getTopPathPrefix()}${getHPathByID_Node(
+              doc /** 要先定位到文档，再通过下面的hash（#）定位到具体元素 */,
+            )}.html#${sy.TextMarkBlockRefID}`;
           } else {
             console.log("未定义顶层元素非 NodeDocument 时的处理方式", sy);
           }
         } else {
           console.log("未查找到所指向的文档节点", sy);
         }
-
 
         return `<span data-type="${sy.TextMarkType}" \
     data-subtype="${/** "s" */ sy.TextMarkBlockRefSubtype}" \
@@ -336,7 +334,6 @@ ${await childRender(sy, this)}
       const node = await getNodeByID(block.id);
       if (node === undefined) {
         // 一般来说是跨笔记引用
-        // TODO 待处理跨笔记引用问题
         console.log("跨笔记引用", block.id, sql, node);
         return `<div class="ft__smaller ft__secondary b3-form__space--small">跨笔记引用</div>`;
       }

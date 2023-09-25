@@ -9,7 +9,9 @@ import { S_Node } from "./siyuan_type";
 const allDocSY = new Map</** 文件路径.sy */ string, S_Node>();
 /** 在 node 函数中管理 */
 const id_Node = new Map</** id */ string, S_Node>();
-export function getDocPathBySY(sy: S_Node) {
+
+/** 文件路径.sy */
+export function getDocPathBySY(sy?: S_Node) {
   for (const [path, SY] of allDocSY) {
     if (SY === sy) {
       return path;
@@ -39,6 +41,10 @@ export function getDocByChildID(id: string) {
   } else {
     return getDocByChildID(node.Parent?.ID);
   }
+}
+export function getHPathByID_Node(id_node: string | S_Node) {
+  let node = typeof id_node === "string" ? getNodeByID(id_node) : id_node;
+  return getDocPathBySY(node)?.slice(0, -3);
 }
 
 /** 处理一个原始的 sy 根节点 */

@@ -82,22 +82,22 @@ export async function* build(
   yield `=== 渲染文档完成 ===`;
   if (config.excludeAssetsCopy === false) {
     yield `=== 开始复制资源文件 ===`;
-    const assets: DB_block[] = await API.query_sql({
+    const assets: { box: string; docpath: string; path: string }[] = await API.query_sql({
       stmt: `SELECT *
     from assets
     WHERE box = '${book.id}'
     limit 1500 OFFSET 0`,
     });
-    for (let i = 0; i < assets.length; i++) {
-      const item = assets[i];
-      const r = (await API.file_getFile({
-        path: `data/${book.id}/${item.path}`,
-      })) as ArrayBuffer;
-      docHTML[item.path] = r;
-    }
+    await Promise.allSettled(
+      assets.map(async (item) => {
+        docHTML[item.path] = await API.get_assets({
+          path: item.path,
+        });
+      }),
+    );
   }
 
-  yield `=== 开始输出文件 ===`;
+  // yield `=== 开始输出文件 ===`;
   if (otherConfig?.dir_ref) {
     await writeFileSystem(docHTML, otherConfig.dir_ref);
   }
@@ -145,16 +145,11 @@ async function writeFileSystem(
   /** 并发写文件 */
   await Promise.all(
     Object.entries(docTree).map(async ([path, html]) => {
-      await writeFile(dir_ref, path, html);
+      await writeFile(dir_ref, path, html).catch((e) => {
+        console.log(e, dir_ref);
+      });
     }),
   );
-  // for (const [path, html] of Object.entries(docTree)) {
-  //   try {
-  //     await writeFile(dir_ref, path, html);
-  //   } catch (error) {
-  //     console.log("写文件失败", path, error);
-  //   }
-  // }
   async function writeFile(dir_ref: any, name: string, data: string | ArrayBuffer) {
     const pathArr = name.split("/");
     /** 如果路径中的目录不存在则创建 */

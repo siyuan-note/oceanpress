@@ -42,6 +42,7 @@ export interface api {
   }): any[];
   // TODO 考虑增加缓存，因为嵌入块等原因可能会反复调用这个
   file_getFile(p: { path: string }): S_Node | ArrayBuffer;
+  get_assets(p: { path: string }): ArrayBuffer;
 }
 type apiPromisify = {
   readonly [K in keyof api]: (...arg: Parameters<api[K]>) => Promise<unPromise<ReturnType<api[K]>>>;
@@ -51,7 +52,15 @@ type apiPromisify = {
 declare type unPromise<T> = T extends Promise<infer R> ? R : T;
 
 async function rpc(method: string, arg: any) {
-  const res = await fetch(`http://127.0.0.1:6806/api/${method.replace(/_/g, "/")}`, {
+  const apiPrefix = "http://127.0.0.1:6806";
+  if (method === "get_assets") {
+    return fetch(`${apiPrefix}/${arg[0].path}`, {
+      body: null,
+      method: "GET",
+      mode: "cors",
+    }).then((r) => r.arrayBuffer());
+  }
+  const res = await fetch(`${apiPrefix}/api/${method.replace(/_/g, "/")}`, {
     headers: {
       Authorization: `Token ${Authorization}`,
     },
@@ -63,7 +72,15 @@ async function rpc(method: string, arg: any) {
     if (path.endsWith(".sy")) {
       return await res.json();
     } else {
-      return await res.arrayBuffer();
+      const buffer = await res.arrayBuffer();
+      if (buffer.byteLength < 200) {
+        const decoder = new TextDecoder();
+        const text = decoder.decode(buffer);
+        if (JSON.parse(text).code === 404) {
+          throw new Error(`文件不存在: ${path}`);
+        }
+      }
+      return buffer;
     }
   }
   const json = await res.json();

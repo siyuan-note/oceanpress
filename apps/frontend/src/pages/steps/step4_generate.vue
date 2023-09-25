@@ -38,10 +38,11 @@
   const isShowDirectoryPickerSupported = computed(() => {
     return "showDirectoryPicker" in globalThis;
   });
+
   /** 此为实验性api */
   async function saveToDisk() {
     //@ts-ignore
-    const dir_ref = await showDirectoryPicker();
+    const dir_ref = await showDirectoryPicker({ mode: "readwrite" });
     if (!dir_ref) {
       console.log("showDirectoryPicker() 未返回有效值");
 
