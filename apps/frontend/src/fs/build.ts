@@ -75,24 +75,37 @@ export async function* build(
     } catch (error) {
       console.log(path, "渲染失败", error);
     }
-
     process(i / arr.length);
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
   if (config.excludeAssetsCopy === false) {
     yield `=== 开始复制资源文件 ===`;
-    const assets: { box: string; docpath: string; path: string }[] = await API.query_sql({
-      stmt: `SELECT *
-    from assets
-    WHERE box = '${book.id}'
-    limit 1500 OFFSET 0`,
-    });
+    const assets: { box: string; docpath: string; path: string; hash: string; id: string }[] =
+      await API.query_sql({
+        stmt: `SELECT *
+                from assets
+                WHERE box = '${book.id}'
+                limit 1500 OFFSET 0`,
+      });
     await Promise.allSettled(
       assets.map(async (item) => {
-        docHTML[item.path] = await API.get_assets({
-          path: item.path,
-        });
+        if (config.enableIncrementalCompilation) {
+          if (config.__skipBuilds__[item.id]?.hash === item.hash) {
+            return /** skip */;
+          }
+          docHTML[item.path] = await API.get_assets({
+            path: item.path,
+          });
+          if (config.__skipBuilds__[item.id] === undefined) {
+            config.__skipBuilds__[item.id] = {};
+          }
+          config.__skipBuilds__[item.id]!.hash = item.hash;
+        } else {
+          docHTML[item.path] = await API.get_assets({
+            path: item.path,
+          });
+        }
       }),
     );
   }

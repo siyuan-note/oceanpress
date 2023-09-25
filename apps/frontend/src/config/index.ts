@@ -16,6 +16,12 @@ export const configs = reactive({
     withoutPublicZip: true,
     /** 不复制 assets/ ，勾选此选项则需要自行处理资源文件 */
     excludeAssetsCopy: false,
+    /** 开启增量编译，当开启增量编译时，
+     * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容
+     */
+    enableIncrementalCompilation: false,
+    /** 跳过编译的资源 */
+    __skipBuilds__: {} as { [id: string]: { hash?: string } | undefined },
 
     cdn: {
       /** 思源 js、css等文件的前缀 */
@@ -25,7 +31,6 @@ export const configs = reactive({
       publicZip:
         "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip",
     },
-
   },
 });
 
