@@ -6,8 +6,11 @@ import { API } from "./siyuan_api";
 import { DB_block, DB_block_path, S_Node } from "./siyuan_type";
 import JSZip from "jszip";
 
-export interface docTree {
-  [docPath: string]: { sy: S_Node };
+export interface DocTree {
+  [/** "/计算机基础课/自述" */ docPath: string]: { sy: S_Node };
+}
+interface FileTree {
+  [path: string]: string | ArrayBuffer;
 }
 
 export async function* build(
@@ -18,7 +21,7 @@ export async function* build(
   },
 ) {
   const book = config.notebook;
-  const docTree = {} as docTree;
+  const docTree: DocTree = {};
   const emit = {
     log(_s: string) {},
     percentage(_n: number) {},
@@ -57,14 +60,14 @@ export async function* build(
     process(i / r.length);
     yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
   }
-  const docHTML = {} as { [htmlPath: string]: string | ArrayBuffer };
+  const fileTree: FileTree = {};
 
   process = processPercentage(0.4);
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy }] = arr[i];
     try {
-      docHTML[path + ".html"] = await htmlTemplate(
+      fileTree[path + ".html"] = await htmlTemplate(
         {
           title: sy.Properties?.title || "",
           htmlContent: await renderHTML(sy),
@@ -82,6 +85,10 @@ export async function* build(
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
+  if (config.sitemap.enable) {
+    yield `=== 开始生成 sitemap.xml ===`;
+    fileTree["sitemap.xml"] = sitemap_xml(docTree, { sitePrefix: "." });
+  }
   if (config.excludeAssetsCopy === false) {
     yield `=== 开始复制资源文件 ===`;
     const assets: { box: string; docpath: string; path: string; hash: string; id: string }[] =
@@ -97,7 +104,7 @@ export async function* build(
           if (config.__skipBuilds__[item.id]?.hash === item.hash) {
             return /** skip */;
           }
-          docHTML[item.path] = await API.get_assets({
+          fileTree[item.path] = await API.get_assets({
             path: item.path,
           });
           if (config.__skipBuilds__[item.id] === undefined) {
@@ -105,7 +112,7 @@ export async function* build(
           }
           config.__skipBuilds__[item.id]!.hash = item.hash;
         } else {
-          docHTML[item.path] = await API.get_assets({
+          fileTree[item.path] = await API.get_assets({
             path: item.path,
           });
         }
@@ -113,12 +120,14 @@ export async function* build(
     );
   }
 
-  // yield `=== 开始输出文件 ===`;
+  // === 输出编译成果 ===
   if (otherConfig?.dir_ref) {
-    await writeFileSystem(docHTML, otherConfig.dir_ref);
+    yield `=== 开始写文件到磁盘 ===`;
+    await writeFileSystem(fileTree, otherConfig.dir_ref);
   }
   if (config.compressedZip) {
-    await downloadZIP(docHTML, {
+    yield `=== 开始生成压缩包 ===`;
+    await downloadZIP(fileTree, {
       withoutZip: config.withoutPublicZip,
       publicZip: config.cdn.publicZip,
     });
@@ -146,7 +155,7 @@ export async function downloadZIP(
       // 将ZIP文件保存为下载
       const link = document.createElement("a");
       link.href = URL.createObjectURL(content);
-      link.download = "notebook.zip";
+      link.download = `notebook.zip`;
       link.click();
     })
     .catch((error) => {
@@ -184,4 +193,26 @@ async function writeFileSystem(
     await new_file_writer.write(data);
     await new_file_writer.close();
   }
+}
+
+function sitemap_xml(
+  tree: DocTree,
+  config: {
+    sitePrefix: string;
+  },
+) {
+  const urlList = Object.entries(tree).map(([path, { sy }]) => {
+    let lastmod = "";
+    const time = sy.Properties?.updated ?? sy.ID;
+    if (time) {
+      lastmod = `\n<lastmod>${time.slice(0, 4)}-${time.slice(4, 6)}-${time.slice(6, 8)}</lastmod>`;
+    }
+    return `<url>
+<loc>${config.sitePrefix}${path}.html</loc>${lastmod}
+</url>\n`;
+  });
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlList}
+</urlset>`;
 }

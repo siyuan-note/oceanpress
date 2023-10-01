@@ -1,10 +1,12 @@
-import { computed, reactive, watch, watchEffect } from "vue";
+import { computed, isReadonly, reactive, readonly, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
 import { setAuthorizedToken } from "@/fs/siyuan_api";
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
-const defaultConfig = {
+const defaultConfig = readonly({
   name: "default",
+  /** 需要编译的笔记本 */
   notebook: {} as notebook,
+  /** 思源的鉴权key */
   authorized: "",
   /** 打包成 zip */
   compressedZip: true,
@@ -12,6 +14,11 @@ const defaultConfig = {
   withoutPublicZip: true,
   /** 不复制 assets/ ，勾选此选项则需要自行处理资源文件 */
   excludeAssetsCopy: false,
+  /** 输出 sitemap.xml */
+  sitemap: {
+    /** 控制是否输出 sitemap.xml */
+    enable: true,
+  },
   /** 开启增量编译，当开启增量编译时，
    * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容
    */
@@ -40,13 +47,15 @@ const defaultConfig = {
 </p>
 </footer>`,
   },
-};
+});
 export const configs = reactive({
+  /** 当前所使用的配置项的 key */
   __current__: "default" as const,
   /** 为true是表示是代码中设置的默认值，不会保存到本地，避免覆盖之前保存的数据，在加载本地配置后会自动修改为false */
   __init__: true,
   default: deepAssign<typeof defaultConfig>({}, defaultConfig),
 });
+
 export function addConfig(name: string, value?: typeof defaultConfig) {
   configs[name as "default"] = deepAssign<typeof defaultConfig>({}, value ?? defaultConfig);
 }
@@ -55,8 +64,15 @@ export const loadConfig = () => {
   // TODO 在node.js环境下需要额外处理
   const localConfig = localStorage.getItem("configs");
   if (localConfig) {
+    /** 从本地存储加载配置 */
     deepAssign(configs, JSON.parse(localConfig));
   }
+  Object.entries(configs)
+    .filter(([key]) => key.startsWith("__") === false)
+    .forEach(([_key, obj]) => {
+      /** 将可能新增的新配置项更新到旧配置上 */
+      deepAssign(obj, defaultConfig, { update: false, add: true });
+    });
 };
 
 export const saveConfig = () => {
@@ -83,20 +99,29 @@ watch(configs, debounceSaveConfig, { deep: true });
 loadConfig();
 configs.__init__ = false;
 
-function deepAssign<T>(target: any, source: any): T {
+function deepAssign<T>(target: any, source: any, config = { add: true, update: true }): T {
+  if (isReadonly(target)) {
+    debugger;
+  }
+
   for (let key in source) {
     if (source.hasOwnProperty(key)) {
       if (source[key] instanceof Object && !Array.isArray(source[key])) {
         // 如果属性是对象且不是数组，则递归执行深度合并
         if (!target.hasOwnProperty(key)) {
-          // 如果目标对象没有该属性，直接赋值
-          target[key] = source[key];
-        } else {
-          deepAssign(target[key], source[key]);
+          // 目标对象不存在该属性则创建空对象
+          target[key] = {};
         }
+        deepAssign(target[key], source[key]);
       } else {
         // 如果属性不是对象或者是数组，则直接赋值
-        target[key] = source[key];
+        if (!target.hasOwnProperty(key) && config.add) {
+          // 目标属性不存在属于新增
+          target[key] = source[key];
+        } else if (config.update) {
+          // 更新
+          target[key] = source[key];
+        }
       }
     }
   }

@@ -4,7 +4,7 @@
   import { currentConfig } from "@/config/";
   import { NSteps, NStep, NButton, NInputGroup, NInput, NAlert } from "naive-ui";
   import { build } from "@/fs/build";
-  import { docTree } from "@/fs/build";
+  import { DocTree } from "@/fs/build";
   import Step1_selectNote from "./step1_selectNote.vue";
   import Step2_preview from "./step2_preview.vue";
   import Step4_generate from "./step4_generate.vue";
@@ -23,7 +23,7 @@
   const genHTML_status = ref(false);
   const log = ref("");
 
-  const docTree = ref<docTree>({});
+  const docTree = ref<DocTree>({});
   async function genHTML(config?: { dir_ref: any }) {
     genHTML_status.value = true;
     log.value = "";

@@ -1,3 +1,4 @@
+import { escaping } from "@/util/escaping";
 import { getNodeByID, getDocPathBySY, getDocByChildID, getHPathByID_Node } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
@@ -349,13 +350,9 @@ ${await childRender(sy, this)}
   NodeCodeBlock: async (sy) => {
     const [yes, _] = isRenderCode(sy);
     if (yes) {
-      return `<div ${strAttr(sy)} data-content="${(
-        sy.Children?.find((el) => el.Type === "NodeCodeBlockCode")?.Data ?? ""
-      )
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")}">
+      return `<div ${strAttr(sy)} data-content="${escaping(
+        sy.Children?.find((el) => el.Type === "NodeCodeBlockCode")?.Data ?? "",
+      )}">
         <div spin="1"></div>
         <div class="protyle-attr" contenteditable="false"></div>
       </div>`;

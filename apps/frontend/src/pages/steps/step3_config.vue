@@ -17,6 +17,8 @@
           不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
         </NCheckbox>
         <NDivider />
+        <NCheckbox v-model:checked="currentConfig.sitemap.enable"> 输出 setmap.xml 文件 </NCheckbox>
+        <NDivider />
         <NCheckbox v-model:checked="currentConfig.enableIncrementalCompilation">
           开启增量编译，当开启增量编译时，<br />
           会根据配置文件中的__skipBuilds__字段跳过一些没有变化不需要重新输出的内容<br />
