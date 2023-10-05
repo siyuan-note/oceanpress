@@ -56,20 +56,12 @@ export async function* build(
   yield `=== 查询文档级block完成 ===`;
   for (let i = 0; i < Doc_blocks.length; i++) {
     const docBlock = Doc_blocks[i];
-    /** TODO 由于查询引用的存在，坑定渲染有bug,需要考虑一下如何解决 */
-    if (
-      config.enableIncrementalCompilation &&
-      /** 资源没有变化，直接跳过 */
-      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash
-    ) {
-      continue; /** skip */
-    } else {
-      const path = DB_block_path(docBlock);
-      const sy = await getSyByPath(path);
-      docTree[docBlock.hpath] = { sy, docBlock };
-      process(i / Doc_blocks.length);
-      yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
-    }
+
+    const path = DB_block_path(docBlock);
+    const sy = await getSyByPath(path);
+    docTree[docBlock.hpath] = { sy, docBlock };
+    process(i / Doc_blocks.length);
+    yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
   }
   const fileTree: FileTree = {};
 
@@ -77,25 +69,35 @@ export async function* build(
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy, docBlock }] = arr[i];
-    try {
-      fileTree[path + ".html"] = await htmlTemplate(
-        {
-          title: sy.Properties?.title || "",
-          htmlContent: await renderHTML(sy),
-          level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
-        },
-        {
-          ...config.cdn,
-          embedCode: config.embedCode,
-        },
-      );
-      if (config.enableIncrementalCompilation) {
-        skipBuilds.add(docBlock.id, { hash: docBlock.hash });
+    /** TODO 由于查询引用的存在，这个还不能跳过 sy 文件的加载，所以得放这而不是生成 docTree 那里，
+     * 以后可以优化一下减少 sy 文件的读取
+      */
+    if (
+      config.enableIncrementalCompilation &&
+      /** 资源没有变化，直接跳过 */
+      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash
+    ) {
+      continue; /** skip */
+    } else {
+      try {
+        fileTree[path + ".html"] = await htmlTemplate(
+          {
+            title: sy.Properties?.title || "",
+            htmlContent: await renderHTML(sy),
+            level: path.split("/").length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
+          },
+          {
+            ...config.cdn,
+            embedCode: config.embedCode,
+          },
+        );
+        if (config.enableIncrementalCompilation) {
+          skipBuilds.add(docBlock.id, { hash: docBlock.hash });
+        }
+      } catch (error) {
+        console.log(path, "渲染失败", error);
       }
-    } catch (error) {
-      console.log(path, "渲染失败", error);
     }
-
     process(i / arr.length);
     yield `渲染： ${path}`;
   }
