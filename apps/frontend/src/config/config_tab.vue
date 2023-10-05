@@ -1,6 +1,16 @@
 <script setup lang="ts">
-  import { NButton, NCard, NInput, NModal, NTabPane, NTabs, useMessage } from "naive-ui";
-  import { configs, addConfig } from ".";
+  import {
+    NButton,
+    NCard,
+    NDivider,
+    NInput,
+    NModal,
+    NSpace,
+    NTabPane,
+    NTabs,
+    useMessage,
+  } from "naive-ui";
+  import { configs, addConfig, loadConfigFile } from ".";
   import { computed, ref } from "vue";
   const message = useMessage();
 
@@ -38,6 +48,36 @@
     }
     return true;
   }
+  function downConfig() {
+    const text = JSON.stringify(configs, null, 2); // 要转换的字符串
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
+    const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `oceanpress.json`;
+    link.click();
+  }
+  async function importConfig() {
+    const fileInput: HTMLInputElement = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.click();
+
+    const file: File = await new Promise((resolve) => {
+      fileInput.addEventListener("change", () => {
+        resolve(fileInput.files![0]);
+      });
+    });
+
+    const contents = await file.text();
+    const config = JSON.parse(contents);
+    if (typeof config === "object") {
+      console.log(config);
+
+      loadConfigFile(config);
+      message.success("导入成功");
+    }
+  }
 </script>
 <template>
   <NTabs
@@ -51,6 +91,11 @@
   >
     <NTabPane :name="el.key" :tab="el.key" v-for="el of tabs"> {{ el.key }} </NTabPane>
   </NTabs>
+  <NDivider></NDivider>
+  <NSpace direction="vertical">
+    <NButton @click="importConfig"><template #icon>🔄</template>导入配置文件</NButton>
+    <NButton @click="downConfig"><template #icon>📝</template>导出配置文件</NButton>
+  </NSpace>
   <NModal v-model:show="showModal">
     <NCard
       style="width: 600px"

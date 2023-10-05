@@ -17,12 +17,18 @@
           不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
         </NCheckbox>
         <NDivider />
-        <NCheckbox v-model:checked="currentConfig.sitemap.enable"> 输出 setmap.xml 文件 </NCheckbox>
+        <NCheckbox v-model:checked="currentConfig.sitemap.enable"> 输出 setmap.xml 文件 </NCheckbox
+        ><br />
+        <h4>路径前缀</h4>
+        <NInput v-model:value="currentConfig.sitemap.sitePrefix"> </NInput>
+        默认值为 "." 生成路径例如 "./record/思源笔记.html" <br />
+        但 sitemap 并不建议采用相对路径所以应该替换成例如 "https://shenzilong.cn" <br />
+        则会生成 "https://shenzilong.cn/record/思源笔记.html" 这样的绝对路径 <br />
+        参见 https://www.sitemaps.org/protocol.html#escaping
         <NDivider />
         <NCheckbox v-model:checked="currentConfig.enableIncrementalCompilation">
-          开启增量编译，当开启增量编译时，<br />
+          开启增量编译，当资源的 hash 值没有变化时不会编译<br />
           会根据配置文件中的__skipBuilds__字段跳过一些没有变化不需要重新输出的内容<br />
-          目前可以跳过的有 assets/ 资源，当资源的 hash 值没有变化时不会再次输出
         </NCheckbox>
         <NDivider />
         <h3>head</h3>

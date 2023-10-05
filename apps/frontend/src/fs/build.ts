@@ -5,9 +5,10 @@ import { renderHTML } from "./render";
 import { API } from "./siyuan_api";
 import { DB_block, DB_block_path, S_Node } from "./siyuan_type";
 import JSZip from "jszip";
+import { deepAssign } from "@/util/deep_assign";
 
 export interface DocTree {
-  [/** "/计算机基础课/自述" */ docPath: string]: { sy: S_Node };
+  [/** "/计算机基础课/自述" */ docPath: string]: { sy: S_Node; docBlock: DB_block };
 }
 interface FileTree {
   [path: string]: string | ArrayBuffer;
@@ -22,6 +23,7 @@ export async function* build(
 ) {
   const book = config.notebook;
   const docTree: DocTree = {};
+  const skipBuilds = useSkipBuilds();
   const emit = {
     log(_s: string) {},
     percentage(_n: number) {},
@@ -42,7 +44,7 @@ export async function* build(
   let process = processPercentage(0.4);
   /** 查询所有文档级block */
   // TODO 需要更换成能够完全遍历一个笔记本的写法
-  const r: DB_block[] = await API.query_sql({
+  const Doc_blocks: DB_block[] = await API.query_sql({
     stmt: `
     SELECT *
     from blocks
@@ -52,20 +54,29 @@ export async function* build(
   `,
   });
   yield `=== 查询文档级block完成 ===`;
-  for (let i = 0; i < r.length; i++) {
-    const docBlock = r[i];
-    const path = DB_block_path(docBlock);
-    const sy = await getSyByPath(path);
-    docTree[docBlock.hpath] = { sy };
-    process(i / r.length);
-    yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
+  for (let i = 0; i < Doc_blocks.length; i++) {
+    const docBlock = Doc_blocks[i];
+    /** TODO 由于查询引用的存在，坑定渲染有bug,需要考虑一下如何解决 */
+    if (
+      config.enableIncrementalCompilation &&
+      /** 资源没有变化，直接跳过 */
+      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash
+    ) {
+      continue; /** skip */
+    } else {
+      const path = DB_block_path(docBlock);
+      const sy = await getSyByPath(path);
+      docTree[docBlock.hpath] = { sy, docBlock };
+      process(i / Doc_blocks.length);
+      yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
+    }
   }
   const fileTree: FileTree = {};
 
   process = processPercentage(0.4);
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
-    const [path, { sy }] = arr[i];
+    const [path, { sy, docBlock }] = arr[i];
     try {
       fileTree[path + ".html"] = await htmlTemplate(
         {
@@ -78,16 +89,20 @@ export async function* build(
           embedCode: config.embedCode,
         },
       );
+      if (config.enableIncrementalCompilation) {
+        skipBuilds.add(docBlock.id, { hash: docBlock.hash });
+      }
     } catch (error) {
       console.log(path, "渲染失败", error);
     }
+
     process(i / arr.length);
     yield `渲染： ${path}`;
   }
   yield `=== 渲染文档完成 ===`;
   if (config.sitemap.enable) {
     yield `=== 开始生成 sitemap.xml ===`;
-    fileTree["sitemap.xml"] = sitemap_xml(docTree, { sitePrefix: "." });
+    fileTree["sitemap.xml"] = sitemap_xml(Doc_blocks, config.sitemap);
   }
   if (config.excludeAssetsCopy === false) {
     yield `=== 开始复制资源文件 ===`;
@@ -100,21 +115,19 @@ export async function* build(
       });
     await Promise.allSettled(
       assets.map(async (item) => {
-        if (config.enableIncrementalCompilation) {
-          if (config.__skipBuilds__[item.id]?.hash === item.hash) {
-            return /** skip */;
-          }
-          fileTree[item.path] = await API.get_assets({
-            path: item.path,
-          });
-          if (config.__skipBuilds__[item.id] === undefined) {
-            config.__skipBuilds__[item.id] = {};
-          }
-          config.__skipBuilds__[item.id]!.hash = item.hash;
+        if (
+          config.enableIncrementalCompilation &&
+          /** 资源没有变化，直接跳过 */
+          config.__skipBuilds__[item.id]?.hash === item.hash
+        ) {
+          return /** skip */;
         } else {
           fileTree[item.path] = await API.get_assets({
             path: item.path,
           });
+          if (config.enableIncrementalCompilation) {
+            skipBuilds.add(item.id, { hash: item.hash });
+          }
         }
       }),
     );
@@ -132,7 +145,8 @@ export async function* build(
       publicZip: config.cdn.publicZip,
     });
   }
-
+  /** 更新跳过编译的资源 */
+  skipBuilds.write();
   emit.percentage(100);
   yield "ok";
 }
@@ -196,23 +210,44 @@ async function writeFileSystem(
 }
 
 function sitemap_xml(
-  tree: DocTree,
+  docArr: DB_block[],
   config: {
     sitePrefix: string;
   },
 ) {
-  const urlList = Object.entries(tree).map(([path, { sy }]) => {
-    let lastmod = "";
-    const time = sy.Properties?.updated ?? sy.ID;
-    if (time) {
-      lastmod = `\n<lastmod>${time.slice(0, 4)}-${time.slice(4, 6)}-${time.slice(6, 8)}</lastmod>`;
-    }
-    return `<url>
-<loc>${config.sitePrefix}${path}.html</loc>${lastmod}
+  const urlList: string = docArr
+    .map((doc) => {
+      let lastmod = "";
+      const time = doc.ial.match(/updated=\"(\d+)\"/)?.[1] ?? doc.created;
+      if (time) {
+        lastmod = `\n<lastmod>${time.slice(0, 4)}-${time.slice(4, 6)}-${time.slice(
+          6,
+          8,
+        )}</lastmod>`;
+      }
+      return `<url>
+<loc>${config.sitePrefix}${doc.hpath}.html</loc>${lastmod}
 </url>\n`;
-  });
+    })
+    .join("");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlList}
 </urlset>`;
+}
+
+function useSkipBuilds() {
+  const obj: { [k: string]: { hash?: string } } = {};
+  return {
+    add(id: string, value: { hash?: string }) {
+      if (obj[id] === undefined) {
+        obj[id] = {};
+      }
+      deepAssign(obj[id], value);
+    },
+    /** 将缓存的写入到配置文件 */
+    write() {
+      deepAssign(currentConfig.value.__skipBuilds__, obj);
+    },
+  };
 }

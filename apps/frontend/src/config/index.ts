@@ -1,8 +1,9 @@
-import { computed, isReadonly, reactive, readonly, watch, watchEffect } from "vue";
+import { computed, reactive, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
 import { setAuthorizedToken } from "@/fs/siyuan_api";
+import { deepAssign } from "@/util/deep_assign";
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
-const defaultConfig = readonly({
+const defaultConfig = {
   name: "default",
   /** 需要编译的笔记本 */
   notebook: {} as notebook,
@@ -18,6 +19,12 @@ const defaultConfig = readonly({
   sitemap: {
     /** 控制是否输出 sitemap.xml */
     enable: true,
+    /** 默认为 "." 生成路径例如 "./record/思源笔记.html"
+     * 但 sitemap 并不建议采用相对路径所以应该替换成例如 "https://shenzilong.cn"
+     * 则会生成 "https://shenzilong.cn/record/思源笔记.html" 这样的绝对路径
+     * 参见 https://www.sitemaps.org/protocol.html#escaping
+     */
+    sitePrefix:"."
   },
   /** 开启增量编译，当开启增量编译时，
    * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容
@@ -47,7 +54,7 @@ const defaultConfig = readonly({
 </p>
 </footer>`,
   },
-});
+};
 export const configs = reactive({
   /** 当前所使用的配置项的 key */
   __current__: "default" as const,
@@ -60,29 +67,33 @@ export function addConfig(name: string, value?: typeof defaultConfig) {
   configs[name as "default"] = deepAssign<typeof defaultConfig>({}, value ?? defaultConfig);
 }
 /** 加载配置文件 */
-export const loadConfig = () => {
-  // TODO 在node.js环境下需要额外处理
-  const localConfig = localStorage.getItem("configs");
-  if (localConfig) {
-    /** 从本地存储加载配置 */
-    deepAssign(configs, JSON.parse(localConfig));
+export const loadConfigFile = (c?: typeof configs) => {
+  if (c) {
+    debugger;
+    deepAssign(configs, c);
+  } else {
+    // TODO 在node.js环境下需要额外处理
+    const localConfig = localStorage.getItem("configs");
+    if (localConfig) {
+      /** 从本地存储加载配置 */
+      deepAssign(configs, JSON.parse(localConfig));
+    }
   }
+
   Object.entries(configs)
     .filter(([key]) => key.startsWith("__") === false)
     .forEach(([_key, obj]) => {
-      /** 将可能新增的新配置项更新到旧配置上 */
+      /** 将新增配置项更新到旧配置上 */
       deepAssign(obj, defaultConfig, { update: false, add: true });
     });
 };
+export const currentConfig = computed(() => configs[configs.__current__]);
+
+watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 export const saveConfig = () => {
   if (configs.__init__ === false) localStorage.setItem("configs", JSON.stringify(configs));
 };
-
-export const currentConfig = computed(() => {
-  return configs[configs.__current__];
-});
-watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 let timer: NodeJS.Timeout | null = null;
 /** 防抖的保存配置 */
@@ -96,34 +107,5 @@ export const debounceSaveConfig = () => {
   }, 700);
 };
 watch(configs, debounceSaveConfig, { deep: true });
-loadConfig();
+loadConfigFile();
 configs.__init__ = false;
-
-function deepAssign<T>(target: any, source: any, config = { add: true, update: true }): T {
-  if (isReadonly(target)) {
-    debugger;
-  }
-
-  for (let key in source) {
-    if (source.hasOwnProperty(key)) {
-      if (source[key] instanceof Object && !Array.isArray(source[key])) {
-        // 如果属性是对象且不是数组，则递归执行深度合并
-        if (!target.hasOwnProperty(key)) {
-          // 目标对象不存在该属性则创建空对象
-          target[key] = {};
-        }
-        deepAssign(target[key], source[key]);
-      } else {
-        // 如果属性不是对象或者是数组，则直接赋值
-        if (!target.hasOwnProperty(key) && config.add) {
-          // 目标属性不存在属于新增
-          target[key] = source[key];
-        } else if (config.update) {
-          // 更新
-          target[key] = source[key];
-        }
-      }
-    }
-  }
-  return target;
-}
