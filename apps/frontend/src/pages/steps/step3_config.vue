@@ -17,7 +17,7 @@
           不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
         </NCheckbox>
         <NDivider />
-        <NCheckbox v-model:checked="currentConfig.sitemap.enable"> 输出 setmap.xml 文件 </NCheckbox
+        <NCheckbox v-model:checked="currentConfig.sitemap.enable"> 输出 sitemap.xml 文件 </NCheckbox
         ><br />
         <h4>路径前缀</h4>
         <NInput v-model:value="currentConfig.sitemap.sitePrefix"> </NInput>
