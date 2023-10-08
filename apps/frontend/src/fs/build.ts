@@ -61,7 +61,7 @@ export async function* build(
     const sy = await getSyByPath(path);
     docTree[docBlock.hpath] = { sy, docBlock };
     process(i / Doc_blocks.length);
-    yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
+    // yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
   }
   const fileTree: FileTree = {};
 
@@ -71,7 +71,7 @@ export async function* build(
     const [path, { sy, docBlock }] = arr[i];
     /** TODO 由于查询引用的存在，这个还不能跳过 sy 文件的加载，所以得放这而不是生成 docTree 那里，
      * 以后可以优化一下减少 sy 文件的读取
-      */
+     */
     if (
       config.enableIncrementalCompilation &&
       /** 资源没有变化，直接跳过 */
@@ -95,6 +95,7 @@ export async function* build(
           skipBuilds.add(docBlock.id, { hash: docBlock.hash });
         }
       } catch (error) {
+        yield `${path} 渲染失败:${error}`;
         console.log(path, "渲染失败", error);
       }
     }

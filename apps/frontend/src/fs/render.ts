@@ -1,4 +1,4 @@
-import { escaping } from "@/util/escaping";
+import { escaping, unescaping } from "@/util/escaping";
 import { getNodeByID, getDocPathBySY, getDocByChildID, getHPathByID_Node } from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
@@ -330,7 +330,17 @@ ${await childRender(sy, this)}
       return html`<pre>${sql}</pre>`;
     }
     let htmlStr = "";
-    const blocks: DB_block[] = await API.query_sql({ stmt: sql });
+    const blocks: DB_block[] = await API.query_sql({
+      stmt: /** sql 被思源转义了，类似 ：SELECT * FROM blocks WHERE id = &#39;20201227174241-nxny1tq&#39;
+      所以这里将它转义回来
+      TODO 当用户确实使用了包含转义的字符串时，这个实现是错误的 */ unescaping(sql).replace(
+        /** 我不理解lute为什么这样实现 https://github.com/88250/lute/blob/HEAD/editor/const.go#L38 */
+        /_esc_newline_/g,
+        "\n",
+      ),
+    }).catch((err) => {
+      throw new Error(`sql error: ${err.message}\nrawSql:${sql}\nunescapingSql:${unescaping(sql)}`);
+    });
     for (const block of blocks) {
       const node = await getNodeByID(block.id);
       if (node === undefined) {

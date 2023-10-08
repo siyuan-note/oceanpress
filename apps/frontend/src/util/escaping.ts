@@ -7,3 +7,14 @@ export function escaping(s: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos");
 }
+export function unescaping(s: string) {
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_sub,code) => {
+      return String.fromCharCode(Number(code));
+    });
+}
