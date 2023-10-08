@@ -1,6 +1,6 @@
 # OceanPress
 
-参见 [OceanPress_js 版的开发记录 ](https://ld246.com/article/1693989505448)
+参见 [OceanPress_js 版的开发记录 ](https://shenzilong.cn/%E6%83%B3%E6%B3%95/%E9%A1%B9%E7%9B%AE/OceanPress_js)
 
 [![](https://data.jsdelivr.com/v1/package/gh/siyuan-note/oceanpress/badge?style=rounded)](https://www.jsdelivr.com/package/gh/siyuan-note/oceanpress)
 
