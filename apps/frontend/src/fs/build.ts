@@ -74,6 +74,7 @@ export async function* build(
      */
     if (
       config.enableIncrementalCompilation &&
+      config.enableIncrementalCompilation_doc &&
       /** 资源没有变化，直接跳过 */
       config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash
     ) {
@@ -91,7 +92,7 @@ export async function* build(
             embedCode: config.embedCode,
           },
         );
-        if (config.enableIncrementalCompilation) {
+        if (config.enableIncrementalCompilation && config.enableIncrementalCompilation_doc) {
           skipBuilds.add(docBlock.id, { hash: docBlock.hash });
         }
       } catch (error) {

@@ -175,20 +175,20 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     }
   },
   async NodeDocument(sy) {
-    return `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
-      sy,
-    )}>
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${
+    let html = "";
+    if (/** 只有顶层的文档块才渲染题图 */ this.nodeStack.length === 1) {
+      html += `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
+        sy,
+      )}><div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${
         sy.Properties?.["title-img"]
-      }"/>
-      ${
+      }"/>${
         sy.Properties?.["icon"]
           ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
           : ""
-      }
-</div>
-${await childRender(sy, this)}
-`;
+      }</div>`;
+    }
+    html += await childRender(sy, this);
+    return html;
   },
   async NodeHeading(sy) {
     return html`<div ${strAttr(sy)}>
@@ -334,7 +334,9 @@ ${await childRender(sy, this)}
       stmt: /** sql 被思源转义了，类似 ：SELECT * FROM blocks WHERE id = &#39;20201227174241-nxny1tq&#39;
       所以这里将它转义回来
       TODO 当用户确实使用了包含转义的字符串时，这个实现是错误的 */ unescaping(sql).replace(
-        /** 我不理解lute为什么这样实现 https://github.com/88250/lute/blob/HEAD/editor/const.go#L38 */
+        /** 我不理解lute为什么这样实现 https://github.com/88250/lute/blob/HEAD/editor/const.go#L38
+         * https://ld246.com/article/1696750832289
+         */
         /_esc_newline_/g,
         "\n",
       ),

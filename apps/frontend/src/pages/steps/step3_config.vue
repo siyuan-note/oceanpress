@@ -29,6 +29,9 @@
         <NCheckbox v-model:checked="currentConfig.enableIncrementalCompilation">
           开启增量编译，当资源的 hash 值没有变化时不会编译<br />
           会根据配置文件中的__skipBuilds__字段跳过一些没有变化不需要重新输出的内容<br />
+        </NCheckbox><br />
+        <NCheckbox v-model:checked="currentConfig.enableIncrementalCompilation_doc">
+          增量编译文档，当需要重新全量编译文档时不勾选此项，需要上方选项勾选，此选项才能生效
         </NCheckbox>
         <NDivider />
         <h3>head</h3>

@@ -30,6 +30,10 @@ const defaultConfig = {
    * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容
    */
   enableIncrementalCompilation: false,
+  /** 增量编译文档
+   * 当需要重新全量编译文档时，将此选项设置为false
+   */
+  enableIncrementalCompilation_doc: true,
   /** 跳过编译的资源 */
   __skipBuilds__: {} as { [id: string]: { hash?: string } | undefined },
 
