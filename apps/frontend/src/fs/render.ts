@@ -1,5 +1,11 @@
 import { escaping, unescaping } from "@/util/escaping";
-import { getNodeByID, getDocPathBySY, getDocByChildID, getHPathByID_Node } from "./node";
+import {
+  getNodeByID,
+  getDocPathBySY,
+  getDocByChildID,
+  getHPathByID_Node,
+  sy_refs_add,
+} from "./node";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node, NodeType } from "./siyuan_type";
 
@@ -18,22 +24,31 @@ export async function renderHTML(
     nodeStack: [...renderInstance.nodeStack],
   };
   if (renderInstance.nodeStack.includes(sy)) {
-    console.log("=== 存在循环引用 ===", renderInstance.nodeStack);
-    return `<div class="ft__smaller ft__secondary b3-form__space--small">循环引用</div>`;
+    return warnDiv("循环引用", renderInstance.nodeStack);
   }
-  if (sy.Type in render) {
-    if (renderObj[sy.Type] === undefined) {
-      return `=== 没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}===`;
-    } else {
-      renderObj.nodeStack.push(sy);
-      const r = await renderObj[sy.Type]!(sy);
-      renderObj.nodeStack.pop();
-      return r;
-    }
+  if (renderObj[sy.Type] === undefined) {
+    return warnDiv(`没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}`);
   } else {
-    console.log("没有找到对应的渲染器", sy.Type, renderObj.nodeStack[0].Properties?.title);
-    return `=== 没有找到对应的渲染器 ${sy.Type} ===`;
+    /** 入栈 */
+    renderObj.nodeStack.push(sy);
+    if (sy.ID && renderInstance.nodeStack[0]?.ID) {
+      const targetDoc = getDocByChildID(sy.ID);
+      const currentDoc = renderInstance.nodeStack[0];
+      if (targetDoc?.ID !== undefined && targetDoc.ID !== currentDoc.ID) {
+        /** 代表这个节点不在当前文档中，所以 currentDoc依赖（正向引用）targetDoc  */
+        // 记录引用
+        sy_refs_add(currentDoc, targetDoc.ID);
+      }
+    }
+    const r = await renderObj[sy.Type]!(sy);
+    /** 出栈 */
+    renderObj.nodeStack.pop();
+    return r;
   }
+}
+function warnDiv(msg: string, ...args: any[]) {
+  console.log(msg, ...args);
+  return `<div class="ft__smaller ft__secondary b3-form__space--small">${msg}</div>`;
 }
 function isRenderCode(sy: S_Node) {
   const mark = atob(
@@ -143,7 +158,7 @@ const _dataString = async (sy: S_Node) => sy.Data ?? "";
 
 const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string> } & {
   /** 用于保存调用栈，
-   * 例如在渲染文档A( 文档A中引用了文档B中的节点) 时调用栈如下
+   * 例如在渲染 文档A中引用了文档B中的节点 时调用栈如下
    * ```
    *    nodeStack ~= [A_NodeDocument,A_NodeList,...,A_block-ref,B_Node]
    * ```

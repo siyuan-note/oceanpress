@@ -24,7 +24,7 @@ const defaultConfig = {
      * 则会生成 "https://shenzilong.cn/record/思源笔记.html" 这样的绝对路径
      * 参见 https://www.sitemaps.org/protocol.html#escaping
      */
-    sitePrefix:"."
+    sitePrefix: ".",
   },
   /** 开启增量编译，当开启增量编译时，
    * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容
@@ -35,7 +35,11 @@ const defaultConfig = {
    */
   enableIncrementalCompilation_doc: true,
   /** 跳过编译的资源 */
-  __skipBuilds__: {} as { [id: string]: { hash?: string } | undefined },
+  __skipBuilds__: {} as {
+    [id: string]:
+      | { hash?: string; /** 此文档正向引用的其他文档的id */ refs?: string[] }
+      | undefined;
+  },
 
   cdn: {
     /** 思源 js、css等文件的前缀 */

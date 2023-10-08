@@ -1,6 +1,6 @@
 import { currentConfig } from "@/config";
 import { htmlTemplate } from "./htmlTemplate";
-import { getSyByPath } from "./node";
+import { getSyByDoc_block, sy_refs_get } from "./node";
 import { renderHTML } from "./render";
 import { API } from "./siyuan_api";
 import { DB_block, DB_block_path, S_Node } from "./siyuan_type";
@@ -42,7 +42,9 @@ export async function* build(
   yield emit;
   yield `=== 开始编译 ${book.name} ===`;
   let process = processPercentage(0.4);
-  /** 查询所有文档级block */
+  /** 查询所有文档级block
+   * 这里必须要每次重新查询，不然用户重新编译无法获得新修改的结果
+   */
   // TODO 需要更换成能够完全遍历一个笔记本的写法
   const Doc_blocks: DB_block[] = await API.query_sql({
     stmt: `
@@ -50,18 +52,32 @@ export async function* build(
     from blocks
     WHERE box = '${book.id}'
         AND type = 'd'
-    limit 1500 OFFSET 0
+    limit 150000 OFFSET 0
   `,
   });
+  function refsNotUpdated(docBlock: DB_block): boolean {
+    const refs = config.__skipBuilds__[docBlock.id]?.refs ?? [];
+    for (const ref_id of refs) {
+      const new_doc_hash = Doc_blocks.find((docBlock) => docBlock.id === ref_id)?.hash;
+      const old_doc_hash = config.__skipBuilds__[ref_id]?.hash;
+      if (new_doc_hash === undefined || old_doc_hash === undefined) {
+        /** 不应该进入此分支的，如果进来了就重新编译吧 */
+        return false;
+      } else if (new_doc_hash === old_doc_hash) {
+        continue;
+      } else {
+        return false;
+      }
+    }
+    /** 引用的都没有更新 */
+    return true;
+  }
   yield `=== 查询文档级block完成 ===`;
   for (let i = 0; i < Doc_blocks.length; i++) {
     const docBlock = Doc_blocks[i];
-
-    const path = DB_block_path(docBlock);
-    const sy = await getSyByPath(path);
+    const sy = await getSyByDoc_block(docBlock);
     docTree[docBlock.hpath] = { sy, docBlock };
     process(i / Doc_blocks.length);
-    // yield `读取： ${docBlock.fcontent}: ${docBlock.id}`;
   }
   const fileTree: FileTree = {};
 
@@ -69,14 +85,13 @@ export async function* build(
   const arr = Object.entries(docTree);
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy, docBlock }] = arr[i];
-    /** TODO 由于查询引用的存在，这个还不能跳过 sy 文件的加载，所以得放这而不是生成 docTree 那里，
-     * 以后可以优化一下减少 sy 文件的读取
-     */
     if (
       config.enableIncrementalCompilation &&
       config.enableIncrementalCompilation_doc &&
-      /** 资源没有变化，直接跳过 */
-      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash
+      /** 文档本身没有发生变化 */
+      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash &&
+      /** docBlock所引用的文档也没有更新 */
+      refsNotUpdated(docBlock)
     ) {
       continue; /** skip */
     } else {
@@ -93,8 +108,14 @@ export async function* build(
           },
         );
         if (config.enableIncrementalCompilation && config.enableIncrementalCompilation_doc) {
-          skipBuilds.add(docBlock.id, { hash: docBlock.hash });
+          skipBuilds.add(docBlock.id, {
+            hash: docBlock.hash,
+          });
         }
+        /** 无论是否配置增量更新都要更新引用，不然开启增量更新后没有引用数据可用 */
+        skipBuilds.add(docBlock.id, {
+          refs: /** 保存引用 */ sy_refs_get(sy),
+        });
       } catch (error) {
         yield `${path} 渲染失败:${error}`;
         console.log(path, "渲染失败", error);
@@ -115,7 +136,7 @@ export async function* build(
         stmt: `SELECT *
                 from assets
                 WHERE box = '${book.id}'
-                limit 1500 OFFSET 0`,
+                limit 150000 OFFSET 0`,
       });
     await Promise.allSettled(
       assets.map(async (item) => {
@@ -243,7 +264,7 @@ ${urlList}
 function useSkipBuilds() {
   const obj: { [k: string]: { hash?: string } } = {};
   return {
-    add(id: string, value: { hash?: string }) {
+    add(id: string, value: { hash?: string; refs?: string[] }) {
       if (obj[id] === undefined) {
         obj[id] = {};
       }
