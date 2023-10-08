@@ -266,7 +266,12 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
           <a href="${href}">${content}</a>
   </span>`;
       } else if (type === "a") {
-        return `<a href="${sy.TextMarkAHref}">${content}</a>`;
+        let href = sy.TextMarkAHref;
+        if (href?.startsWith("assets/")) {
+          /** TODO 应该有一个统一处理资源的方案 */
+          href = `${await that.getTopPathPrefix()}/${href}`;
+        }
+        return `<a href="${href}">${content}</a>`;
       } else if (`strong em u s mark sup sub kbd tag code strong code text`.includes(type ?? "")) {
         return `<span ${strAttr(sy, { data_type: type })}>${content}</span>`;
       } else {
@@ -431,22 +436,23 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
   </div>`,
   NodeMathBlockOpenMarker: _emptyString,
   NodeMathBlockCloseMarker: _emptyString,
-  NodeIFrame: async (sy) => ` <div ${strAttr(sy)}>
+  async NodeIFrame(sy) {
+    return ` <div ${strAttr(sy)}>
     <div class="iframe-content">
-    ${sy.Data}
+    ${
+      /** 资源总是被复制到顶层目录，所以直接跳到顶层即可 */
+      /** TODO 应该有一个统一处理资源的方案 */
+      sy.Data?.replace(/src="assets\//, `src="${await this.getTopPathPrefix()}/assets\/`)
+    }
     </div>
-  </div>`,
-  //TODO 音视频的链接需要重写
-  NodeVideo: async (sy) => `<div  ${strAttr(sy)}>
-    <div class="iframe-content">
-      ${sy.Data}
-    </div>
-  </div>`,
-  NodeAudio: async (sy) => `<div  ${strAttr(sy)}>
-    <div class="iframe-content">
-      ${sy.Data}
-    </div>
-  </div>`,
+  </div>`;
+  },
+  async NodeVideo(sy) {
+    return await this.NodeIFrame!(sy);
+  },
+  async NodeAudio(sy) {
+    return await this.NodeIFrame!(sy);
+  },
   /** 虚拟链接 */
   NodeHeadingC8hMarker: _emptyString,
   async NodeSoftBreak(_sy) {
