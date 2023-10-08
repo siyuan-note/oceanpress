@@ -32,10 +32,11 @@ export async function renderHTML(
     /** 入栈 */
     renderObj.nodeStack.push(sy);
     if (sy.ID && renderInstance.nodeStack[0]?.ID) {
+      /** 维护引用关系 */
       const targetDoc = getDocByChildID(sy.ID);
       const currentDoc = renderInstance.nodeStack[0];
       if (targetDoc?.ID !== undefined && targetDoc.ID !== currentDoc.ID) {
-        /** 代表这个节点不在当前文档中，所以 currentDoc依赖（正向引用）targetDoc  */
+        /** 代表这个节点不在当前文档中，却在编译currentDoc时出现了，所以 currentDoc依赖（正向引用）targetDoc  */
         // 记录引用
         sy_refs_add(currentDoc, targetDoc.ID);
       }
