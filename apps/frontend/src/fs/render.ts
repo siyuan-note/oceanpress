@@ -186,6 +186,10 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
           ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
           : ""
       }</div>`;
+      /** h1 文档标题 */
+      html += `<div ${strAttr(sy)} data-type="NodeHeading" class="h1">${
+        sy.Properties?.title
+      }</div>`;
     }
     html += await childRender(sy, this);
     return html;
