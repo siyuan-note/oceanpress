@@ -179,13 +179,16 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     if (/** 只有顶层的文档块才渲染题图 */ this.nodeStack.length === 1) {
       html += `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
         sy,
-      )}><div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;${
-        sy.Properties?.["title-img"]
-      }"/>${
-        sy.Properties?.["icon"]
-          ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
-          : ""
-      }</div>`;
+      )}>`;
+      if (sy.Properties?.["title-img"]) {
+        html += `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${
+          sy.Properties?.["title-img"]
+        }"/>${
+          sy.Properties?.["icon"]
+            ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.["icon"]} </div>`
+            : ""
+        }</div>`;
+      }
       /** h1 文档标题 */
       html += `<div ${strAttr(sy)} data-type="NodeHeading" class="h1">${
         sy.Properties?.title
