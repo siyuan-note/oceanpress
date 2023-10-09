@@ -1,0 +1,3 @@
+[submodule ".\\apps\\siyuan_plugin"]
+	path = .\\apps\\siyuan_plugin
+	url = https://github.com/2234839/OceanPress_siyuan_plugin.git
