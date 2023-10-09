@@ -483,6 +483,11 @@ ${await childRender(sy, this)}\
   async NodeBr(sy) {
     return `<${sy.Data}>`;
   },
+  async NodeWidget(sy) {
+    return `<div ${strAttr(sy)}><img src="${await this.getTopPathPrefix()}/assets/widget/${
+      sy.ID
+    }.jpg"/></div>`;
+  },
 };
 
 /** 获取sy节点的child中第一个type类型节点的data */

@@ -1,6 +1,6 @@
 import { currentConfig } from "@/config";
 import { htmlTemplate } from "./htmlTemplate";
-import { getSyByDoc_block, sy_refs_get } from "./node";
+import { getNodeByID, getSyByDoc_block, sy_refs_get } from "./node";
 import { renderHTML } from "./render";
 import { API } from "./siyuan_api";
 import { DB_block, S_Node } from "./siyuan_type";
@@ -156,6 +156,40 @@ export async function* build(
         }
       }),
     );
+    yield `=== 开始复制挂件资源文件 ===`;
+    const widgetList: DB_block[] = await API.query_sql({
+      stmt: `
+      SELECT *
+      from blocks
+      WHERE box = '${book.id}'
+      AND type = 'widget'
+      limit 150000 OFFSET 0
+    `,
+    });
+    const widgetNode = widgetList
+      .map((el) => getNodeByID(el.id))
+      .filter((widget) => (widget?.Properties as any)?.["custom-oceanpress-widget-update"])
+      .map(async (widget) => {
+        if (!widget || !widget?.ID) return;
+        const update = (widget?.Properties as any)?.["custom-oceanpress-widget-update"] as string;
+        if (
+          config.enableIncrementalCompilation &&
+          /** 资源没有变化，直接跳过 */
+          config.__skipBuilds__[widget.ID]?.updated === update
+        ) {
+          return /** skip */;
+        } else {
+          const id = widget.ID;
+          // 快照保存的位置 `/data/storage/oceanpress/widget_img/${id}.jpg`
+          fileTree[`assets/widget/${id}.jpg`] = (await API.file_getFile({
+            path: `data/storage/oceanpress/widget_img/${id}.jpg`,
+          })) as ArrayBuffer;
+          if (config.enableIncrementalCompilation) {
+            skipBuilds.add(id, { updated: update });
+          }
+        }
+      });
+    await Promise.allSettled(widgetNode);
   }
 
   // === 输出编译成果 ===
@@ -264,7 +298,7 @@ ${urlList}
 function useSkipBuilds() {
   const obj: { [k: string]: { hash?: string } } = {};
   return {
-    add(id: string, value: { hash?: string; refs?: string[] }) {
+    add(id: string, value: { hash?: string; refs?: string[]; updated?: string }) {
       if (obj[id] === undefined) {
         obj[id] = {};
       }

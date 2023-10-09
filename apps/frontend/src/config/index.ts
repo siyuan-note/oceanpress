@@ -37,7 +37,11 @@ const defaultConfig = {
   /** 跳过编译的资源 */
   __skipBuilds__: {} as {
     [id: string]:
-      | { hash?: string; /** 此文档正向引用的其他文档的id */ refs?: string[] }
+      | {
+          hash?: string;
+          /** 此文档正向引用的其他文档的id */ refs?: string[];
+          /** 挂件快照的更新时间 */ updated?: string;
+        }
       | undefined;
   },
 
