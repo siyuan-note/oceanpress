@@ -320,13 +320,8 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
       console.log("NodeImage 存在多个 LinkTitle", sy);
     }
     return html`<span ${await strAttr(sy)} style="${sy.Properties?.["parent-style"]}"
-      ><img
-        src="${link}"
-        data-src="${link}"
-        title="${title}"
-        style="${sy.Properties?.style}"
-      /><span class="protyle-action__title">${title}</span></span
-    >`;
+      ><img src="${link}" data-src="${link}" title="${title}" style="${sy.Properties?.style}" \
+loading="lazy"/><span class="protyle-action__title">${title}</span></span>`;
   },
   async NodeLinkDest(sy) {
     return `${await this.getTopPathPrefix()}/${sy.Data}`;
