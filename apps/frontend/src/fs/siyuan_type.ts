@@ -78,7 +78,7 @@ export interface S_Node {
   Path?: string; // 路径
   Spec?: string; // 规范版本号
   Type: NodeType; // 节点类型
-  Parent?: S_Node; // 父节点
+  Parent: S_Node; // 父节点 在 node.ts 中被重建了，所以这个引用关系是可用的
   Previous?: S_Node; // 前一个兄弟节点
   Next?: S_Node; // 后一个兄弟节点
   FirstChild?: S_Node; // 第一个子节点

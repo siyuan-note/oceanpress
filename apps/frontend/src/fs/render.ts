@@ -214,9 +214,27 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
     return html;
   },
   async NodeHeading(sy) {
-    return html`<div ${strAttr(sy)}>
-      <div>${await childRender(sy, this)}</div>
-    </div>`;
+    let html = `<div ${strAttr(sy)}><div>${await childRender(sy, this)}</div></div>`;
+
+    // 在被嵌入查询块的情况下需要查询渲染其后面的非标题块
+    const parentNode =
+      this.nodeStack[
+        this.nodeStack.length - 2 /** 最后一个元素是 sy本身(NodeHeading)还得要往前一个，所以是2 */
+      ];
+
+    if (parentNode?.Type === "NodeBlockQueryEmbedScript") {
+      let afterFlag = false;
+      for (const node of sy.Parent.Children ?? []) {
+        if (node === sy) {
+          afterFlag = true;
+        } else if (node !== sy && node.Type === "NodeHeading") {
+          afterFlag = false;
+        } else if (afterFlag) {
+          html += "\n" + (await renderHTML(node, this));
+        }
+      }
+    }
+    return html;
   },
   NodeText: _dataString,
   async NodeList(sy) {
@@ -375,9 +393,8 @@ ${await childRender(sy, this)}\
     for (const block of blocks) {
       const node = await getNodeByID(block.id);
       if (node === undefined) {
-        // 一般来说是跨笔记引用
-        console.log("跨笔记引用", block.id, sql, node);
-        return `<div class="ft__smaller ft__secondary b3-form__space--small">跨笔记引用</div>`;
+        // TODO 一般来说是跨笔记引用,但也有可能是 node.ts 中的缓存失效
+        return warnDiv("跨笔记引用", block.id, sql, node);
       }
       htmlStr += await renderHTML(node, this);
     }
