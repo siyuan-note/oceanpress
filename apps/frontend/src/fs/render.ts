@@ -111,9 +111,7 @@ function strAttr(
       else return "";
     })();
   }
-
   const attrObj = {} as { [k: string]: string };
-
   function addAttr(key: string, value: string) {
     attrObj[key] = value;
   }
@@ -149,6 +147,8 @@ function strAttr(
     attrObj["class"] = (attrObj["class"] ?? "") + " protyle-task--done ";
   }
   /** 不折叠任何项目 */ delete attrObj["fold"];
+  /** 避免任意元素上悬停都显示文档标题 */
+  if (sy.Type === "NodeDocument") delete attrObj["title"];
   return Object.entries(attrObj)
     .map(([k, v]) => `${k}="${v}"`)
     .join(" ");
