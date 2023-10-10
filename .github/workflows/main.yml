@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
+          submodules: false
 
       # 1、生成静态文件
       - name: Build
