@@ -11,7 +11,7 @@
   </div>
   <div>
     查看OceanPress生成的效果：
-    <a href="/notebook/请从这里开始.html"> 《思源笔记用户指南》： 请从这里开始.html </a>
+    <a href="/notebook/请从这里开始.html#20210428212840-859h45j"> 《思源笔记用户指南》： 请从这里开始.html </a>
     <br />
     <a href="/notebook/请从这里开始/编辑器/排版元素.html"> 《思源笔记用户指南》： 排版元素.html </a>
   </div>

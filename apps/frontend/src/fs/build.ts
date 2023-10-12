@@ -48,13 +48,13 @@ export async function* build(
   // TODO 需要更换成能够完全遍历一个笔记本的写法
   const Doc_blocks: DB_block[] = await API.query_sql({
     stmt: `
-    SELECT *
-    from blocks
+    SELECT * from blocks
     WHERE box = '${book.id}'
         AND type = 'd'
     limit 150000 OFFSET 0
   `,
   });
+  /** docBlock 的引用没有更新：true */
   function refsNotUpdated(docBlock: DB_block): boolean {
     const refs = config.__skipBuilds__[docBlock.id]?.refs ?? [];
     for (const ref_id of refs) {

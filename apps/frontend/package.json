@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-components": "vue-tsc && vite build --config vite.components.config.ts"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
