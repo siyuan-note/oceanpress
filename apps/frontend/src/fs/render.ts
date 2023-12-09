@@ -24,7 +24,10 @@ export async function renderHTML(
     nodeStack: [...renderInstance.nodeStack],
   };
   if (renderInstance.nodeStack.includes(sy)) {
-    return warnDiv("循环引用", renderInstance.nodeStack);
+    return warnDiv(
+      "循环引用",
+      [...renderInstance.nodeStack, sy].map((el) => el.ID),
+    );
   }
   if (renderObj[sy.Type] === undefined) {
     return warnDiv(`没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}`);
@@ -48,7 +51,7 @@ export async function renderHTML(
   }
 }
 function warnDiv(msg: string, ...args: any[]) {
-  console.log(msg, ...args);
+  warn(msg, ...args);
   return `<div class="ft__smaller ft__secondary b3-form__space--small">${msg}</div>`;
 }
 function isRenderCode(sy: S_Node) {
@@ -291,10 +294,10 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
               doc /** 要先定位到文档，再通过下面的hash（#）定位到具体元素 */,
             )}.html#${sy.TextMarkBlockRefID}`;
           } else {
-            console.log("未定义顶层元素非 NodeDocument 时的处理方式", sy);
+            warn("未查找到所指向的文档节点", sy);
           }
         } else {
-          console.log("未查找到所指向的文档节点", sy);
+          warn("未查找到所指向的文档节点", sy);
         }
 
         return `<span data-type="${sy.TextMarkType}" \
@@ -312,7 +315,7 @@ const render: { [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
       } else if (`strong em u s mark sup sub kbd tag code strong code text`.includes(type ?? "")) {
         return `<span ${strAttr(sy, { data_type: type })}>${content}</span>`;
       } else {
-        console.log(
+        console.warn(
           "没有找到对应的渲染器 NodeTextMark.TextMarkType",
           sy.TextMarkType,
           that.nodeStack,
@@ -510,4 +513,8 @@ ${await childRender(sy, this)}\
 /** 获取sy节点的child中第一个type类型节点的data */
 function childDateByType(sy: S_Node, type: S_Node["Type"]) {
   return sy.Children?.find((el) => el.Type === type)?.Data;
+}
+
+function warn(...arg: any[]) {
+  console.warn("\n", ...arg);
 }

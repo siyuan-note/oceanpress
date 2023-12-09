@@ -1,6 +1,7 @@
 import { Ref } from "vue";
 import { PromiseObj, usePromiseComputed } from "../components/data_promise";
 import { NodeDocument, S_Node, file, notebook } from "./siyuan_type";
+
 let Authorization = "";
 export function setAuthorizedToken(s: string) {
   Authorization = s;
@@ -55,6 +56,9 @@ async function rpc(method: string, arg: any) {
   const apiPrefix = "http://127.0.0.1:6806";
   if (method === "get_assets") {
     return fetch(`${apiPrefix}/${arg[0].path}`, {
+      headers: {
+        Authorization: `Token ${Authorization}`,
+      },
       body: null,
       method: "GET",
       mode: "cors",
@@ -66,6 +70,9 @@ async function rpc(method: string, arg: any) {
     },
     body: JSON.stringify(arg[0]),
     method: "POST",
+  }).catch((err: Error) => {
+    err.message = `访问思源接口时出错了，请检查思源服务是否启动`;
+    throw err;
   });
   if (method === "file_getFile") {
     const path = arg[0].path as string;

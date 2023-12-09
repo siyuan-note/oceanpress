@@ -10,5 +10,8 @@
     "前端dev": "yarn workspace frontend dev",
     "后端dev": "yarn workspace backend start",
     "deploy:prod": "yarn workspace frontend build && yarn workspace backend deploy:prod"
+  },
+  "devDependencies": {
+    "vite-node": "^1.0.1"
   }
 }

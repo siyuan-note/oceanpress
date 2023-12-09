@@ -2,6 +2,8 @@ import { computed, reactive, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
 import { setAuthorizedToken } from "@/fs/siyuan_api";
 import { deepAssign } from "@/util/deep_assign";
+import { getItem, setItem } from "@/util/store";
+
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
   name: "default",
@@ -81,11 +83,9 @@ export function addConfig(name: string, value?: typeof defaultConfig) {
 /** 加载配置文件 */
 export const loadConfigFile = (c?: typeof configs) => {
   if (c) {
-    debugger;
     deepAssign(configs, c);
   } else {
-    // TODO 在node.js环境下需要额外处理
-    const localConfig = localStorage.getItem("configs");
+    const localConfig = getItem("configs");
     if (localConfig) {
       /** 从本地存储加载配置 */
       deepAssign(configs, JSON.parse(localConfig));
@@ -104,7 +104,7 @@ export const currentConfig = computed(() => configs[configs.__current__]);
 watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 export const saveConfig = () => {
-  if (configs.__init__ === false) localStorage.setItem("configs", JSON.stringify(configs));
+  if (configs.__init__ === false) setItem("configs", JSON.stringify(configs));
 };
 
 let timer: NodeJS.Timeout | null = null;
@@ -119,5 +119,10 @@ export const debounceSaveConfig = () => {
   }, 700);
 };
 watch(configs, debounceSaveConfig, { deep: true });
-loadConfigFile();
+
 configs.__init__ = false;
+
+/** 浏览器环境下，直接尝试加载配置 */
+if (globalThis.document) {
+  loadConfigFile();
+}

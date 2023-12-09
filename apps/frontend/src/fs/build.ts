@@ -18,7 +18,9 @@ export async function* build(
   config = currentConfig.value,
   otherConfig?: {
     /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
-    dir_ref: any;
+    dir_ref?: any;
+    // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
+    onFileTree?: (tree: FileTree) => void;
   },
 ) {
   const book = config.notebook;
@@ -197,6 +199,9 @@ export async function* build(
     yield `=== 开始写文件到磁盘 ===`;
     await writeFileSystem(fileTree, otherConfig.dir_ref);
   }
+  if (otherConfig?.onFileTree) {
+    otherConfig.onFileTree(fileTree);
+  }
   if (config.compressedZip) {
     yield `=== 开始生成压缩包 ===`;
     await downloadZIP(fileTree, {
@@ -237,12 +242,12 @@ export async function downloadZIP(
 }
 
 async function writeFileSystem(
-  docTree: { [htmlPath: string]: string | ArrayBuffer },
+  fileTree: { [htmlPath: string]: string | ArrayBuffer },
   dir_ref: any,
 ) {
   /** 并发写文件 */
   await Promise.all(
-    Object.entries(docTree).map(async ([path, html]) => {
+    Object.entries(fileTree).map(async ([path, html]) => {
       await writeFile(dir_ref, path, html).catch((e) => {
         console.log(e, dir_ref);
       });

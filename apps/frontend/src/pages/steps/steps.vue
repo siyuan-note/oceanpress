@@ -30,7 +30,7 @@
     const res = build(currentConfig.value, config);
     const emitRes = res.next();
     const emit = (await emitRes).value;
-    if (emit instanceof Object) {
+    if (emit instanceof Object && !(emit instanceof Error)) {
       emit.percentage = (s) => {
         percentage.value = s;
       };
@@ -39,7 +39,7 @@
       log.value += r + "\n";
     }
 
-    if (emit instanceof Object) {
+    if (emit instanceof Object && !(emit instanceof Error)) {
       docTree.value = emit.docTree;
       console.log(emit);
     }
