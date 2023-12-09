@@ -1,6 +1,6 @@
 import Test from "@/components/web-custom/Test_c.vue";
 import { createApp } from "vue";
-import { aElement, addAnchorELement, removeAnchorELement } from "./store";
+import { addAnchorELement, removeAnchorELement } from "./store";
 
 const div = document.createElement("div");
 const app = createApp(Test);
