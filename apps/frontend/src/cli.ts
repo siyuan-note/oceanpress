@@ -3,6 +3,7 @@ import { build } from "./fs/build";
 import { writeFile, mkdir, readFile } from "fs/promises";
 import { Command } from "commander";
 import { join, resolve } from "path/posix";
+import "@/util/store.node.dep";
 const program = new Command();
 console.log(process.argv);
 

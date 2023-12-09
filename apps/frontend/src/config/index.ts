@@ -2,7 +2,7 @@ import { computed, reactive, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
 import { setAuthorizedToken } from "@/fs/siyuan_api";
 import { deepAssign } from "@/util/deep_assign";
-import { getItem, setItem } from "@/util/store";
+import { storeDep } from "@/dependency";
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
@@ -85,7 +85,7 @@ export const loadConfigFile = (c?: typeof configs) => {
   if (c) {
     deepAssign(configs, c);
   } else {
-    const localConfig = getItem("configs");
+    const localConfig = storeDep.getItem("configs");
     if (localConfig) {
       /** 从本地存储加载配置 */
       deepAssign(configs, JSON.parse(localConfig));
@@ -104,7 +104,7 @@ export const currentConfig = computed(() => configs[configs.__current__]);
 watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 export const saveConfig = () => {
-  if (configs.__init__ === false) setItem("configs", JSON.stringify(configs));
+  if (configs.__init__ === false) storeDep.setItem("configs", JSON.stringify(configs));
 };
 
 let timer: NodeJS.Timeout | null = null;

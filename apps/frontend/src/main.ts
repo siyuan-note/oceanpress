@@ -5,7 +5,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import steps from "@/pages/steps/steps.vue";
 import test from "@/pages/test.vue";
-
+import "@/util/store.bower.dep";
 
 const routes = [
   { path: "/", component: steps },
