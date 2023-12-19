@@ -85,3 +85,4 @@
     />
   </NSteps>
 </template>
+@/core/siyuan_api@/core/build@/core/build

@@ -1,5 +1,5 @@
 import { computed, reactive, watch, watchEffect } from "vue";
-import { notebook } from "../fs/siyuan_type";
+import { notebook } from "../core/siyuan_type";
 import { deepAssign } from "@/util/deep_assign";
 import { storeDep } from "@/dependency";
 

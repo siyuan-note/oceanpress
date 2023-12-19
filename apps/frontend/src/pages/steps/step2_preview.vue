@@ -30,3 +30,4 @@
     }
   });
 </script>
+@/core/siyuan_api

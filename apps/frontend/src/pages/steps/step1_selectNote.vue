@@ -24,3 +24,4 @@
   }>();
   const notebooks = toRef(props.notebooks);
 </script>
+@/core/siyuan_type

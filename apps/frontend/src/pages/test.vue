@@ -53,3 +53,4 @@
     navigator.clipboard.writeText(textToCopy);
   }
 </script>
+@/core/htmlTemplate@/core/siyuan_api@/core/render@/core/siyuan_type

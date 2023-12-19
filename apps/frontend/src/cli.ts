@@ -1,5 +1,5 @@
 import { currentConfig, loadConfigFile } from "./config";
-import { build } from "./fs/build";
+import { build } from "./core/build";
 import { writeFile, mkdir, readFile } from "fs/promises";
 import { Command } from "commander";
 import { join } from "path/posix";
