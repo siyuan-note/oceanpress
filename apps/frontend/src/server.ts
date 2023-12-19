@@ -1,12 +1,11 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { currentConfig } from './config'
-import { renderHTML } from './core/render'
-import { DB_block } from './core/siyuan_type'
+import { get_doc_by_hpath } from './core/cache'
 import { htmlTemplate } from './core/htmlTemplate'
-import { getIDsByHPath, get_doc_by_hpath, query_sql } from './core/cache'
+import { renderHTML } from './core/render'
 
-export function server() {
+export function server(config = { port: 80, hostname: '0.0.0.0' }) {
   const app = new Hono()
   app.use(async (_, next) => {
     try {
@@ -63,7 +62,8 @@ export function server() {
     serve(
       {
         fetch: app.fetch,
-        port: 80,
+        port: config.port,
+        hostname: config.hostname,
       },
       (info) => {
         resolve({ info, app })

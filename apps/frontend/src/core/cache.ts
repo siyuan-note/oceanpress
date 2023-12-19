@@ -6,8 +6,11 @@ import { parentRef } from './node'
 import { API } from './siyuan_api'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type'
 
+let cache = true
 /** 控制是否启用快取功能 */
-export let cache = true
+export function setCache(b: boolean) {
+  cache = b
+}
 
 /** sql->查询结果 */
 const sqlCacheMap = new Map<string, any>()

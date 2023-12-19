@@ -1,11 +1,12 @@
-import '@/util/store.node.dep'
 import '@/core/render.api.dep'
+import '@/util/store.node.dep'
+import { Command } from 'commander'
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import { resolve } from 'path'
+import { join } from 'path/posix'
 import { currentConfig, loadConfigFile } from './config'
 import { build } from './core/build'
-import { writeFile, mkdir, readFile } from 'fs/promises'
-import { Command } from 'commander'
-import { join } from 'path/posix'
-import { resolve } from 'path'
+import { setCache } from './core/cache'
 import { server } from './server'
 const program = new Command()
 console.log(process.argv)
@@ -68,14 +69,31 @@ program
   .command('server')
   .description('输出静态站点源码')
   .option('-c, --config <string>', '指定配置文件的位置')
-  .action(async (opt: { config: string; output: string }) => {
-    if (!opt.config) {
-      console.log(`请设置配置文件位置`)
-    }
-    const config = await readFile(opt.config, 'utf-8')
-    loadConfigFile(JSON.parse(config))
-
-    server()
-  })
+  .option('-h, --host <string>', 'web服务绑定到的地址', '127.0.0.1')
+  .option('-p, --port <number>', 'web服务绑定到的端口', '80')
+  .option(
+    '--cache <boolean>',
+    '配置为 true 时开启缓存,默认为 false 不开启缓存',
+    'false',
+  )
+  .action(
+    async (opt: {
+      config: string
+      host: string
+      port: string
+      cache: 'false'
+    }) => {
+      if (!opt.config) {
+        console.log(`请设置配置文件位置`)
+      }
+      const config = await readFile(opt.config, 'utf-8')
+      loadConfigFile(JSON.parse(config))
+      setCache(opt.cache !== 'false')
+      server({
+        hostname: opt.host,
+        port: Number(opt.port),
+      })
+    },
+  )
 
 program.parse(process.argv)
