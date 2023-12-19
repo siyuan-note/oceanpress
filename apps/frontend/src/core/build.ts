@@ -241,6 +241,7 @@ export async function downloadZIP(
     });
 }
 
+/** chrome系高版本可用 */
 async function writeFileSystem(
   fileTree: { [htmlPath: string]: string | ArrayBuffer },
   dir_ref: any,

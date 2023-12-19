@@ -1,7 +1,7 @@
 import "@/util/store.bower.dep";
+
 import { createApp } from "vue";
-import "./style.css";
-import App from "./App.vue";
+import App from "@/pages/App.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import steps from "@/pages/steps/steps.vue";
@@ -17,7 +17,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes, // `routes: routes` 的缩写
 });
-
 
 const app = createApp(App);
 
