@@ -57,14 +57,21 @@ export async function get_doc_by_hpath(hpath: string): Promise<S_Node> {
     )) as DB_block[]
   )[0]
   if (docBlock === undefined) throw new Error(`not doc by:${hpath}`)
+  const res = await get_doc_by_SyPath(DB_block_path(docBlock))
+  if (cache) {
+    hpathCacheMap.set(hpath, res)
+  }
+  return res
+}
+/** 设置快取 idCacheMap */
+export async function get_doc_by_SyPath(path: string): Promise<S_Node> {
   const res = parentRef(
     (await API.file_getFile({
-      path: DB_block_path(docBlock),
+      path,
     })) as S_Node,
   )
   if (cache) {
     idCache(res)
-    hpathCacheMap.set(hpath, res)
   }
   return res
 }
@@ -83,6 +90,19 @@ export async function get_block_by_id(id: string) {
   }
   if (cache) blockCacheMap.set(id, blocks[0])
   return blocks[0]
+}
+/** 设置快取 blockCacheMap */
+export async function allDocBlock_by_bookId(id: string) {
+  const res = (await query_sql(`
+    SELECT * from blocks
+    WHERE box = '${id}'
+        AND type = 'd'
+    limit 150000 OFFSET 0
+  `)) as DB_block[]
+  if (cache) {
+    res.forEach((block) => blockCacheMap.set(block.id, block))
+  }
+  return res
 }
 
 export async function get_doc_by_child_id(
