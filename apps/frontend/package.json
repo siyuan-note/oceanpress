@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "cli": "tsx ./src/cli.ts",
+    "cli_watch": "tsx watch ./src/cli.ts",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "build-components": "vue-tsc && vite build --config vite.components.config.ts"
