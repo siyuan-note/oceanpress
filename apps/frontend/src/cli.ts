@@ -2,9 +2,10 @@ import { currentConfig, loadConfigFile } from "./config";
 import { build } from "./fs/build";
 import { writeFile, mkdir, readFile } from "fs/promises";
 import { Command } from "commander";
-import { join,  } from "path/posix";
-import {  resolve } from "path";
+import { join } from "path/posix";
+import { resolve } from "path";
 import "@/util/store.node.dep";
+import { server } from "./server";
 const program = new Command();
 console.log(process.argv);
 
@@ -58,6 +59,20 @@ program
         console.log(iterator + "\n");
       }
     }
+  });
+
+program
+  .command("server")
+  .description("输出静态站点源码")
+  .option("-c, --config <string>", "指定配置文件的位置")
+  .action(async (opt: { config: string; output: string }) => {
+    if (!opt.config) {
+      console.log(`请设置配置文件位置`);
+    }
+    const config = await readFile(opt.config, "utf-8");
+    loadConfigFile(JSON.parse(config));
+
+    server();
   });
 
 program.parse(process.argv);

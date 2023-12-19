@@ -2,3 +2,4 @@ node_modules/
 .malagu/
 /test/
 test.session.sql
+/.vscode

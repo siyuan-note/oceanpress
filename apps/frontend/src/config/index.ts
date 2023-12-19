@@ -1,6 +1,5 @@
 import { computed, reactive, watch, watchEffect } from "vue";
 import { notebook } from "../fs/siyuan_type";
-import { setAuthorizedToken } from "@/fs/siyuan_api";
 import { deepAssign } from "@/util/deep_assign";
 import { storeDep } from "@/dependency";
 
@@ -11,6 +10,8 @@ const defaultConfig = {
   notebook: {} as notebook,
   /** 思源的鉴权key */
   authorized: "",
+  /** 思源的api服务地址 */
+  apiPrefix: "http://127.0.0.1:6806",
   /** 打包成 zip */
   compressedZip: true,
   /** 不将 publicZip 打包到 zip 包中 */
@@ -100,8 +101,6 @@ export const loadConfigFile = (c?: typeof configs) => {
     });
 };
 export const currentConfig = computed(() => configs[configs.__current__]);
-
-watchEffect(() => setAuthorizedToken(currentConfig.value.authorized));
 
 export const saveConfig = () => {
   if (configs.__init__ === false) storeDep.setItem("configs", JSON.stringify(configs));

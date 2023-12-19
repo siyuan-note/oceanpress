@@ -1,11 +1,8 @@
 import { Ref } from "vue";
 import { PromiseObj, usePromiseComputed } from "../components/data_promise";
 import { NodeDocument, S_Node, file, notebook } from "./siyuan_type";
+import { currentConfig } from "@/config";
 
-let Authorization = "";
-export function setAuthorizedToken(s: string) {
-  Authorization = s;
-}
 export interface api {
   /**
    *  列出笔记本
@@ -53,7 +50,8 @@ type apiPromisify = {
 declare type unPromise<T> = T extends Promise<infer R> ? R : T;
 
 async function rpc(method: string, arg: any) {
-  const apiPrefix = "http://127.0.0.1:6806";
+  const apiPrefix = currentConfig.value.apiPrefix;
+  const Authorization = currentConfig.value.authorized;
   if (method === "get_assets") {
     return fetch(`${apiPrefix}/${arg[0].path}`, {
       headers: {
