@@ -9,6 +9,13 @@ import { htmlTemplate } from './core/htmlTemplate'
 
 export function server() {
   const app = new Hono()
+  app.use(async (_, next) => {
+    try {
+      await next()
+    } catch (error) {
+      console.log(error)
+    }
+  })
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/:file', async (c) => {
     // TODO 处于安全考虑应该防范 file 跳出 assets
@@ -50,12 +57,8 @@ export function server() {
       return err
     })
 
-    if (r instanceof Error) return c.text(r.message, 500)
+    if (r instanceof Error) throw r
     return c.html(r)
-  })
-  app.onError((err, c) => {
-    console.error(`${err}`)
-    return c.text('Custom Error Message', 500)
   })
   return new Promise((resolve, _reject) => {
     serve(
@@ -72,19 +75,17 @@ export function server() {
 }
 
 async function renderHtmlByPath(path: string): Promise<string | Error> {
-  const hpath = path.replace(/\.html$/, '')
+  const hpath = decodeURIComponent(path).replace(/\.html$/, '')
   const ids = await API.filetree_getIDsByHPath({
     notebook: currentConfig.value.notebook.id,
     path: hpath,
   })
+  console.log(hpath)
 
   const docBlocks: DB_block[] = await API.query_sql({
-    stmt: `
-    SELECT * from blocks
+    stmt: `SELECT * from blocks
     WHERE hpath = '${hpath}'
-        AND type = 'd'
-    limit 150000 OFFSET 0
-  `,
+      AND type = 'd' `,
   })
   if (docBlocks.length === 0) {
     return new Error('not found')

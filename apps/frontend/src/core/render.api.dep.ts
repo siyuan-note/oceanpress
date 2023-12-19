@@ -5,9 +5,21 @@ import { DB_block, DB_block_path, S_Node } from './siyuan_type'
 storeDep.getDocByChildID = async (id: string) => {
   const docBlock = await get_doc_by_child_id(id)
   if (docBlock === undefined) return
-  return (await API.file_getFile({
+  const node = (await API.file_getFile({
     path: DB_block_path(docBlock),
   })) as S_Node
+  parentRef(node)
+  return node
+
+  /** 处理一个原始的 sy 根节点 */
+  function parentRef(sy: S_Node) {
+    for (const child of sy?.Children ?? []) {
+      /** 附加 Parent 指向 */
+      child.Parent = sy
+      parentRef(child)
+    }
+    return sy
+  }
 }
 
 storeDep.getDocPathBySY = async (sy?: S_Node) => {
