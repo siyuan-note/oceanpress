@@ -45,7 +45,6 @@ export interface api {
     /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string
   }): any[]
   /** 获取文件 https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#获取文件
-   * TODO 考虑增加缓存，因为嵌入块等原因可能会反复调用这个
    */
   file_getFile(p: { path: string }): S_Node | ArrayBuffer
   get_assets(p: { path: string }): ArrayBuffer
@@ -66,9 +65,12 @@ type apiPromisify = {
 /** 解开 promise 类型包装 */
 declare type unPromise<T> = T extends Promise<infer R> ? R : T
 
+let old = 0
 async function rpc(method: string, arg: any) {
   const apiPrefix = currentConfig.value.apiPrefix
   const Authorization = currentConfig.value.authorized
+  console.log(old++, method)
+
   if (method === 'get_assets') {
     return fetch(`${apiPrefix}/${arg[0].path}`, {
       headers: {

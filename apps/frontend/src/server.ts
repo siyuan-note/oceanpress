@@ -1,11 +1,10 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { API } from './core/siyuan_api'
 import { currentConfig } from './config'
 import { renderHTML } from './core/render'
-import { DB_block, S_Node } from './core/siyuan_type'
-import '@/core/render.api.dep'
+import { DB_block } from './core/siyuan_type'
 import { htmlTemplate } from './core/htmlTemplate'
+import { getIDsByHPath, get_doc_by_hpath, query_sql } from './core/cache'
 
 export function server() {
   const app = new Hono()
@@ -76,30 +75,8 @@ export function server() {
 
 async function renderHtmlByPath(path: string): Promise<string | Error> {
   const hpath = decodeURIComponent(path).replace(/\.html$/, '')
-  const ids = await API.filetree_getIDsByHPath({
-    notebook: currentConfig.value.notebook.id,
-    path: hpath,
-  })
-  console.log(hpath)
 
-  const docBlocks: DB_block[] = await API.query_sql({
-    stmt: `SELECT * from blocks
-    WHERE hpath = '${hpath}'
-      AND type = 'd' `,
-  })
-  if (docBlocks.length === 0) {
-    return new Error('not found')
-  } else if (docBlocks.length > 1) {
-    return new Error(
-      `该路径存在多个文档与之对应: ${ids.join(
-        ' ',
-      )},但一个 url 应该只指向一个文档的`,
-    )
-  }
-  const docBlock = docBlocks[0]
-  const doc = (await API.file_getFile({
-    path: `data/${currentConfig.value.notebook.id}/${docBlock.path}`,
-  })) as S_Node
+  const doc = await get_doc_by_hpath(hpath)
 
   return await htmlTemplate(
     {
