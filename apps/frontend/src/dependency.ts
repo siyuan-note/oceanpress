@@ -18,5 +18,6 @@ export const storeDep = {
   getDocPathBySY: nullDep as (sy?: S_Node) => Promise<string | undefined>,
   getDocByChildID: nullDep as (id: string) => Promise<S_Node | undefined>,
   getHPathByID_Node: nullDep as (id_node: string | S_Node) => Promise<string>,
+  /** TODO 现在正向引用相关功能还未实现 */
   sy_refs_add: nullDep as (sy: S_Node, ref: string) => void,
 }

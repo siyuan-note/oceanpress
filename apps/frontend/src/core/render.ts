@@ -17,7 +17,11 @@ export async function renderHTML(
     /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里创建一个新 []  */
     nodeStack: [...renderInstance.nodeStack],
   }
-  if (renderInstance.nodeStack.includes(sy)) {
+  if (
+    renderInstance.nodeStack.find(
+      (node) => node.ID && sy.ID && node.ID === sy.ID,
+    )
+  ) {
     return warnDiv(
       '循环引用',
       [...renderInstance.nodeStack, sy].map((el) => el.ID),
