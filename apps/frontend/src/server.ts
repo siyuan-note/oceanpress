@@ -15,11 +15,10 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
     }
   })
   app.get('/', (c) => c.redirect('/index.html'))
-  app.get('/assets/:file', async (c) => {
+  app.get('/assets/*', async (c) => {
     // TODO 处于安全考虑应该防范 file 跳出 assets
-    const file = c.req.param('file')
-
-    const r = await fetch(`${currentConfig.value.apiPrefix}/assets/${file}`, {
+    const file = c.req.path
+    const r = await fetch(`${currentConfig.value.apiPrefix}${file}`, {
       headers: {
         Authorization: `Token ${currentConfig.value.authorized}`,
       },
