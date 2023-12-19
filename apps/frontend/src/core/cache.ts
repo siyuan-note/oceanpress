@@ -91,6 +91,23 @@ export async function get_block_by_id(id: string) {
   if (cache) blockCacheMap.set(id, blocks[0])
   return blocks[0]
 }
+export async function get_node_by_id(id?: string) {
+  if (id === undefined) return
+  if (cache) {
+    const node = idCacheMap.get(id)
+    if (node) return node
+  }
+  const doc = await get_doc_by_child_id(id)
+  if (doc === undefined) return
+  return findNode(doc)
+
+  function findNode(node: S_Node): S_Node | undefined {
+    if (node.ID === id) return node
+    if (node.Children) {
+      return node.Children.find((child) => findNode(child))
+    }
+  }
+}
 /** 设置快取 blockCacheMap */
 export async function allDocBlock_by_bookId(id: string) {
   const res = (await query_sql(`
@@ -134,4 +151,23 @@ function idCache(node: S_Node) {
   if (node.Children) {
     node.Children.forEach(idCache)
   }
+}
+
+/** 管理文档的引用关系 */
+const sy_refs = new Map<
+  /** 文档id */ string,
+  /** S_Node所正向引用的文档id */ string[]
+>()
+export function sy_refs_add(docId: string, ref: string) {
+  const refs = sy_refs.get(docId)
+  if (refs === undefined) {
+    sy_refs.set(docId, [ref])
+  } else if (refs.includes(ref) === true) {
+    // refs 已经包含了，不管他
+  } else {
+    refs.push(ref)
+  }
+}
+export function sy_refs_get(docId: string) {
+  return sy_refs.get(docId) ?? []
 }

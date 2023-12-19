@@ -65,11 +65,9 @@ type apiPromisify = {
 /** 解开 promise 类型包装 */
 declare type unPromise<T> = T extends Promise<infer R> ? R : T
 
-let old = 0
 async function rpc(method: string, arg: any) {
   const apiPrefix = currentConfig.value.apiPrefix
   const Authorization = currentConfig.value.authorized
-  console.log(old++, method)
 
   if (method === 'get_assets') {
     return fetch(`${apiPrefix}/${arg[0].path}`, {
