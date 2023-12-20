@@ -15,13 +15,9 @@ export async function htmlTemplate(
     }
   }
   const version = "2.10.5";
+  //data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight"
   return `<!DOCTYPE html>
-<html
-  lang="zh_CN"
-  data-theme-mode="light"
-  data-light-theme="daylight"
-  data-dark-theme="midnight"
->
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
 <head>
   ${config?.embedCode?.head ?? ""}
   <meta charset="utf-8" />
