@@ -9,7 +9,7 @@ body {
   font-size: 16px !important;
 }
 .b3-typography code:not(.hljs),
-.protyle-wysiwyg span[data-type~="code"] {
+.protyle-wysiwyg span[data-type~='code'] {
   font-variant-ligatures: normal;
 }
 .li > .protyle-action {
@@ -82,16 +82,17 @@ body {
 #preview {
   padding: 0;
 }
-#preview > [data-type="NodeDocument"] {
+#preview > [data-type='NodeDocument'] {
   padding: 0;
-  margin: 0 ;
-  /* max-width: 800px;margin: 0 auto; */
+  margin: 0 auto;
+  max-width: 800px;
 }
 #preview > * {
   max-width: 800px;
+  width: 800px;
   margin: 0 auto;
 }
-#preview > [data-type="NodeDocument"]>.protyle-background__img {
+#preview > [data-type='NodeDocument'] > .protyle-background__img {
   max-width: 100%;
   width: 100vw;
   background-position: center;

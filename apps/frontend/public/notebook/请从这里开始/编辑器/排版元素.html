@@ -1,129 +1,29 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>排版元素</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20200825162036-4dx365o" data-node-id="20200825162036-4dx365o" data-type="NodeDocument" updated="20230820185054" data-subtype="h1" class="h1" icon="1f4f0" title="排版元素" title-img="background-color: hsl(2, 57%, 40%);background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);" type="doc">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;background-color: hsl(2, 57%, 40%);background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);"/>
-      <div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x1f4f0 </div>
-</div>
-<div id="20210604182832-nm3hapx" data-node-id="20210604182832-nm3hapx" data-type="NodeHeading" updated="20220916194920" data-subtype="h2" class="h2">
-      <div>行级元素
-</div>
-    </div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>排版元素</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20200825162036-4dx365o" data-node-id="20200825162036-4dx365o" data-type="NodeDocument" updated="20230820185054" data-subtype="h1" class="h1" icon="1f4f0" title-img="background-color: hsl(2, 57%, 40%);background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);" type="doc"><div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;background-color: hsl(2, 57%, 40%);background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);"/><div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x1f4f0 </div></div></div><div id="20200825162036-4dx365o" data-node-id="20200825162036-4dx365o" data-type="NodeDocument" updated="20230820185054" data-subtype="h1" class="h1" icon="1f4f0" title-img="background-color: hsl(2, 57%, 40%);background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);" type="doc" data-type="NodeHeading" class="h1">排版元素</div><div id="20210604182832-nm3hapx" data-node-id="20210604182832-nm3hapx" data-type="NodeHeading" updated="20220916194920" data-subtype="h2" class="h2"><div>行级元素
+</div></div>
 <div id="20210104091228-ttcj9nm" data-node-id="20210104091228-ttcj9nm" data-type="NodeList" updated="20220918174723" data-subtype="u" class="list"><div id="20210604220521-7pujuf7" data-node-id="20210604220521-7pujuf7" data-type="NodeListItem" updated="20211205000246" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -156,6 +56,7 @@
         data-src="./../../assets/siyuan-128-20210604092205-djd749a.png"
         title=""
         style="display: block;"
+        loading="lazy"
       /><span class="protyle-action__title"></span></span
     >
 
@@ -327,10 +228,8 @@
 
     </div>
 </div>
-<div id="20210604183450-fybakeg" data-node-id="20210604183450-fybakeg" data-type="NodeHeading" updated="20210604183453" data-subtype="h2" class="h2">
-      <div>超级块
-</div>
-    </div>
+<div id="20210604183450-fybakeg" data-node-id="20210604183450-fybakeg" data-type="NodeHeading" updated="20210604183453" data-subtype="h2" class="h2"><div>超级块
+</div></div>
 <div
       id="20210604234955-651jbge" data-node-id="20210604234955-651jbge" data-type="NodeSuperBlock" updated="20210612222326" class="sb"
       data-sb-layout="col"
@@ -366,12 +265,9 @@
 
 
     </div>
-<div id="20210604182944-w4gwxvw" data-node-id="20210604182944-w4gwxvw" data-type="NodeHeading" updated="20210604183242" data-subtype="h2" class="h2">
-      <div>嵌入块
-</div>
-    </div>
+<div id="20210604182944-w4gwxvw" data-node-id="20210604182944-w4gwxvw" data-type="NodeHeading" updated="20210604183242" data-subtype="h2" class="h2"><div>嵌入块
+</div></div>
 <div id="20210604222515-ggpd5hs" data-node-id="20210604222515-ggpd5hs" data-type="NodeBlockQueryEmbed" updated="20210604222515" data-type="NodeBlockquote" class="bq">
-      
 
 <div id="20210428212840-8rqwn5o" data-node-id="20210428212840-8rqwn5o" data-type="NodeParagraph" updated="20230415112508" class="p" style="color: var(--b3-card-info-color); background-color: var(--b3-card-info-background);">在
 <span data-type="block-ref"     data-subtype="s"     data-id="20230415111858-vgohvf3">
@@ -387,20 +283,13 @@
 </div>
 
 
-
-    </div>
-<div id="20210604222535-cb4cjo9" data-node-id="20210604222535-cb4cjo9" data-type="NodeHeading" updated="20220312004958" data-subtype="h2" class="h2">
-      <div>标题块
 </div>
-    </div>
-<div id="20210104091228-okx8vv6" data-node-id="20210104091228-okx8vv6" data-type="NodeHeading" updated="20210415200532" data-subtype="h2" class="h2">
-      <div>有序、无序、任务列表
-</div>
-    </div>
-<div id="20210104091228-y6h31l2" data-node-id="20210104091228-y6h31l2" data-type="NodeHeading" updated="20210415200534" data-subtype="h3" class="h3">
-      <div>无序列表
-</div>
-    </div>
+<div id="20210604222535-cb4cjo9" data-node-id="20210604222535-cb4cjo9" data-type="NodeHeading" updated="20220312004958" data-subtype="h2" class="h2"><div>标题块
+</div></div>
+<div id="20210104091228-okx8vv6" data-node-id="20210104091228-okx8vv6" data-type="NodeHeading" updated="20210415200532" data-subtype="h2" class="h2"><div>有序、无序、任务列表
+</div></div>
+<div id="20210104091228-y6h31l2" data-node-id="20210104091228-y6h31l2" data-type="NodeHeading" updated="20210415200534" data-subtype="h3" class="h3"><div>无序列表
+</div></div>
 <div id="20210104091228-tue1zbn" data-node-id="20210104091228-tue1zbn" data-type="NodeList" updated="20210104091228" data-subtype="u" class="list"><div id="20210104091228-ao01ihn" data-node-id="20210104091228-ao01ihn" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -486,10 +375,8 @@
 
     </div>
 </div>
-<div id="20210104091228-ocbok50" data-node-id="20210104091228-ocbok50" data-type="NodeHeading" updated="20210415200535" data-subtype="h3" class="h3">
-      <div>有序列表
-</div>
-    </div>
+<div id="20210104091228-ocbok50" data-node-id="20210104091228-ocbok50" data-type="NodeHeading" updated="20210415200535" data-subtype="h3" class="h3"><div>有序列表
+</div></div>
 <div id="20210104091228-90lv391" data-node-id="20210104091228-90lv391" data-type="NodeList" updated="20210104091228" data-subtype="o" class="list"><div id="20210104091228-2wye0q8" data-node-id="20210104091228-2wye0q8" data-type="NodeListItem" data-subtype="o" class="li" data-marker="1.">
       <div class="protyle-action">
         1.
@@ -574,10 +461,8 @@
 
     </div>
 </div>
-<div id="20210104091228-t9yutg4" data-node-id="20210104091228-t9yutg4" data-type="NodeHeading" updated="20210415200538" data-subtype="h3" class="h3">
-      <div>任务列表
-</div>
-    </div>
+<div id="20210104091228-t9yutg4" data-node-id="20210104091228-t9yutg4" data-type="NodeHeading" updated="20210415200538" data-subtype="h3" class="h3"><div>任务列表
+</div></div>
 <div id="20210104091228-4uwvws7" data-node-id="20210104091228-4uwvws7" data-type="NodeList" updated="20210604230227" data-subtype="t" class="list"><div id="20210104091228-670n64p" data-node-id="20210104091228-670n64p" data-type="NodeListItem" data-subtype="t" class="li protyle-task--done " data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconCheck"></use></svg>
@@ -597,33 +482,22 @@
 
     </div>
 </div>
-<div id="20210604182634-xswb2hw" data-node-id="20210604182634-xswb2hw" data-type="NodeHeading" updated="20211120101257" data-subtype="h2" class="h2">
-      <div>引述块
-</div>
-    </div>
+<div id="20210604182634-xswb2hw" data-node-id="20210604182634-xswb2hw" data-type="NodeHeading" updated="20211120101257" data-subtype="h2" class="h2"><div>引述块
+</div></div>
 <div id="20210604223030-6gapuyv" data-node-id="20210604223030-6gapuyv" data-type="NodeBlockquote" updated="20210604223045" class="bq">
 <div id="20210604223031-yogw7qh" data-node-id="20210604223031-yogw7qh" data-type="NodeParagraph" updated="20210604223045" class="p">注意不是内容块引用，而是引述块（Blockquote）。
 </div>
 </div>
-<div id="20210104091228-r7b56f9" data-node-id="20210104091228-r7b56f9" data-type="NodeHeading" updated="20210415200520" data-subtype="h2" class="h2">
-      <div>代码块
-</div>
-    </div>
+<div id="20210104091228-r7b56f9" data-node-id="20210104091228-r7b56f9" data-type="NodeHeading" updated="20210415200520" data-subtype="h2" class="h2"><div>代码块
+</div></div>
 <div id="20210104091228-zbx0a7k" data-node-id="20210104091228-zbx0a7k" data-type="NodeParagraph" updated="20210104091228" class="p">如果在 ``` 后面跟随语言名称，可以有语法高亮的效果哦，比如：
 </div>
-<div id="20210104091228-qagtclt" data-node-id="20210104091228-qagtclt" data-type="NodeHeading" updated="20210415200529" data-subtype="h3" class="h3">
-      <div>演示 Go 代码高亮
-</div>
-    </div>
+<div id="20210104091228-qagtclt" data-node-id="20210104091228-qagtclt" data-type="NodeHeading" updated="20210415200529" data-subtype="h3" class="h3"><div>演示 Go 代码高亮
+</div></div>
 <div id="20210104091228-mwb2x54" data-node-id="20210104091228-mwb2x54" data-type="NodeCodeBlock" updated="20210104091228" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          go
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">go</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">package main
 
@@ -634,19 +508,12 @@ func main() {
 }
 </div>
       </div>
-<div id="20210104091228-cwrynj4" data-node-id="20210104091228-cwrynj4" data-type="NodeHeading" updated="20210415200530" data-subtype="h3" class="h3">
-      <div>演示 Java 高亮
-</div>
-    </div>
+<div id="20210104091228-cwrynj4" data-node-id="20210104091228-cwrynj4" data-type="NodeHeading" updated="20210415200530" data-subtype="h3" class="h3"><div>演示 Java 高亮
+</div></div>
 <div id="20210104091228-68vvd95" data-node-id="20210104091228-68vvd95" data-type="NodeCodeBlock" updated="20210104091228" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          java
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">java</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">public class HelloWorld {
 
@@ -683,10 +550,8 @@ func main() {
  ...
 </div>
 </div>
-<div id="20210104091228-1bq55o9" data-node-id="20210104091228-1bq55o9" data-type="NodeHeading" updated="20210604183513" data-subtype="h2" class="h2">
-      <div>表格
-</div>
-    </div>
+<div id="20210104091228-1bq55o9" data-node-id="20210104091228-1bq55o9" data-type="NodeHeading" updated="20210604183513" data-subtype="h2" class="h2"><div>表格
+</div></div>
 <div id="20210104091228-eem86ni" data-node-id="20210104091228-eem86ni" data-type="NodeTable" updated="20210104091228" class="table">
     <div>
       <table spellcheck="false">
@@ -719,10 +584,8 @@ func main() {
       </table>
     </div>
   </div>
-<div id="20220312004459-gdhy5je" data-node-id="20220312004459-gdhy5je" data-type="NodeHeading" updated="20220312004516" data-subtype="h2" class="h2">
-      <div>HTML 块
-</div>
-    </div>
+<div id="20220312004459-gdhy5je" data-node-id="20220312004459-gdhy5je" data-type="NodeHeading" updated="20220312004516" data-subtype="h2" class="h2"><div>HTML 块
+</div></div>
 <div id="20220312004517-f6i1k8m" data-node-id="20220312004517-f6i1k8m" data-type="NodeHTMLBlock" updated="20220828102447"><div>
 <ruby>
 你<rt>nǐ</rt>
@@ -754,15 +617,11 @@ Hello World
 
     </div>
 </div>
-<div id="20210604183516-4v5xvue" data-node-id="20210604183516-4v5xvue" data-type="NodeHeading" updated="20210604183745" data-subtype="h2" class="h2">
-      <div>分隔线
-</div>
-    </div>
+<div id="20210604183516-4v5xvue" data-node-id="20210604183516-4v5xvue" data-type="NodeHeading" updated="20210604183745" data-subtype="h2" class="h2"><div>分隔线
+</div></div>
 <div id="20210604222430-tctcbzh" data-node-id="20210604222430-tctcbzh" data-type="NodeThematicBreak" updated="20210604222430" class="hr"><div></div></div>
-<div id="20210104091228-l7g1s3j" data-node-id="20210104091228-l7g1s3j" data-type="NodeHeading" updated="20210415200550" data-subtype="h2" class="h2">
-      <div>数学公式
-</div>
-    </div>
+<div id="20210104091228-l7g1s3j" data-node-id="20210104091228-l7g1s3j" data-type="NodeHeading" updated="20210415200550" data-subtype="h2" class="h2"><div>数学公式
+</div></div>
 <div id="20210104091228-9ok9gv4" data-node-id="20210104091228-9ok9gv4" data-type="NodeMathBlock" data-subtype="math" class="render-node" data-content="\frac{1}{
   \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{
   \frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {
@@ -772,37 +631,29 @@ Hello World
 }">
     <div spin="1"></div>
   </div>
-<div id="20210604183551-ob6f6wk" data-node-id="20210604183551-ob6f6wk" data-type="NodeHeading" updated="20210608004838" data-subtype="h2" class="h2">
-      <div>IFrame
-</div>
-    </div>
+<div id="20210604183551-ob6f6wk" data-node-id="20210604183551-ob6f6wk" data-type="NodeHeading" updated="20210608004838" data-subtype="h2" class="h2"><div>IFrame
+</div></div>
  <div id="20220908200902-6rqv2wt" data-node-id="20220908200902-6rqv2wt" data-type="NodeIFrame" updated="20220908200902" class="iframe">
     <div class="iframe-content">
     <iframe src="https://player.bilibili.com/player.html?bvid=BV1ov41187qM&amp;page=1&amp;high_quality=1&amp;as_wide=1&amp;allowfullscreen=true&amp;aid=247401039&amp;cid=319662466&amp;autoplay=0" data-src="//player.bilibili.com/player.html?aid=247401039&amp;bvid=BV1ov41187qM&amp;cid=319662466&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 981px; height: 440px;" sandbox="allow-top-navigation-by-user-activation allow-same-origin allow-forms allow-scripts allow-popups"></iframe>
     </div>
   </div>
-<div id="20210608113637-i04ffr2" data-node-id="20210608113637-i04ffr2" data-type="NodeHeading" updated="20210608120716" data-subtype="h2" class="h2">
-      <div>视频
-</div>
-    </div>
-<div  id="20210608113914-zvtw5kj" data-node-id="20210608113914-zvtw5kj" data-type="NodeVideo" updated="20210608113914" class="iframe">
+<div id="20210608113637-i04ffr2" data-node-id="20210608113637-i04ffr2" data-type="NodeHeading" updated="20210608120716" data-subtype="h2" class="h2"><div>视频
+</div></div>
+ <div id="20210608113914-zvtw5kj" data-node-id="20210608113914-zvtw5kj" data-type="NodeVideo" updated="20210608113914" class="iframe">
     <div class="iframe-content">
-      <video controls="controls" src="assets/formatting_elements-20210607225733-o1keasx.mp4" data-src="assets/formatting_elements-20210607213508-y2r3y55-20210608113914-q11ou4j.mp4" style="width: 640px; height: 327px;"></video>
+    <video controls="controls" src="./../../assets/formatting_elements-20210607225733-o1keasx.mp4" data-src="assets/formatting_elements-20210607213508-y2r3y55-20210608113914-q11ou4j.mp4" style="width: 640px; height: 327px;"></video>
     </div>
   </div>
-<div id="20210608113645-k19wsmr" data-node-id="20210608113645-k19wsmr" data-type="NodeHeading" updated="20210608113650" data-subtype="h2" class="h2">
-      <div>音频
-</div>
-    </div>
-<div  id="20210608113713-wm8271x" data-node-id="20210608113713-wm8271x" data-type="NodeAudio" updated="20210608113713">
+<div id="20210608113645-k19wsmr" data-node-id="20210608113645-k19wsmr" data-type="NodeHeading" updated="20210608113650" data-subtype="h2" class="h2"><div>音频
+</div></div>
+ <div id="20210608113713-wm8271x" data-node-id="20210608113713-wm8271x" data-type="NodeAudio" updated="20210608113713">
     <div class="iframe-content">
-      <audio controls="controls" src="assets/record1623120470117-20210608104750-2thv5m5.wav" data-src="assets/record1623077643753-20210607225403-7cg1jkq-20210608113713-4eddn56.wav"></audio>
+    <audio controls="controls" src="./../../assets/record1623120470117-20210608104750-2thv5m5.wav" data-src="assets/record1623077643753-20210607225403-7cg1jkq-20210608113713-4eddn56.wav"></audio>
     </div>
   </div>
-<div id="20210104091228-wdpx6ev" data-node-id="20210104091228-wdpx6ev" data-type="NodeHeading" updated="20210415200555" data-subtype="h2" class="h2">
-      <div>脑图
-</div>
-    </div>
+<div id="20210104091228-wdpx6ev" data-node-id="20210104091228-wdpx6ev" data-type="NodeHeading" updated="20210415200555" data-subtype="h2" class="h2"><div>脑图
+</div></div>
 <div id="20210104091228-xdtxrto" data-node-id="20210104091228-xdtxrto" data-type="NodeCodeBlock" data-subtype="mindmap" class="render-node" data-content="- 教程
 - 语法指导
   - 普通内容
@@ -844,10 +695,8 @@ Hello World
       </div>
 <div id="20211213122456-r9r9njg" data-node-id="20211213122456-r9r9njg" data-type="NodeParagraph" updated="20211213122523" class="p">使用 Markdown 列表语法渲染脑图。
 </div>
-<div id="20210104091228-2nz4ows" data-node-id="20210104091228-2nz4ows" data-type="NodeHeading" updated="20210604223148" data-subtype="h2" class="h2">
-      <div>流程图
-</div>
-    </div>
+<div id="20210104091228-2nz4ows" data-node-id="20210104091228-2nz4ows" data-type="NodeHeading" updated="20210604223148" data-subtype="h2" class="h2"><div>流程图
+</div></div>
 <div id="20210104091228-ez3uzqu" data-node-id="20210104091228-ez3uzqu" data-type="NodeCodeBlock" data-subtype="mermaid" class="render-node" data-content="graph TB
     c1--&gt;a2
     subgraph one
@@ -867,10 +716,8 @@ Hello World
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20210104091228-jlr83td" data-node-id="20210104091228-jlr83td" data-type="NodeHeading" updated="20211221130459" data-subtype="h2" class="h2">
-      <div>时序图
-</div>
-    </div>
+<div id="20210104091228-jlr83td" data-node-id="20210104091228-jlr83td" data-type="NodeHeading" updated="20211221130459" data-subtype="h2" class="h2"><div>时序图
+</div></div>
 <div id="20210104091228-jf7ocds" data-node-id="20210104091228-jf7ocds" data-type="NodeCodeBlock" data-subtype="mermaid" class="render-node" data-content="sequenceDiagram
     Alice-&gt;&gt;John: Hello John, how are you?
     loop Every minute
@@ -884,10 +731,8 @@ Hello World
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20210104091228-bp25efl" data-node-id="20210104091228-bp25efl" data-type="NodeHeading" updated="20210415200600" data-subtype="h2" class="h2">
-      <div>甘特图
-</div>
-    </div>
+<div id="20210104091228-bp25efl" data-node-id="20210104091228-bp25efl" data-type="NodeHeading" updated="20210415200600" data-subtype="h2" class="h2"><div>甘特图
+</div></div>
 <div id="20210104091228-rkz14tq" data-node-id="20210104091228-rkz14tq" data-type="NodeCodeBlock" data-subtype="mermaid" class="render-node" data-content="gantt
     title A Gantt Diagram
     dateFormat  YYYY-MM-DD
@@ -905,10 +750,8 @@ Hello World
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20211221130523-8zamni0" data-node-id="20211221130523-8zamni0" data-type="NodeHeading" updated="20211221130530" data-subtype="h2" class="h2">
-      <div>类图
-</div>
-    </div>
+<div id="20211221130523-8zamni0" data-node-id="20211221130523-8zamni0" data-type="NodeHeading" updated="20211221130530" data-subtype="h2" class="h2"><div>类图
+</div></div>
 <div id="20211221130523-4ufvc7s" data-node-id="20211221130523-4ufvc7s" data-type="NodeCodeBlock" updated="20211221130538" data-subtype="mermaid" class="render-node" data-content="classDiagram
 Class01 &amp;lt;|-- AveryLongClass : Cool
 Class03 *-- Class04
@@ -930,10 +773,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20211221130726-bc0gmbk" data-node-id="20211221130726-bc0gmbk" data-type="NodeHeading" updated="20211221130849" data-subtype="h2" class="h2">
-      <div>用户游历图
-</div>
-    </div>
+<div id="20211221130726-bc0gmbk" data-node-id="20211221130726-bc0gmbk" data-type="NodeHeading" updated="20211221130849" data-subtype="h2" class="h2"><div>用户游历图
+</div></div>
 <div id="20211221130726-sqk7b09" data-node-id="20211221130726-sqk7b09" data-type="NodeCodeBlock" updated="20211221130820" data-subtype="mermaid" class="render-node" data-content="journey
     title My working day
     section Go to work
@@ -950,10 +791,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20211221130609-36qfaos" data-node-id="20211221130609-36qfaos" data-type="NodeHeading" updated="20211221130615" data-subtype="h2" class="h2">
-      <div>Git 图
-</div>
-    </div>
+<div id="20211221130609-36qfaos" data-node-id="20211221130609-36qfaos" data-type="NodeHeading" updated="20211221130615" data-subtype="h2" class="h2"><div>Git 图
+</div></div>
 <div id="20211221130609-z04k7rn" data-node-id="20211221130609-z04k7rn" data-type="NodeCodeBlock" updated="20220602100957" data-subtype="mermaid" class="render-node" data-content="    gitGraph
        commit
        commit
@@ -971,10 +810,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20211221130641-06rg9n2" data-node-id="20211221130641-06rg9n2" data-type="NodeHeading" updated="20211221130714" data-subtype="h2" class="h2">
-      <div>实体关系图
-</div>
-    </div>
+<div id="20211221130641-06rg9n2" data-node-id="20211221130641-06rg9n2" data-type="NodeHeading" updated="20211221130714" data-subtype="h2" class="h2"><div>实体关系图
+</div></div>
 <div id="20211221130641-t6qb9tz" data-node-id="20211221130641-t6qb9tz" data-type="NodeCodeBlock" updated="20211221130710" data-subtype="mermaid" class="render-node" data-content="erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
@@ -986,10 +823,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 <a href="https://mermaid.js.org/">Mermaid</a>
 。
 </div>
-<div id="20210104091228-jctx529" data-node-id="20210104091228-jctx529" data-type="NodeHeading" updated="20210415200602" data-subtype="h2" class="h2">
-      <div>图表
-</div>
-    </div>
+<div id="20210104091228-jctx529" data-node-id="20210104091228-jctx529" data-type="NodeHeading" updated="20210415200602" data-subtype="h2" class="h2"><div>图表
+</div></div>
 <div id="20210104091228-b6sr6sq" data-node-id="20210104091228-b6sr6sq" data-type="NodeCodeBlock" updated="20221105164534" data-subtype="echarts" class="render-node" data-content="{
   &amp;quot;title&amp;quot;: { &amp;quot;text&amp;quot;: &amp;quot;最近 30 天&amp;quot; },
   &amp;quot;backgroundColor&amp;quot;: &amp;quot;transparent&amp;quot;,
@@ -1031,13 +866,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 </div>
 <div id="20221225103039-o8ap7h6" data-node-id="20221225103039-o8ap7h6" data-type="NodeCodeBlock" updated="20221225103059" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          json
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">json</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">{
     "propName": "propValue"
@@ -1054,13 +884,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 </div>
 <div id="20221225103111-8jioici" data-node-id="20221225103111-8jioici" data-type="NodeCodeBlock" updated="20221225103114" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          javascript
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">javascript</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">{
     propName: 'propValue',
@@ -1077,13 +902,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 </div>
 <div id="20221225103118-uw8ui6i" data-node-id="20221225103118-uw8ui6i" data-type="NodeCodeBlock" updated="20221225103122" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          javascript
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">javascript</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">(() => {
     const option = {};
@@ -1099,10 +919,8 @@ Class08 &amp;lt;--&amp;gt; C2: Cool label">
 <a href="https://echarts.apache.org/zh/index.html">ECharts</a>
 。
 </div>
-<div id="20210104091228-nxyj563" data-node-id="20210104091228-nxyj563" data-type="NodeHeading" updated="20210604223215" data-subtype="h2" class="h2">
-      <div>五线谱
-</div>
-    </div>
+<div id="20210104091228-nxyj563" data-node-id="20210104091228-nxyj563" data-type="NodeHeading" updated="20210604223215" data-subtype="h2" class="h2"><div>五线谱
+</div></div>
 <div id="20210104091228-0oun8c9" data-node-id="20210104091228-0oun8c9" data-type="NodeCodeBlock" data-subtype="abc" class="render-node" data-content="X: 24
 T: Clouds Thicken
 C: Paul Rosen
@@ -1124,10 +942,8 @@ K: Em
       </div>
 <div id="20211213122035-83prmz2" data-node-id="20211213122035-83prmz2" data-type="NodeParagraph" updated="20230820185054" class="p">语法请参考 abcjs (github repo: paulrosen/abcjs)。
 </div>
-<div id="20210104091228-ifv0j64" data-node-id="20210104091228-ifv0j64" data-type="NodeHeading" updated="20210415200607" data-subtype="h2" class="h2">
-      <div>Graphviz
-</div>
-    </div>
+<div id="20210104091228-ifv0j64" data-node-id="20210104091228-ifv0j64" data-type="NodeHeading" updated="20210415200607" data-subtype="h2" class="h2"><div>Graphviz
+</div></div>
 <div id="20210104091228-ww5nb3p" data-node-id="20210104091228-ww5nb3p" data-type="NodeCodeBlock" data-subtype="graphviz" class="render-node" data-content="digraph finite_state_machine {
     rankdir=LR;
     size=&quot;8,5&quot;
@@ -1151,10 +967,8 @@ K: Em
 <a href="https://graphviz.org">Graphviz</a>
 。
 </div>
-<div id="20210104091228-tw1nmmg" data-node-id="20210104091228-tw1nmmg" data-type="NodeHeading" updated="20210415200608" data-subtype="h2" class="h2">
-      <div>Flowchart
-</div>
-    </div>
+<div id="20210104091228-tw1nmmg" data-node-id="20210104091228-tw1nmmg" data-type="NodeHeading" updated="20210415200608" data-subtype="h2" class="h2"><div>Flowchart
+</div></div>
 <div id="20210104091228-mh7dtd0" data-node-id="20210104091228-mh7dtd0" data-type="NodeCodeBlock" data-subtype="flowchart" class="render-node" data-content="st=&gt;start: Start
 op=&gt;operation: Your Operation
 cond=&gt;condition: Yes or No?
@@ -1171,10 +985,8 @@ cond(no)-&gt;op
 <a href="https://flowchart.js.org/">flowchart.js</a>
 。
 </div>
-<div id="20210201202204-gljrabr" data-node-id="20210201202204-gljrabr" data-type="NodeHeading" updated="20210415200621" data-subtype="h2" class="h2">
-      <div>PlantUML
-</div>
-    </div>
+<div id="20210201202204-gljrabr" data-node-id="20210201202204-gljrabr" data-type="NodeHeading" updated="20210415200621" data-subtype="h2" class="h2"><div>PlantUML
+</div></div>
 <div id="20210201202302-5lfweuz" data-node-id="20210201202302-5lfweuz" data-type="NodeCodeBlock" updated="20210201202302" data-subtype="plantuml" class="render-node" data-content="@startuml component
 actor client
 node app
@@ -1190,57 +1002,58 @@ app -&gt; client
 。
 </div>
 
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>

@@ -1,129 +1,29 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>查询语法</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20220415190432-r3xqn3r" data-node-id="20220415190432-r3xqn3r" data-type="NodeDocument" updated="20230820184739" data-subtype="h1" class="h1" title="查询语法">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
-      
-</div>
-<div id="20220415192036-99dwwdh" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" updated="20220415201012" data-subtype="h2" class="h2">
-      <div>概述
-</div>
-    </div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>查询语法</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20220415190432-r3xqn3r" data-node-id="20220415190432-r3xqn3r" data-type="NodeDocument" updated="20230820184739" data-subtype="h1" class="h1"></div><div id="20220415190432-r3xqn3r" data-node-id="20220415190432-r3xqn3r" data-type="NodeDocument" updated="20230820184739" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">查询语法</div><div id="20220415192036-99dwwdh" data-node-id="20220415192036-99dwwdh" data-type="NodeHeading" updated="20220415201012" data-subtype="h2" class="h2"><div>概述
+</div></div>
 <div id="20220415190432-6g68nr6" data-node-id="20220415190432-6g68nr6" data-type="NodeParagraph" updated="20220415232302" class="p">全局搜索 
 <span data-type="kbd">Ctrl+P</span>
  支持通过查询语法（Query Syntax）进行高级搜索，以便实现一些逻辑操作，比如包含关键字 
@@ -169,10 +69,8 @@
 </div>
 <div id="20220415192934-mlqzc8m" data-node-id="20220415192934-mlqzc8m" data-type="NodeParagraph" updated="20220415232006" class="p">下面我们分别介绍它们的细节。
 </div>
-<div id="20220415194256-qagtnkz" data-node-id="20220415194256-qagtnkz" data-type="NodeHeading" updated="20220415194259" data-subtype="h2" class="h2">
-      <div>字符串
-</div>
-    </div>
+<div id="20220415194256-qagtnkz" data-node-id="20220415194256-qagtnkz" data-type="NodeHeading" updated="20220415194259" data-subtype="h2" class="h2"><div>字符串
+</div></div>
 <div id="20220415194259-bvrexhp" data-node-id="20220415194259-bvrexhp" data-type="NodeParagraph" updated="20220415194339" class="p">字符串可由两种方式指定：
 </div>
 <div id="20220415194339-m0g962e" data-node-id="20220415194339-m0g962e" data-type="NodeList" updated="20220415232543" data-subtype="u" class="list"><div id="20220415194342-0tzonkx" data-node-id="20220415194342-0tzonkx" data-type="NodeListItem" updated="20220415202647" data-subtype="u" class="li" data-marker="*">
@@ -262,10 +160,8 @@
 <span data-type="code">*</span>
  等符号的字符串。
 </div>
-<div id="20220415192040-apqa2u0" data-node-id="20220415192040-apqa2u0" data-type="NodeHeading" updated="20220415192043" data-subtype="h2" class="h2">
-      <div>短语
-</div>
-    </div>
+<div id="20220415192040-apqa2u0" data-node-id="20220415192040-apqa2u0" data-type="NodeHeading" updated="20220415192043" data-subtype="h2" class="h2"><div>短语
+</div></div>
 <div id="20220415192311-5fv8kjl" data-node-id="20220415192311-5fv8kjl" data-type="NodeParagraph" updated="20230820184739" class="p">短语由字符串构成，可由 
 <span data-type="code">+</span>
 ​ 进行连接。一个短语是由一些记号（Token）有序构成，这些记号由用户的输入文本通过分词器处理得到。思源使用的分词器为了让中文搜索好用（支持单字搜索），所以实现方式是按照字分词的，也就是说每个汉字或者英文字母都会被拆分为一个记号。这对 
@@ -274,10 +170,8 @@
 <span data-type="code">+</span>
 ​ 组合多个短语。
 </div>
-<div id="20220415192044-9d8ou1j" data-node-id="20220415192044-9d8ou1j" data-type="NodeHeading" updated="20220415192101" data-subtype="h2" class="h2">
-      <div>查询
-</div>
-    </div>
+<div id="20220415192044-9d8ou1j" data-node-id="20220415192044-9d8ou1j" data-type="NodeHeading" updated="20220415192101" data-subtype="h2" class="h2"><div>查询
+</div></div>
 <div id="20220415192101-lezi6pd" data-node-id="20220415192101-lezi6pd" data-type="NodeParagraph" updated="20220415211942" class="p">查询由多个短语构成，可通过操作符 
 <span data-type="code">AND</span>
 、
@@ -324,13 +218,8 @@
 </div>
 <div id="20220415212235-jon9dnr" data-node-id="20220415212235-jon9dnr" data-type="NodeCodeBlock" updated="20220502163519" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          sql
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">-- 匹配包含 "one" 或者 "two" 的块，不匹配包含 "three" 的块
 'one OR two NOT three'
@@ -345,13 +234,8 @@
 </div>
 <div id="20220415225927-10jqrs9" data-node-id="20220415225927-10jqrs9" data-type="NodeCodeBlock" updated="20220502163531" class="code-block">
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          sql
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         <div class="hljs" spellcheck="false">'one two three'         -- 'one AND two AND three'
 'three "one two"'       -- 'three AND "one two"'
@@ -361,10 +245,8 @@
 'func(one two)'         -- 语法错误！
 </div>
       </div>
-<div id="20220415195733-gb4mj1a" data-node-id="20220415195733-gb4mj1a" data-type="NodeHeading" updated="20220415234700" data-subtype="h2" class="h2">
-      <div>技术实现
-</div>
-    </div>
+<div id="20220415195733-gb4mj1a" data-node-id="20220415195733-gb4mj1a" data-type="NodeHeading" updated="20220415234700" data-subtype="h2" class="h2"><div>技术实现
+</div></div>
 <div id="20220415195737-mo3ya7g" data-node-id="20220415195737-mo3ya7g" data-type="NodeParagraph" updated="20220415230645" class="p">我们通过 
 <a href="https://www.sqlite.org/fts5.html">SQLite FTS5</a>
  实现了全局搜索。
@@ -388,7 +270,6 @@
 <div id="20220415200742-2l1tkjr" data-node-id="20220415200742-2l1tkjr" data-type="NodeParagraph" updated="20220415202247" class="p">了解到这些以后，我们就可以通过查询语法来实现查询嵌入块，这样查询性能会更好：
 </div>
 <div id="20220415200953-ftnqiic" data-node-id="20220415200953-ftnqiic" data-type="NodeBlockQueryEmbed" updated="20220415234532" data-type="NodeBlockquote" class="bq">
-      
 
 <div id="20220415190432-6g68nr6" data-node-id="20220415190432-6g68nr6" data-type="NodeParagraph" updated="20220415232302" class="p">全局搜索 
 <span data-type="kbd">Ctrl+P</span>
@@ -402,14 +283,11 @@
 </div>
 
 
-
-    </div>
+</div>
 <div id="20220415202144-mc7e5xh" data-node-id="20220415202144-mc7e5xh" data-type="NodeParagraph" updated="20220415202331" class="p">除此以外，API 也支持使用 FTS 查询。
 </div>
-<div id="20220415230035-u0oui0b" data-node-id="20220415230035-u0oui0b" data-type="NodeHeading" updated="20220415230221" data-subtype="h3" class="h3">
-      <div>大小写敏感
-</div>
-    </div>
+<div id="20220415230035-u0oui0b" data-node-id="20220415230035-u0oui0b" data-type="NodeHeading" updated="20220415230221" data-subtype="h3" class="h3"><div>大小写敏感
+</div></div>
 <div id="20220415230042-zzlr04p" data-node-id="20220415230042-zzlr04p" data-type="NodeParagraph" updated="20220415230236" class="p">如果开启了 
 <span data-type="kbd">设置</span>
  - 
@@ -444,57 +322,58 @@
 <div id="20220415232054-zr76p9s" data-node-id="20220415232054-zr76p9s" data-type="NodeParagraph" updated="20220415232120" class="p">如果你有更好的实现方案，欢迎告诉我们，非常感谢。
 </div>
 
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>

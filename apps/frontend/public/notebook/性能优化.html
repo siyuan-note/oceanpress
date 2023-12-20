@@ -1,135 +1,33 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>性能优化</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20230405155631-leo4vc6" data-node-id="20230405155631-leo4vc6" data-type="NodeDocument" updated="20230406155719" data-subtype="h1" class="h1" icon="1f680" title="性能优化">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
-      <div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x1f680 </div>
-</div>
-<div id="20230405155631-0xw341e" data-node-id="20230405155631-0xw341e" data-type="NodeHeading" updated="20230405163058" data-subtype="h2" class="h2">
-      <div>概述
-</div>
-    </div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="appearance/oceanpress.css"/>
+  <title>性能优化</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20230405155631-leo4vc6" data-node-id="20230405155631-leo4vc6" data-type="NodeDocument" updated="20231014100210" data-subtype="h1" class="h1" icon="1f680"></div><div id="20230405155631-leo4vc6" data-node-id="20230405155631-leo4vc6" data-type="NodeDocument" updated="20231014100210" data-subtype="h1" class="h1" icon="1f680" data-type="NodeHeading" class="h1">性能优化</div><div id="20230405155631-0xw341e" data-node-id="20230405155631-0xw341e" data-type="NodeHeading" updated="20230405163058" data-subtype="h2" class="h2"><div>概述
+</div></div>
 <div id="20230405155721-ljxfaat" data-node-id="20230405155721-ljxfaat" data-type="NodeParagraph" updated="20230405165112" class="p">不同硬件配置、不同操作系统平台上性能表现是不一样的。另外，随着数据增多，性能下降无法避免。所以我们可能需要改变使用方式并调整一些配置项来提升性能，以获得更流畅的使用体验。
 </div>
-<div id="20230405171357-3f1dyix" data-node-id="20230405171357-3f1dyix" data-type="NodeHeading" updated="20230405171401" data-subtype="h3" class="h3">
-      <div>整体性能
-</div>
-    </div>
+<div id="20230405171357-3f1dyix" data-node-id="20230405171357-3f1dyix" data-type="NodeHeading" updated="20230405171401" data-subtype="h3" class="h3"><div>整体性能
+</div></div>
 <div id="20230405161606-12co6vz" data-node-id="20230405161606-12co6vz" data-type="NodeList" updated="20230405165154" data-subtype="u" class="list"><div id="20230405165154-mwfival" data-node-id="20230405165154-mwfival" data-type="NodeListItem" updated="20230405165154" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -210,39 +108,37 @@
 
     </div>
 </div>
-<div id="20230405171407-ltaakx8" data-node-id="20230405171407-ltaakx8" data-type="NodeHeading" updated="20230405171419" data-subtype="h3" class="h3">
-      <div>编辑器性能
-</div>
-    </div>
-<div id="20230405171343-t3v7zis" data-node-id="20230405171343-t3v7zis" data-type="NodeList" updated="20230405165229" data-subtype="u" class="list"><div id="20230405165213-7f2mie7" data-node-id="20230405165213-7f2mie7" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+<div id="20230405171407-ltaakx8" data-node-id="20230405171407-ltaakx8" data-type="NodeHeading" updated="20230405171419" data-subtype="h3" class="h3"><div>编辑器性能
+</div></div>
+<div id="20230405171343-t3v7zis" data-node-id="20230405171343-t3v7zis" data-type="NodeList" updated="20231014100210" data-subtype="u" class="list"><div id="20230405165213-7f2mie7" data-node-id="20230405165213-7f2mie7" data-type="NodeListItem" updated="20231014100152" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20230405165213-tb7ozhd" data-node-id="20230405165213-tb7ozhd" data-type="NodeParagraph" updated="20230405165216" class="p">叶子块大小：单个叶子块大小主要影响编辑器性能，如果一个叶子块包含了大量字符，那么编辑器可能会卡顿
+      <div id="20230405165213-tb7ozhd" data-node-id="20230405165213-tb7ozhd" data-type="NodeParagraph" updated="20231014100152" class="p">叶子块大小：单个叶子块大小会影响编辑器性能，如果一个叶子块包含了大量字符，那么编辑器可能会卡顿
 </div>
 
     </div>
-<div id="20230405170653-z2vsmgf" data-node-id="20230405170653-z2vsmgf" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+<div id="20230405170653-z2vsmgf" data-node-id="20230405170653-z2vsmgf" data-type="NodeListItem" updated="20231014100157" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20230405170653-xsogb1v" data-node-id="20230405170653-xsogb1v" data-type="NodeParagraph" updated="20230405171038" class="p">动态加载块数：加载块数主要影响编辑器性能，特别是对于公式块、代码块和图表块较多的情况，如果加载较多块，那么编辑器可能会卡顿
+      <div id="20230405170653-xsogb1v" data-node-id="20230405170653-xsogb1v" data-type="NodeParagraph" updated="20231014100157" class="p">动态加载块数：加载块数会影响编辑器性能，特别是对于公式块、代码块和图表块较多的情况，如果加载较多块，那么编辑器可能会卡顿
 </div>
 
     </div>
-<div id="20230405165219-ssntm64" data-node-id="20230405165219-ssntm64" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+<div id="20230405165219-ssntm64" data-node-id="20230405165219-ssntm64" data-type="NodeListItem" updated="20231014100159" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20230405165219-tu1gvvv" data-node-id="20230405165219-tu1gvvv" data-type="NodeParagraph" updated="20230405165223" class="p">代码块行号：代码块行号主要影响编辑器性能，如果一个代码块内容较多且开启了行号显示，那么编辑器可能会卡顿
+      <div id="20230405165219-tu1gvvv" data-node-id="20230405165219-tu1gvvv" data-type="NodeParagraph" updated="20231014100159" class="p">代码块行号：代码块行号会影响编辑器性能，如果一个代码块内容较多且开启了行号显示，那么编辑器可能会卡顿
 </div>
 
     </div>
-<div id="20230405165226-j1zfdmb" data-node-id="20230405165226-j1zfdmb" data-type="NodeListItem" updated="20230405165229" data-subtype="u" class="li" data-marker="*">
+<div id="20230405165226-j1zfdmb" data-node-id="20230405165226-j1zfdmb" data-type="NodeListItem" updated="20231014100210" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20230405165226-tc75whx" data-node-id="20230405165226-tc75whx" data-type="NodeParagraph" updated="20230405165229" class="p">图片和图表：图片和图表主要影响编辑器性能，如果文档中包含了大量图片和图表，那么编辑器可能会卡顿
+      <div id="20230405165226-tc75whx" data-node-id="20230405165226-tc75whx" data-type="NodeParagraph" updated="20231014100210" class="p">公式、图片和图表：公式、图片和图表会影响编辑器性能，如果文档中包含了大量公式、图片和图表，那么编辑器可能会卡顿
 </div>
 
     </div>
@@ -279,57 +175,58 @@
     </div>
 </div>
 
+  </div>
+  <script src="appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "stage/protyle";
+    const previewElement = document.getElementById("preview");
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>
