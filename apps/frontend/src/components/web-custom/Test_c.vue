@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { watchEffect } from "vue";
-  import { aElement } from "./store";
+  import { aElement } from "./store.ts";
 
   watchEffect(() => {
     aElement.forEach((el) => {

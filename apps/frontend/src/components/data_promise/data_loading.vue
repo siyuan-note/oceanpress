@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ref } from "vue";
-import { PromiseObj } from "./";
+import { PromiseObj } from "./index.ts";
 import { NSpace, NSpin, NButton, NButtonGroup, NAlert } from "naive-ui";
 const props = defineProps<{
   p: Ref<PromiseObj<unknown, Error>>;

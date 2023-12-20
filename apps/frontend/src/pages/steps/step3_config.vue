@@ -57,7 +57,7 @@
   </NStep>
 </template>
 <script setup lang="ts">
-  import { currentConfig } from "@/config";
+  import { currentConfig } from "@/config/index.ts";
   import { NCheckbox, NCollapse, NCollapseItem, NDivider, NInput, NStep } from "naive-ui";
   currentConfig;
 </script>
