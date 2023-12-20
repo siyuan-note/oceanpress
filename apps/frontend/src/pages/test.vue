@@ -6,14 +6,14 @@
   <!-- <iframe style="width: 80vw; height: 70vh" :src="'/notebook/test.html?t=' + Date.now()"></iframe> -->
 </template>
 <script setup lang="ts">
-  import { htmlTemplate } from "@/fs/htmlTemplate";
-  import { vApi } from "@/fs/siyuan_api";
+  import { htmlTemplate } from "@/core/htmlTemplate.ts";
+  import { vApi } from "@/core/siyuan_api.ts";
   import { NButton } from "naive-ui";
-  import { useDebouncedRef, usePromiseComputed } from "@/components/data_promise";
-  import { renderHTML } from "@/fs/render";
+  import { useDebouncedRef, usePromiseComputed } from "@/components/data_promise/index.ts";
+  import { renderHTML } from "@/core/render.ts";
   import { watchEffect } from "vue";
-  import { writeFile } from "@/util/writeFile";
-  import { S_Node } from "@/fs/siyuan_type";
+  import { writeFile } from "@/util/writeFile.ts";
+  import { S_Node } from "@/core/siyuan_type.ts";
   const sy = vApi.file_getFile({
     /** 排版元素 */
     // path: "data/20210808180117-czj9bvb/20200812220555-lj3enxa/20210808180320-abz7w6k/20200825162036-4dx365o.sy",

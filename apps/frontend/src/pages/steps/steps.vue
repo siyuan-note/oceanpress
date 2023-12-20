@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import { vApi } from "@/fs/siyuan_api";
+  import { vApi } from "@/core/siyuan_api.ts";
   import { computed, ref } from "vue";
-  import { currentConfig } from "@/config/";
+  import { currentConfig } from "@/config/index.ts";
   import { NSteps, NStep, NButton, NInputGroup, NInput, NAlert } from "naive-ui";
-  import { build } from "@/fs/build";
-  import { DocTree } from "@/fs/build";
+  import { build,DocTree } from "@/core/build.ts";
   import Step1_selectNote from "./step1_selectNote.vue";
   import Step2_preview from "./step2_preview.vue";
   import Step4_generate from "./step4_generate.vue";
