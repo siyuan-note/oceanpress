@@ -215,9 +215,7 @@ const render: {
   async NodeDocument(sy) {
     let html = ''
     if (/** 只有顶层的文档块才渲染题图 */ this.nodeStack.length === 1) {
-      html += `<div class="protyle-background protyle-background--enable" style="min-height: 150px;" ${strAttr(
-        sy,
-      )}>`
+      html += `<div style="min-height: 150px;" ${strAttr(sy)}>`
       if (sy.Properties?.['title-img']) {
         html += `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${
           sy.Properties?.['title-img']
@@ -227,6 +225,7 @@ const render: {
             : ''
         }</div>`
       }
+      html += '</div>'
       /** h1 文档标题 */
       html += `<div ${strAttr(sy)} data-type="NodeHeading" class="h1">${
         sy.Properties?.title
