@@ -30,7 +30,6 @@ export async function htmlTemplate(
   <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?${version}"/>
   <script>
   function isNightTime() {
-    return true
     const currentHour = new Date().getHours();
     return currentHour >= 18 || currentHour < 6;
   }
