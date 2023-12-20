@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "naive-ui": "^2.34.4",
     "typescript": "^5.0.2",
     "unocss": "^0.55.7",
