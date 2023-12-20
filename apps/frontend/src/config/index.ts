@@ -1,8 +1,7 @@
-import { computed, reactive, watch, watchEffect } from 'vue'
-import { notebook } from '../core/siyuan_type'
-import { deepAssign } from '@/util/deep_assign'
 import { storeDep } from '@/dependency'
-import { version } from 'jszip'
+import { deepAssign } from '@/util/deep_assign'
+import { computed, reactive, watch } from 'vue'
+import { notebook } from '../core/siyuan_type'
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
