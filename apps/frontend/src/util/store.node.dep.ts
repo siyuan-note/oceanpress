@@ -1,5 +1,5 @@
 import { writeFileSync, readFileSync } from "fs";
-import { storeDep } from "@/dependency";
+import { storeDep } from "@/core/dependency";
 
 storeDep.getItem = getItem;
 storeDep.setItem = setItem;

@@ -1,4 +1,4 @@
-import { storeDep } from '@/dependency'
+import { storeDep } from '@/core/dependency'
 import { deepAssign } from '@/util/deep_assign'
 import { computed, reactive, watch } from 'vue'
 import { notebook } from '../core/siyuan_type'

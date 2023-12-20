@@ -1,4 +1,4 @@
-import { S_Node } from './core/siyuan_type'
+import { S_Node } from './siyuan_type'
 
 /** 默认填充函数，不应当被调用 */
 const nullDep: any = () => {

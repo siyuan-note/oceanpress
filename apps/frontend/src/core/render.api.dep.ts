@@ -1,4 +1,4 @@
-import { storeDep } from '@/dependency'
+import { storeDep } from '@/core/dependency'
 import { DB_block_path, type S_Node } from './siyuan_type'
 import { get_block_by_id, get_doc_by_child_id } from './cache'
 

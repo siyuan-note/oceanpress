@@ -1,7 +1,7 @@
 import { escaping, unescaping } from '@/util/escaping'
 import { API } from './siyuan_api'
 import { DB_block, S_Node, NodeType } from './siyuan_type'
-import { storeDep } from '@/dependency'
+import { storeDep } from '@/core/dependency'
 import { sy_refs_add } from './cache'
 
 export async function renderHTML(
