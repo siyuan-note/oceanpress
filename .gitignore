@@ -3,3 +3,4 @@ node_modules/
 /test/
 test.session.sql
 /.vscode
+apps/visualizer
