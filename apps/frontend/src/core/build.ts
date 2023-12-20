@@ -11,6 +11,7 @@ import {
   get_node_by_id,
   sy_refs_get,
 } from './cache'
+import packageJson from '@/../package.json'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -82,6 +83,7 @@ export async function* build(
   yield `=== 查询文档级block完成 ===`
   for (let i = 0; i < Doc_blocks.length; i++) {
     const docBlock = Doc_blocks[i]
+    // TODO 增量编译时不应该全部获取
     const sy = await get_doc_by_SyPath(DB_block_path(docBlock))
     docTree[docBlock.hpath] = { sy, docBlock }
     process(i / Doc_blocks.length)
@@ -90,11 +92,16 @@ export async function* build(
 
   process = processPercentage(0.4)
   const arr = Object.entries(docTree)
+  let enableIncrementalCompilation_doc = config.enableIncrementalCompilation_doc
+  if (packageJson.version !== config.OceanPress.version) {
+    yield '配置文件版本号与OceanPress版本不一致，将进行文档全量编译'
+    enableIncrementalCompilation_doc = false
+  }
   for (let i = 0; i < arr.length; i++) {
     const [path, { sy, docBlock }] = arr[i]
     if (
       config.enableIncrementalCompilation &&
-      config.enableIncrementalCompilation_doc &&
+      enableIncrementalCompilation_doc &&
       /** 文档本身没有发生变化 */
       config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash &&
       /** docBlock所引用的文档也没有更新 */
@@ -232,10 +239,11 @@ export async function* build(
       publicZip: config.cdn.publicZip,
     })
   }
+  config.OceanPress.version = packageJson.version
   /** 更新跳过编译的资源 */
   skipBuilds.write()
   emit.percentage(100)
-  yield 'ok'
+  yield '编译完毕'
 }
 /** 下载zip */
 export async function downloadZIP(
