@@ -1,4 +1,4 @@
-import { S_Node } from './siyuan_type'
+import type { S_Node } from './siyuan_type'
 
 /** 默认填充函数，不应当被调用 */
 const nullDep: any = () => {
@@ -18,6 +18,4 @@ export const storeDep = {
   getDocPathBySY: nullDep as (sy?: S_Node) => Promise<string | undefined>,
   getDocByChildID: nullDep as (id: string) => Promise<S_Node | undefined>,
   getHPathByID_Node: nullDep as (id_node: string | S_Node) => Promise<string>,
-  /** TODO 现在正向引用相关功能还未实现 */
-  sy_refs_add: nullDep as (sy: S_Node, ref: string) => void,
 }
