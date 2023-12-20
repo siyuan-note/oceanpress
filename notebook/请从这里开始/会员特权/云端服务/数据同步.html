@@ -1,129 +1,29 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>数据同步</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20230808120347-3cob0nb" data-node-id="20230808120347-3cob0nb" data-type="NodeDocument" updated="20230220103623" data-subtype="h1" class="h1" title="数据同步">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
-      
-</div>
-<div id="20230808120347-wx5cr4v" data-node-id="20230808120347-wx5cr4v" data-type="NodeHeading" updated="20210721103911" data-subtype="h2" class="h2">
-      <div>概述
-</div>
-    </div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../../appearance/oceanpress.css"/>
+  <title>数据同步</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20230808120347-3cob0nb" data-node-id="20230808120347-3cob0nb" data-type="NodeDocument" updated="20231120213300" data-subtype="h1" class="h1"></div><div id="20230808120347-3cob0nb" data-node-id="20230808120347-3cob0nb" data-type="NodeDocument" updated="20231120213300" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">数据同步</div><div id="20230808120347-wx5cr4v" data-node-id="20230808120347-wx5cr4v" data-type="NodeHeading" updated="20210721103911" data-subtype="h2" class="h2"><div>概述
+</div></div>
 <div id="20230808120347-q4v034g" data-node-id="20230808120347-q4v034g" data-type="NodeParagraph" updated="20210721103854" class="p">数据同步指的是在多个设备上保持 
 <span data-type="code">工作空间/data/</span>
  文件夹数据一致，包括
@@ -132,10 +32,8 @@
 挂件
 以及笔记本数据。
 </div>
-<div id="20230808120347-qbr56bx" data-node-id="20230808120347-qbr56bx" data-type="NodeHeading" updated="20210721103758" data-subtype="h2" class="h2">
-      <div>使用方式
-</div>
-    </div>
+<div id="20230808120347-qbr56bx" data-node-id="20230808120347-qbr56bx" data-type="NodeHeading" updated="20210721103758" data-subtype="h2" class="h2"><div>使用方式
+</div></div>
 <div id="20230808120347-2p4bc49" data-node-id="20230808120347-2p4bc49" data-type="NodeParagraph" updated="20220821170632" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20220615113758-i2279ot">
           <a href="./../../../请从这里开始/通用操作/数据历史.html#20220615113758-i2279ot">初始化数据仓库密钥</a>
   </span>
@@ -190,10 +88,8 @@
 
     </div>
 </div>
-<div id="20230808120347-buiv5yn" data-node-id="20230808120347-buiv5yn" data-type="NodeHeading" updated="20230219120246" data-subtype="h2" class="h2">
-      <div>同步模式
-</div>
-    </div>
+<div id="20230808120347-buiv5yn" data-node-id="20230808120347-buiv5yn" data-type="NodeHeading" updated="20230219120246" data-subtype="h2" class="h2"><div>同步模式
+</div></div>
 <div id="20230808120347-fwrmpx3" data-node-id="20230808120347-fwrmpx3" data-type="NodeParagraph" updated="20230219120420" class="p">在 
 <span data-type="kbd">设置</span>
 ​ - 
@@ -261,10 +157,8 @@
 
     </div>
 </div>
-<div id="20230808120347-lptnyvq" data-node-id="20230808120347-lptnyvq" data-type="NodeHeading" updated="20230219121525" data-subtype="h2" class="h2">
-      <div>自动/手动同步模式工作原理
-</div>
-    </div>
+<div id="20230808120347-lptnyvq" data-node-id="20230808120347-lptnyvq" data-type="NodeHeading" updated="20230219121525" data-subtype="h2" class="h2"><div>自动/手动同步模式工作原理
+</div></div>
 <div id="20230808120347-o64blc2" data-node-id="20230808120347-o64blc2" data-type="NodeParagraph" updated="20220703225614" class="p">思源通过对比云端数据快照和本地数据快照进行相应操作：
 </div>
 <div id="20230808120347-j4bqb3a" data-node-id="20230808120347-j4bqb3a" data-type="NodeList" updated="20220703230810" data-subtype="u" class="list"><div id="20230808120347-7uvkzsb" data-node-id="20230808120347-7uvkzsb" data-type="NodeListItem" updated="20210901163356" data-subtype="u" class="li" data-marker="*">
@@ -320,16 +214,12 @@
 
     </div>
 </div>
-<div id="20230808120347-w8dfrmf" data-node-id="20230808120347-w8dfrmf" data-type="NodeHeading" updated="20230219120510" data-subtype="h2" class="h2">
-      <div>自动同步模式场景例举
-</div>
-    </div>
+<div id="20230808120347-w8dfrmf" data-node-id="20230808120347-w8dfrmf" data-type="NodeHeading" updated="20230219120510" data-subtype="h2" class="h2"><div>自动同步模式场景例举
+</div></div>
 <div id="20230808120347-92sa9pr" data-node-id="20230808120347-92sa9pr" data-type="NodeParagraph" updated="20220307094844" class="p">从上述工作原理我们可以得知，思源仅支持在多设备上交替同步数据：设备 A 上同步完成以后设备 B 上再进行同步。无法支持多设备同时同步，这样会发生无法预期的数据覆盖。
 </div>
-<div id="20230808120347-dec0dhv" data-node-id="20230808120347-dec0dhv" data-type="NodeHeading" updated="20220307092705" data-subtype="h3" class="h3">
-      <div>正常场景
-</div>
-    </div>
+<div id="20230808120347-dec0dhv" data-node-id="20230808120347-dec0dhv" data-type="NodeHeading" updated="20220307092705" data-subtype="h3" class="h3"><div>正常场景
+</div></div>
 <div id="20230808120347-0t8dl3b" data-node-id="20230808120347-0t8dl3b" data-type="NodeList" updated="20220307093834" data-subtype="o" class="list"><div id="20230808120347-hoyv0c6" data-node-id="20230808120347-hoyv0c6" data-type="NodeListItem" data-subtype="o" class="li" data-marker="1.">
       <div class="protyle-action">
         1.
@@ -365,10 +255,8 @@
 </div>
 <div id="20230808120347-5crduzj" data-node-id="20230808120347-5crduzj" data-type="NodeParagraph" updated="20220307093342" class="p">该场景下，使用同步的过程是在设备 A、B 上交替进行的，这样能够保证数据同步符合预期正常完成。
 </div>
-<div id="20230808120347-2ir9q3j" data-node-id="20230808120347-2ir9q3j" data-type="NodeHeading" updated="20220703231010" data-subtype="h3" class="h3">
-      <div>冲突场景
-</div>
-    </div>
+<div id="20230808120347-2ir9q3j" data-node-id="20230808120347-2ir9q3j" data-type="NodeHeading" updated="20220703231010" data-subtype="h3" class="h3"><div>冲突场景
+</div></div>
 <div id="20230808120347-7b58yr8" data-node-id="20230808120347-7b58yr8" data-type="NodeList" updated="20221009104351" data-subtype="o" class="list"><div id="20230808120347-8zop0b9" data-node-id="20230808120347-8zop0b9" data-type="NodeListItem" data-subtype="o" class="li" data-marker="1.">
       <div class="protyle-action">
         1.
@@ -394,11 +282,9 @@
 
     </div>
 </div>
-<div id="20230808120347-yy5m46r" data-node-id="20230808120347-yy5m46r" data-type="NodeHeading" updated="20220307092835" data-subtype="h2" class="h2">
-      <div><span data-type="tag">注意</span>
-</div>
-    </div>
-<div id="20230808120347-um16u4f" data-node-id="20230808120347-um16u4f" data-type="NodeList" updated="20220807180028" data-subtype="u" class="list"><div id="20230808120347-5j8ihgi" data-node-id="20230808120347-5j8ihgi" data-type="NodeListItem" updated="20220420100248" data-subtype="u" class="li" data-marker="*">
+<div id="20230808120347-yy5m46r" data-node-id="20230808120347-yy5m46r" data-type="NodeHeading" updated="20220307092835" data-subtype="h2" class="h2"><div><span data-type="tag">注意</span>
+</div></div>
+<div id="20230808120347-um16u4f" data-node-id="20230808120347-um16u4f" data-type="NodeList" updated="20231120213300" data-subtype="u" class="list"><div id="20230808120347-5j8ihgi" data-node-id="20230808120347-5j8ihgi" data-type="NodeListItem" updated="20220420100248" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
@@ -422,59 +308,103 @@
 </div>
 
     </div>
+<div id="20231120211520-p8tb9wg" data-node-id="20231120211520-p8tb9wg" data-type="NodeListItem" updated="20231120213300" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231120211520-1xtrwfh" data-node-id="20231120211520-1xtrwfh" data-type="NodeParagraph" updated="20231120213300" class="p">自动同步模式下，如需退出，请使用正常的退出应用（比如移动端 APP 不要使用滑动移除，桌面端不要使用结束进程强制关闭）方式以保证数据同步执行
 </div>
 
+    </div>
+<div id="20231120211807-pzxmsee" data-node-id="20231120211807-pzxmsee" data-type="NodeListItem" updated="20231120212111" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231120211807-n24g7wl" data-node-id="20231120211807-n24g7wl" data-type="NodeParagraph" updated="20231120211921" class="p">数据同步前进行数据快照如果耗时超过 12 秒会提示清理数据仓库，如果需要改动默认耗时，可通过如下两种方式
+</div>
+<div id="20231120211944-fvla0hc" data-node-id="20231120211944-fvla0hc" data-type="NodeList" updated="20231120212046" data-subtype="u" class="list"><div id="20231120211944-ol64svy" data-node-id="20231120211944-ol64svy" data-type="NodeListItem" updated="20231120211944" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231120211944-4edb9kx" data-node-id="20231120211944-4edb9kx" data-type="NodeParagraph" updated="20231120211944" class="p">环境变量 
+<span data-type="code">SIYUAN_SYNC_INDEX_TIMING</span>
+​，例如 
+<span data-type="code">SIYUAN_SYNC_INDEX_TIMING=30000</span>
+​，单位是毫秒
+</div>
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    </div>
+<div id="20231120211944-5yhw1vi" data-node-id="20231120211944-5yhw1vi" data-type="NodeListItem" updated="20231120212046" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231120211944-chb1tvm" data-node-id="20231120211944-chb1tvm" data-type="NodeParagraph" updated="20231120212046" class="p">直接修改 工作空间/conf/conf.json 中的 
+<span data-type="code">repo.syncIndexTiming</span>
+​
+</div>
+
+    </div>
+</div>
+<div id="20231120211944-m955a64" data-node-id="20231120211944-m955a64" data-type="NodeParagraph" updated="20231120212111" class="p">最小值只能配置为 
+<span data-type="code">12000</span>
+​（12 秒），最大值不限制；启动时会优先读取环境变量覆盖 conf 文件中的值。
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>

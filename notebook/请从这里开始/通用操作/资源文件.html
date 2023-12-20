@@ -1,138 +1,36 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>资源文件</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20200915214115-42b8zma" data-node-id="20200915214115-42b8zma" data-type="NodeDocument" updated="20230820185522" data-subtype="h1" class="h1" title="资源文件" type="doc">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
-      
-</div>
-<div id="20210503095355-r83044o" data-node-id="20210503095355-r83044o" data-type="NodeHeading" updated="20210503095726" data-subtype="h2" class="h2">
-      <div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>资源文件</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20200915214115-42b8zma" data-node-id="20200915214115-42b8zma" data-type="NodeDocument" updated="20231110112936" data-subtype="h1" class="h1" type="doc"></div><div id="20200915214115-42b8zma" data-node-id="20200915214115-42b8zma" data-type="NodeDocument" updated="20231110112936" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">资源文件</div><div id="20210503095355-r83044o" data-node-id="20210503095355-r83044o" data-type="NodeHeading" updated="20210503095726" data-subtype="h2" class="h2"><div>
 概述
-</div>
-    </div>
+</div></div>
 <div id="20210503095358-zr3uijl" data-node-id="20210503095358-zr3uijl" data-type="NodeParagraph" updated="20220711121657" class="p">通过编辑器插入的附件会被认为是资源文件，默认放置在 
 <span data-type="code">工作空间/data/assets/</span>
  文件夹下。
 </div>
-<div id="20201210194734-lr6v0s2" data-node-id="20201210194734-lr6v0s2" data-type="NodeHeading" updated="20220824171919" data-subtype="h2" class="h2">
-      <div>插入图片或文件
-</div>
-    </div>
+<div id="20201210194734-lr6v0s2" data-node-id="20201210194734-lr6v0s2" data-type="NodeHeading" updated="20220824171919" data-subtype="h2" class="h2"><div>插入图片或文件
+</div></div>
 <div id="20210104091255-8s7avcx" data-node-id="20210104091255-8s7avcx" data-type="NodeParagraph" updated="20220905215650" class="p">在编辑器中可以直接粘贴系统剪切板中复制好的图片或文件（Linux 端不支持），或者通过拖拽图片或文件到编辑器中也可以实现插入。插入时有两个选择：
 </div>
 <div id="20220824172203-etwu4qu" data-node-id="20220824172203-etwu4qu" data-type="NodeList" updated="20220902215702" data-subtype="u" class="list"><div id="20220824172204-xxh346y" data-node-id="20220824172204-xxh346y" data-type="NodeListItem" updated="20220824172527" data-subtype="u" class="li" data-marker="*">
@@ -167,6 +65,7 @@
         data-src="./../../assets/siyuan-128-20210604092205-djd749a.png"
         title="源于思考，饮水思源"
         style="display: block;"
+        loading="lazy"
       /><span class="protyle-action__title">源于思考，饮水思源</span></span
     >
 
@@ -175,11 +74,9 @@
 <span data-type="tag">注意</span>
 ​：插入图片不会进行压缩处理，所有图片和文件都以原始数据进行保存。
 </div>
-<div id="20210115222011-bzsftun" data-node-id="20210115222011-bzsftun" data-type="NodeHeading" data-subtype="h2" class="h2">
-      <div>
+<div id="20210115222011-bzsftun" data-node-id="20210115222011-bzsftun" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
 清理未引用资源
-</div>
-    </div>
+</div></div>
 <div id="20210115222053-i62ppkz" data-node-id="20210115222053-i62ppkz" data-type="NodeParagraph" updated="20210503095856" class="p">“引用”指的是通过超链接、插入图片或者 HTML 标签（例如 
 <span data-type="code">&lt;img&gt;</span>
  、
@@ -225,10 +122,8 @@
 <span data-type="tag">注意</span>
 ​：使用绝对路径（本地路径或者是网络路径）不会纳入清理计算。
 </div>
-<div id="20230604115545-plxx5iu" data-node-id="20230604115545-plxx5iu" data-type="NodeHeading" updated="20230604115551" data-subtype="h2" class="h2">
-      <div>查看丢失资源
-</div>
-    </div>
+<div id="20230604115545-plxx5iu" data-node-id="20230604115545-plxx5iu" data-type="NodeHeading" updated="20230604115551" data-subtype="h2" class="h2"><div>查看丢失资源
+</div></div>
 <div id="20230604115552-qqg9s4j" data-node-id="20230604115552-qqg9s4j" data-type="NodeParagraph" updated="20230604115947" class="p">在
 <span data-type="kbd">设置</span>
 ​ - 
@@ -247,10 +142,8 @@
 <span data-type="kbd">资源文件路径</span>
 ​。
 </div>
-<div id="20210615102657-kampx8a" data-node-id="20210615102657-kampx8a" data-type="NodeHeading" updated="20220503121605" data-subtype="h2" class="h2">
-      <div>笔记本级资源文件
-</div>
-    </div>
+<div id="20210615102657-kampx8a" data-node-id="20210615102657-kampx8a" data-type="NodeHeading" updated="20220503121605" data-subtype="h2" class="h2"><div>笔记本级资源文件
+</div></div>
 <div id="20210615102703-7wghhgm" data-node-id="20210615102703-7wghhgm" data-type="NodeParagraph" updated="20210626153454" class="p">如果需要默认将插入的资源文件放置在文档同级 assets 文件夹下，则需要先手动创建名为 assets 的文件夹，这样思源会优先选择该 assets 文件夹来存放资源文件。
 </div>
 <div id="20220503120950-4e9vwxq" data-node-id="20220503120950-4e9vwxq" data-type="NodeParagraph" updated="20220503121613" class="p">建议尽量不要使用笔记本级资源文件，因为这会带来一些副作用：
@@ -294,10 +187,8 @@ assets
 
     </div>
 </div>
-<div id="20230117002036-vmc0mx4" data-node-id="20230117002036-vmc0mx4" data-type="NodeHeading" updated="20230117002509" data-subtype="h2" class="h2">
-      <div>图片 OCR 提取文本
-</div>
-    </div>
+<div id="20230117002036-vmc0mx4" data-node-id="20230117002036-vmc0mx4" data-type="NodeHeading" updated="20230117002509" data-subtype="h2" class="h2"><div>图片 OCR 提取文本
+</div></div>
 <div id="20230117002059-ssmlejt" data-node-id="20230117002059-ssmlejt" data-type="NodeParagraph" updated="20230820185522" class="p">该特性仅在桌面端支持，并且需要先手动安装 
 <span data-type="em">Tesseract OCR</span>
  程序。
@@ -306,16 +197,18 @@ assets
 <span data-type="tag">注意</span>
 ​：
 </div>
-<div id="20230202231309-pcjl7c2" data-node-id="20230202231309-pcjl7c2" data-type="NodeList" updated="20230211103308" data-subtype="u" class="list"><div id="20230202231311-7qdk1za" data-node-id="20230202231311-7qdk1za" data-type="NodeListItem" updated="20230211103308" data-subtype="u" class="li" data-marker="*">
+<div id="20230202231309-pcjl7c2" data-node-id="20230202231309-pcjl7c2" data-type="NodeList" updated="20231110112936" data-subtype="u" class="list"><div id="20230202231311-7qdk1za" data-node-id="20230202231311-7qdk1za" data-type="NodeListItem" updated="20231110112936" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
       </div>
-      <div id="20230202231311-n1pf7in" data-node-id="20230202231311-n1pf7in" data-type="NodeParagraph" updated="20230211103308" class="p">在安装 Tesseract OCR 时需要勾选你需要的语言包，并将安装后的 Tesseract-OCR 目录路径添加到环境变量 
+      <div id="20230202231311-n1pf7in" data-node-id="20230202231311-n1pf7in" data-type="NodeParagraph" updated="20231110112936" class="p">在安装 Tesseract OCR 时需要勾选你需要的语言包，并将安装后的 Tesseract-OCR 目录路径添加到环境变量 
 <span data-type="code">PATH</span>
 ​ 中，这样思源才能直接调用 
 <span data-type="code">tesseract</span>
 ​ 命令进行图片 OCR 提取文本。如果安装正常的话，在内核启动日志中可以搜索到 
 <span data-type="code">tesseract-ocr enabled</span>
+​；如果要禁用 OCR，请设置环境变量 
+<span data-type="code">SIYUAN_TESSERACT_ENABLED=false</span>
 ​
 </div>
 
@@ -369,10 +262,8 @@ assets
 </div>
 <div id="20230117002511-ex9qrjy" data-node-id="20230117002511-ex9qrjy" data-type="NodeParagraph" updated="20230117003207" class="p">图片 OCR 提取文本过程是自动在后台进行的，目前仅支持 PNG、JPG 图片。提取的文本会被用于搜索功能，这样就能通过文本关键字来定位图片。
 </div>
-<div id="20230414202710-a51lo76" data-node-id="20230414202710-a51lo76" data-type="NodeHeading" updated="20230414202726" data-subtype="h3" class="h3">
-      <div>手动调整 OCR 结果
-</div>
-    </div>
+<div id="20230414202710-a51lo76" data-node-id="20230414202710-a51lo76" data-type="NodeHeading" updated="20230414202726" data-subtype="h3" class="h3"><div>手动调整 OCR 结果
+</div></div>
 <div id="20230117003118-da7wjvx" data-node-id="20230117003118-da7wjvx" data-type="NodeParagraph" updated="20230414202825" class="p">OCR 的结果保存在 
 <span data-type="code">工作空间/data/assets/ocr-texts.json</span>
 ​ 中，可通过下面的方式调整 OCR 结果：
@@ -399,57 +290,58 @@ assets
 <div id="20230414202749-qbcnypq" data-node-id="20230414202749-qbcnypq" data-type="NodeParagraph" updated="20230414202900" class="p">调整完以后需要手动重建索引。
 </div>
 
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>

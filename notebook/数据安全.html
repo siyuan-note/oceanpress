@@ -1,130 +1,30 @@
 <!DOCTYPE html>
-    <html
-      lang="zh_CN"
-      data-theme-mode="light"
-      data-light-theme="daylight"
-      data-dark-theme="midnight"
-    >
-      <head>
-        
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="baseStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/base.css?2.10.5"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          id="themeDefaultStyle"
-          href="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/themes/daylight/theme.css?2.10.5"
-        />
-
-        <title>数据安全</title>
-        <style>
-          body {
-            background-color: var(--b3-theme-background);
-            color: var(--b3-theme-on-background);
-          }
-          .b3-typography,
-          .protyle-wysiwyg,
-          .protyle-title {
-            font-size: 16px !important;
-          }
-          .b3-typography code:not(.hljs),
-          .protyle-wysiwyg span[data-type~="code"] {
-            font-variant-ligatures: normal;
-          }
-          .li > .protyle-action {
-            height: 34px;
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
-          .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {
-            line-height: 34px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action:after {
-            height: 16px;
-            width: 16px;
-            margin: -8px 0 0 -8px;
-          }
-          .protyle-wysiwyg [data-node-id].li > .protyle-action svg {
-            height: 14px;
-          }
-          .protyle-wysiwyg [data-node-id].li:before {
-            height: calc(100% - 34px);
-            top: 34px;
-          }
-          .protyle-wysiwyg [data-node-id] [spellcheck] {
-            min-height: 26px;
-          }
-          .protyle-wysiwyg [data-node-id] {
-          }
-          .protyle-wysiwyg .li {
-            min-height: 34px;
-          }
-          .protyle-gutters button svg {
-            height: 26px;
-          }
-          .protyle-wysiwyg img.emoji,
-          .b3-typography img.emoji {
-            width: 18px;
-          }
-          .protyle-wysiwyg .h1 img.emoji,
-          .b3-typography h1 img.emoji {
-            width: 35px;
-          }
-          .protyle-wysiwyg .h2 img.emoji,
-          .b3-typography h2 img.emoji {
-            width: 31px;
-          }
-          .protyle-wysiwyg .h3 img.emoji,
-          .b3-typography h3 img.emoji {
-            width: 27px;
-          }
-          .protyle-wysiwyg .h4 img.emoji,
-          .b3-typography h4 img.emoji {
-            width: 25px;
-          }
-          .protyle-wysiwyg .h5 img.emoji,
-          .b3-typography h5 img.emoji {
-            width: 22px;
-          }
-          .protyle-wysiwyg .h6 img.emoji,
-          .b3-typography h6 img.emoji {
-            width: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        
-        <div
-          class="protyle-wysiwyg protyle-wysiwyg--attr"
-          style="max-width: 800px;margin: 0 auto;"
-          id="preview"
-        >
-          <div class="protyle-background protyle-background--enable" style="min-height: 150px;" id="20210117211155-56n4odu" data-node-id="20210117211155-56n4odu" data-type="NodeDocument" updated="20230828111922" data-subtype="h1" class="h1" icon="1f50f" title="数据安全" type="doc">
-      <div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 25vh;undefined"/>
-      <div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x1f50f </div>
-</div>
-<div id="20210117212652-vpmkfab" data-node-id="20210117212652-vpmkfab" data-type="NodeHeading" data-subtype="h2" class="h2">
-      <div>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="appearance/oceanpress.css"/>
+  <title>数据安全</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20210117211155-56n4odu" data-node-id="20210117211155-56n4odu" data-type="NodeDocument" updated="20230828111922" data-subtype="h1" class="h1" icon="1f50f" type="doc"></div><div id="20210117211155-56n4odu" data-node-id="20210117211155-56n4odu" data-type="NodeDocument" updated="20230828111922" data-subtype="h1" class="h1" icon="1f50f" type="doc" data-type="NodeHeading" class="h1">数据安全</div><div id="20210117212652-vpmkfab" data-node-id="20210117212652-vpmkfab" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
 概述
-</div>
-    </div>
+</div></div>
 <div id="20210117212533-b9xm7h6" data-node-id="20210117212533-b9xm7h6" data-type="NodeParagraph" updated="20210302223432" class="p">数据安全主要分为两方面：
 </div>
 <div id="20210302223430-kskwppo" data-node-id="20210302223430-kskwppo" data-type="NodeList" updated="20230422123357" data-subtype="u" class="list"><div id="20210525220618-mb42ynt" data-node-id="20210525220618-mb42ynt" data-type="NodeListItem" updated="20230422123357" data-subtype="u" class="li" data-marker="*">
@@ -149,11 +49,9 @@
 </div>
 <div id="20210117213032-48sgu29" data-node-id="20210117213032-48sgu29" data-type="NodeParagraph" updated="20210525214350" class="p">思源对这两方面都进行了一定支持，下面是关于数据安全方面的说明。
 </div>
-<div id="20210117213252-rjh6iu2" data-node-id="20210117213252-rjh6iu2" data-type="NodeHeading" data-subtype="h2" class="h2">
-      <div>
+<div id="20210117213252-rjh6iu2" data-node-id="20210117213252-rjh6iu2" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
 明文存储
-</div>
-    </div>
+</div></div>
 <div id="20210525214530-69ml3fo" data-node-id="20210525214530-69ml3fo" data-type="NodeParagraph" updated="20210525214719" class="p">思源使用明文方式将数据存储在本地文件系统上，这意味着：
 </div>
 <div id="20210117213258-m2gevi3" data-node-id="20210117213258-m2gevi3" data-type="NodeList" data-subtype="u" class="list" data-marker="*"><div id="20210117213526-cy3oj8v" data-node-id="20210117213526-cy3oj8v" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
@@ -173,21 +71,17 @@
 
     </div>
 </div>
-<div id="20210117211513-nelhsjf" data-node-id="20210117211513-nelhsjf" data-type="NodeHeading" updated="20210721110530" data-subtype="h2" class="h2">
-      <div>端到端加密
-</div>
-    </div>
+<div id="20210117211513-nelhsjf" data-node-id="20210117211513-nelhsjf" data-type="NodeHeading" updated="20210721110530" data-subtype="h2" class="h2"><div>端到端加密
+</div></div>
 <div id="20210721110555-81sqopb" data-node-id="20210721110555-81sqopb" data-type="NodeParagraph" updated="20230828111922" class="p">思源云端同步使用
 <span data-type="block-ref"     data-subtype="s"     data-id="20230808120347-lael5oq">
           <a href="./请从这里开始/会员特权/云端服务/存储空间.html#20230808120347-lael5oq">端到端加密</a>
   </span>
 ，密码在本地通过内置密钥加密保存，除使用者之外的任何第三方均无法在云端获得明文数据。
 </div>
-<div id="20210117212440-bkk6f95" data-node-id="20210117212440-bkk6f95" data-type="NodeHeading" data-subtype="h2" class="h2">
-      <div>
+<div id="20210117212440-bkk6f95" data-node-id="20210117212440-bkk6f95" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
 建议
-</div>
-    </div>
+</div></div>
 <div id="20210117214728-szj3mg9" data-node-id="20210117214728-szj3mg9" data-type="NodeList" updated="20220703223831" data-subtype="u" class="list" data-marker="*"><div id="20210117215237-1mbl2ly" data-node-id="20210117215237-1mbl2ly" data-type="NodeListItem" updated="20220703223831" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -205,16 +99,12 @@
 
     </div>
 </div>
-<div id="20220626205507-zakjqo5" data-node-id="20220626205507-zakjqo5" data-type="NodeHeading" updated="20220626205745" data-subtype="h2" class="h2">
-      <div>威胁模型
-</div>
-    </div>
+<div id="20220626205507-zakjqo5" data-node-id="20220626205507-zakjqo5" data-type="NodeHeading" updated="20220626205745" data-subtype="h2" class="h2"><div>威胁模型
+</div></div>
 <div id="20220626210804-d1iir4r" data-node-id="20220626210804-d1iir4r" data-type="NodeParagraph" updated="20220626213925" class="p">主要针对本地数据安全和思源云端存储安全进行评估。
 </div>
-<div id="20220626210024-c045aps" data-node-id="20220626210024-c045aps" data-type="NodeHeading" updated="20220626213021" data-subtype="h3" class="h3">
-      <div>前提假设
-</div>
-    </div>
+<div id="20220626210024-c045aps" data-node-id="20220626210024-c045aps" data-type="NodeHeading" updated="20220626213021" data-subtype="h3" class="h3"><div>前提假设
+</div></div>
 <div id="20220626210038-joi74n0" data-node-id="20220626210038-joi74n0" data-type="NodeList" updated="20220626211139" data-subtype="u" class="list"><div id="20220626210038-412dnfz" data-node-id="20220626210038-412dnfz" data-type="NodeListItem" updated="20220626210038" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -281,10 +171,8 @@
 
     </div>
 </div>
-<div id="20220626210027-hhtc2a6" data-node-id="20220626210027-hhtc2a6" data-type="NodeHeading" updated="20220626213850" data-subtype="h3" class="h3">
-      <div>云端存储能够保证
-</div>
-    </div>
+<div id="20220626210027-hhtc2a6" data-node-id="20220626210027-hhtc2a6" data-type="NodeHeading" updated="20220626213850" data-subtype="h3" class="h3"><div>云端存储能够保证
+</div></div>
 <div id="20220626211230-el1oox9" data-node-id="20220626211230-el1oox9" data-type="NodeList" updated="20220626211249" data-subtype="u" class="list"><div id="20220626211249-wrkarxp" data-node-id="20220626211249-wrkarxp" data-type="NodeListItem" updated="20220626211249" data-subtype="u" class="li" data-marker="*">
       <div class="protyle-action">
         <svg><use xlink:href="#iconDot"></use></svg>
@@ -302,10 +190,8 @@
 
     </div>
 </div>
-<div id="20220626213039-vc4f1ts" data-node-id="20220626213039-vc4f1ts" data-type="NodeHeading" updated="20220626213102" data-subtype="h3" class="h3">
-      <div>正常示例
-</div>
-    </div>
+<div id="20220626213039-vc4f1ts" data-node-id="20220626213039-vc4f1ts" data-type="NodeHeading" updated="20220626213102" data-subtype="h3" class="h3"><div>正常示例
+</div></div>
 <div id="20220626211621-yw8d4zb" data-node-id="20220626211621-yw8d4zb" data-type="NodeParagraph" updated="20220626211919" class="p">基于上述假设和保证，下面是攻击者能够达成的目标示例。
 </div>
 <div id="20220626211754-ftwoqz4" data-node-id="20220626211754-ftwoqz4" data-type="NodeParagraph" updated="20220626212025" class="p">如果攻击者对云端存储具有只读权限，那么他能够：
@@ -354,10 +240,8 @@
 
     </div>
 </div>
-<div id="20220626211209-ok2rvht" data-node-id="20220626211209-ok2rvht" data-type="NodeHeading" updated="20220626213125" data-subtype="h3" class="h3">
-      <div>异常示例
-</div>
-    </div>
+<div id="20220626211209-ok2rvht" data-node-id="20220626211209-ok2rvht" data-type="NodeHeading" updated="20220626213125" data-subtype="h3" class="h3"><div>异常示例
+</div></div>
 <div id="20220626213125-y4dolh0" data-node-id="20220626213125-y4dolh0" data-type="NodeParagraph" updated="20220626213144" class="p">如果违反了上述假设或保证，下面是攻击者能够达成的目标和示例。
 </div>
 <div id="20220626213144-2t86jkw" data-node-id="20220626213144-2t86jkw" data-type="NodeParagraph" updated="20220626213227" class="p">如果攻击者能够入侵本地操作系统，那么他能够：
@@ -399,57 +283,58 @@
     </div>
 </div>
 
+  </div>
+  <script src="appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "stage/protyle";
+    const previewElement = document.getElementById("preview");
 
-        </div>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/appearance/icons/material/icon.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/build/export/protyle-method.js?2.10.5"></script>
-        <script src="https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle/js/lute/lute.min.js?2.10.5"></script>
-        <script>
-          window.siyuan = {
-            config: {
-              appearance: {
-                mode: 0,
-                codeBlockThemeDark: "base16/dracula",
-                codeBlockThemeLight: "github",
-              },
-              editor: {
-                codeLineWrap: true,
-                codeLigatures: false,
-                plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-                codeSyntaxHighlightLineNum: true,
-                katexMacros: JSON.stringify({}),
-              },
-            },
-            languages: { copy: "复制" },
-          };
-          const previewElement = document.getElementById("preview");
-          Protyle.highlightRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mathRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle", false);
-          Protyle.mermaidRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.flowchartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.graphvizRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.chartRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.mindmapRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.abcRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          Protyle.htmlRender(previewElement);
-          Protyle.plantumlRender(previewElement, "https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/stage/protyle");
-          document.querySelectorAll(".protyle-action__copy").forEach((item) => {
-            item.addEventListener("click", (event) => {
-              navigator.clipboard.writeText(
-                item.parentElement.nextElementSibling.textContent.trimEnd(),
-              );
-              event.preventDefault();
-              event.stopPropagation();
-            });
-          });
-        </script>
-        <footer>
-  <p style="text-align:center;margin:15px 0;">
-    技术支持：
-    <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
-    开发者：
-    <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
-  </p>
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
 </footer>
-      </body>
-    </html>
+</body>
+</html>
