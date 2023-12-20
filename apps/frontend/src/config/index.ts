@@ -1,7 +1,7 @@
-import { storeDep } from '@/core/dependency'
-import { deepAssign } from '@/util/deep_assign'
+import { storeDep } from '@/core/dependency.ts'
+import { deepAssign } from '@/util/deep_assign.ts'
 import { computed, reactive, watch } from 'vue'
-import { notebook } from '../core/siyuan_type'
+import { notebook } from '../core/siyuan_type.ts'
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {

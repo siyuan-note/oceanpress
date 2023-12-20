@@ -2,9 +2,9 @@
  *  对于思源内核 api 的调用存到内存，通过快取技术避免重复请求和没有必要的请求，加速程序运行速度，但这可能会导致数据不是最新的
  ** ════════════════════════🚧 cache 🚧════════════════════════ */
 
-import { parentRef } from './node'
-import { API } from './siyuan_api'
-import { DB_block, DB_block_path, S_Node } from './siyuan_type'
+import { parentRef } from './node.ts'
+import { API } from './siyuan_api.ts'
+import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 
 let cache = true
 /** 控制是否启用快取功能 */

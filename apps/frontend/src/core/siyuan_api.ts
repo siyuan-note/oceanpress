@@ -1,7 +1,10 @@
 import { Ref } from 'vue'
-import { PromiseObj, usePromiseComputed } from '../components/data_promise'
-import { NodeDocument, S_Node, file, notebook } from './siyuan_type'
-import { currentConfig } from '@/config'
+import {
+  PromiseObj,
+  usePromiseComputed,
+} from '../components/data_promise/index.ts'
+import { NodeDocument, S_Node, file, notebook } from './siyuan_type.ts'
+import { currentConfig } from '@/config/index.ts'
 
 /** https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md */
 export interface api {

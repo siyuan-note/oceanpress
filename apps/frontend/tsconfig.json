@@ -3,7 +3,7 @@
     "target": "ES2020",
     "esModuleInterop": true,
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "NodeNext",
     "lib": [
       "ES2020",
       "DOM",
@@ -11,8 +11,8 @@
     ],
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "moduleResolution" :"NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -33,8 +33,10 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
-, "public/dev/http.js"  ],
+    "src/**/*.vue",
+    "public/dev/http.js",
+    "store/api_test.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

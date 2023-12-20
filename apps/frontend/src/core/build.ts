@@ -1,16 +1,16 @@
-import { currentConfig } from '@/config'
-import { htmlTemplate } from './htmlTemplate'
-import { renderHTML } from './render'
-import { API } from './siyuan_api'
-import { DB_block, DB_block_path, S_Node } from './siyuan_type'
+import { currentConfig } from '@/config/index.ts'
+import { htmlTemplate } from './htmlTemplate.ts'
+import { renderHTML } from './render.ts'
+import { API } from './siyuan_api.ts'
+import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import JSZip from 'jszip'
-import { deepAssign } from '@/util/deep_assign'
+import { deepAssign } from '@/util/deep_assign.ts'
 import {
   allDocBlock_by_bookId,
   get_doc_by_SyPath,
   get_node_by_id,
   sy_refs_get,
-} from './cache'
+} from './cache.ts'
 import packageJson from '@/../package.json'
 
 export interface DocTree {

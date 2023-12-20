@@ -1,8 +1,8 @@
-import { escaping, unescaping } from '@/util/escaping'
-import { API } from './siyuan_api'
-import { DB_block, S_Node, NodeType } from './siyuan_type'
-import { storeDep } from '@/core/dependency'
-import { sy_refs_add } from './cache'
+import { escaping, unescaping } from '@/util/escaping.ts'
+import { API } from './siyuan_api.ts'
+import { DB_block, S_Node, NodeType } from './siyuan_type.ts'
+import { storeDep } from '@/core/dependency.ts'
+import { sy_refs_add } from './cache.ts'
 
 export async function renderHTML(
   sy: S_Node | undefined,

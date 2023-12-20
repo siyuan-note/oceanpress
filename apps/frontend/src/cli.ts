@@ -4,10 +4,10 @@ import { Command } from 'commander'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import { resolve } from 'path'
 import { join } from 'path/posix'
-import { currentConfig, loadConfigFile } from './config'
-import { build } from './core/build'
-import { setCache } from './core/cache'
-import { server } from './server'
+import { currentConfig, loadConfigFile } from './config/index.ts'
+import { build } from './core/build.ts'
+import { setCache } from './core/cache.ts'
+import { server } from './server.ts'
 const program = new Command()
 console.log(process.argv)
 

@@ -1,9 +1,9 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { currentConfig } from './config'
-import { get_doc_by_hpath } from './core/cache'
-import { htmlTemplate } from './core/htmlTemplate'
-import { renderHTML } from './core/render'
+import { currentConfig } from './config/index.ts'
+import { get_doc_by_hpath } from './core/cache.ts'
+import { htmlTemplate } from './core/htmlTemplate.ts'
+import { renderHTML } from './core/render.ts'
 
 export function server(config = { port: 80, hostname: '0.0.0.0' }) {
   const app = new Hono()
