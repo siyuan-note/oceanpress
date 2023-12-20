@@ -94,7 +94,7 @@ export async function* build(
   const arr = Object.entries(docTree)
   let enableIncrementalCompilation_doc = config.enableIncrementalCompilation_doc
   if (packageJson.version !== config.OceanPress.version) {
-    yield '配置文件版本号与OceanPress版本不一致，将进行文档全量编译'
+    yield `配置文件版本号[${config.OceanPress.version}]与OceanPress版本[${packageJson.version}]不一致，将进行文档全量编译`
     enableIncrementalCompilation_doc = false
   }
   for (let i = 0; i < arr.length; i++) {
