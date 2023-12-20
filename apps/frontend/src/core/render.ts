@@ -458,20 +458,14 @@ ${await childRender(sy, this)}\
         <div class="protyle-attr" contenteditable="false"></div>
       </div>`
     }
-    //TODO 语法高亮没有正确触发
     return `<div ${strAttr(sy)}>
         <div class="protyle-action">
-          <span class="protyle-action--first protyle-action__language">
-          ${await renderHTML(
+          <span class="protyle-action--first protyle-action__language">${await renderHTML(
             sy.Children?.find(
               (el) => el.Type === 'NodeCodeBlockFenceInfoMarker',
             ),
-          )}
-          </span>
-            <span class="fn__flex-1"></span>
-            <span class="protyle-icon protyle-icon--only protyle-action__copy">
-            <svg><use xlink:href="#iconCopy"></use></svg>
-          </span>
+          )}</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         ${await renderHTML(
           sy.Children?.find((el) => el.Type === 'NodeCodeBlockCode'),
