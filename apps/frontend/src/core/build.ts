@@ -157,10 +157,9 @@ export async function* build(
       hash: string
       id: string
     }[] = await API.query_sql({
-      stmt: `SELECT *
-                from assets
-                WHERE box = '${book.id}'
-                limit 150000 OFFSET 0`,
+      stmt: `SELECT * from assets
+             WHERE box = '${book.id}'
+            limit 150000 OFFSET 0`,
     })
     await Promise.allSettled(
       assets.map(async (item) => {

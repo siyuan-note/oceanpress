@@ -44,6 +44,7 @@ export interface api {
     id: '20200825162036-4dx365o'
     name: '排版元素'
   }
+  /** 执行 SQL 查询 https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#执行-sql-查询 */
   query_sql(p: {
     /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string
   }): any[]
