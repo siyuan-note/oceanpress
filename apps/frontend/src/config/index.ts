@@ -51,10 +51,10 @@ const defaultConfig = {
   cdn: {
     /** 思源 js、css等文件的前缀 */
     siyuanPrefix:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/notebook/',
+      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@latest/apps/frontend/public/notebook/',
     /** 思源 js、css等文件zip包地址  */
     publicZip:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@main/apps/frontend/public/public.zip',
+      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@latest/apps/frontend/public/public.zip',
   },
   /** html模板嵌入代码块，会将此处配置中的代码嵌入到生成的html所对应的位置 */
   embedCode: {
