@@ -1,20 +1,11 @@
-<script setup lang="ts">
-  import { watchEffect } from "vue";
-  import { aElement } from "./store.ts";
-
-  watchEffect(() => {
-    aElement.forEach((el) => {
-      console.log(el.href);
-    });
-  });
-</script>
+<script lang="ts" src="./test.ts"></script>
 <template>
-  <iframe v-for="(el, index) in aElement" :key="index" class="flow" :src="el.href"></iframe>
+  <div class="flow_card">
+    <h2>浮窗</h2>
+    <iframe
+      ref="iframe"
+      src="http://localhost:8080/notebook/请从这里开始.html#20210528115021-oj6gzg7"
+    />
+  </div>
 </template>
-<style>
-  .flow {
-    position: absolute;
-    left: 0px;
-    top: 1000px;
-  }
-</style>
+<style scoped src="./flow.css"></style>

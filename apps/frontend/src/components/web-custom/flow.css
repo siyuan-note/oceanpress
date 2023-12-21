@@ -1,0 +1,17 @@
+iframe {
+  width: calc(100% - 6px);
+  height: calc(100% - 40px);
+
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0px;
+  border: 0px;
+}
+
+.flow_card {
+  height: 275px;
+  position: relative;
+  border: solid 1px #ccc;
+  border-radius: 17px;
+  overflow: hidden;
+}

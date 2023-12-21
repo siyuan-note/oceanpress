@@ -14,5 +14,10 @@ export default defineConfig({
   server: {
     port: 8080,
   },
+  css: {
+    devSourcemap: true,
+  },
   base: './',
 })
+
+console.log('http://localhost:8080/components_dev/')
