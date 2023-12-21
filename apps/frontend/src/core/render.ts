@@ -551,8 +551,16 @@ ${await childRender(sy, this)}\
     }.jpg"/></div>`
   },
   async NodeBackslash(sy) {
-    return `${await childRender(sy, this)}`
+    if (sy.Data === undefined || sy.Data === 'span') {
+      return `${await childRender(sy, this)}`
+    } else {
+      return warnDiv(
+        `未定义的 NodeBackslash 处理 ${sy.Data}`,
+        this.nodeStack[0].Properties?.title,
+      )
+    }
   },
+  NodeBackslashContent: _dataString,
 }
 
 /** 获取sy节点的child中第一个type类型节点的data */
