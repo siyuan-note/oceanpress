@@ -88,8 +88,7 @@ body {
   max-width: 800px;
 }
 #preview > * {
-  max-width: 800px;
-  width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
