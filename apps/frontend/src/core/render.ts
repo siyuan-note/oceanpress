@@ -84,7 +84,6 @@ async function childRender(sy: S_Node, renderInstance: typeof render) {
   let h = ''
   for await (const el of sy?.Children ?? []) {
     h += await renderHTML(el, renderInstance)
-    h += '\n'
   }
   return h
 }
@@ -346,12 +345,9 @@ const render: {
       ) {
         return `<span ${strAttr(sy, { data_type: type })}>${content}</span>`
       } else {
-        console.warn(
-          '没有找到对应的渲染器 NodeTextMark.TextMarkType',
-          sy.TextMarkType,
-          that.nodeStack,
+        return warnDiv(
+          `没有找到对应的渲染器 ${sy.TextMarkType}  ${that.nodeStack[0].Properties?.title}`,
         )
-        return ''
       }
     }
   },
@@ -553,6 +549,9 @@ ${await childRender(sy, this)}\
     )}><img src="${await this.getTopPathPrefix()}/assets/widget/${
       sy.ID
     }.jpg"/></div>`
+  },
+  async NodeBackslash(sy) {
+    return `${await childRender(sy, this)}`
   },
 }
 

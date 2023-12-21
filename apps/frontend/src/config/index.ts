@@ -111,10 +111,10 @@ export const currentConfig = computed(() => configs[configs.__current__])
 
 export const saveConfig = () => {
   if (configs.__init__ === false)
-    storeDep.setItem('configs', JSON.stringify(configs))
+    storeDep.setItem('configs', JSON.stringify(configs, null, 2))
 }
 
-let timer: NodeJS.Timeout | null = null
+let timer: ReturnType<typeof setTimeout> | null = null
 /** 防抖的保存配置 */
 export const debounceSaveConfig = () => {
   if (timer) {
