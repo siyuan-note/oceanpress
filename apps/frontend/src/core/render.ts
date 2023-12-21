@@ -357,7 +357,7 @@ const render: {
     if (LinkDest?.length === 1) {
       link = await renderHTML(LinkDest[0], this)
     } else if (LinkDest?.length && LinkDest.length > 1) {
-      console.log('NodeImage 存在多个 LinkDest', sy)
+      warn('NodeImage 存在多个 LinkDest', sy)
     }
 
     let title = ''
@@ -365,7 +365,7 @@ const render: {
     if (LinkTitle?.length === 1) {
       title = await renderHTML(LinkTitle[0], this)
     } else if (LinkTitle?.length && LinkTitle.length > 1) {
-      console.log('NodeImage 存在多个 LinkTitle', sy)
+      warn('NodeImage 存在多个 LinkTitle', sy)
     }
     return html`<span ${await strAttr(sy)} style="${
       sy.Properties?.['parent-style']
@@ -380,6 +380,11 @@ const render: {
     >`
   },
   async NodeLinkDest(sy) {
+    /** 绝对路径 */
+    if (/^(?:[a-z]+:)?\/\/|^(?:\/)/.test(sy.Data ?? '')) {
+      return sy.Data ?? ''
+    }
+    /** 为相对路径添加正确的前缀 */
     return `${await this.getTopPathPrefix()}/${sy.Data}`
   },
   NodeLinkTitle: _dataString,
