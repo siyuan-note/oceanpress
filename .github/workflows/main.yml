@@ -25,8 +25,8 @@ jobs:
       # 1、生成静态文件
       - name: Build
         run: yarn && yarn workspace frontend build
-      - name: Build component
-        run: yarn workspace frontend build-components
+      # - name: Build component
+      #   run: yarn workspace frontend build-components
 
       # 2、部署到 gh-pages 分支
       - name: Deploy
