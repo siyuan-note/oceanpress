@@ -8,8 +8,7 @@
     "cli": "tsx ./src/cli.ts",
     "cli_watch": "tsx watch ./src/cli.ts",
     "build": "vite build",
-    "preview": "vite preview",
-    "build-components": "vite build --config vite.components.config.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hono/node-server": "^1.3.3",

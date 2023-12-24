@@ -37,9 +37,4 @@
     "public/dev/http.js",
     "store/api_test.ts"
   ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
 }
