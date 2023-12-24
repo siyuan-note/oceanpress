@@ -51,7 +51,7 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
   app.get('*', async (c) => {
     const path = c.req.path
     const r = await renderHtmlByPath(path).catch((err) => {
-      return err
+      return err.message
     })
 
     if (r instanceof Error) throw r
