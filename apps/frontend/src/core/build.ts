@@ -83,13 +83,14 @@ export async function* build(
     return true
   }
   yield `=== 查询文档级block完成 ===`
-  for (let i = 0; i < Doc_blocks.length; i++) {
-    const docBlock = Doc_blocks[i]
-    // TODO 增量编译时不应该全部获取
+  let i = 0
+  // TODO 增量编译时不应该全部获取
+  Doc_blocks.map(async (docBlock) => {
+    i++
     const sy = await get_doc_by_SyPath(DB_block_path(docBlock))
     docTree[docBlock.hpath] = { sy, docBlock }
     process(i / Doc_blocks.length)
-  }
+  })
   const fileTree: FileTree = {}
 
   process = processPercentage(0.4)
