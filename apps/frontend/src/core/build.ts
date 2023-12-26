@@ -59,7 +59,7 @@ export async function* build(
   yield `=== 开始编译 ${book.name} ===`
   let process = processPercentage(0.4)
   /** 查询所有文档级block
-   * 这里必须要每次重新查询，不然用户重新编译无法获得新修改的结果
+   * TODO 增量编译时不应该全部获取
    */
   const Doc_blocks: DB_block[] = await allDocBlock_by_bookId(book.id)
   /** docBlock 的引用没有更新：true */
@@ -84,11 +84,10 @@ export async function* build(
   }
   yield `=== 查询文档级block完成 ===`
   let i = 0
-  // TODO 增量编译时不应该全部获取
   Doc_blocks.map(async (docBlock) => {
-    i++
     const sy = await get_doc_by_SyPath(DB_block_path(docBlock))
     docTree[docBlock.hpath] = { sy, docBlock }
+    i++
     process(i / Doc_blocks.length)
   })
   const fileTree: FileTree = {}
@@ -147,8 +146,8 @@ export async function* build(
     yield `渲染： ${path}`
   }
   yield `=== 渲染文档完成 ===`
+  yield `=== 开始生成 sitemap.xml ===`
   if (config.sitemap.enable) {
-    yield `=== 开始生成 sitemap.xml ===`
     fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
   }
   if (config.excludeAssetsCopy === false) {
