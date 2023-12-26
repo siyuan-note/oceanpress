@@ -1,12 +1,12 @@
-import '@/util/store.bower.dep'
-import '@/core/render.api.dep'
+import '~/util/store.bower.dep'
+import '~/core/render.api.dep'
 
 import { createApp } from 'vue'
-import App from '@/pages/App.vue'
+import App from '~/pages/App.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import steps from '@/pages/steps/steps.vue'
-import test from '@/pages/test.vue'
+import steps from '~/pages/steps/steps.vue'
+import test from '~/pages/test.vue'
 
 const routes = [
   { path: '/', component: steps },

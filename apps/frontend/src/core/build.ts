@@ -1,17 +1,17 @@
-import { currentConfig } from '@/config/index.ts'
+import { currentConfig } from '~/config/index.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import JSZip from 'jszip'
-import { deepAssign } from '@/util/deep_assign.ts'
+import { deepAssign } from '~/util/deep_assign.ts'
 import {
   allDocBlock_by_bookId,
   get_doc_by_SyPath,
   get_node_by_id,
   sy_refs_get,
 } from './cache.ts'
-import packageJson from '@/../package.json'
+import packageJson from '~/../package.json'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -19,10 +19,13 @@ export interface DocTree {
     docBlock: DB_block
   }
 }
-interface FileTree {
+export interface FileTree {
   [path: string]: string | ArrayBuffer
 }
 
+/** 根据配置文件进行编译
+ * TODO 将浏览器写文件的部分抽离出去，也改成使用 onFileTree
+ */
 export async function* build(
   config = currentConfig.value,
   otherConfig?: {
@@ -58,7 +61,6 @@ export async function* build(
   /** 查询所有文档级block
    * 这里必须要每次重新查询，不然用户重新编译无法获得新修改的结果
    */
-  // TODO 需要更换成能够完全遍历一个笔记本的写法
   const Doc_blocks: DB_block[] = await allDocBlock_by_bookId(book.id)
   /** docBlock 的引用没有更新：true */
   function refsNotUpdated(docBlock: DB_block): boolean {

@@ -1,5 +1,5 @@
-import '@/core/render.api.dep'
-import '@/util/store.node.dep'
+import '~/core/render.api.dep'
+import '~/util/store.node.dep'
 import { Command } from 'commander'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import { resolve } from 'path'

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { vApi } from "@/core/siyuan_api.ts";
+import Config_tab from "~/config/config_tab.vue";
+import { currentConfig } from "~/config/index.ts";
+import { DocTree, build } from "~/core/build.ts";
+import { vApi } from "~/core/siyuan_api.ts";
+import { NButton, NInput, NInputGroup, NStep, NSteps } from "naive-ui";
 import { computed, ref } from "vue";
-import { currentConfig } from "@/config/index.ts";
-import { NSteps, NStep, NButton, NInputGroup, NInput, NAlert } from "naive-ui";
-import { build,DocTree } from "@/core/build.ts";
 import Step1_selectNote from "./step1_selectNote.vue";
 import Step2_preview from "./step2_preview.vue";
-import Step4_generate from "./step4_generate.vue";
 import Step3_config from "./step3_config.vue";
-import Config_tab from "@/config/config_tab.vue";
+import Step4_generate from "./step4_generate.vue";
 
 const _notebooks = vApi.notebook_lsNotebooks();
 const current = computed(() => {
@@ -69,18 +69,6 @@ async function genHTML(config?: { dir_ref: any }) {
           确定
         </NButton>
       </NInputGroup>
-      <NAlert
-        v-if="currentConfig.authorized === ''"
-        title="存在安全风险"
-        type="warning"
-        style="max-width: 400px"
-      >
-        看起来您似乎没有开启siyuan访问授权，这会导致您的数据可能被他人获取，建议您开启授权码。
-        <hr />
-        在没有开启的情况下，任意一个网页都能访问您的数据，包括您的笔记内容。
-        <hr />
-        例如本页面在没有授权的情况下获取到了您的笔记本名称，事实上可以读取siyuan的任意内容。
-      </NAlert>
     </NStep>
     <Step1_selectNote
       v-if="_notebooks.fulfilled"
@@ -96,4 +84,4 @@ async function genHTML(config?: { dir_ref: any }) {
     />
   </NSteps>
 </template>
-@/core/siyuan_api@/core/build@/core/build
+~/core/siyuan_api~/core/build~/core/build

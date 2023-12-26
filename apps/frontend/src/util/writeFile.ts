@@ -1,4 +1,4 @@
-/** @/src/frontend/public/dev/http.js
+/** ~/src/frontend/public/dev/http.js
  * 提供一个向本地写文件的http服务
  * 用于测试
  */

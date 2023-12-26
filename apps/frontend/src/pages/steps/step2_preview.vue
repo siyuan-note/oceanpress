@@ -15,10 +15,10 @@
   </NStep>
 </template>
 <script setup lang="ts">
-import { continueLoading, usePromiseComputed } from "@/components/data_promise/index.ts";
-import Data_loading from "@/components/data_promise/data_loading.vue";
-import { currentConfig } from "@/config/index.ts";
-import { API } from "@/core/siyuan_api.ts";
+import { continueLoading, usePromiseComputed } from "~/components/data_promise/index.ts";
+import Data_loading from "~/components/data_promise/data_loading.vue";
+import { currentConfig } from "~/config/index.ts";
+import { API } from "~/core/siyuan_api.ts";
 import { NList, NListItem, NScrollbar, NStep } from "naive-ui";
 import { toRef } from "vue";
 
@@ -33,4 +33,4 @@ const filetree = usePromiseComputed.fn(() => {
   }
 });
 </script>
-@/core/siyuan_api
+~/core/siyuan_api

@@ -111,7 +111,8 @@ export async function get_node_by_id(id?: string) {
     }
   }
 }
-/** 设置快取 blockCacheMap */
+/** set blockCacheMap*/
+// TODO 需要更换成能够完全遍历一个笔记本的写法
 export async function allDocBlock_by_bookId(id: string) {
   const res = (await query_sql(`
     SELECT * from blocks

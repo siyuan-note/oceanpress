@@ -1,4 +1,4 @@
-import Test from "@/components/web-custom/Test_c.vue";
+import Test from "~/components/web-custom/Test_c.vue";
 import { createApp } from "vue";
 import { addAnchorELement, removeAnchorELement } from "./store.ts";
 

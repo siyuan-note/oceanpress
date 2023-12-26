@@ -1,8 +1,8 @@
-import { storeDep } from '@/core/dependency.ts'
-import { deepAssign } from '@/util/deep_assign.ts'
+import { storeDep } from '~/core/dependency.ts'
+import { deepAssign } from '~/util/deep_assign.ts'
 import { computed, reactive, watch } from 'vue'
 import { notebook } from '../core/siyuan_type.ts'
-
+import { version } from '~/../package.json'
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
   name: 'default',
@@ -56,6 +56,15 @@ const defaultConfig = {
     publicZip:
       'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
   },
+  /** s3 上传配置
+   * https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3
+   */
+  s3: {
+    region: '',
+    endpoint: '',
+    accessKeyId: '',
+    secretAccessKey: '',
+  },
   /** html模板嵌入代码块，会将此处配置中的代码嵌入到生成的html所对应的位置 */
   embedCode: {
     head: '',
@@ -71,9 +80,10 @@ const defaultConfig = {
   },
   OceanPress: {
     /** 此配置文件编译时的版本 */
-    version: '',
+    version: version,
   },
 }
+export type Config = typeof defaultConfig
 export const configs = reactive({
   /** 当前所使用的配置项的 key */
   __current__: 'default' as const,

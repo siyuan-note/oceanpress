@@ -12,9 +12,9 @@
 </template>
 <script setup lang="ts">
 import { NRadioButton, NRadioGroup, NStep } from "naive-ui";
-import type { notebook } from "@/core/siyuan_type.ts";
+import type { notebook } from "~/core/siyuan_type.ts";
 import { computed, toRef } from "vue";
-import { currentConfig } from "@/config/index.ts";
+import { currentConfig } from "~/config/index.ts";
 const value = computed({
   get: () => currentConfig.value.notebook.id,
   set: (id: string) => {
@@ -29,4 +29,4 @@ const props = defineProps<{
 }>();
 const notebooks = toRef(props.notebooks);
 </script>
-@/core/siyuan_type
+~/core/siyuan_type

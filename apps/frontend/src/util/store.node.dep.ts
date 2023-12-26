@@ -1,5 +1,5 @@
 import { writeFileSync, readFileSync } from 'fs'
-import { storeDep } from '@/core/dependency.ts'
+import { storeDep } from '~/core/dependency.ts'
 
 storeDep.getItem = getItem
 storeDep.setItem = setItem

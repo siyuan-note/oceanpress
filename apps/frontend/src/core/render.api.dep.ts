@@ -1,4 +1,4 @@
-import { storeDep } from '@/core/dependency.ts'
+import { storeDep } from '~/core/dependency.ts'
 import { DB_block_path, type S_Node } from './siyuan_type.ts'
 import { get_block_by_id, get_doc_by_child_id } from './cache.ts'
 
