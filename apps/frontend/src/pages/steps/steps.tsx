@@ -8,6 +8,7 @@ import Step1_selectNote from './step1_selectNote.tsx'
 import Step2_preview from './step2_preview.tsx'
 import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
+import { s3_uploads } from '~/publish/s3.ts'
 
 export default defineComponent({
   setup() {
@@ -24,10 +25,32 @@ export default defineComponent({
     const log = ref('')
 
     const docTree = ref<DocTree>({})
-    async function genHTML(config?: { dir_ref: any }) {
+    async function genHTML(config?: { dir_ref: any } | { s3: true }) {
       genHTML_status.value = true
       log.value = ''
-      const res = build(currentConfig.value, config)
+      let res: ReturnType<typeof build>
+      if (config && 'dir_ref' in config) {
+        res = build(currentConfig.value, config)
+      } else {
+        res = build(currentConfig.value, {
+          async onFileTree(tree) {
+            log.value = ''
+            log.value += '开始上传 s3' + '\n'
+            percentage.value = 0
+            console.log(tree)
+            const uploads = s3_uploads(tree, currentConfig.value)
+
+            const length = Object.keys(tree).length
+            let i = 0
+            for await (const [path, r] of uploads) {
+              i++
+              log.value += `上传：${path}  eTag:${r} \n`
+              percentage.value = (i / length) * 100
+            }
+            log.value += `上传完毕`
+          },
+        })
+      }
       const emitRes = res.next()
       const emit = (await emitRes).value
       if (emit instanceof Object && !(emit instanceof Error)) {
@@ -46,6 +69,7 @@ export default defineComponent({
       genHTML_status.value = false
       percentage.value = 100
     }
+
     return () => (
       <>
         <Config_tab></Config_tab>
@@ -80,6 +104,7 @@ export default defineComponent({
             log={log.value}
             onGenerateClick={() => genHTML()}
             onSaveToDisk={(dir_ref: any) => genHTML({ dir_ref })}
+            onUploadS3={() => genHTML({ s3: true })}
           />
         </NSteps>
       </>

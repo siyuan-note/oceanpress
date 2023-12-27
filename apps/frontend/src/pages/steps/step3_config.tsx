@@ -110,6 +110,16 @@ export default defineComponent({
             />
             <NDivider />
             <NInput
+              v-model:value={this.currentConfig.s3.bucket}
+              placeholder="s3.bucket"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={this.currentConfig.s3.pathPrefix}
+              placeholder="s3.pathPrefix"
+            />
+            <NDivider />
+            <NInput
               v-model:value={this.currentConfig.s3.endpoint}
               placeholder="s3.endpoint"
             />
