@@ -14,7 +14,8 @@ export default defineComponent({
   },
   emits: {
     saveToDisk(_ref?: any) {},
-    generateClick(_ref?: any) {},
+    generateClick() {},
+    uploadS3() {},
   },
   setup(props, { emit }) {
     const isShowDirectoryPickerSupported = computed(() => {
@@ -46,7 +47,7 @@ export default defineComponent({
             onClick={() => emit('generateClick')}
           >
             开始生成
-          </NButton>
+          </NButton>{' '}
           <NButton
             disabled={!isShowDirectoryPickerSupported}
             type="success"
@@ -54,6 +55,13 @@ export default defineComponent({
             onClick={() => saveToDisk()}
           >
             保存到本地磁盘
+          </NButton>{' '}
+          <NButton
+            type="success"
+            loading={props.percentage > 0 && props.percentage < 100}
+            onClick={() => emit('uploadS3')}
+          >
+            上传 s3
           </NButton>
           <NProgress
             type="line"

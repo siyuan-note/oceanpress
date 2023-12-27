@@ -68,7 +68,9 @@ const defaultConfig = {
    * https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3
    */
   s3: {
+    bucket: '',
     region: '',
+    pathPrefix: '',
     endpoint: '',
     accessKeyId: '',
     secretAccessKey: '',
