@@ -1,6 +1,6 @@
 import { Config, currentConfig } from '~/core/config.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
-import { renderHTML } from './render.ts'
+import { getRender, renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import JSZip from 'jszip'
@@ -9,8 +9,8 @@ import {
   allDocBlock_by_bookId,
   get_doc_by_SyPath,
   get_node_by_id,
-  sy_refs_get,
 } from './cache.ts'
+import { storeDep } from './dependency.ts'
 import packageJson from '~/../package.json'
 
 export interface DocTree {
@@ -84,16 +84,17 @@ export async function* build(
   }
   yield `=== 查询文档级block完成 ===`
   let i = 0
-  Doc_blocks.map(async (docBlock) => {
-    const sy = await get_doc_by_SyPath(DB_block_path(docBlock))
-    docTree[docBlock.hpath] = { sy, docBlock }
-    i++
-    process(i / Doc_blocks.length)
-  })
+  await Promise.all(
+    Doc_blocks.map(async (docBlock) => {
+      const sy = await get_doc_by_SyPath(DB_block_path(docBlock))
+      docTree[docBlock.hpath] = { sy, docBlock }
+      i++
+      process(i / Doc_blocks.length)
+    }),
+  )
   const fileTree: FileTree = {}
 
   process = processPercentage(0.4)
-  const arr = Object.entries(docTree)
 
   const enableIncrementalCompilation_doc = (() => {
     if (packageJson.version !== config.OceanPress.version) {
@@ -104,6 +105,7 @@ export async function* build(
     }
     return config.enableIncrementalCompilation_doc
   })()
+  yield `=== 开始渲染文档 ===`
   await Promise.all(
     Object.entries(docTree).map(async ([path, { sy, docBlock }]) => {
       if (
@@ -113,40 +115,89 @@ export async function* build(
         config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash &&
         /** docBlock所引用的文档也没有更新 */
         refsNotUpdated(docBlock)
-      ) {
+      )
         return /** skip */
-      } else {
-        try {
-          fileTree[path + '.html'] = await htmlTemplate(
-            {
-              title: sy.Properties?.title || '',
-              htmlContent: await renderHTML(sy),
-              level:
-                path.split('/').length -
-                2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
-            },
-            {
-              ...config.cdn,
-              embedCode: config.embedCode,
-            },
-          )
-          if (
-            config.enableIncrementalCompilation &&
-            config.enableIncrementalCompilation_doc
-          ) {
-            skipBuilds.add(docBlock.id, {
-              hash: docBlock.hash,
-            })
-          }
-          /** 无论是否配置增量更新都要更新引用，不然开启增量更新后没有引用数据可用 */
-          skipBuilds.add(docBlock.id, {
-            refs: /** 保存引用 */ sy_refs_get(sy.ID!),
-          })
-        } catch (error) {
-          emit.log(`${path} 渲染失败:${error}`)
+
+      try {
+        const rootLevel =
+          path.split('/').length -
+          2 /** 最开头有一个 /  还有一个 data 目录所以减二 */
+        const renderInstance = getRender()
+        fileTree[path + '.html'] = await htmlTemplate(
+          {
+            title: sy.Properties?.title || '',
+            htmlContent: await renderHTML(sy, renderInstance),
+            level: rootLevel,
+          },
+          {
+            ...config.cdn,
+            embedCode: config.embedCode,
+          },
+        )
+
+        /** rss.xml 生成 */
+        if (config.sitemap.rss && path.endsWith('.rss.xml')) {
+          const rssPath = path
+          const refNode = (
+            await Promise.all(
+              [...renderInstance.refs.values()].map(get_node_by_id),
+            )
+          ).filter((el) => el)
+          fileTree[rssPath] = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>${config.sitemap.title}</title>
+<link>${config.sitemap.siteLink}</link>
+<description>${config.sitemap.description}</description>
+<atom:link href="${
+            config.sitemap.sitePrefix
+          }${rssPath}" rel="self" type="application/rss+xml"/>
+<lastBuildDate>${new Date().toISOString()}</lastBuildDate>
+${(
+  await Promise.all(
+    refNode.map(
+      async (node) => `<item>
+  <title>${node?.Properties?.title}</title>
+  <link>${config.sitemap.sitePrefix}${
+        node?.ID ? (await storeDep.getHPathByID_Node(node?.ID)) + '.html' : ''
+      }</link>
+  <description>${'' /** TODO 或许可以加入ai 进行摘要 */}</description>
+  <pubDate>${
+    node?.Properties?.updated
+      ? new Date(
+          node.Properties.updated.replace(
+            /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+            '$1/$2/$3 $4:$5:$6',
+          ),
+        ).toISOString()
+      : ''
+  }</pubDate>
+</item>`,
+    ),
+  )
+).join('\n')}
+</channel>
+</rss>`
+          emit.log(`渲染 rss.xml:${rssPath} 完毕`)
         }
+        if (
+          config.enableIncrementalCompilation &&
+          config.enableIncrementalCompilation_doc
+        ) {
+          /** 更新为当前hash */
+          skipBuilds.add(docBlock.id, {
+            hash: docBlock.hash,
+          })
+        }
+        /** 无论是否配置增量更新都要更新正向引用，不然开启增量更新后没有引用数据可用 */
+        skipBuilds.add(docBlock.id, {
+          refs: /** 保存引用 */ [...renderInstance.refs.values()],
+        })
+      } catch (error) {
+        emit.log(`${path} 渲染失败:${error}`)
+        console.log(error)
       }
-      process(i / arr.length)
+      process(i / Doc_blocks.length)
       emit.log(`渲染完毕:${path}`)
     }),
   )
