@@ -2,7 +2,6 @@
  *  对于思源内核 api 的调用存到内存，通过快取技术避免重复请求和没有必要的请求，加速程序运行速度，但这可能会导致数据不是最新的
  ** ════════════════════════🚧 cache 🚧════════════════════════ */
 
-import { parentRef } from './node.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 
@@ -174,4 +173,13 @@ export function sy_refs_add(docId: string, ref: string) {
 }
 export function sy_refs_get(docId: string) {
   return sy_refs.get(docId) ?? []
+}
+
+/** 为 children 节点附加 Parent 引用  */
+export function parentRef(sy: S_Node) {
+  for (const child of sy?.Children ?? []) {
+    child.Parent = sy
+    parentRef(child)
+  }
+  return sy
 }

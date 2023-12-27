@@ -25,8 +25,6 @@ export default defineComponent({
 
     const docTree = ref<DocTree>({})
     async function genHTML(config?: { dir_ref: any }) {
-      console.log(333)
-
       genHTML_status.value = true
       log.value = ''
       const res = build(currentConfig.value, config)

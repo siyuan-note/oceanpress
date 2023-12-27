@@ -1,4 +1,4 @@
-import { currentConfig } from '~/core/config.ts'
+import { Config, currentConfig } from '~/core/config.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
@@ -27,7 +27,7 @@ export interface FileTree {
  * TODO 将浏览器写文件的部分抽离出去，也改成使用 onFileTree
  */
 export async function* build(
-  config = currentConfig.value,
+  config: Config,
   otherConfig?: {
     /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
     dir_ref?: any
@@ -94,57 +94,62 @@ export async function* build(
 
   process = processPercentage(0.4)
   const arr = Object.entries(docTree)
-  let enableIncrementalCompilation_doc = config.enableIncrementalCompilation_doc
-  if (packageJson.version !== config.OceanPress.version) {
-    yield `配置文件版本号[${config.OceanPress.version}]与OceanPress版本[${packageJson.version}]不一致，将进行文档全量编译`
-    enableIncrementalCompilation_doc = false
-  }
-  for (let i = 0; i < arr.length; i++) {
-    const [path, { sy, docBlock }] = arr[i]
-    if (
-      config.enableIncrementalCompilation &&
-      enableIncrementalCompilation_doc &&
-      /** 文档本身没有发生变化 */
-      config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash &&
-      /** docBlock所引用的文档也没有更新 */
-      refsNotUpdated(docBlock)
-    ) {
-      continue /** skip */
-    } else {
-      try {
-        fileTree[path + '.html'] = await htmlTemplate(
-          {
-            title: sy.Properties?.title || '',
-            htmlContent: await renderHTML(sy),
-            level:
-              path.split('/').length -
-              2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
-          },
-          {
-            ...config.cdn,
-            embedCode: config.embedCode,
-          },
-        )
-        if (
-          config.enableIncrementalCompilation &&
-          config.enableIncrementalCompilation_doc
-        ) {
-          skipBuilds.add(docBlock.id, {
-            hash: docBlock.hash,
-          })
-        }
-        /** 无论是否配置增量更新都要更新引用，不然开启增量更新后没有引用数据可用 */
-        skipBuilds.add(docBlock.id, {
-          refs: /** 保存引用 */ sy_refs_get(sy.ID!),
-        })
-      } catch (error) {
-        yield `${path} 渲染失败:${error}`
-        console.log(path, '渲染失败', error)
-      }
+
+  const enableIncrementalCompilation_doc = (() => {
+    if (packageJson.version !== config.OceanPress.version) {
+      emit.log(
+        `配置文件版本号[${config.OceanPress.version}]与OceanPress版本[${packageJson.version}]不一致，将进行文档全量编译`,
+      )
+      return false
     }
-    process(i / arr.length)
-    yield `渲染： ${path}`
-  }
+    return config.enableIncrementalCompilation_doc
+  })()
+  await Promise.all(
+    Object.entries(docTree).map(async ([path, { sy, docBlock }]) => {
+      if (
+        config.enableIncrementalCompilation &&
+        enableIncrementalCompilation_doc &&
+        /** 文档本身没有发生变化 */
+        config.__skipBuilds__[docBlock.id]?.hash === docBlock.hash &&
+        /** docBlock所引用的文档也没有更新 */
+        refsNotUpdated(docBlock)
+      ) {
+        return /** skip */
+      } else {
+        try {
+          fileTree[path + '.html'] = await htmlTemplate(
+            {
+              title: sy.Properties?.title || '',
+              htmlContent: await renderHTML(sy),
+              level:
+                path.split('/').length -
+                2 /** 最开头有一个 /  还有一个 data 目录所以减二 */,
+            },
+            {
+              ...config.cdn,
+              embedCode: config.embedCode,
+            },
+          )
+          if (
+            config.enableIncrementalCompilation &&
+            config.enableIncrementalCompilation_doc
+          ) {
+            skipBuilds.add(docBlock.id, {
+              hash: docBlock.hash,
+            })
+          }
+          /** 无论是否配置增量更新都要更新引用，不然开启增量更新后没有引用数据可用 */
+          skipBuilds.add(docBlock.id, {
+            refs: /** 保存引用 */ sy_refs_get(sy.ID!),
+          })
+        } catch (error) {
+          emit.log(`${path} 渲染失败:${error}`)
+        }
+      }
+      process(i / arr.length)
+      emit.log(`渲染完毕:${path}`)
+    }),
+  )
   yield `=== 渲染文档完成 ===`
   yield `=== 开始生成 sitemap.xml ===`
   if (config.sitemap.enable) {
@@ -163,7 +168,7 @@ export async function* build(
              WHERE box = '${book.id}'
             limit 150000 OFFSET 0`,
     })
-    await Promise.allSettled(
+    await Promise.all(
       assets.map(async (item) => {
         if (
           config.enableIncrementalCompilation &&
@@ -222,7 +227,7 @@ export async function* build(
           }
         }
       })
-    await Promise.allSettled(widgetNode)
+    await Promise.all(widgetNode)
   }
 
   // === 输出编译成果 ===
