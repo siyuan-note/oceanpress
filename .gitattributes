@@ -1,1 +1,1 @@
-apps/frontend/public/* linguist-vendored
+apps/frontend/public/* -linguist-detectable
