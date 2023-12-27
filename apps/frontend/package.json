@@ -8,6 +8,7 @@
     "cli": "tsx ./src/cli.ts",
     "cli_watch": "tsx watch ./src/cli.ts",
     "build": "vite build",
+    "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -26,10 +27,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "dependency-cruiser": "^15.5.0",
     "naive-ui": "^2.34.4",
     "typescript": "^5.0.2",
-    "unocss": "^0.55.7",
-    "vfonts": "^0.0.3",
     "vite": "^4.4.5",
     "vue-tsc": "^1.8.5"
   }

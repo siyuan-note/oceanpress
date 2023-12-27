@@ -12,11 +12,12 @@
     "skipLibCheck": true,
     /* Bundler mode */
     "allowImportingTsExtensions": true,
-    "moduleResolution" :"NodeNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

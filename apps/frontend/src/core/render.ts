@@ -45,7 +45,7 @@ export async function renderHTML(
         currentDoc.ID
       ) {
         /** 代表这个节点不在当前文档中，却在编译currentDoc时出现了，所以 currentDoc依赖（正向引用）targetDoc  */
-        // 记录引用
+        // 记录引用 TODO 不应该在 render中之直接记录，该上报
         sy_refs_add(currentDoc.ID, targetDoc.ID)
       }
     }

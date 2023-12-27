@@ -1,6 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { currentConfig } from './config/index.ts'
+import { currentConfig } from './core/config.ts'
 import { get_doc_by_hpath } from './core/cache.ts'
 import { htmlTemplate } from './core/htmlTemplate.ts'
 import { renderHTML } from './core/render.ts'

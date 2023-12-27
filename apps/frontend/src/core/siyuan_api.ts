@@ -4,7 +4,7 @@ import {
   usePromiseComputed,
 } from '../components/data_promise/index.ts'
 import { NodeDocument, S_Node, file, notebook } from './siyuan_type.ts'
-import { currentConfig } from '~/config/index.ts'
+import { currentConfig } from '~/core/config.ts'
 
 /** https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md */
 export interface api {

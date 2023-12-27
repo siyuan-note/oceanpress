@@ -1,0 +1,102 @@
+strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    subgraph "cluster_src" {label="src" "src/cli.ts" [label=<cli.ts> tooltip="cli.ts" URL="src/cli.ts" fillcolor="#ddfeff"] }
+    "src/cli.ts" -> "src/core/build.ts"
+    "src/cli.ts" -> "src/core/cache.ts"
+    "src/cli.ts" -> "src/core/config.ts"
+    "src/cli.ts" -> "src/server.ts"
+    "src/cli.ts" -> "src/core/render.api.dep.ts"
+    "src/cli.ts" -> "src/util/store.node.dep.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/data_promise" {label="data_promise" "src/components/data_promise/data_loading.vue" [label=<data_loading.vue> tooltip="data_loading.vue" URL="src/components/data_promise/data_loading.vue" fillcolor="#41f083"] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/data_promise" {label="data_promise" "src/components/data_promise/index.ts" [label=<index.ts> tooltip="index.ts" URL="src/components/data_promise/index.ts" fillcolor="#ddfeff"] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/web-custom" {label="web-custom" "src/components/web-custom/Test_c.vue" [label=<Test_c.vue> tooltip="Test_c.vue" URL="src/components/web-custom/Test_c.vue" fillcolor="#41f083"] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/web-custom" {label="web-custom" "src/components/web-custom/flow.ts" [label=<flow.ts> tooltip="flow.ts" URL="src/components/web-custom/flow.ts" fillcolor="#ddfeff"] } } }
+    "src/components/web-custom/flow.ts" -> "src/components/web-custom/store.ts"
+    "src/components/web-custom/flow.ts" -> "src/components/web-custom/Test_c.vue"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/web-custom" {label="web-custom" "src/components/web-custom/store.ts" [label=<store.ts> tooltip="store.ts" URL="src/components/web-custom/store.ts" fillcolor="#ddfeff"] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/build.ts" [label=<build.ts> tooltip="build.ts" URL="src/core/build.ts" fillcolor="#ddfeff"] } }
+    "src/core/build.ts" -> "src/core/cache.ts"
+    "src/core/build.ts" -> "src/core/htmlTemplate.ts"
+    "src/core/build.ts" -> "src/core/render.ts"
+    "src/core/build.ts" -> "src/core/siyuan_api.ts"
+    "src/core/build.ts" -> "src/core/siyuan_type.ts"
+    "src/core/build.ts" -> "src/core/config.ts"
+    "src/core/build.ts" -> "src/util/deep_assign.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/cache.ts" [label=<cache.ts> tooltip="cache.ts" URL="src/core/cache.ts" fillcolor="#ddfeff"] } }
+    "src/core/cache.ts" -> "src/core/node.ts"
+    "src/core/cache.ts" -> "src/core/siyuan_api.ts"
+    "src/core/cache.ts" -> "src/core/siyuan_type.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/config.ts" [label=<config.ts> tooltip="config.ts" URL="src/core/config.ts" fillcolor="#ddfeff"] } }
+    "src/core/config.ts" -> "src/core/siyuan_type.ts"
+    "src/core/config.ts" -> "src/core/dependency.ts"
+    "src/core/config.ts" -> "src/util/deep_assign.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/dependency.ts" [label=<dependency.ts> tooltip="dependency.ts" URL="src/core/dependency.ts" fillcolor="#ddfeff"] } }
+    "src/core/dependency.ts" -> "src/core/siyuan_type.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/htmlTemplate.ts" [label=<htmlTemplate.ts> tooltip="htmlTemplate.ts" URL="src/core/htmlTemplate.ts" fillcolor="#ddfeff"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/node.ts" [label=<node.ts> tooltip="node.ts" URL="src/core/node.ts" fillcolor="#ddfeff"] } }
+    "src/core/node.ts" -> "src/core/siyuan_type.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/render.api.dep.ts" [label=<render.api.dep.ts> tooltip="render.api.dep.ts" URL="src/core/render.api.dep.ts" fillcolor="#ddfeff"] } }
+    "src/core/render.api.dep.ts" -> "src/core/cache.ts"
+    "src/core/render.api.dep.ts" -> "src/core/siyuan_type.ts"
+    "src/core/render.api.dep.ts" -> "src/core/dependency.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/render.ts" [label=<render.ts> tooltip="render.ts" URL="src/core/render.ts" fillcolor="#ddfeff"] } }
+    "src/core/render.ts" -> "src/core/cache.ts"
+    "src/core/render.ts" -> "src/core/siyuan_api.ts"
+    "src/core/render.ts" -> "src/core/siyuan_type.ts"
+    "src/core/render.ts" -> "src/core/dependency.ts"
+    "src/core/render.ts" -> "src/util/escaping.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/siyuan_api.ts" [label=<siyuan_api.ts> tooltip="siyuan_api.ts" URL="src/core/siyuan_api.ts" fillcolor="#ddfeff"] } }
+    "src/core/siyuan_api.ts" -> "src/components/data_promise/index.ts"
+    "src/core/siyuan_api.ts" -> "src/core/siyuan_type.ts"
+    "src/core/siyuan_api.ts" -> "src/core/config.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/core" {label="core" "src/core/siyuan_type.ts" [label=<siyuan_type.ts> tooltip="siyuan_type.ts" URL="src/core/siyuan_type.ts" fillcolor="#ddfeff"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" "src/pages/App.tsx" [label=<App.tsx> tooltip="App.tsx" URL="src/pages/App.tsx" fillcolor="#bbfeff"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" "src/pages/config_tab.tsx" [label=<config_tab.tsx> tooltip="config_tab.tsx" URL="src/pages/config_tab.tsx" fillcolor="#bbfeff"] } }
+    "src/pages/config_tab.tsx" -> "src/core/config.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/steps" {label="steps" "src/pages/steps/step1_selectNote.tsx" [label=<step1_selectNote.tsx> tooltip="step1_selectNote.tsx" URL="src/pages/steps/step1_selectNote.tsx" fillcolor="#bbfeff"] } } }
+    "src/pages/steps/step1_selectNote.tsx" -> "src/core/config.ts"
+    "src/pages/steps/step1_selectNote.tsx" -> "src/core/siyuan_type.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/steps" {label="steps" "src/pages/steps/step2_preview.tsx" [label=<step2_preview.tsx> tooltip="step2_preview.tsx" URL="src/pages/steps/step2_preview.tsx" fillcolor="#bbfeff"] } } }
+    "src/pages/steps/step2_preview.tsx" -> "src/components/data_promise/data_loading.vue"
+    "src/pages/steps/step2_preview.tsx" -> "src/components/data_promise/index.ts"
+    "src/pages/steps/step2_preview.tsx" -> "src/core/config.ts"
+    "src/pages/steps/step2_preview.tsx" -> "src/core/siyuan_api.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/steps" {label="steps" "src/pages/steps/step3_config.tsx" [label=<step3_config.tsx> tooltip="step3_config.tsx" URL="src/pages/steps/step3_config.tsx" fillcolor="#bbfeff"] } } }
+    "src/pages/steps/step3_config.tsx" -> "src/core/config.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/steps" {label="steps" "src/pages/steps/step4_generate.tsx" [label=<step4_generate.tsx> tooltip="step4_generate.tsx" URL="src/pages/steps/step4_generate.tsx" fillcolor="#bbfeff"] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/steps" {label="steps" "src/pages/steps/steps.tsx" [label=<steps.tsx> tooltip="steps.tsx" URL="src/pages/steps/steps.tsx" fillcolor="#bbfeff"] } } }
+    "src/pages/steps/steps.tsx" -> "src/pages/steps/step1_selectNote.tsx"
+    "src/pages/steps/steps.tsx" -> "src/pages/steps/step2_preview.tsx"
+    "src/pages/steps/steps.tsx" -> "src/pages/steps/step3_config.tsx"
+    "src/pages/steps/steps.tsx" -> "src/pages/steps/step4_generate.tsx"
+    "src/pages/steps/steps.tsx" -> "src/core/build.ts"
+    "src/pages/steps/steps.tsx" -> "src/core/config.ts"
+    "src/pages/steps/steps.tsx" -> "src/core/siyuan_api.ts"
+    "src/pages/steps/steps.tsx" -> "src/pages/config_tab.tsx"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/publish" {label="publish" "src/publish/github.ts" [label=<github.ts> tooltip="no-orphans" URL="src/publish/github.ts" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/publish" {label="publish" "src/publish/interface.ts" [label=<interface.ts> tooltip="interface.ts" URL="src/publish/interface.ts" fillcolor="#ddfeff"] } }
+    "src/publish/interface.ts" -> "src/core/build.ts"
+    "src/publish/interface.ts" -> "src/core/config.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/publish" {label="publish" "src/publish/s3.ts" [label=<s3.ts> tooltip="s3.ts" URL="src/publish/s3.ts" fillcolor="#ddfeff"] } }
+    "src/publish/s3.ts" -> "src/publish/interface.ts"
+    subgraph "cluster_src" {label="src" "src/server.ts" [label=<server.ts> tooltip="server.ts" URL="src/server.ts" fillcolor="#ddfeff"] }
+    "src/server.ts" -> "src/core/cache.ts"
+    "src/server.ts" -> "src/core/config.ts"
+    "src/server.ts" -> "src/core/htmlTemplate.ts"
+    "src/server.ts" -> "src/core/render.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/util" {label="util" "src/util/deep_assign.ts" [label=<deep_assign.ts> tooltip="deep_assign.ts" URL="src/util/deep_assign.ts" fillcolor="#ddfeff"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/util" {label="util" "src/util/escaping.ts" [label=<escaping.ts> tooltip="escaping.ts" URL="src/util/escaping.ts" fillcolor="#ddfeff"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/util" {label="util" "src/util/store.bower.dep.ts" [label=<store.bower.dep.ts> tooltip="store.bower.dep.ts" URL="src/util/store.bower.dep.ts" fillcolor="#ddfeff"] } }
+    "src/util/store.bower.dep.ts" -> "src/core/dependency.ts"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/util" {label="util" "src/util/store.node.dep.ts" [label=<store.node.dep.ts> tooltip="store.node.dep.ts" URL="src/util/store.node.dep.ts" fillcolor="#ddfeff"] } }
+    "src/util/store.node.dep.ts" -> "src/core/dependency.ts"
+    subgraph "cluster_src" {label="src" "src/vite-env.d.ts" [label=<vite-env.d.ts> tooltip="vite-env.d.ts" URL="src/vite-env.d.ts" fillcolor="#ccffcc"] }
+    subgraph "cluster_src" {label="src" "src/webpage.ts" [label=<webpage.ts> tooltip="webpage.ts" URL="src/webpage.ts" fillcolor="#ddfeff"] }
+    "src/webpage.ts" -> "src/core/render.api.dep.ts"
+    "src/webpage.ts" -> "src/pages/App.tsx"
+    "src/webpage.ts" -> "src/pages/steps/steps.tsx"
+    "src/webpage.ts" -> "src/util/store.bower.dep.ts"
+}

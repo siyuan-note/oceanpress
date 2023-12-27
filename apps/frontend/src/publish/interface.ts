@@ -1,4 +1,4 @@
-import type { Config } from '~/config/index.ts'
+import type { Config } from '~/core/config.ts'
 import type { FileTree } from '~/core/build.ts'
 
 export interface uploadFiles {

@@ -1,4 +1,4 @@
-import { currentConfig } from '~/config/index.ts'
+import { currentConfig } from '~/core/config.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
