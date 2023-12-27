@@ -18,9 +18,9 @@ const defaultConfig = {
   withoutPublicZip: true,
   /** 不复制 assets/ ，勾选此选项则需要自行处理资源文件 */
   excludeAssetsCopy: false,
-  /** 输出 sitemap.xml */
+  /** 输出站点地图相关 */
   sitemap: {
-    /** 控制是否输出 sitemap.xml */
+    /** 控制是否输出 sitemap.xml,不影响 rss 选项 */
     enable: true,
     /** 默认为 "." 生成路径例如 "./record/思源笔记.html"
      * 但 sitemap 并不建议采用相对路径所以应该替换成例如 "https://shenzilong.cn"
@@ -28,6 +28,14 @@ const defaultConfig = {
      * 参见 https://www.sitemaps.org/protocol.html#escaping
      */
     sitePrefix: '.',
+    /** 站点地址 */
+    siteLink: '',
+    /** 站点描述 */
+    description: '',
+    /** 站点标题 */
+    title: '',
+    /** 开启 rss 生成，对于文件名为 .rss.xml 结尾的文档生效 */
+    rss: true,
   },
   /** 开启增量编译，当开启增量编译时，
    * 在编译过程中会依据 __skipBuilds__ 的内容来跳过一些没有变化不需要重新输出的内容

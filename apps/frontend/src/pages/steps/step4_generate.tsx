@@ -51,7 +51,7 @@ export default defineComponent({
             disabled={!isShowDirectoryPickerSupported}
             type="success"
             loading={props.percentage > 0 && props.percentage < 100}
-            onClick={saveToDisk}
+            onClick={() => saveToDisk()}
           >
             保存到本地磁盘
           </NButton>

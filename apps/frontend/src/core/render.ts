@@ -2,7 +2,6 @@ import { escaping, unescaping } from '~/util/escaping.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, S_Node, NodeType } from './siyuan_type.ts'
 import { storeDep } from '~/core/dependency.ts'
-import { sy_refs_add } from './cache.ts'
 
 export async function renderHTML(
   sy: S_Node | undefined,
@@ -10,7 +9,7 @@ export async function renderHTML(
    * renderHTML 内部会创建一个 renderInstance 的浅克隆
    * 用来维护 renderHTML.nodeStack 的正常运转
    */
-  renderInstance: typeof render = render,
+  renderInstance: typeof render = getRender(),
 ): Promise<string> {
   if (sy === undefined) return ''
   const renderObj = {
@@ -35,8 +34,8 @@ export async function renderHTML(
   } else {
     /** 入栈 */
     renderObj.nodeStack.push(sy)
+    /** 维护引用关系 */
     if (sy.ID && renderInstance.nodeStack[0]?.ID) {
-      /** 维护引用关系 */
       const targetDoc = await storeDep.getDocByChildID(sy.ID)
       const currentDoc = renderInstance.nodeStack[0]
       if (
@@ -46,7 +45,7 @@ export async function renderHTML(
       ) {
         /** 代表这个节点不在当前文档中，却在编译currentDoc时出现了，所以 currentDoc依赖（正向引用）targetDoc  */
         // 记录引用 TODO 不应该在 render中之直接记录，该上报
-        sy_refs_add(currentDoc.ID, targetDoc.ID)
+        renderObj.refs.add(targetDoc.ID)
       }
     }
     const r = await renderObj[sy.Type]!(sy)
@@ -176,6 +175,14 @@ function strAttr(
 const _emptyString = async (_sy: S_Node) => ''
 const _dataString = async (sy: S_Node) => sy.Data ?? ''
 
+/** 对一些数据常量进行处理 */
+export const getRender = () => {
+  return {
+    ...render,
+    nodeStack: [],
+    refs: new Set(),
+  } as typeof render
+}
 const render: {
   [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
 } & {
@@ -188,10 +195,13 @@ const render: {
    * 这样就方便解决 block-ref 等链接问题
    * */
   nodeStack: S_Node[]
+  /** 当前实例所引用的其他文档id，在渲染中计算 */
+  refs: Set<string>
   /** 返回当前文档到顶层文档的路径前缀,例如： ./../..  */
   getTopPathPrefix: (sy_doc?: S_Node) => Promise<string>
 } = {
   nodeStack: [] as S_Node[],
+  refs: new Set(),
   async getTopPathPrefix() {
     const sy = this.nodeStack[0]
     let prefix = '.'
@@ -319,6 +329,7 @@ const render: {
             href = `${await that.getTopPathPrefix()}${await storeDep.getHPathByID_Node(
               doc /** 要先定位到文档，再通过下面的hash（#）定位到具体元素 */,
             )}.html#${sy.TextMarkBlockRefID}`
+            that.refs.add(doc.ID)
           } else {
             warn('未查找到所指向的文档节点', sy)
           }
@@ -464,11 +475,13 @@ ${await childRender(sy, this)}\
             sy.Children?.find(
               (el) => el.Type === 'NodeCodeBlockFenceInfoMarker',
             ),
+            this,
           )}</span>
           <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
         </div>
         ${await renderHTML(
           sy.Children?.find((el) => el.Type === 'NodeCodeBlockCode'),
+          this,
         )}
       </div>`
   },
@@ -486,6 +499,7 @@ ${await childRender(sy, this)}\
         </colgroup>
         ${await renderHTML(
           sy.Children?.find((el) => el.Type === 'NodeTableHead'),
+          this,
         )}
         <tbody>
         ${(

@@ -156,25 +156,6 @@ function idCache(node: S_Node) {
   }
 }
 
-/** 管理文档的引用关系 */
-const sy_refs = new Map<
-  /** 文档id */ string,
-  /** S_Node所正向引用的文档id */ string[]
->()
-export function sy_refs_add(docId: string, ref: string) {
-  const refs = sy_refs.get(docId)
-  if (refs === undefined) {
-    sy_refs.set(docId, [ref])
-  } else if (refs.includes(ref) === true) {
-    // refs 已经包含了，不管他
-  } else {
-    refs.push(ref)
-  }
-}
-export function sy_refs_get(docId: string) {
-  return sy_refs.get(docId) ?? []
-}
-
 /** 为 children 节点附加 Parent 引用  */
 export function parentRef(sy: S_Node) {
   for (const child of sy?.Children ?? []) {
