@@ -1,0 +1,40 @@
+import { MeilisearchPlugin } from '~/plugins/meilisearch_plugin/meilisearch_upload.ts'
+import { Config } from './config.ts'
+import { PluginCenter } from './plugin.ts'
+import { s3Upload_plugin } from '~/plugins/publish/s3.ts'
+import { FileTree, build } from './build.ts'
+import { renderHTML } from './render.ts'
+
+export type OceanPressPlugin = PluginCenter<OceanPress['funMap']>['pluginType']
+
+export class OceanPress {
+  async build() {
+    const build_res = this.pluginCenter.fun.build(this.config, {
+      renderHtmlFn: this.pluginCenter.fun.build_renderHTML,
+      onFileTree: this.pluginCenter.fun.build_onFileTree,
+    })
+    return build_res
+  }
+  funMap = {
+    /** 开始整体编译 */
+    build,
+    /** 用于渲染文档的函数 */
+    build_renderHTML: renderHTML,
+    /** 编译完成后文件树的处理回调函数 */
+    build_onFileTree: (_tree: FileTree) => {},
+  }
+  pluginCenter: PluginCenter<OceanPress['funMap']> = new PluginCenter(
+    this.funMap,
+  )
+  constructor(public config: Config) {
+    // TODO 内置插件，以后应该改成由用户配置
+    if (config.meilisearch.enable) {
+      this.pluginCenter.registerPlugin(
+        new MeilisearchPlugin(config.meilisearch),
+      )
+    }
+    if (config.s3.enable) {
+      this.pluginCenter.registerPlugin(new s3Upload_plugin())
+    }
+  }
+}

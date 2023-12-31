@@ -8,7 +8,7 @@ import Step1_selectNote from './step1_selectNote.tsx'
 import Step2_preview from './step2_preview.tsx'
 import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
-import { s3_uploads } from '~/publish/s3.ts'
+import { OceanPress } from '~/core/ocean_press.ts'
 
 export default defineComponent({
   setup() {
@@ -23,34 +23,26 @@ export default defineComponent({
     const percentage = ref(0)
     const genHTML_status = ref(false)
     const log = ref('')
-
     const docTree = ref<DocTree>({})
-    async function genHTML(config?: { dir_ref: any } | { s3: true }) {
+    async function genHTML(otherConfig?: {
+      /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
+      dir_ref: any
+    }) {
       genHTML_status.value = true
       log.value = ''
-      let res: ReturnType<typeof build>
-      if (config && 'dir_ref' in config) {
-        res = build(currentConfig.value, config)
-      } else {
-        res = build(currentConfig.value, {
-          async onFileTree(tree) {
-            log.value = ''
-            log.value += '开始上传 s3' + '\n'
-            percentage.value = 0
-            console.log(tree)
-            const uploads = s3_uploads(tree, currentConfig.value)
 
-            const length = Object.keys(tree).length
-            let i = 0
-            for await (const [path, r] of uploads) {
-              i++
-              log.value += `上传：${path}  eTag:${r} \n`
-              percentage.value = (i / length) * 100
-            }
-            log.value += `上传完毕`
+      const ocean_press = new OceanPress(currentConfig.value)
+
+      // 浏览器端写磁盘插件
+      if (otherConfig?.dir_ref) {
+        ocean_press.pluginCenter.registerPlugin({
+          build_onFileTree([tree]) {
+            writeFileSystem(tree, otherConfig.dir_ref)
           },
         })
       }
+
+      let res: ReturnType<typeof build> = await ocean_press.build()
       const emitRes = res.next()
       const emit = (await emitRes).value
       if (emit instanceof Object && !(emit instanceof Error)) {
@@ -104,10 +96,48 @@ export default defineComponent({
             log={log.value}
             onGenerateClick={() => genHTML()}
             onSaveToDisk={(dir_ref: any) => genHTML({ dir_ref })}
-            onUploadS3={() => genHTML({ s3: true })}
           />
         </NSteps>
       </>
     )
   },
 })
+
+/** chrome系高版本可用 */
+async function writeFileSystem(
+  fileTree: { [htmlPath: string]: string | ArrayBuffer },
+  dir_ref: any,
+) {
+  /** 并发写文件 */
+  await Promise.all(
+    Object.entries(fileTree).map(async ([path, html]) => {
+      await writeFile(dir_ref, path, html).catch((e) => {
+        console.log(e, dir_ref)
+      })
+    }),
+  )
+  async function writeFile(
+    dir_ref: any,
+    name: string,
+    data: string | ArrayBuffer,
+  ) {
+    const pathArr = name.split('/')
+    /** 如果路径中的目录不存在则创建 */
+    if (pathArr.length > 1) {
+      for (let i = 0; i < pathArr.length - 1; i++) {
+        const dirName = pathArr[i]
+        if (dirName === '') {
+          continue
+        }
+        dir_ref = await dir_ref.getDirectoryHandle(dirName, { create: true })
+      }
+    }
+    /** 写文件 */
+    const new_file = await dir_ref.getFileHandle(pathArr[pathArr.length - 1], {
+      create: true,
+    })
+    const new_file_writer = await new_file.createWritable()
+    await new_file_writer.write(data)
+    await new_file_writer.close()
+  }
+}

@@ -103,7 +103,11 @@ export default defineComponent({
           <NCollapseItem title="S3 配置" name="3">
             OceanPress 的运算都是在本地，不会收集密钥，请确保网址是 https 加密的
             oceanpress.heartstack.space
+            <br />
             {/* 推荐自身的技术支持服务 */}
+            <NCheckbox v-model:checked={this.currentConfig.s3.enable}>
+              启用 s3
+            </NCheckbox>
             <NInput
               v-model:value={this.currentConfig.s3.region}
               placeholder="s3.region"
@@ -133,6 +137,26 @@ export default defineComponent({
               v-model:value={this.currentConfig.s3.secretAccessKey}
               type="password"
               placeholder="s3.secretAccessKey"
+            />
+          </NCollapseItem>
+          <NCollapseItem title="meilisearch 配置" name="4">
+            <NCheckbox v-model:checked={this.currentConfig.meilisearch.enable}>
+              启用 meilisearch 搜索引擎
+            </NCheckbox>
+            <NDivider />
+            <NInput
+              v-model:value={this.currentConfig.meilisearch.host}
+              placeholder="meilisearch.host"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={this.currentConfig.meilisearch.apiKey}
+              placeholder="meilisearch.apiKey"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={this.currentConfig.meilisearch.indexName}
+              placeholder="meilisearch.indexName"
             />
           </NCollapseItem>
         </NCollapse>

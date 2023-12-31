@@ -17,7 +17,7 @@ export default defineComponent({
     generateClick() {},
     uploadS3() {},
   },
-  setup(props, { emit }) {
+  setup(props, context) {
     const isShowDirectoryPickerSupported = computed(() => {
       return 'showDirectoryPicker' in globalThis
     })
@@ -32,7 +32,7 @@ export default defineComponent({
         // User cancelled, or otherwise failed to open a directory.
         return
       }
-      emit('saveToDisk', dir_ref)
+      context.emit('saveToDisk', dir_ref)
     }
 
     return () => (
@@ -44,7 +44,7 @@ export default defineComponent({
           <NButton
             type="success"
             loading={props.percentage > 0 && props.percentage < 100}
-            onClick={() => emit('generateClick')}
+            onClick={() => context.emit('generateClick')}
           >
             开始生成
           </NButton>{' '}
@@ -55,13 +55,6 @@ export default defineComponent({
             onClick={() => saveToDisk()}
           >
             保存到本地磁盘
-          </NButton>{' '}
-          <NButton
-            type="success"
-            loading={props.percentage > 0 && props.percentage < 100}
-            onClick={() => emit('uploadS3')}
-          >
-            上传 s3
           </NButton>
           <NProgress
             type="line"

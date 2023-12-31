@@ -8,9 +8,23 @@
   <title>OceanPress</title>
   <meta name="description" content="这是一款从思源笔记本 生成一个静态站点的工具" />
   <meta property="og:description" content="这是一款从思源笔记本 生成一个静态站点的工具" />
+  <script type="text/javascript">
+    // https://clarity.microsoft.com 站点分析
+    (function (c, l, a, r, i, t, y) {
+      c[ a ] = c[ a ] || function () { (c[ a ].q = c[ a ].q || []).push(arguments) }
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i
+      y = l.getElementsByTagName(r)[ 0 ]; y.parentNode.insertBefore(t, y)
+    })(window, document, "clarity", "script", "kdd1bzgo7w");
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.1.0/themes/reset-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.1.0/themes/satellite-min.css">
 </head>
 
 <body>
+  <div class="wrapper">
+    <div id="searchbox" focus></div>
+    <div id="hits"></div>
+  </div>
   <div id="app"></div>
   <script type="module" src="./src/webpage.ts"></script>
 </body>
@@ -21,5 +35,37 @@
     padding: 0 10px;
   }
 </style>
+<!-- <script
+  src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch/dist/instant-meilisearch.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script>
+  const search = instantsearch({
+    indexName: "llej_blogs",
+    searchClient: instantMeiliSearch(
+      "http://zixu.shenzilong.cn", '6e73f23421923228d8060729a97d5a8604d2ae1c00cea384b46f035c7b82706b'
+    ).searchClient
+  })
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: "#searchbox"
+    }),
+    instantsearch.widgets.configure({ hitsPerPage: 8 }),
+    instantsearch.widgets.hits({
+      container: "#hits",
+      templates: {
+        item: `
+        <div>
+          <div class="hit-name">
+            <a href="{{#helpers.highlight}}{ "attribute": "url" }{{/helpers.highlight}}">
+              {{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}
+            </a>
+          </div>
+        </div>
+      `
+      }
+    })
+  ])
+  search.start();
+</script> -->
 
 </html>

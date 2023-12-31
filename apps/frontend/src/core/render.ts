@@ -3,6 +3,7 @@ import { API } from './siyuan_api.ts'
 import { DB_block, S_Node, NodeType } from './siyuan_type.ts'
 import { storeDep } from '~/core/dependency.ts'
 
+export type RenderHTML = typeof renderHTML
 export async function renderHTML(
   sy: S_Node | undefined,
   /**
