@@ -288,6 +288,7 @@ ${(
   if (config.compressedZip) {
     yield `=== 开始生成压缩包 ===`
     await downloadZIP(fileTree, {
+      // TODO 这里应该移出来成为全局的写选项
       withoutZip: config.withoutPublicZip,
       publicZip: config.cdn.publicZip,
     })

@@ -21,7 +21,7 @@ importers:
         specifier: ^1.3.3
         version: 1.3.3
       cheerio:
-        specifier: ^1.0.0-rc.12
+        specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       commander:
         specifier: ^11.1.0
