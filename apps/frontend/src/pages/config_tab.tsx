@@ -136,18 +136,14 @@ export default defineComponent({
               show-count
               clearable
               :allow-input={this.validateInput}
-              v-slots={{
-                footer: () => (
-                  <NButton
-                    type="primary"
-                    onClick={this.add}
-                    disabled={!this.validateInput(this.name)}
-                  >
-                    确认
-                  </NButton>
-                ),
-              }}
-            />
+
+            /><br /><br />
+            <NButton
+            type="primary"
+            onClick={()=>this.add()}
+            disabled={!this.validateInput(this.name)}>
+            确认
+          </NButton><br />
             不能以双下划线（__）开头、也不能为空、不能和已有的配置项重名
           </NCard>
         </NModal>

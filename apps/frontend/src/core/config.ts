@@ -68,12 +68,19 @@ const defaultConfig = {
    * https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3
    */
   s3: {
+    enable: false,
     bucket: '',
     region: '',
     pathPrefix: '',
     endpoint: '',
     accessKeyId: '',
     secretAccessKey: '',
+  },
+  meilisearch: {
+    enable: false,
+    host: '',
+    apiKey: '',
+    indexName: '',
   },
   /** html模板嵌入代码块，会将此处配置中的代码嵌入到生成的html所对应的位置 */
   embedCode: {

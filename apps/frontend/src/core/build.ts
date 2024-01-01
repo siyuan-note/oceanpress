@@ -22,19 +22,19 @@ export interface DocTree {
 export interface FileTree {
   [path: string]: string | ArrayBuffer
 }
-
+export type Build = typeof build
 /** 根据配置文件进行编译
  * TODO 将浏览器写文件的部分抽离出去，也改成使用 onFileTree
  */
 export async function* build(
   config: Config,
   otherConfig?: {
-    /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
-    dir_ref?: any
     // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
     onFileTree?: (tree: FileTree) => void
+    renderHtmlFn?: typeof renderHTML
   },
 ) {
+  const _renderHTML = otherConfig?.renderHtmlFn ?? renderHTML
   const book = config.notebook
   const docTree: DocTree = {}
   const skipBuilds = useSkipBuilds()
@@ -123,10 +123,11 @@ export async function* build(
           path.split('/').length -
           2 /** 最开头有一个 /  还有一个 data 目录所以减二 */
         const renderInstance = getRender()
+
         fileTree[path + '.html'] = await htmlTemplate(
           {
             title: sy.Properties?.title || '',
-            htmlContent: await renderHTML(sy, renderInstance),
+            htmlContent: await _renderHTML(sy, renderInstance),
             level: rootLevel,
           },
           {
@@ -263,10 +264,9 @@ ${(
         ] as string
         if (
           config.enableIncrementalCompilation &&
-          /** 资源没有变化，直接跳过 */
           config.__skipBuilds__[widget.ID]?.updated === update
         ) {
-          return /** skip */
+          return /** 资源没有变化，直接跳过 */
         } else {
           const id = widget.ID
           // 快照保存的位置 `/data/storage/oceanpress/widget_img/${id}.jpg`
@@ -282,16 +282,13 @@ ${(
   }
 
   // === 输出编译成果 ===
-  if (otherConfig?.dir_ref) {
-    yield `=== 开始写文件到磁盘 ===`
-    await writeFileSystem(fileTree, otherConfig.dir_ref)
-  }
   if (otherConfig?.onFileTree) {
     otherConfig.onFileTree(fileTree)
   }
   if (config.compressedZip) {
     yield `=== 开始生成压缩包 ===`
     await downloadZIP(fileTree, {
+      // TODO 这里应该移出来成为全局的写选项
       withoutZip: config.withoutPublicZip,
       publicZip: config.cdn.publicZip,
     })
@@ -330,46 +327,6 @@ export async function downloadZIP(
       console.error(error)
     })
 }
-
-/** chrome系高版本可用 */
-async function writeFileSystem(
-  fileTree: { [htmlPath: string]: string | ArrayBuffer },
-  dir_ref: any,
-) {
-  /** 并发写文件 */
-  await Promise.all(
-    Object.entries(fileTree).map(async ([path, html]) => {
-      await writeFile(dir_ref, path, html).catch((e) => {
-        console.log(e, dir_ref)
-      })
-    }),
-  )
-  async function writeFile(
-    dir_ref: any,
-    name: string,
-    data: string | ArrayBuffer,
-  ) {
-    const pathArr = name.split('/')
-    /** 如果路径中的目录不存在则创建 */
-    if (pathArr.length > 1) {
-      for (let i = 0; i < pathArr.length - 1; i++) {
-        const dirName = pathArr[i]
-        if (dirName === '') {
-          continue
-        }
-        dir_ref = await dir_ref.getDirectoryHandle(dirName, { create: true })
-      }
-    }
-    /** 写文件 */
-    const new_file = await dir_ref.getFileHandle(pathArr[pathArr.length - 1], {
-      create: true,
-    })
-    const new_file_writer = await new_file.createWritable()
-    await new_file_writer.write(data)
-    await new_file_writer.close()
-  }
-}
-
 function sitemap_xml(
   docArr: DB_block[],
   config: {
