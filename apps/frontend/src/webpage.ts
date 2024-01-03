@@ -5,12 +5,14 @@ import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from '~/pages/App.tsx'
 import steps from '~/pages/steps/steps.tsx'
-
-const routes = [{ path: '/', component: steps }]
+import preview from '~/pages/preview.tsx'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: [
+    { path: '/', component: steps },
+    { path: '/preview/:path', component: preview },
+  ],
 })
 
 const app = createApp(App)

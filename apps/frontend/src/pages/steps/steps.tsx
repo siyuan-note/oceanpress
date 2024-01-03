@@ -65,7 +65,7 @@ export default defineComponent({
     return () => (
       <>
         <Config_tab></Config_tab>
-        <NSteps vertical current={current.value} status={'process'}>
+        <NSteps vertical current={current.value} status={'process'} >
           <NStep title="鉴权配置">
             http apiPrefix:
             <NInput

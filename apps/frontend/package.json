@@ -1,13 +1,14 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "cli": "tsx ./src/cli.ts",
     "cli_watch": "tsx watch ./src/cli.ts",
-    "build": "vite build",
+    "build": "vite build && pnpm build_lib",
+    "build_lib": "vite build --config vite.sw.config.ts",
     "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
   },

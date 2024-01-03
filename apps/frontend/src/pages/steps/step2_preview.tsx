@@ -41,11 +41,19 @@ export default defineComponent({
         title={currentConfig.value.notebook.name ?? '未选中'}
         description="请先选择一个笔记本"
       >
+        {'可点击文件名预览效果'}
         <Data_loading p={this.toRef(this.filetree)}>
-          <NScrollbar style="max-height: 120px" trigger="none">
+          <NScrollbar style="max-height: 220px" trigger="none">
             <NList hoverable>
               {this.filetree.data.files.map((item) => (
-                <NListItem>{item.name}</NListItem>
+                <NListItem>
+                  <a
+                    target="_blank"
+                    href={`/#/preview/${item.name.replace(/.sy$/, '')}`}
+                  >
+                    {item.name}
+                  </a>
+                </NListItem>
               ))}
             </NList>
           </NScrollbar>
