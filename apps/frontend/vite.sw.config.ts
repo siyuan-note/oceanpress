@@ -12,7 +12,7 @@ export default defineConfig({
       entry: ['./sw.ts'],
       name: 'sw',
       fileName: 'sw',
-      formats: ['es'],
+      formats: ['iife'],
     },
   },
   resolve: {

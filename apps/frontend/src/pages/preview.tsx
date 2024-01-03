@@ -8,7 +8,7 @@ const preview = defineComponent({
     const iframeHref = ref<string | null>(null)
     // firefox 不兼容
     navigator.serviceWorker
-      .register(import.meta.env.PROD ? 'sw.js' : '/sw.ts', {
+      .register(import.meta.env.PROD ? 'sw.iife.js' : '/sw.ts', {
         scope: '/',
       })
       .then(async (_r) => {
