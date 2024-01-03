@@ -7,7 +7,7 @@
     "dev": "vite",
     "cli": "tsx ./src/cli.ts",
     "cli_watch": "tsx watch ./src/cli.ts",
-    "build": "vite build && pnpm build_lib",
+    "build": "vite build && npm run build_lib",
     "build_lib": "vite build --config vite.sw.config.ts",
     "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
