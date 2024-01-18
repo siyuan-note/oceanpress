@@ -294,7 +294,11 @@ const render: {
   NodeTaskListItemMarker: _emptyString,
 
   async NodeParagraph(sy) {
-    return html`<div ${strAttr(sy)}>${await childRender(sy, this)}</div>`
+    /** .protyle-wysiwyg [data-node-id] [spellcheck] 定义了换行样式 */
+    return `<div ${strAttr(sy)}><div spellcheck="false">${await childRender(
+      sy,
+      this,
+    )}</div></div>`
   },
   async NodeTextMark(sy) {
     const that = this
