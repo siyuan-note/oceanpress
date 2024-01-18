@@ -7,6 +7,7 @@ import {
 import Data_loading from '~/components/data_promise/data_loading.vue'
 import { currentConfig } from '~/core/config.ts'
 import { API } from '~/core/siyuan_api.ts'
+import { swPrefix } from '~/sw/const.ts'
 
 export default defineComponent({
   components: {
@@ -49,7 +50,7 @@ export default defineComponent({
                 <NListItem>
                   <a
                     target="_blank"
-                    href={`/#/preview/${item.name.replace(/.sy$/, '')}`}
+                    href={`${swPrefix}${item.name.replace(/.sy$/, '')}`}
                   >
                     {item.name}
                   </a>

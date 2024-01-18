@@ -3,17 +3,10 @@ import { currentConfig } from './config.ts'
 import { get_doc_by_hpath } from './cache.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
+import { stream } from 'hono/streaming'
 
 export function createHonoApp() {
   const app = new Hono()
-  app.use(async (_, next) => {
-    console.log('请求到达')
-    try {
-      await next()
-    } catch (error) {
-      console.log(error)
-    }
-  })
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', async (c) => {
     // TODO 处于安全考虑应该防范 file 跳出 assets
@@ -24,36 +17,29 @@ export function createHonoApp() {
       },
       method: 'GET',
     })
-
-    if (!r.body) {
+    const body = r.body
+    if (!body) {
       return c.text('Not Found', 404, { 'Content-Type': 'text/plain' })
     }
-    return c.stream(
-      async (stream) => {
-        const reader = r.body!.getReader()
-        console.log(file)
-        while (true) {
-          const r = await reader.read()
-          if (r.done) {
-            stream.close()
-            break
-          } else {
-            stream.write(r.value)
-          }
+
+    return stream(c, async (writeStream) => {
+      const reader = body.getReader()
+      while (true) {
+        const r = await reader.read()
+        if (r.done) {
+          writeStream.close()
+          break
+        } else {
+          writeStream.write(r.value)
         }
-      },
-      200,
-      {
-        'content-type': r.headers.get('content-type')!,
-      },
-    )
+      }
+    })
   })
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
 
-    const r = await renderHtmlByPath(path).catch((err) => {
-      console.log('err')
-
+    const r = await renderHtmlByUriPath(path).catch((err) => {
+      console.log(err)
       return err.message
     })
 
@@ -63,11 +49,10 @@ export function createHonoApp() {
   return app
 }
 
-async function renderHtmlByPath(path: string): Promise<string | Error> {
+async function renderHtmlByUriPath(path: string): Promise<string | Error> {
   const hpath = decodeURIComponent(path)
     .replace(/\#(.*)?$/, '')
     .replace(/\.html$/, '')
-  console.log(currentConfig.value)
 
   const doc = await get_doc_by_hpath(hpath)
 

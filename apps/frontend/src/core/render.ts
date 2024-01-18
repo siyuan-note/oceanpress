@@ -83,7 +83,7 @@ const html = String.raw
 async function childRender(sy: S_Node, renderInstance: typeof render) {
   let h = ''
   for await (const el of sy?.Children ?? []) {
-    h += await renderHTML(el, renderInstance)
+    h += (await renderHTML(el, renderInstance)) + '\n'
   }
   return h
 }
@@ -245,10 +245,7 @@ const render: {
     return html
   },
   async NodeHeading(sy) {
-    let html = `<div ${strAttr(sy)}><div>${await childRender(
-      sy,
-      this,
-    )}</div></div>`
+    let html = `<div ${strAttr(sy)}>${await childRender(sy, this)}</div>`
 
     // 在被嵌入查询块的情况下需要查询渲染其后面的非标题块
     const parentNode =
@@ -332,17 +329,17 @@ const render: {
             )}.html#${sy.TextMarkBlockRefID}`
             that.refs.add(doc.ID)
           } else {
-            warn('未查找到所指向的文档节点', sy)
+            warn(`未查找到${sy.ID}所指向的文档节点 ${sy.TextMarkBlockRefID}`)
           }
         } else {
-          warn('未查找到所指向的文档节点', sy)
+          warn(`${sy.ID} 块引用没有设定 ref id`)
         }
 
         return `<span data-type="${sy.TextMarkType}" \
-    data-subtype="${/** "s" */ sy.TextMarkBlockRefSubtype}" \
-    data-id="${/** 被引用块的id */ sy.TextMarkBlockRefID}">
-          <a href="${href}">${content}</a>
-  </span>`
+data-subtype="${/** "s" */ sy.TextMarkBlockRefSubtype}" \
+data-id="${
+          /** 被引用块的id */ sy.TextMarkBlockRefID
+        }"><a href="${href}">${content}</a></span>`
       } else if (type === 'a') {
         let href = sy.TextMarkAHref
         if (href?.startsWith('assets/')) {
@@ -379,17 +376,17 @@ const render: {
     } else if (LinkTitle?.length && LinkTitle.length > 1) {
       warn('NodeImage 存在多个 LinkTitle', sy)
     }
-    return html`<span ${await strAttr(sy)} style="${
-      sy.Properties?.['parent-style']
-    }"
-      ><img
-        src="${link}"
-        data-src="${link}"
-        title="${title}"
-        style="${sy.Properties?.style}"
-        loading="lazy"
-      /><span class="protyle-action__title">${title}</span></span
-    >`
+    return `<span ${await strAttr(sy)} style="${
+      sy.Properties?.['parent-style'] ?? ''
+    }">
+<img
+  src="${link}"
+  data-src="${link}"
+  title="${title}"
+  style="${sy.Properties?.style ?? ''}"
+  loading="lazy"
+/>
+<span class="protyle-action__title">${title}</span></span>`
   },
   async NodeLinkDest(sy) {
     /** 绝对路径 */
@@ -402,12 +399,10 @@ const render: {
   NodeLinkTitle: _dataString,
   NodeKramdownSpanIAL: _emptyString,
   async NodeSuperBlock(sy) {
-    return html`<div
-      ${strAttr(sy)}
-      data-sb-layout="${childDateByType(sy, 'NodeSuperBlockLayoutMarker')}"
-    >
-      ${await childRender(sy, this)}
-    </div>`
+    return `<div ${strAttr(sy)} data-sb-layout="${childDateByType(
+      sy,
+      'NodeSuperBlockLayoutMarker',
+    )}">${await childRender(sy, this)}</div>`
   },
   NodeSuperBlockOpenMarker: _emptyString,
   NodeSuperBlockCloseMarker: _emptyString,
@@ -448,8 +443,7 @@ ${await childRender(sy, this)}\
     for (const block of blocks) {
       const node = await storeDep.getNodeByID(block.id)
       if (node === undefined) {
-        // TODO 一般来说是跨笔记引用,但也有可能是 node.ts 中的缓存失效
-        return warnDiv('跨笔记引用', block.id, sql, node)
+        return warnDiv('未找到此块，可能为跨笔记引用', block.id, sql)
       }
       htmlStr += await renderHTML(node, this)
     }

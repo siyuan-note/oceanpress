@@ -4,3 +4,4 @@ node_modules/
 test.session.sql
 /.vscode
 apps/visualizer
+apps/siyuan_serverless
