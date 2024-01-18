@@ -4,19 +4,22 @@ import { DB_block, S_Node, NodeType } from './siyuan_type.ts'
 import { storeDep } from '~/core/dependency.ts'
 
 export type RenderHTML = typeof renderHTML
+type Render = typeof render
+
 export async function renderHTML(
   sy: S_Node | undefined,
   /**
    * renderHTML 内部会创建一个 renderInstance 的浅克隆
    * 用来维护 renderHTML.nodeStack 的正常运转
    */
-  renderInstance: typeof render = getRender(),
+  renderInstance: Render = getRender(),
 ): Promise<string> {
   if (sy === undefined) return ''
-  const renderObj = {
+  const renderObj: Render = {
     ...renderInstance,
-    /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里创建一个新 []  */
-    nodeStack: [...renderInstance.nodeStack],
+    nodeStack: [
+      /** 避免让所有的 renderInstance.nodeStack 是同一个对象 ，所以这里复制一个新的  */ ...renderInstance.nodeStack,
+    ],
   }
   if (
     renderInstance.nodeStack.find(
@@ -30,7 +33,7 @@ export async function renderHTML(
   }
   if (renderObj[sy.Type] === undefined) {
     return warnDiv(
-      `没有找到对应的渲染器 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}`,
+      `没有找到对应的渲染方法 ${sy.Type}  ${renderObj.nodeStack[0].Properties?.title}`,
     )
   } else {
     /** 入栈 */
@@ -83,7 +86,7 @@ const html = String.raw
 async function childRender(sy: S_Node, renderInstance: typeof render) {
   let h = ''
   for await (const el of sy?.Children ?? []) {
-    h += (await renderHTML(el, renderInstance))
+    h += await renderHTML(el, renderInstance)
   }
   return h
 }
@@ -182,12 +185,13 @@ export const getRender = () => {
     ...render,
     nodeStack: [],
     refs: new Set(),
-  } as typeof render
+  } as Render
 }
 const render: {
   [key in keyof typeof NodeType]?: (sy: S_Node) => Promise<string>
 } & {
-  /** 用于保存调用栈，
+  /**
+   * 用于保存调用栈，即从根节点到当前节点。
    * 例如在渲染 文档A中引用了文档B中的节点 时调用栈如下
    * ```
    *    nodeStack ~= [A_NodeDocument,A_NodeList,...,A_block-ref,B_Node]
@@ -227,9 +231,13 @@ const render: {
     if (/** 只有顶层的文档块才渲染题图 */ this.nodeStack.length === 1) {
       html += `<div style="min-height: 150px;" ${strAttr(sy)}>`
       if (sy.Properties?.['title-img']) {
-        html += `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${
-          sy.Properties?.['title-img']
-        }"/>${
+        html += `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${sy.Properties?.[
+          'title-img'
+        ].replace(
+          /assets/,
+          //  修改为相对路径
+          (await this.getTopPathPrefix()) + '/assets/',
+        )}"/>${
           sy.Properties?.['icon']
             ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.['icon']} </div>`
             : ''
@@ -245,8 +253,11 @@ const render: {
     return html
   },
   async NodeHeading(sy) {
-    const tagName =`h${sy.HeadingLevel}`
-    let html = `<${tagName} ${strAttr(sy)}>${await childRender(sy, this)}</${tagName}>`
+    const tagName = `h${sy.HeadingLevel}`
+    let html = `<${tagName} ${strAttr(sy)}>${await childRender(
+      sy,
+      this,
+    )}</${tagName}>`
 
     // 在被嵌入查询块的情况下需要查询渲染其后面的非标题块
     const parentNode =

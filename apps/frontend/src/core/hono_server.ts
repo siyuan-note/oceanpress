@@ -1,4 +1,4 @@
-import { Hono } from 'hono'
+import { Context, Hono } from 'hono'
 import { currentConfig } from './config.ts'
 import { get_doc_by_hpath } from './cache.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
@@ -8,47 +8,53 @@ import { stream } from 'hono/streaming'
 export function createHonoApp() {
   const app = new Hono()
   app.get('/', (c) => c.redirect('/index.html'))
-  app.get('/assets/*', async (c) => {
-    // TODO 处于安全考虑应该防范 file 跳出 assets
-    const file = c.req.path
-    const r = await fetch(`${currentConfig.value.apiPrefix}${file}`, {
-      headers: {
-        Authorization: `Token ${currentConfig.value.authorized}`,
-      },
-      method: 'GET',
-    })
-    const body = r.body
-    if (!body) {
-      return c.text('Not Found', 404, { 'Content-Type': 'text/plain' })
-    }
-
-    return stream(c, async (writeStream) => {
-      const reader = body.getReader()
-      while (true) {
-        const r = await reader.read()
-        if (r.done) {
-          writeStream.close()
-          break
-        } else {
-          writeStream.write(r.value)
-        }
-      }
-    })
-  })
+  app.get('/assets/*', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
-
-    const r = await renderHtmlByUriPath(path).catch((err) => {
-      console.log(err)
-      return err.message
+    const r = await renderHtmlByUriPath(path).catch(async (err: Error) => {
+      if (err.message.includes('not doc')) {
+        return await assetsHandle(c)
+      }
+      throw err
     })
 
-    if (r instanceof Error) throw r
-    return c.html(r)
+    if (r instanceof Error) {
+      throw r
+    } else if (typeof r === 'string') {
+      return c.html(r)
+    } else {
+      return r
+    }
   })
   return app
 }
+async function assetsHandle(c: Context) {
+  // TODO 处于安全考虑应该防范 file 跳出 assets
+  const file = c.req.path
+  const r = await fetch(`${currentConfig.value.apiPrefix}${file}`, {
+    headers: {
+      Authorization: `Token ${currentConfig.value.authorized}`,
+    },
+    method: 'GET',
+  })
+  const body = r.body
+  if (!body) {
+    return c.text('Not Found', 404, { 'Content-Type': 'text/plain' })
+  }
 
+  return stream(c, async (writeStream) => {
+    const reader = body.getReader()
+    while (true) {
+      const r = await reader.read()
+      if (r.done) {
+        writeStream.close()
+        break
+      } else {
+        writeStream.write(r.value)
+      }
+    }
+  })
+}
 async function renderHtmlByUriPath(path: string): Promise<string | Error> {
   const hpath = decodeURIComponent(path)
     .replace(/\#(.*)?$/, '')

@@ -9,7 +9,8 @@ import { swConfigsPrefix, swPrefix } from '~/sw/const.ts'
 
 storeDep.getItem = getItem
 storeDep.setItem = setItem
-setCache(false)
+// setCache(false)
+setCache(true)
 
 function setItem(_key: string, _value: string) {
   // TODO 没有需要
