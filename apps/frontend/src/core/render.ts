@@ -83,7 +83,7 @@ const html = String.raw
 async function childRender(sy: S_Node, renderInstance: typeof render) {
   let h = ''
   for await (const el of sy?.Children ?? []) {
-    h += (await renderHTML(el, renderInstance)) + '\n'
+    h += (await renderHTML(el, renderInstance))
   }
   return h
 }
