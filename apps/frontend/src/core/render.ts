@@ -237,15 +237,16 @@ const render: {
       }
       html += '</div>'
       /** h1 文档标题 */
-      html += `<div ${strAttr(sy)} data-type="NodeHeading" class="h1">${
+      html += `<h1 ${strAttr(sy)} data-type="NodeHeading" class="h1">${
         sy.Properties?.title
-      }</div>`
+      }</h1>`
     }
     html += await childRender(sy, this)
     return html
   },
   async NodeHeading(sy) {
-    let html = `<div ${strAttr(sy)}>${await childRender(sy, this)}</div>`
+    const tagName =`h${sy.HeadingLevel}`
+    let html = `<${tagName} ${strAttr(sy)}>${await childRender(sy, this)}</${tagName}>`
 
     // 在被嵌入查询块的情况下需要查询渲染其后面的非标题块
     const parentNode =
