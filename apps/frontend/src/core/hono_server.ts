@@ -11,6 +11,7 @@ export function createHonoApp() {
   app.get('/assets/*', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
+
     const r = await renderHtmlByUriPath(path).catch(async (err: Error) => {
       if (err.message.includes('not doc')) {
         return await assetsHandle(c)
@@ -31,17 +32,29 @@ export function createHonoApp() {
 async function assetsHandle(c: Context) {
   // TODO 处于安全考虑应该防范 file 跳出 assets
   const file = c.req.path
-  const r = await fetch(`${currentConfig.value.apiPrefix}${file}`, {
+  const widgetPrefix = '/assets/widget/'
+  const isWidget = file.startsWith(widgetPrefix)
+  const apiPath = `${currentConfig.value.apiPrefix}${
+    isWidget ? '/api/file/getFile' : file
+  }`
+  const r = await fetch(apiPath, {
     headers: {
       Authorization: `Token ${currentConfig.value.authorized}`,
     },
-    method: 'GET',
+    method: isWidget ? 'POST' : 'GET',
+    body: isWidget
+      ? JSON.stringify({
+          path: `/data/storage/oceanpress/widget_img/${file.substring(
+            widgetPrefix.length,
+          )}`,
+        })
+      : undefined,
   })
   const body = r.body
   if (!body) {
-    return c.text('Not Found', 404, { 'Content-Type': 'text/plain' })
+    return c.text('响应体为 null', 500, { 'Content-Type': 'text/plain' })
   }
-
+  c.status(r.status)
   return stream(c, async (writeStream) => {
     const reader = body.getReader()
     while (true) {

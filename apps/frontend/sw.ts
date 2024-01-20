@@ -33,7 +33,7 @@ app.post(swConfigsPrefix, async (c) => {
   return c.json({ ok: true })
 })
 
-app.get(`${swPrefix}*`, async (c) => {
+app.all(`${swPrefix}*`, async (c) => {
   const url = c.req.path.substring(swPrefix.length)
   // 转发到渲染服务器
   return renderServer.request(url)
