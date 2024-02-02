@@ -317,11 +317,15 @@ export async function downloadZIP(
   await zip
     .generateAsync({ type: 'blob' })
     .then((content) => {
-      // 将ZIP文件保存为下载
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(content)
-      link.download = `notebook.zip`
-      link.click()
+      if (globalThis.document) {
+        // 将ZIP文件保存为下载
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(content)
+        link.download = `notebook.zip`
+        link.click()
+      } else {
+        //TODO node 环境下需要写文件
+      }
     })
     .catch((error) => {
       console.error(error)
