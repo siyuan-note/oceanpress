@@ -12,6 +12,7 @@
     "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
   },
+  "bin": "./dist/cli.js",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.490.0",
     "@hono/node-server": "^1.4.0",

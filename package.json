@@ -13,5 +13,9 @@
   },
   "devDependencies": {
     "vite-node": "^1.0.1"
+  },
+  "dependencies": {
+    "pkgroll": "^2.0.1",
+    "tsx": "^4.7.0"
   }
 }

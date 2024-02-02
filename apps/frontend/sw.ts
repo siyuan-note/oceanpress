@@ -42,7 +42,7 @@ app.notFound(async (c) => {
   // 请求转发给真实服务器
   return fetch(c.req.raw)
 })
-//
+// 开始监听请求
 app.fire()
 self.addEventListener('install', (event) => {
   console.log('sw installed🎉', event)

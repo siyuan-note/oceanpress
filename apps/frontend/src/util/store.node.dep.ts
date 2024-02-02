@@ -1,11 +1,17 @@
-import { writeFileSync, readFileSync } from 'fs'
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs'
 import { storeDep } from '~/core/dependency.ts'
 
 storeDep.getItem = getItem
 storeDep.setItem = setItem
 
 export function setItem(key: string, value: string) {
-  return writeFileSync(`./store/${key}`, value, 'utf-8')
+  if (!existsSync('./store/')) {
+    // 目录不存在，递归创建目录
+    mkdirSync('./store/', { recursive: true })
+  }
+  return writeFileSync(`./store/${key}`, value, {
+    encoding: 'utf-8',
+  })
 }
 
 export function getItem(key: string): string | undefined {
