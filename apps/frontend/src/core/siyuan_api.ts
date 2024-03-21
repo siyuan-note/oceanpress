@@ -91,7 +91,7 @@ async function rpc(method: string, arg: any) {
     body: JSON.stringify(arg[0]),
     method: 'POST',
   }).catch((err: Error) => {
-    err.message = `访问思源接口时出错了，请检查思源服务是否启动`
+    err.message = `访问思源接口时出错了，请检查思源服务是否启动以及配置接口地址是否正确。`
     throw err
   })
   if (method === 'file_getFile') {
