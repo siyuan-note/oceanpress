@@ -26,3 +26,5 @@ dist-ssr
 
 
 /store/
+
+*.env
