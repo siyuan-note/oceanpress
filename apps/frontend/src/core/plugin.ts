@@ -45,7 +45,7 @@ export class PluginCenter<T extends Record<string, (...args: any[]) => any>> {
           return (...args: any) => {
             return that.callFn(
               propertyKey as keyof T,
-              //@ts-ignore  懒得推了。属于内部实现，就直接忽略掉吧
+              //@ts-ignore  懒得推类型了。属于内部实现，就直接忽略掉吧
               method,
             )(...args)
           }

@@ -12,6 +12,8 @@ import {
 } from './cache.ts'
 import { storeDep } from './dependency.ts'
 import packageJson from '~/../package.json' with { type: 'json' };
+import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
+import { downloadZIP } from './genZip.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -139,46 +141,7 @@ export async function* build(
         /** rss.xml 生成 */
         if (config.sitemap.rss && path.endsWith('.rss.xml')) {
           const rssPath = path
-          const refNode = (
-            await Promise.all(
-              [...renderInstance.refs.values()].map(get_node_by_id),
-            )
-          ).filter((el) => el)
-          fileTree[rssPath] = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-<title>${config.sitemap.title}</title>
-<link>${config.sitemap.siteLink}</link>
-<description>${config.sitemap.description}</description>
-<atom:link href="${
-            config.sitemap.sitePrefix
-          }${rssPath}" rel="self" type="application/rss+xml"/>
-<lastBuildDate>${new Date().toISOString()}</lastBuildDate>
-${(
-  await Promise.all(
-    refNode.map(
-      async (node) => `<item>
-  <title>${node?.Properties?.title}</title>
-  <link>${config.sitemap.sitePrefix}${
-        node?.ID ? (await storeDep.getHPathByID_Node(node?.ID)) + '.html' : ''
-      }</link>
-  <description>${'' /** TODO 或许可以加入ai 进行摘要 */}</description>
-  <pubDate>${
-    node?.Properties?.updated
-      ? new Date(
-          node.Properties.updated.replace(
-            /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
-            '$1/$2/$3 $4:$5:$6',
-          ),
-        ).toISOString()
-      : ''
-  }</pubDate>
-</item>`,
-    ),
-  )
-).join('\n')}
-</channel>
-</rss>`
+          fileTree[rssPath] =await generateRSSXML(rssPath, renderInstance, config)
           emit.log(`渲染 rss.xml:${rssPath} 完毕`)
         }
         if (
@@ -299,64 +262,7 @@ ${(
   emit.percentage(100)
   yield '编译完毕'
 }
-/** 下载zip */
-export async function downloadZIP(
-  docTree: { [htmlPath: string]: string | ArrayBuffer },
-  config?: { publicZip?: string; withoutZip?: boolean },
-) {
-  const zip = new JSZip()
-  if (config?.withoutZip !== true) {
-    const presetZip = await (
-      await fetch(config?.publicZip ?? '/public.zip')
-    ).arrayBuffer()
-    await zip.loadAsync(presetZip)
-  }
-  for (const [path, html] of Object.entries(docTree)) {
-    zip.file(path, html)
-  }
-  await zip
-    .generateAsync({ type: 'blob' })
-    .then((content) => {
-      if (globalThis.document) {
-        // 将ZIP文件保存为下载
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(content)
-        link.download = `notebook.zip`
-        link.click()
-      } else {
-        //TODO node 环境下需要写文件
-      }
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-}
-function sitemap_xml(
-  docArr: DB_block[],
-  config: {
-    sitePrefix: string
-  },
-) {
-  const urlList: string = docArr
-    .map((doc) => {
-      let lastmod = ''
-      const time = doc.ial.match(/updated=\"(\d+)\"/)?.[1] ?? doc.created
-      if (time) {
-        lastmod = `\n<lastmod>${time.slice(0, 4)}-${time.slice(
-          4,
-          6,
-        )}-${time.slice(6, 8)}</lastmod>`
-      }
-      return `<url>
-<loc>${config.sitePrefix}${doc.hpath}.html</loc>${lastmod}
-</url>\n`
-    })
-    .join('')
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urlList}
-</urlset>`
-}
+
 
 function useSkipBuilds() {
   const obj: { [k: string]: { hash?: string } } = {}

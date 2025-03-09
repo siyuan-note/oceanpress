@@ -4,7 +4,7 @@ import { DB_block, S_Node, NodeType } from './siyuan_type.ts'
 import { storeDep } from '~/core/dependency.ts'
 
 export type RenderHTML = typeof renderHTML
-type Render = typeof render
+export type Render = typeof render
 
 export async function renderHTML(
   sy: S_Node | undefined,
