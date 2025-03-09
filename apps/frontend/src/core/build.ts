@@ -11,7 +11,7 @@ import {
   get_node_by_id,
 } from './cache.ts'
 import { storeDep } from './dependency.ts'
-import packageJson from '~/../package.json'
+import packageJson from '~/../package.json' with { type: 'json' };
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
