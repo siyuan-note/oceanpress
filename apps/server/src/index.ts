@@ -10,7 +10,7 @@ import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
 dotenv.config();
 
 const fastify = Fastify({
-  logger: true,
+  logger: false,
 });
 
 // 假设静态文件存储在 ./public 目录下
