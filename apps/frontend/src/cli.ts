@@ -72,7 +72,7 @@ program
 
 program
   .command('server')
-  .description('输出静态站点源码')
+  .description('启动动态代理')
   .option('-c, --config <string>', '指定配置文件的位置')
   .option('-h, --host <string>', 'web服务绑定到的地址', '127.0.0.1')
   .option('-p, --port <number>', 'web服务绑定到的端口', '80')

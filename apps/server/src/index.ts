@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 // 获取当前文件的目录路径
 const __dirname = path.dirname(__filename);
+console.log('[__dirname]',__dirname);
 // 加载环境变量
 dotenv.config();
 
