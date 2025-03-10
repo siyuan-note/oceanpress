@@ -1,8 +1,11 @@
 # RPC
 
-最简单好用的 ts rpc 方案，前后端一致的类型定义，可以跳转到对应定义的代码
+最简单好用的 ts rpc 方案
 
-唯一需要注意的就是参数传递，你不能传递无法序列化的对象，例如你使用 json 传递参数，那你的接口 入参 和返回值都需要是合法 json。
+1. 前后端一致的类型定义
+2. 可以跳转到对应定义的代码和查找引用 (需要可以直接导入未经过编译的 server api type)
+
+需要注意的就是参数传递，你不能传递无法序列化的对象，例如你使用 json 传递参数，那你的接口 入参 和返回值都需要是合法 json。
 
 想要传递复杂对象的话可以考虑使用 superjson , 或者自行定义其他的序列化逻辑
 
@@ -19,7 +22,7 @@ const apis = {
   },
 };
 export type API = typeof apis;
-const serverRPC = createRPC('apiProvider', {
+const serverRPC = await createRPC('apiProvider', {
   genApiModule: async () => {
     return apis;
   },
@@ -27,7 +30,7 @@ const serverRPC = createRPC('apiProvider', {
 fastify.all('/api/*', async (request, reply) => {
   const method = request.url;
   const params = JSON.parse(request.body as string);
-  const result = await (await serverRPC).RC(method.slice(5), params);
+  const result = await serverRPC.RC(method.slice(5), params);
   reply.send({ result });
 });
 ```
@@ -36,9 +39,9 @@ fastify.all('/api/*', async (request, reply) => {
 
 ```typescript
 import { API } from 'server-npm_package';
-const client = await createRPC<API>('apiConsumer', {
+const clientRPC = await createRPC<API>('apiConsumer', {
   remoteCall(method, data) {
-    return fetch(`${opt.apiBase}/api/${method}`, {
+    return fetch(`server-base-url/api/${method}`, {
       method: 'POST',
       body: JSON.stringify(data),
     })
@@ -46,6 +49,5 @@ const client = await createRPC<API>('apiConsumer', {
       .then((r) => r.result);
   },
 });
-const res = await client.API.a.b(33);
-console.log('[res]', res);
+const res = await clientRPC.API.a.b(33);
 ```
