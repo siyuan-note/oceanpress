@@ -8,4 +8,7 @@ export default defineConfig({
   sourcemap: true, // 生成 sourcemap
   minify: false, // 是否压缩代码
   outDir: 'dist', // 输出目录
+  bundle: true, // 是否打包依赖
+  external: ['react'],
+
 });

@@ -1,8 +1,11 @@
 import { readFile } from 'fs/promises'
 import { program } from './common.ts'
-import { currentConfig, loadConfigFile } from '~/core/config.ts';
-import { OceanPress } from '~/core/ocean_press.ts';
-import { genZIP } from '~/core/genZip.ts';
+import { currentConfig, loadConfigFile } from '~/core/config.ts'
+import { OceanPress } from '~/core/ocean_press.ts'
+import { genZIP } from '~/core/genZip.ts'
+import type { API } from 'oceanpress-server'
+import { createRPC } from 'oceanpress-rpc'
+
 program
   .command('deploy')
   .description('部署站点')
@@ -13,9 +16,23 @@ program
     if (!opt.apiBase || !opt.apiKey) {
       return console.error(`请配置 apiBase 和 apiKey`)
     }
+    console.log(333)
+
     const config = await readFile(opt.config, 'utf-8')
     loadConfigFile(JSON.parse(config))
-
+    const client = await createRPC<API>('apiConsumer', {
+      remoteCall(method, data) {
+        return fetch(`${opt.apiBase}/api/${method}`, {
+          method: 'POST',
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((r) => r.result)
+      },
+    })
+    const ress = await client.API.a.b(33)
+    console.log('[res]', ress)
+    return
     const ocean_press = new OceanPress(currentConfig.value)
 
     ocean_press.pluginCenter.registerPlugin({

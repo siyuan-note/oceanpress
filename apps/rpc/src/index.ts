@@ -8,7 +8,6 @@ async function main() {
   };
   const serverRPC = await createRPC('apiProvider' as const, {
     genApiModule: async () => {
-      console.log('Generating API module...');
       return apis;
     },
   });
@@ -20,7 +19,5 @@ async function main() {
     },
   });
 
-  console.log('[serverRPC]', await serverRPC.API.test());
-  console.log('[clientRPC]', await clientRPC.API.test());
 }
 main();
