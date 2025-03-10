@@ -1,0 +1,50 @@
+{
+    "compilerOptions": {
+        /* 基本选项 */
+        "target": "esnext", // 编译目标为最新的 ECMAScript 语法
+        "module": "esnext", // 使用 ES 模块
+        "lib": [
+            "dom",
+            "esnext"
+        ], // 包含 DOM 和最新的 ES 库
+        "allowJs": true, // 允许编译 JavaScript 文件
+        "checkJs": true, // 检查 JavaScript 文件中的类型错误
+        "declaration": true, // 生成对应的 .d.ts 文件
+        "sourceMap": true, // 生成 source map 文件
+        "outDir": "./dist", // 输出目录
+        "rootDir": "./src", // 源代码目录
+        "removeComments": true, // 移除注释
+        "noEmitOnError": true, // 如果有错误，不生成输出文件
+        /* 严格类型检查选项 */
+        "strict": true, // 启用所有严格类型检查选项
+        "noImplicitAny": true, // 不允许隐式的 any 类型
+        "strictNullChecks": true, // 严格的 null 检查
+        "strictFunctionTypes": true, // 严格的函数类型检查
+        "strictBindCallApply": true, // 严格的 bind/call/apply 检查
+        "strictPropertyInitialization": true, // 严格的属性初始化检查
+        "noImplicitThis": true, // 不允许隐式的 this
+        "alwaysStrict": true, // 在严格模式下解析并输出 "use strict"
+        /* 模块解析选项 */
+        "moduleResolution": "node", // 使用 Node.js 风格的模块解析
+        "baseUrl": "./", // 解析非相对模块名的基目录
+        "paths": {
+            "@/*": [
+                "src/*"
+            ] // 路径别名
+        },
+        "esModuleInterop": true, // 允许使用 import * as React from 'react'
+        "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
+        /* 其他选项 */
+        "skipLibCheck": true, // 跳过库文件的类型检查
+        "allowSyntheticDefaultImports": true, // 允许合成项目的默认导入
+        "resolveJsonModule": true, // 允许导入 JSON 文件
+        "isolatedModules": true // 将每个文件作为单独的模块
+    },
+    "include": [
+        "src/**/*"
+    ], // 包含 src 目录下的所有文件
+    "exclude": [
+        "node_modules",
+        "dist"
+    ] // 排除 node_modules 和 dist 目录
+}
