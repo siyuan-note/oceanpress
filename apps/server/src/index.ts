@@ -11,7 +11,6 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 // 获取当前文件的目录路径
 const __dirname = path.dirname(__filename);
-console.log('[__dirname]',__dirname);
 // 加载环境变量
 dotenv.config();
 
@@ -21,7 +20,7 @@ const fastify = Fastify({
 
 // 假设静态文件存储在 ./public 目录下
 const staticDir = path.join(__dirname, 'public');
-
+console.log('[staticDir]',staticDir);
 // 确保静态文件目录存在
 if (!fs.existsSync(staticDir)) {
   fs.mkdirSync(staticDir, { recursive: true });
