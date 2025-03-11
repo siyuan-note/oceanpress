@@ -24,23 +24,9 @@ if (!fs.existsSync(staticDir)) {
   fs.mkdirSync(staticDir, { recursive: true });
 }
 
-async function test({ notebookConfig, zipFile }: { notebookConfig: any; zipFile: string }) {
-  // 验证 apiKey
-
-  return '测试结果';
-  // 解压 zip 文件
-  const zip = new AdmZip(Buffer.from(zipFile, 'base64'));
-  zip.extractAllTo(staticDir, true);
-
-  return { success: true, message: 'Deployment successful' };
-}
 const apis = {
-  test,
-  a: {
-    b(n: number) {
-      return { t: Date.now(), n };
-    },
-  },
+  upload: async (zipCode: string) => {},
+  deploy: async (zipCode: string) => {},
 };
 export type API = typeof apis;
 
@@ -51,7 +37,7 @@ const serverRPC = createRPC('apiProvider', {
   middleware: [
     /** 实现 apiKey 的验证中间件 */
     async (method, data, next) => {
-      const ctx = getCtx(data);
+      const ctx = getCtx();
       if (ctx?.apiKey !== config.API_KEY) {
         throw new Error('Unauthorized 不正确的 apiKey');
       }
@@ -61,11 +47,20 @@ const serverRPC = createRPC('apiProvider', {
 });
 fastify.all('/api/*', async (request, reply) => {
   const method = request.url;
-  const data = JSON.parse(request.body as string);
+
+  const contentType = request.headers['content-type'];
+  console.log('[request.body]', request.body);
+  let data: any[];
+  if (contentType === 'application/json') {
+    data = request.body as any[];
+  } else {
+    // 如果请求体不是 json 对象的话，意味着他可能是二进制，或者字符串，这里我们直接包裹成数组返回,因为 rpc 要求参数必须是数组的
+    data = [request.body];
+  }
 
   const apiKey = request.headers['x-api-key'] as string;
 
-  setCtx(data, { apiKey });
+  setCtx({ apiKey });
 
   const result = await (await serverRPC).RC(method.slice(5), data);
   reply.send({ result });
@@ -75,6 +70,7 @@ fastify.register(fastifyStatic, {
   root: staticDir,
   prefix: '/',
 });
+
 const start = async () => {
   try {
     await fastify.listen({ port: 3000 });

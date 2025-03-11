@@ -1,15 +1,20 @@
-const ctxMap = new WeakMap<
-  any,
-  {
-    apiKey: string; // 存储 apiKey
-    // 其他上下文信息
-  }
->();
+import { AsyncLocalStorage } from 'async_hooks';
 
-export const setCtx = (key: any, ctx: { apiKey: string }) => {
-  ctxMap.set(key, { ...getCtx(key), ...ctx });
+// 创建一个 AsyncLocalStorage 实例来存储上下文
+const asyncLocalStorage = new AsyncLocalStorage<{ apiKey: string }>();
+
+// 设置上下文
+export const setCtx = (ctx: { apiKey: string }) => {
+  const currentStore = asyncLocalStorage.getStore();
+  asyncLocalStorage.enterWith({ ...currentStore, ...ctx });
 };
 
-export const getCtx = (key: any) => {
-  return ctxMap.get(key);
+// 获取上下文
+export const getCtx = () => {
+  return asyncLocalStorage.getStore();
+};
+
+// 示例：在异步操作中使用上下文
+export const runWithCtx = (ctx: { apiKey: string }, callback: () => void) => {
+  asyncLocalStorage.run(ctx, callback);
 };
