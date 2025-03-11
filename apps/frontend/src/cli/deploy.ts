@@ -5,7 +5,7 @@ import { OceanPress } from '~/core/ocean_press.ts'
 import { genZIP } from '~/core/genZip.ts'
 import type { API } from 'oceanpress-server'
 import { createRPC } from 'oceanpress-rpc'
-
+import { stringify, parse, serialize } from 'superjson'
 program
   .command('deploy')
   .description('部署站点')
@@ -22,17 +22,26 @@ program
     loadConfigFile(JSON.parse(config))
     const client = await createRPC<API>('apiConsumer', {
       remoteCall(method, data) {
+        console.log('[data]', serialize(data))
         return fetch(`${opt.apiBase}/api/${method}`, {
           method: 'POST',
-          body: JSON.stringify(data),
+          body: stringify(serialize(data)),
+          headers: {
+            'x-api-key': opt.apiKey,
+          },
         })
           .then((res) => res.json())
-          .then((r) => r.result)
+          .then((r) => {
+            if (r.error) {
+              console.log('[r]', r)
+              throw new Error()
+            }
+            return r.result
+          })
       },
     })
-    const ress = await client.API.a.b(33)
-    console.log('[res]', ress)
-    return
+    // const ress = await client.API.a.b(33)
+    // console.log('[res]', ress)
     const ocean_press = new OceanPress(currentConfig.value)
 
     ocean_press.pluginCenter.registerPlugin({
@@ -40,8 +49,10 @@ program
         const zip = await genZIP(tree, { withoutZip: true })
         const sizeInMB = zip.size / (1024 * 1024)
         console.log('[zip.size in MB]', sizeInMB.toFixed(2))
-        // todo： 这里需要实现 调用 OceanPress server 接口将 zip 包上传部署。
+
         // await writeFile('dist.zip', new Uint8Array(await zip.arrayBuffer()));
+        const res = await client.API.upload({ file: zip, filePath: 'test.zip' })
+        console.log('[res]', res)
       },
     })
 

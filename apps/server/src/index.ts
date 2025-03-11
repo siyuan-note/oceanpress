@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import fs from 'fs';
+import fs, { createWriteStream } from 'fs';
 import path from 'path';
 import AdmZip from 'adm-zip';
 import { fileURLToPath } from 'url';
@@ -7,6 +7,7 @@ import fastifyStatic from '@fastify/static';
 import { createRPC } from 'oceanpress-rpc';
 import { getCtx, setCtx } from './ctx';
 import { config } from './config';
+import type { IncomingMessage } from 'http';
 // 获取当前文件的路径
 const __filename = fileURLToPath(import.meta.url);
 // 获取当前文件的目录路径
@@ -25,11 +26,24 @@ if (!fs.existsSync(staticDir)) {
 }
 
 const apis = {
-  upload: async (zipBuffer: string) => {
+  /**
+   * 接受客户端上传的文件，并保存到本地临时文件存储目录中。
+   * 返回对应的文件编号
+   * 并且在之后的时间中定时清理掉此文件
+   *  */
+  upload: async (playload: IncomingMessage) => {
     const ctx = getCtx();
-    return { zipCode: zipBuffer, ctx };
+    // 创建一个可写流，将文件保存到本地
+    const fileStream = createWriteStream('./file.bin');
+
+    // 将传入的数据流通过管道传输到文件流中
+    playload.pipe(fileStream);
+
+    return { ctx };
   },
-  deploy: async (zipCode: string) => {},
+  deploy: async (zipCode: string) => {
+    return 'eeee';
+  },
 };
 export type API = typeof apis;
 
@@ -48,11 +62,16 @@ const serverRPC = createRPC('apiProvider', {
     },
   ],
 });
+
+/** 对于 application/octet-stream 类型的请求直接将 payload 传递过去 */
+fastify.addContentTypeParser('application/octet-stream', async function (request, payload, done) {
+  return payload;
+});
+
 fastify.all('/api/*', async (request, reply) => {
   const method = request.url;
-  console.log('[method]',method);
+  console.log('[method]', method);
   const contentType = request.headers['content-type'];
-  console.log('[request.body]', request.body);
   let data: any[];
   if (contentType === 'application/json') {
     data = request.body as any[];

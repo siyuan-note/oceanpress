@@ -6,21 +6,15 @@ async function uploadFile(filePath: string, apiUrl: string, apiKey: string) {
   try {
     // 使用 Node.js 的 fs 模块读取文件
     const fileData = readFileSync(filePath);
-    // 将 Buffer 转换为 Blob
-    const blob = new Blob([fileData], { type: 'text/markdown' });
-
-    // 创建 FormData 对象
-    const formData = new FormData();
-    formData.append('file', blob, 'README.md');
 
     // 使用 fetch 上传文件
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'x-api-key': apiKey,
-        "content-type": "multipart/form-data"
+        'content-type': 'application/octet-stream',
       },
-      body: formData,
+      body: fileData,
     });
 
     if (!response.ok) {
