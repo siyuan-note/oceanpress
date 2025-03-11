@@ -10,6 +10,12 @@ async function main() {
     genApiModule: async () => {
       return apis;
     },
+    middleware: [
+      async (method, data, next) => {
+        console.log(1);
+        return next();
+      },
+    ],
   });
 
   const clientRPC = await createRPC<typeof apis>('apiConsumer', {
@@ -18,5 +24,7 @@ async function main() {
       return result;
     },
   });
+  serverRPC.API.test().then(console.log); // Output: Hello, world!
+  clientRPC.API.test().then(console.log); // Output: Hello, world!
 }
 main();

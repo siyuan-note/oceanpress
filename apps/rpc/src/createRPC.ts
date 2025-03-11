@@ -1,15 +1,20 @@
 /** ═════════🏳‍🌈 超轻量级的远程调用，完备的类型提示！ 🏳‍🌈═════════  */
+
+interface commonOptions {
+  middleware?: ((method: string, data: any[], next: () => Promise<any>) => Promise<any>)[]; // 统一的中间件
+}
+
 export async function createRPC<API_TYPE>(
   ...[type, options]:
     | [
         'apiProvider',
-        {
+        commonOptions & {
           genApiModule: () => Promise<API_TYPE>;
         },
       ]
     | [
         'apiConsumer',
-        {
+        commonOptions & {
           /** 配置此选项替换默认的远程调用函数，默认逻辑采用 fetch 实现。 */
           remoteCall: (method: string, data: any[]) => Promise<any>; // 远程调用函数
         },
@@ -18,35 +23,44 @@ export async function createRPC<API_TYPE>(
   const apiModule = type === 'apiProvider' ? await options.genApiModule() : undefined;
 
   const remoteCall = type === 'apiConsumer' ? options.remoteCall : undefined;
+
   async function RC<K extends string>(method: K, data: any[]): Promise<any> {
-    if (type === 'apiProvider') {
-      try {
-        const methodParts = method.split('.');
-        let currentObj: any = apiModule;
-        for (const part of methodParts) {
-          if (currentObj && typeof currentObj === 'object' && part in currentObj) {
-            currentObj = currentObj[part];
-          } else {
-            throw new Error(`Method ${method} not found`);
-          }
-        }
-        if (typeof currentObj === 'function') {
-          return await currentObj(...data);
-        } else {
-          throw new Error(`${method} is not a function`);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-        throw error;
+    // 洋葱路由的核心逻辑
+    async function executeMiddleware(index: number): Promise<any> {
+      if (options.middleware && index < options.middleware.length) {
+        return options.middleware[index](method, data, () => executeMiddleware(index + 1));
+      } else {
+        return executeCall();
       }
-    } else {
+    }
+
+    async function executeCall(): Promise<any> {
       try {
-        return await remoteCall!(method, data);
+        if (type === 'apiProvider') {
+          const methodParts = method.split('.');
+          let currentObj: any = apiModule;
+          for (const part of methodParts) {
+            if (currentObj && typeof currentObj === 'object' && part in currentObj) {
+              currentObj = currentObj[part];
+            } else {
+              throw new Error(`Method ${method} not found`);
+            }
+          }
+          if (typeof currentObj === 'function') {
+            return await currentObj(...data);
+          } else {
+            throw new Error(`${method} is not a function`);
+          }
+        } else {
+          return await remoteCall!(method, data);
+        }
       } catch (error) {
         console.error('API call failed:', error);
         throw error;
       }
     }
+
+    return await executeMiddleware(0);
   }
 
   /** Remote call ， 会就近的选择是远程调用还是使用本地函数 */
