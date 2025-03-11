@@ -1,4 +1,4 @@
-POST  http://localhost:3000/api/deploy
+POST  http://localhost:3000/api/upload
 x-api-key: api-key-test
 Content-Type: application/json
 

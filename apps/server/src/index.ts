@@ -25,7 +25,10 @@ if (!fs.existsSync(staticDir)) {
 }
 
 const apis = {
-  upload: async (zipCode: string) => {},
+  upload: async (zipBuffer: string) => {
+    const ctx = getCtx();
+    return { zipCode: zipBuffer, ctx };
+  },
   deploy: async (zipCode: string) => {},
 };
 export type API = typeof apis;
@@ -47,7 +50,7 @@ const serverRPC = createRPC('apiProvider', {
 });
 fastify.all('/api/*', async (request, reply) => {
   const method = request.url;
-
+  console.log('[method]',method);
   const contentType = request.headers['content-type'];
   console.log('[request.body]', request.body);
   let data: any[];
