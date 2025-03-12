@@ -9,5 +9,5 @@ export default defineConfig({
   minify: false, // 是否压缩代码
   outDir: 'dist', // 输出目录
   bundle: true, // 是否打包依赖
-  noExternal: ['oceanpress-rpc'], // 不要将这些模块视为外部模块
+  // noExternal: ['oceanpress-rpc'], // 不要将这些模块视为外部模块
 });

@@ -5,16 +5,13 @@ const c = dotenv.config().parsed ?? {};
 
 export const config = {
   API_KEY: c.API_KEY,
-  UPLOAD_DIR: c.UPLOAD_DIR,
+  UPLOAD_DIR: c.UPLOAD_DIR ?? './uploads',
   /** 静态文件存储目录 */
   STATIC_DIR: c.STATIC_DIR ?? 'static',
 };
 
 if (c.API_KEY === undefined) {
   throw new Error('API_KEY is not defined in .env file');
-}
-if (c.UPLOAD_DIR === undefined) {
-  throw new Error('UPLOAD_DIR is not defined in .env file');
 }
 
 // 确保静态文件目录存在

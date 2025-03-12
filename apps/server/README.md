@@ -13,7 +13,13 @@
 5. 处理部署请求并将 zip 解压部署到本地磁盘
 6. 提供对本地磁盘对应目录的 http server
 
+## 配置 .env
+
+```env
+# 自定义api鉴权密钥
+API_KEY=api-key-test
+```
+
 ## 技术栈
 
-fastify , nodejs , typescript
-使用 pnpm 包管理
+fastify , nodejs , typescript 使用 pnpm 包管理
