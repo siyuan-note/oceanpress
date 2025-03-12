@@ -17,8 +17,6 @@ program
     if (!opt.apiBase || !opt.apiKey) {
       return console.error(`请配置 apiBase 和 apiKey`)
     }
-    console.log(333)
-
     const config = await readFile(opt.config, 'utf-8')
     loadConfigFile(JSON.parse(config))
     const client = await createRPC<API>('apiConsumer', {
