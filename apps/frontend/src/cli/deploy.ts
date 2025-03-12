@@ -22,13 +22,25 @@ program
     loadConfigFile(JSON.parse(config))
     const client = await createRPC<API>('apiConsumer', {
       remoteCall(method, data) {
-        console.log('[data]', serialize(data))
+        let body: ReadableStream | string
+        // 如果第一参数是 ReadableStream 的时候，直接使用 ReadableStream 作为 body，不用考虑其他参数，因为这种情况只支持一个参数
+        let content_type
+        if (data[0] instanceof ReadableStream) {
+          body = data[0]
+          content_type = 'application/octet-stream'
+        } else {
+          body = stringify(serialize(data))
+          content_type = 'application/json'
+        }
         return fetch(`${opt.apiBase}/api/${method}`, {
           method: 'POST',
-          body: stringify(serialize(data)),
+          body,
           headers: {
             'x-api-key': opt.apiKey,
+            'Content-Type': content_type,
           },
+          // @ts-expect-error 在 node 运行的时候需要声明双工模式才能正确发送 ReadableStream，TODO 需要验证浏览器端可以这样运行吗
+          duplex: 'half', // 关键：显式声明半双工模式
         })
           .then((res) => res.json())
           .then((r) => {
@@ -40,8 +52,6 @@ program
           })
       },
     })
-    // const ress = await client.API.a.b(33)
-    // console.log('[res]', ress)
     const ocean_press = new OceanPress(currentConfig.value)
 
     ocean_press.pluginCenter.registerPlugin({
@@ -49,9 +59,9 @@ program
         const zip = await genZIP(tree, { withoutZip: true })
         const sizeInMB = zip.size / (1024 * 1024)
         console.log('[zip.size in MB]', sizeInMB.toFixed(2))
-
-        // await writeFile('dist.zip', new Uint8Array(await zip.arrayBuffer()));
-        const res = await client.API.upload({ file: zip, filePath: 'test.zip' })
+        // 将 Blob 转换为 ReadableStream
+        const readableStream = zip.stream()
+        const res = await client.API.upload(readableStream)
         console.log('[res]', res)
       },
     })

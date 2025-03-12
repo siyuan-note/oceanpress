@@ -1,13 +1,13 @@
+import fastifyStatic from '@fastify/static';
 import Fastify from 'fastify';
 import fs, { createWriteStream } from 'fs';
-import path from 'path';
-import AdmZip from 'adm-zip';
-import { fileURLToPath } from 'url';
-import fastifyStatic from '@fastify/static';
 import { createRPC } from 'oceanpress-rpc';
-import { getCtx, setCtx } from './ctx';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { config } from './config';
-import type { IncomingMessage } from 'http';
+import { getCtx, setCtx } from './ctx';
+import { Readable } from 'stream';
+
 // 获取当前文件的路径
 const __filename = fileURLToPath(import.meta.url);
 // 获取当前文件的目录路径
@@ -30,16 +30,23 @@ const apis = {
    * 接受客户端上传的文件，并保存到本地临时文件存储目录中。
    * 返回对应的文件编号
    * 并且在之后的时间中定时清理掉此文件
+   *
+   * 我希望这里可以直接接受一个二进制文件流
    *  */
-  upload: async (playload: IncomingMessage) => {
+  upload: async (readStream: ReadableStream) => {
     const ctx = getCtx();
     // 创建一个可写流，将文件保存到本地
     const fileStream = createWriteStream('./file.bin');
+    const reader = readStream.getReader();
+    let count = 0;
+    while (1) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      count++;
+      fileStream.write(value);
+    }
 
-    // 将传入的数据流通过管道传输到文件流中
-    playload.pipe(fileStream);
-
-    return { ctx };
+    return { ctx, count };
   },
   deploy: async (zipCode: string) => {
     return 'eeee';
@@ -63,9 +70,10 @@ const serverRPC = createRPC('apiProvider', {
   ],
 });
 
-/** 对于 application/octet-stream 类型的请求直接将 payload 传递过去 */
+/** 对于 application/octet-stream 类型的请求转换为 web 兼容的 ReadableStream 供接口处理 */
 fastify.addContentTypeParser('application/octet-stream', async function (request, payload, done) {
-  return payload;
+  const webStream = Readable.toWeb(payload);
+  return webStream;
 });
 
 fastify.all('/api/*', async (request, reply) => {

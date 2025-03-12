@@ -38,6 +38,7 @@
         "skipLibCheck": true, // 跳过库文件的类型检查
         "allowSyntheticDefaultImports": true, // 允许合成项目的默认导入
         "resolveJsonModule": true, // 允许导入 JSON 文件
+        "exactOptionalPropertyTypes": true,
         "isolatedModules": true // 将每个文件作为单独的模块
     },
     "include": [
