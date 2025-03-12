@@ -25,3 +25,6 @@ yarn-error.log*
 
 # 忽略 pnpm 的 store 目录
 .pnpm-store/
+
+
+uploads/

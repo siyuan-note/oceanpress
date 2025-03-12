@@ -15,7 +15,8 @@
     "arktype": "^2.1.9",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
-    "oceanpress-rpc": "workspace:*"
+    "oceanpress-rpc": "workspace:*",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
