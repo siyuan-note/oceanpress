@@ -34,7 +34,8 @@ export async function genZIP(
     await zip.loadAsync(presetZip)
   }
   for (const [path, html] of Object.entries(docTree)) {
-    zip.file(path, html)
+    const newPath = path.startsWith('/') ? path.slice(1) : path
+    zip.file(newPath, html)
   }
   return await zip.generateAsync({ type: 'blob' })
 }

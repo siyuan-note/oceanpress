@@ -3,14 +3,12 @@ import { htmlTemplate } from './htmlTemplate.ts'
 import { getRender, renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
-import JSZip from 'jszip'
 import { deepAssign } from '~/util/deep_assign.ts'
 import {
   allDocBlock_by_bookId,
   get_doc_by_SyPath,
   get_node_by_id,
 } from './cache.ts'
-import { storeDep } from './dependency.ts'
 import packageJson from '~/../package.json' with { type: 'json' };
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'

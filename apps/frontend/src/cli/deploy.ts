@@ -1,11 +1,12 @@
 import { readFile } from 'fs/promises'
-import { program } from './common.ts'
-import { currentConfig, loadConfigFile } from '~/core/config.ts'
-import { OceanPress } from '~/core/ocean_press.ts'
-import { genZIP } from '~/core/genZip.ts'
-import type { API } from 'oceanpress-server'
 import { createRPC } from 'oceanpress-rpc'
-import { stringify, parse, serialize } from 'superjson'
+import type { API } from 'oceanpress-server'
+import { stringify } from 'superjson'
+import { currentConfig, loadConfigFile } from '~/core/config.ts'
+import { genZIP } from '~/core/genZip.ts'
+import { OceanPress } from '~/core/ocean_press.ts'
+import { program } from './common.ts'
+
 program
   .command('deploy')
   .description('部署站点')
@@ -29,7 +30,8 @@ program
           body = data[0]
           content_type = 'application/octet-stream'
         } else {
-          body = stringify(serialize(data))
+          body = stringify(data)
+          console.log('[body]', body)
           content_type = 'application/json'
         }
         return fetch(`${opt.apiBase}/api/${method}`, {
@@ -61,8 +63,11 @@ program
         console.log('[zip.size in MB]', sizeInMB.toFixed(2))
         // 将 Blob 转换为 ReadableStream
         const readableStream = zip.stream()
-        const res = await client.API.upload(readableStream)
-        console.log('[res]', res)
+        const { chunkCount, fileId } = await client.API.upload(readableStream)
+
+        console.log('[res]', { chunkCount, fileId })
+        const res = await client.API.deploy({ zipFileId: fileId })
+        console.log('[deploy res]', res)
       },
     })
 
