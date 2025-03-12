@@ -1,6 +1,6 @@
 {
   "name": "oceanpress-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OceanPress deployment server",
   "main": "dist/index.js",
   "type": "module",
@@ -8,6 +8,9 @@
     "build": "tsup",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts"
+  },
+  "bin": {
+    "oceanpress_server": "dist/index.js"
   },
   "files": [
     "dist",
