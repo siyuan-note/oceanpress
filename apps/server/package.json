@@ -16,20 +16,17 @@
     "dist",
     "*.md"
   ],
-  "bundleDependencies": [
-    "oceanpress-rpc"
-  ],
   "dependencies": {
     "@fastify/static": "^8.1.1",
     "arktype": "^2.1.9",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
-    "oceanpress-rpc": "workspace:*",
     "superjson": "^2.2.2",
     "uuid": "^11.1.0",
     "yauzl-promise": "^4.0.0"
   },
   "devDependencies": {
+    "oceanpress-rpc": "workspace:*",
     "@types/node": "^22.13.10",
     "@types/yauzl-promise": "^4.0.1",
     "tsup": "^8.4.0",
