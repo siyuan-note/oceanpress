@@ -7,9 +7,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "前端dev": "yarn workspace frontend dev",
-    "后端dev": "yarn workspace backend start",
-    "deploy:prod": "yarn workspace frontend build && yarn workspace backend deploy:prod"
+    "前端dev": "pnpm --filter frontend dev",
+    "frontend_build": "pnpm --filter frontend build",
+    "后端dev": "pnpm --filter backend start",
+    "deploy:prod": "pnpm --filter frontend build && pnpm --filter backend deploy:prod"
   },
   "devDependencies": {
     "vite-node": "^1.0.1"
