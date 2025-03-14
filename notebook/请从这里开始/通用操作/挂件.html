@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>挂件</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20210824201257-cy7icrc" data-node-id="20210824201257-cy7icrc" data-type="NodeDocument" updated="20230820184200" data-subtype="h1" class="h1"></div><div id="20210824201257-cy7icrc" data-node-id="20210824201257-cy7icrc" data-type="NodeDocument" updated="20230820184200" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">挂件</div><div id="20210824201352-apdkqps" data-node-id="20210824201352-apdkqps" data-type="NodeHeading" updated="20210824201352" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20210824201352-z3731rx" data-node-id="20210824201352-z3731rx" data-type="NodeParagraph" updated="20230512170805" class="p">挂件是思源内核伺服的静态网页，它通过 API 存取数据，通过 
+<span data-type="code">&lt;iframe&gt;</span>
+​ 进行渲染展现。
+</div>
+<div id="20230512170809-69w37zm" data-node-id="20230512170809-69w37zm" data-type="NodeParagraph" updated="20230512194517" class="p">相较于
+<span data-type="block-ref"     data-subtype="s"     data-id="20230506210010-houyyvy">
+          <a href="./../../请从这里开始/通用操作/插件.html#20230506210010-houyyvy">插件</a>
+  </span>
+而言，挂件是一种内容块，遵循块的索引和渲染规则，挂件主要面向内容块扩展，不面向程序功能扩展。
+</div>
+<div id="20210824201352-9vey615" data-node-id="20210824201352-9vey615" data-type="NodeHeading" updated="20210824202222" data-subtype="h2" class="h2"><div>使用方式
+</div></div>
+<div id="20210824201352-xhr1kmi" data-node-id="20210824201352-xhr1kmi" data-type="NodeParagraph" updated="20230506210708" class="p">挂件通过挂件集市安装，安装后挂件将被放置到 
+<span data-type="code">工作空间/widgets/</span>
+​ 文件夹下。在编辑器中使用斜杆菜单触发调用搜索，选择需要的挂件后该挂件就会以挂件块的形式插入到文档中。
+</div>
+<div id="20211222095016-3jjm95h" data-node-id="20211222095016-3jjm95h" data-type="NodeHeading" updated="20211222095023" data-subtype="h2" class="h2"><div>上架挂件集市
+</div></div>
+<div id="20221114172636-pirwdpa" data-node-id="20221114172636-pirwdpa" data-type="NodeParagraph" updated="20230820184200" class="p">请参考
+<a href="https://b3log.org/siyuan/community.html">社区集市仓库</a>
+。
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

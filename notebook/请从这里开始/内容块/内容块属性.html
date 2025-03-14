@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>内容块属性</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20210612224500-ywcms1m" data-node-id="20210612224500-ywcms1m" data-type="NodeDocument" updated="20210613105851" data-subtype="h1" class="h1"></div><div id="20210612224500-ywcms1m" data-node-id="20210612224500-ywcms1m" data-type="NodeDocument" updated="20210613105851" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">内容块属性</div><div id="20210612224500-ftupo06" data-node-id="20210612224500-ftupo06" data-type="NodeHeading" updated="20210613000110" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20210613000111-kj7vhlk" data-node-id="20210613000111-kj7vhlk" data-type="NodeParagraph" updated="20210613105556" class="p">属性以键值对（key-value）的形式存在，我们可以通过对内容块设置属性来丰富内容块的内涵。属性分为内置属性和自定义属性。
+</div>
+<div id="20210613004126-79loyta" data-node-id="20210613004126-79loyta" data-type="NodeHeading" updated="20210613004130" data-subtype="h2" class="h2"><div>内置属性
+</div></div>
+<div id="20210613004249-56e0c6r" data-node-id="20210613004249-56e0c6r" data-type="NodeTable" updated="20210613120805" class="table">
+    <div>
+      <table spellcheck="false">
+        <colgroup>
+        <col /><col />
+        </colgroup>
+        <thead><tr><td>属性名
+</td>
+<td>描述
+</td>
+</tr>
+</thead>
+        <tbody>
+        <tr><td>name
+</td>
+<td>内容块的命名
+</td>
+</tr>
+<tr><td>alias
+</td>
+<td>内容块的别名
+</td>
+</tr>
+<tr><td>memo
+</td>
+<td>内容块的备注
+</td>
+</tr>
+<tr><td>bookmark
+</td>
+<td>内容块的书签
+</td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div id="20210613004117-1jnl9m0" data-node-id="20210613004117-1jnl9m0" data-type="NodeHeading" updated="20210613004135" data-subtype="h2" class="h2"><div>自定义属性
+</div></div>
+<div id="20210613004135-7td7u1o" data-node-id="20210613004135-7td7u1o" data-type="NodeParagraph" updated="20210613122309" class="p">自定义属性由用户通过 
+<span data-type="code">块标菜单</span>
+ - 
+<span data-type="code">属性</span>
+ 进行设置，属性名仅允许使用英文字母和阿拉伯数字（例如 
+<span data-type="code">doing</span>
+、
+<span data-type="code"> 7days</span>
+）。设置后，思源会自动在属性名前加上前缀 
+<span data-type="code">custom-</span>
+，以区分内置属性和自定义属性。
+</div>
+<div id="20210613105627-xbzpkz0" data-node-id="20210613105627-xbzpkz0" data-type="NodeHeading" updated="20210613105851" data-subtype="h2" class="h2"><div>根据属性查询内容块
+</div></div>
+<div id="20210613010047-clw1kra" data-node-id="20210613010047-clw1kra" data-type="NodeParagraph" updated="20210613102634" class="p">例如，当我们为内容块设置了 
+<span data-type="code">progress=30</span>
+、 
+<span data-type="code">priority=2</span>
+ 属性后，则可以通过 SQL 查询出所有进度为 30、优先级为 2 的内容块：
+</div>
+<div id="20210613012911-qdrxc6w" data-node-id="20210613012911-qdrxc6w" data-type="NodeCodeBlock" updated="20210613105821" class="code-block">
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
+        </div>
+        <div class="hljs" spellcheck="false">SELECT *
+FROM blocks
+WHERE id IN (
+    SELECT block_id
+    FROM attributes AS a
+    WHERE (a.name = 'custom-progress' AND a.value = '30')
+       OR (a.name = 'custom-priority' AND a.value = '2')
+    GROUP BY block_id
+    HAVING count(block_id) = 2
+);
+</div>
+      </div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

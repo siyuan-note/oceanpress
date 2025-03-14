@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>优化排版</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20220628204444-9n0y9h2" data-node-id="20220628204444-9n0y9h2" data-type="NodeDocument" updated="20221006214307" data-subtype="h1" class="h1"></div><div id="20220628204444-9n0y9h2" data-node-id="20220628204444-9n0y9h2" data-type="NodeDocument" updated="20221006214307" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">优化排版</div><div id="20220628204444-yil2u2m" data-node-id="20220628204444-yil2u2m" data-type="NodeHeading" updated="20220628204604" data-subtype="h2" class="h2"><div>
+概述
+</div></div>
+<div id="20220628204604-qom7yyl" data-node-id="20220628204604-qom7yyl" data-type="NodeParagraph" updated="20221006214307" class="p">为了快速记录内容，我们时常会忽略一些排版细节，比如行级代码前后或者加粗前后缺少空格、中文和西文之间缺少空格。
+</div>
+<div id="20220628205215-z3whiwr" data-node-id="20220628205215-z3whiwr" data-type="NodeParagraph" updated="20220628215004" class="p">这样会导致内容排版看上去不够精致，以后浏览该内容时也有一定视觉干扰。当然，这只是我们的感触，也许这并不是问题，甚至本来就需要这样紧凑排版。
+</div>
+<div id="20220628205558-6krkd89" data-node-id="20220628205558-6krkd89" data-type="NodeHeading" updated="20220628205611" data-subtype="h2" class="h2"><div>
+使用方式
+</div></div>
+<div id="20220628205611-ikc5gy0" data-node-id="20220628205611-ikc5gy0" data-type="NodeParagraph" updated="20220628205851" class="p">在编辑器右上角 
+<span data-type="kbd" id="">...</span>
+ 菜单中选择 
+<span data-type="kbd" id="">优化排版</span>
+，处理完成后文档中的如下元素前后会被自动插入一个空格：
+</div>
+<div id="20220628205832-odovge3" data-node-id="20220628205832-odovge3" data-type="NodeList" updated="20221006214303" data-subtype="u" class="list"><div id="20220628205833-kmfuhsp" data-node-id="20220628205833-kmfuhsp" data-type="NodeListItem" updated="20221006214303" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220628205833-iu4yxrq" data-node-id="20220628205833-iu4yxrq" data-type="NodeParagraph" updated="20221006214303" class="p">行级代码
+</div>
+
+    </div>
+<div id="20220628205855-jp2ks1q" data-node-id="20220628205855-jp2ks1q" data-type="NodeListItem" updated="20220916195220" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220628205855-1gfuu51" data-node-id="20220628205855-1gfuu51" data-type="NodeParagraph" updated="20220916195220" class="p">行级公式
+</div>
+
+    </div>
+</div>
+<div id="20220628210000-ives8vm" data-node-id="20220628210000-ives8vm" data-type="NodeParagraph" updated="20220630211006" class="p">另外，如下元素中的中西文间也会自动插入一个空格：
+</div>
+<div id="20220630211006-svizyw7" data-node-id="20220630211006-svizyw7" data-type="NodeList" updated="20220630211109" data-subtype="u" class="list"><div id="20220630211007-dsx48yk" data-node-id="20220630211007-dsx48yk" data-type="NodeListItem" updated="20220630211007" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211007-26zt41e" data-node-id="20220630211007-26zt41e" data-type="NodeParagraph" updated="20220630211032" class="p">标签
+</div>
+
+    </div>
+<div id="20220630211033-fnlmuvi" data-node-id="20220630211033-fnlmuvi" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211033-b7xfx2z" data-node-id="20220630211033-b7xfx2z" data-type="NodeParagraph" updated="20220630211037" class="p">高亮
+</div>
+
+    </div>
+<div id="20220630211037-mntb5y9" data-node-id="20220630211037-mntb5y9" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211037-lftq994" data-node-id="20220630211037-lftq994" data-type="NodeParagraph" updated="20220630211045" class="p">删除线
+</div>
+
+    </div>
+<div id="20220630211045-4ve578l" data-node-id="20220630211045-4ve578l" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211045-58vch5e" data-node-id="20220630211045-58vch5e" data-type="NodeParagraph" updated="20220630211054" class="p">超链接锚文本
+</div>
+
+    </div>
+<div id="20220630211054-5om39qm" data-node-id="20220630211054-5om39qm" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211054-tx41ceb" data-node-id="20220630211054-tx41ceb" data-type="NodeParagraph" updated="20220630211101" class="p">普通文本
+</div>
+
+    </div>
+<div id="20220630211101-1txhfqw" data-node-id="20220630211101-1txhfqw" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211101-zcj15cy" data-node-id="20220630211101-zcj15cy" data-type="NodeParagraph" updated="20220630211108" class="p">强调
+</div>
+
+    </div>
+<div id="20220630211108-356v085" data-node-id="20220630211108-356v085" data-type="NodeListItem" updated="20220630211109" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220630211108-wlwci62" data-node-id="20220630211108-wlwci62" data-type="NodeParagraph" updated="20220630211109" class="p">加粗
+</div>
+
+    </div>
+</div>
+<div id="20220628210321-x8cf0vr" data-node-id="20220628210321-x8cf0vr" data-type="NodeHeading" updated="20220628210344" data-subtype="h2" class="h2"><div>自动备份
+</div></div>
+<div id="20220628210345-fsoqtka" data-node-id="20220628210345-fsoqtka" data-type="NodeParagraph" updated="20220628214153" class="p">在实际执行优化排版之前，思源会自动备份一次原有的文档，这样如果优化结果不满意也能够通过
+<span data-type="block-ref"     data-subtype="s"     data-id="20210615211733-v6rzowm">
+          <a href="./../../请从这里开始/通用操作/数据历史.html#20210615211733-v6rzowm">数据历史</a>
+  </span>
+进行回滚。
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

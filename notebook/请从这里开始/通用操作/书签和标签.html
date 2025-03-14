@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>书签和标签</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20200910201551-h4twhas" data-node-id="20200910201551-h4twhas" data-type="NodeDocument" updated="20231205225717" data-subtype="h1" class="h1" type="doc"></div><div id="20200910201551-h4twhas" data-node-id="20200910201551-h4twhas" data-type="NodeDocument" updated="20231205225717" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">书签和标签</div><div id="20210104091316-ltmnzg9" data-node-id="20210104091316-ltmnzg9" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+书签
+</div></div>
+<div id="20210104091316-lz5jshd" data-node-id="20210104091316-lz5jshd" data-type="NodeParagraph" updated="20210702231322" class="p">如果你需要“收藏”内容块，请通过块标菜单打开属性面板，然后就可以在属性面板中设置书签了。
+</div>
+<div id="20210104091316-5vwheuz" data-node-id="20210104091316-5vwheuz" data-type="NodeParagraph" class="p">所有收藏过的内容块会在书签页签（ 
+<span data-type="kbd">Alt 3</span>
+ / 
+<span data-type="kbd">⌘ 3</span>
+）中列出。如果要取消收藏，在该内容块标识下拉菜单中选择删除即可。
+</div>
+<div id="20210104091316-zxotarc" data-node-id="20210104091316-zxotarc" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+标签
+</div></div>
+<div id="20210104091316-2w9o7q2" data-node-id="20210104091316-2w9o7q2" data-type="NodeParagraph" class="p">标签用于在内容块中对该块进行标记。语法是通过一前一后两个 
+<span data-type="code">#</span>
+ 将标签标识包裹起来，像这样 
+<span data-type="code">#标签#</span>
+。
+</div>
+<div id="20210104091316-nehznw8" data-node-id="20210104091316-nehznw8" data-type="NodeParagraph" class="p">标签支持层级，这样可以更方便地对内容块进行分类整理。不同层级之间使用 
+<span data-type="code">/</span>
+ 分隔，像这样 
+<span data-type="code">#A/B/C#</span>
+。
+</div>
+<div id="20210104091316-gt0utcz" data-node-id="20210104091316-gt0utcz" data-type="NodeParagraph" class="p">所有打过标签的内容块会在标签页签（
+<span data-type="kbd">Alt 4</span>
+ / 
+<span data-type="kbd">⌘ 4</span>
+）中列出。如果需要取消标签，在内容块中删掉该标签即可。
+</div>
+<div id="20230928114125-0cw4gus" data-node-id="20230928114125-0cw4gus" data-type="NodeHeading" updated="20230928114129" data-subtype="h2" class="h2"><div><span data-type="tag">注意</span>
+​
+</div></div>
+<div id="20230928114129-dirvllf" data-node-id="20230928114129-dirvllf" data-type="NodeParagraph" updated="20231205225717" class="p">请勿在书签或者标签中使用特殊符号，否则会导致无法全局搜索，也无法在书签/标签面板中重命名和删除。这里的“特殊符号”包括：
+<span data-type="code">*</span>
+​、
+<span data-type="code">_</span>
+​、
+<span data-type="code">[</span>
+​、
+<span data-type="code">]</span>
+​、
+<span data-type="code">!</span>
+​、
+<span data-type="code">\</span>
+​、
+<span data-type="code">`</span>
+​、
+<span data-type="code">&lt;</span>
+​、
+<span data-type="code">&gt;</span>
+​、
+<span data-type="code">&amp;</span>
+​、
+<span data-type="code">~</span>
+​、
+<span data-type="code">$</span>
+​、
+<span data-type="code">(</span>
+​、
+<span data-type="code">)</span>
+​、
+<span data-type="code">{</span>
+​、
+<span data-type="code">}</span>
+​、
+<span data-type="code">=</span>
+​ 和 
+<span data-type="code">#</span>
+​。
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

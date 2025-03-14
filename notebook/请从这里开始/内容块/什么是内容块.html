@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>什么是内容块</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20200813004931-q4cu8na" data-node-id="20200813004931-q4cu8na" data-type="NodeDocument" updated="20230419153534" data-subtype="h1" class="h1" type="doc"></div><div id="20200813004931-q4cu8na" data-node-id="20200813004931-q4cu8na" data-type="NodeDocument" updated="20230419153534" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">什么是内容块</div><div id="20210118100623-i00rgj0" data-node-id="20210118100623-i00rgj0" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+内容块定义
+</div></div>
+<div id="20210118100631-nhy9fe2" data-node-id="20210118100631-nhy9fe2" data-type="NodeParagraph" updated="20210415202214" class="p">“
+<span data-type="tag">内容块</span>
+”指的是一块内容，每块这样的内容通过一个全局唯一的 ID 进行标识。ID 是程序自动生成的，形如： 
+<span data-type="code">202008250000-a1b2c3d</span>
+，由时间和 7 位随机字符组成。
+</div>
+<div id="20210104090752-2n7t087" data-node-id="20210104090752-2n7t087" data-type="NodeHeading" updated="20210415202508" data-subtype="h2" class="h2"><div>
+内容块类型
+</div></div>
+<div id="20210104090752-98ivtnt" data-node-id="20210104090752-98ivtnt" data-type="NodeParagraph" updated="20211110154030" class="p">最常见的内容块就是我们所熟悉的段落（Paragraph）。在中文传统排版中，段落通常是通过段首缩进（空两格）来表示，互联网的发展逐渐影响了段落的表示，现在使用较多的方式是增加段落之间的行距，或者使用空行来分隔段落。
+</div>
+<div id="20210104090752-7efgvis" data-node-id="20210104090752-7efgvis" data-type="NodeParagraph" class="p">实际使用时，仅仅靠段落排版是不够的，往往还需要用到标题（Heading）、列表（List）、表格（Table）、块引用（Blockquote）等来丰富我们的排版。这些排版样式除了视觉上的不同，更重要的是它们在一定程度上表达了内容的语义。比如在看到无序列表时，我们可以知道每个列表项是不分先后的平级关系，而在看到有序列表时则相反。
+</div>
+<div id="20210104090752-c49qfvi" data-node-id="20210104090752-c49qfvi" data-type="NodeParagraph" updated="20210415202309" class="p">所以，内容块存在
+<span data-type="block-ref"     data-subtype="s"     data-id="20200905090211-2vixtlf">
+          <a href="./../../请从这里开始/内容块/内容块类型.html#20200905090211-2vixtlf">很多类型</a>
+  </span>
+，不同的排版格式会形成不同的内容块。
+<span data-type="tag">内容块/类型</span>
+</div>
+<div id="20210104090752-qxk7yz6" data-node-id="20210104090752-qxk7yz6" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+组合内容块
+</div></div>
+<div id="20210104090752-cg21nhc" data-node-id="20210104090752-cg21nhc" data-type="NodeParagraph" class="p">一篇文档是一些内容块的组合，内容块是基本单位。这就好比乐高积木，可以使用不同的基本模块进行组合。
+<span data-type="tag">注意</span>
+：文档本身也是一种内容块，更准确地说，文档块、列表块、引述块这三种内容块是容器块，他们可以包含其他任意类型的内容块。
+<span data-type="tag">内容块/组合</span>
+</div>
+<div id="20210104090752-hjcn822" data-node-id="20210104090752-hjcn822" data-type="NodeParagraph" class="p">至此，我们已经能够用内容块来描述所有的内容了，这样就能通过统一的用法来
+<span data-type="block-ref"     data-subtype="s"     data-id="20200813013559-sgbzl5k">
+          <a href="./../../请从这里开始/内容块/引用内容块.html#20200813013559-sgbzl5k">链接内容块</a>
+  </span>
+了。逻辑上没有页面（Page）概念，减少使用中不必要的负担，让用户将注意力集中在内容块上。
+</div>
+<div id="20210118101911-tbt6kkp" data-node-id="20210118101911-tbt6kkp" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+命名和备注
+</div></div>
+<div id="20210118101917-4n4ygss" data-node-id="20210118101917-4n4ygss" data-type="NodeParagraph" updated="20221026234721" class="p" memo="备注通常是一句简短的话。">我们可以为每个内容块命名、添加别名和备注。命名和别名主要用于反链
+<span data-type="block-ref"     data-subtype="s"     data-id="20210106201736-oyu11fw">
+          <a href="./../../请从这里开始/内容块/在内容块中遨游.html#20210106201736-oyu11fw">提及</a>
+  </span>
+搜索，备注用于记录一些不便在内容区中出现的信息。
+</div>
+<div id="20210118102327-mybetkv" data-node-id="20210118102327-mybetkv" data-type="NodeParagraph" updated="20210512160923" class="p">在 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">编辑器</span>
+ 中打开显示书签、命名、别名标识选项后，被命名的内容块在编辑器中会被加上外框显示。如果对文档块进行命名和备注，则当鼠标悬浮文档树文档上时将浮出该文档的相关命名和备注信息。
+</div>
+<div id="20210118103020-bjtu89u" data-node-id="20210118103020-bjtu89u" data-type="NodeParagraph" updated="20210512154754" class="p">可使用
+<span data-type="block-ref"     data-subtype="s"     data-id="20201117101902-2ewjjum">
+          <a href="./../../请从这里开始/内容块/嵌入内容块.html#20201117101902-2ewjjum">嵌入内容块</a>
+  </span>
+对命名和备注进行搜索汇总，比如列出备注中包含 
+<span data-type="code">简短</span>
+ 关键字的内容块：
+</div>
+<div id="20210118103059-q92s3lt" data-node-id="20210118103059-q92s3lt" data-type="NodeBlockQueryEmbed" data-type="NodeBlockquote" class="bq">
+
+<div id="20210118101917-4n4ygss" data-node-id="20210118101917-4n4ygss" data-type="NodeParagraph" updated="20221026234721" class="p" memo="备注通常是一句简短的话。">我们可以为每个内容块命名、添加别名和备注。命名和别名主要用于反链
+<span data-type="block-ref"     data-subtype="s"     data-id="20210106201736-oyu11fw">
+          <a href="./../../请从这里开始/内容块/在内容块中遨游.html#20210106201736-oyu11fw">提及</a>
+  </span>
+搜索，备注用于记录一些不便在内容区中出现的信息。
+</div>
+
+
+</div>
+<div id="20210127204409-yjgww90" data-node-id="20210127204409-yjgww90" data-type="NodeParagraph" updated="20230419153442" class="p">​
+<span data-type="tag">注意</span>
+​：
+</div>
+<div id="20230419153207-l40wjv2" data-node-id="20230419153207-l40wjv2" data-type="NodeList" updated="20230419153534" data-subtype="u" class="list"><div id="20230419153259-2do0vsl" data-node-id="20230419153259-2do0vsl" data-type="NodeListItem" updated="20230419153259" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230419153259-02ihc3r" data-node-id="20230419153259-02ihc3r" data-type="NodeParagraph" updated="20230419153308" class="p">命名是唯一的，一个块只能设置一个命名
+</div>
+
+    </div>
+<div id="20230419153308-89l1o1c" data-node-id="20230419153308-89l1o1c" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230419153308-60o6t5t" data-node-id="20230419153308-60o6t5t" data-type="NodeParagraph" updated="20230419153317" class="p">别名可以设置多个，通过英文状态下的逗号（
+<span data-type="code">,</span>
+​）分隔
+</div>
+
+    </div>
+<div id="20230419153321-lxs2x7d" data-node-id="20230419153321-lxs2x7d" data-type="NodeListItem" updated="20230419153534" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230419153321-56fxsqz" data-node-id="20230419153321-56fxsqz" data-type="NodeParagraph" updated="20230419153534" class="p">备注仅支持纯文本
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

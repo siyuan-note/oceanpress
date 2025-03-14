@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>数据历史</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20210615211733-v6rzowm" data-node-id="20210615211733-v6rzowm" data-type="NodeDocument" updated="20230422102226" data-subtype="h1" class="h1"></div><div id="20210615211733-v6rzowm" data-node-id="20210615211733-v6rzowm" data-type="NodeDocument" updated="20230422102226" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">数据历史</div><div id="20220501134357-003dftr" data-node-id="20220501134357-003dftr" data-type="NodeHeading" updated="20230403113939" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20220501134418-ql8s90v" data-node-id="20220501134418-ql8s90v" data-type="NodeParagraph" updated="20220615111558" class="p">数据历史主要用于保证数据安全，即使发生误操作也能通过历史进行数据回滚。数据历史分为两个功能：
+</div>
+<div id="20220615111559-oiv8079" data-node-id="20220615111559-oiv8079" data-type="NodeList" updated="20220615112117" data-subtype="u" class="list"><div id="20220615111600-89ecgx0" data-node-id="20220615111600-89ecgx0" data-type="NodeListItem" updated="20220615111600" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220615111600-ag04crg" data-node-id="20220615111600-ag04crg" data-type="NodeParagraph" updated="20220615112026" class="p">文件历史：按原始文件方式保存在 
+<span data-type="code">工作空间/history/</span>
+ 文件夹下，人类可读，可手动拷贝到 data 对应位置恢复
+</div>
+
+    </div>
+<div id="20220615111601-l9ydpwh" data-node-id="20220615111601-l9ydpwh" data-type="NodeListItem" updated="20220615112117" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220615111601-8oaj5t3" data-node-id="20220615111601-8oaj5t3" data-type="NodeParagraph" updated="20220615112117" class="p">数据快照：按文件分块、加密并压缩保存在 
+<span data-type="code">工作空间/repo/</span>
+ 文件夹下，人类不可读，无法手动恢复
+</div>
+
+    </div>
+</div>
+<div id="20220615112117-57abhen" data-node-id="20220615112117-57abhen" data-type="NodeParagraph" updated="20220830225617" class="p">数据快照除了用于本地数据历史，还用于云端
+<span data-type="block-ref"     data-subtype="s"     data-id="20230808120347-3cob0nb">
+          <a href="./../../请从这里开始/会员特权/云端服务/数据同步.html#20230808120347-3cob0nb">数据同步</a>
+  </span>
+。
+</div>
+<div id="20220615111435-ownalnb" data-node-id="20220615111435-ownalnb" data-type="NodeHeading" updated="20220615111459" data-subtype="h2" class="h2"><div>文件历史
+</div></div>
+<div id="20220615111435-mm5qpqp" data-node-id="20220615111435-mm5qpqp" data-type="NodeHeading" updated="20220615112944" data-subtype="h3" class="h3"><div>文件历史生成规则
+</div></div>
+<div id="20210403160319-ufy7jta" data-node-id="20210403160319-ufy7jta" data-type="NodeList" updated="20230403114310" data-subtype="u" class="list"><div id="20210403160319-8uzmero" data-node-id="20210403160319-8uzmero" data-type="NodeListItem" updated="20220831210638" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210524213102-cwl7v2f" data-node-id="20210524213102-cwl7v2f" data-type="NodeParagraph" updated="20220831210638" class="p">每隔 10 分钟会对这 10 分钟内更新过的文档生成历史（间隔时间可通过 
+<span data-type="kbd">设置</span>
+​ - 
+<span data-type="kbd">编辑器</span>
+​ - 
+<span data-type="kbd">历史生成间隔</span>
+​ 进行调整），历史文件夹后缀为 
+<span data-type="code">-update</span>
+​
+</div>
+
+    </div>
+<div id="20220501134315-6omumob" data-node-id="20220501134315-6omumob" data-type="NodeListItem" updated="20220501134735" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501134315-1h4mvgn" data-node-id="20220501134315-1h4mvgn" data-type="NodeParagraph" updated="20220501134735" class="p">云端同步时，本地被云端覆盖的数据会生成历史，历史文件夹后缀为 
+<span data-type="code">-sync</span>
+​
+</div>
+
+    </div>
+<div id="20220501134333-kamak39" data-node-id="20220501134333-kamak39" data-type="NodeListItem" updated="20220501134747" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501134333-1f6hbi9" data-node-id="20220501134333-1f6hbi9" data-type="NodeParagraph" updated="20220501134747" class="p">手动删除笔记本、文档和资源文件时会生成历史，历史文件夹后缀为 
+<span data-type="code">-delete</span>
+​
+</div>
+
+    </div>
+<div id="20210524213119-wybx1kh" data-node-id="20210524213119-wybx1kh" data-type="NodeListItem" updated="20220830225509" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210524213119-ofmb315" data-node-id="20210524213119-ofmb315" data-type="NodeParagraph" updated="20220830225509" class="p">使用
+<span data-type="block-ref"     data-subtype="s"     data-id="20210115222011-bzsftun">
+          <a href="./../../请从这里开始/通用操作/资源文件.html#20210115222011-bzsftun">清理未引用资源</a>
+  </span>
+时会生成历史，历史文件夹后缀为 
+<span data-type="code">-clean</span>
+​
+</div>
+
+    </div>
+<div id="20220501134920-qb6wh0b" data-node-id="20220501134920-qb6wh0b" data-type="NodeListItem" updated="20230403114300" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501134920-k403n1r" data-node-id="20220501134920-k403n1r" data-type="NodeParagraph" updated="20230403114300" class="p">使用
+<span data-type="block-ref"     data-subtype="s"     data-id="20220628204444-9n0y9h2">
+          <a href="./../../请从这里开始/编辑器/优化排版.html#20220628204444-9n0y9h2">优化排版</a>
+  </span>
+时会生成历史，历史文件夹后缀为 
+<span data-type="code">-format</span>
+​
+</div>
+
+    </div>
+<div id="20230403113929-44xkaoz" data-node-id="20230403113929-44xkaoz" data-type="NodeListItem" updated="20230403114310" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230403113929-ud36ubv" data-node-id="20230403113929-ud36ubv" data-type="NodeParagraph" updated="20230403114310" class="p">使用 
+<span data-type="kbd">搜索替换</span>
+​ 时会生成历史，历史文件夹后缀为 
+<span data-type="code">-replace</span>
+​
+</div>
+
+    </div>
+</div>
+<div id="20210104090742-f9nkimo" data-node-id="20210104090742-f9nkimo" data-type="NodeHeading" updated="20220615112949" data-subtype="h3" class="h3"><div>浏览文件历史
+</div></div>
+<div id="20210104090742-8rmcz3i" data-node-id="20210104090742-8rmcz3i" data-type="NodeList" updated="20220830230716" data-subtype="u" class="list"><div id="20220501135052-k47n4ms" data-node-id="20220501135052-k47n4ms" data-type="NodeListItem" updated="20220830230716" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501135052-o3r30jj" data-node-id="20220501135052-o3r30jj" data-type="NodeParagraph" updated="20220830230716" class="p">点击顶部工具栏 
+<span data-type="kbd">数据历史</span>
+ 按钮或者 
+<span data-type="kbd">Alt+H</span>
+ 可打开数据历史界面，切换到 
+<span data-type="kbd">文件历史</span>
+ 页签，如果没有历史数据显示，可以试下该界面的 
+<span data-type="kbd">重建索引</span>
+</div>
+
+    </div>
+<div id="20220501135057-pa9pcyo" data-node-id="20220501135057-pa9pcyo" data-type="NodeListItem" updated="20220501135111" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501135057-4hmpdzy" data-node-id="20220501135057-4hmpdzy" data-type="NodeParagraph" updated="20220501135111" class="p">在文件系统 
+<span data-type="code">工作空间/history/</span>
+ 文件夹下浏览
+</div>
+
+    </div>
+</div>
+<div id="20210104090742-hjfornp" data-node-id="20210104090742-hjfornp" data-type="NodeHeading" updated="20220615112957" data-subtype="h3" class="h3"><div>通过文件历史回滚
+</div></div>
+<div id="20210121105921-zdk68jf" data-node-id="20210121105921-zdk68jf" data-type="NodeParagraph" updated="20220615120058" class="p">在数据历史界面左侧时间列表栏中，每一条历史记录右侧都有一个回滚按钮，点击以后将弹出确认对话框，如果确认回滚的话将使用文件历史覆盖现有文件。
+</div>
+<div id="20220501133017-3hecoih" data-node-id="20220501133017-3hecoih" data-type="NodeParagraph" updated="20220501133133" class="p">如果有非常多的文件需要回滚，建议手动在文件系统上复制。历史文件夹的内部结构和 data 内部结构一致，比如：
+</div>
+<div id="20220501133105-b25vi0a" data-node-id="20220501133105-b25vi0a" data-type="NodeList" updated="20220831210446" data-subtype="u" class="list"><div id="20220501133105-kzow9y3" data-node-id="20220501133105-kzow9y3" data-type="NodeListItem" updated="20220501133105" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501133105-1dmg0zl" data-node-id="20220501133105-1dmg0zl" data-type="NodeParagraph" updated="20220501133105" class="p">笔记本删除：
+<span data-type="code">2022-05-01-091021-delete/20210808180117-czj9bvb/</span>
+，即 
+<span data-type="code">历史生成日期-{操作}/{笔记本 ID}/</span>
+</div>
+
+    </div>
+<div id="20220501133105-ham1o5d" data-node-id="20220501133105-ham1o5d" data-type="NodeListItem" updated="20220501134003" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501133105-a1rwa0u" data-node-id="20220501133105-a1rwa0u" data-type="NodeParagraph" updated="20220501134003" class="p">文档删除：
+<span data-type="code">2022-05-01-091209-delete/20210808180117-czj9bvb/20200812220555-lj3enxa.sy</span>
+，即 
+<span data-type="code">历史生成日期-{操作}/{笔记本 ID}/{文档路径}</span>
+</div>
+
+    </div>
+<div id="20220501133105-486vgy6" data-node-id="20220501133105-486vgy6" data-type="NodeListItem" updated="20220831210446" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220501133105-jqnfpzv" data-node-id="20220501133105-jqnfpzv" data-type="NodeParagraph" updated="20220831210446" class="p">资源文件清理：
+<span data-type="code">2022-05-01-095621-clean/assets/image-20220501091157-qccp87e.png</span>
+，即 
+<span data-type="code">历史生成日期-{操作}/assets/{资源文件名}</span>
+</div>
+
+    </div>
+</div>
+<div id="20220501133041-w6ydfgw" data-node-id="20220501133041-w6ydfgw" data-type="NodeParagraph" updated="20220501133251" class="p">手动回滚操作步骤：
+</div>
+<div id="20220501133237-il09opg" data-node-id="20220501133237-il09opg" data-type="NodeList" updated="20220615111149" data-subtype="o" class="list"><div id="20220501133254-az0u30r" data-node-id="20220501133254-az0u30r" data-type="NodeListItem" updated="20220501133340" data-subtype="o" class="li" data-marker="1.">
+      <div class="protyle-action">
+        1.
+      </div>
+      <div id="20220501133254-4ztj9yt" data-node-id="20220501133254-4ztj9yt" data-type="NodeParagraph" updated="20220501133340" class="p">退出思源，然后全量复制备份一下整个工作空间，避免后续误操作导致数据丢失
+</div>
+
+    </div>
+<div id="20220501133342-7fu44br" data-node-id="20220501133342-7fu44br" data-type="NodeListItem" updated="20220501133421" data-subtype="o" class="li" data-marker="2.">
+      <div class="protyle-action">
+        2.
+      </div>
+      <div id="20220501133342-j92vqhx" data-node-id="20220501133342-j92vqhx" data-type="NodeParagraph" updated="20220501133421" class="p">进入 
+<span data-type="code">工作空间/history/</span>
+ 文件夹，将 
+<span data-type="code">历史生成日期-{操作}</span>
+ 文件夹下的数据直接复制到 data 文件夹进行覆盖
+</div>
+
+    </div>
+<div id="20220501133422-0nxnwc2" data-node-id="20220501133422-0nxnwc2" data-type="NodeListItem" updated="20220615111149" data-subtype="o" class="li" data-marker="3.">
+      <div class="protyle-action">
+        3.
+      </div>
+      <div id="20220501133422-gc6qund" data-node-id="20220501133422-gc6qund" data-type="NodeParagraph" updated="20220615111149" class="p">启动思源后手动执行重建索引
+</div>
+
+    </div>
+</div>
+<div id="20220615115547-2fr6uej" data-node-id="20220615115547-2fr6uej" data-type="NodeHeading" updated="20220615115551" data-subtype="h3" class="h3"><div>清理文件历史
+</div></div>
+<div id="20220615115551-u75o5mk" data-node-id="20220615115551-u75o5mk" data-type="NodeParagraph" updated="20220615115618" class="p">默认自动保存最近 30 天生成的文件历史，可通过 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">编辑器</span>
+ - 
+<span data-type="kbd">历史保留天数</span>
+ 进行调整，超过该期限的文件历史会被自动删除。
+</div>
+<div id="20220615115625-3dx0t1j" data-node-id="20220615115625-3dx0t1j" data-type="NodeParagraph" updated="20220830230414" class="p">如果你想清空所有文件历史数据，可以点击 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">编辑器</span>
+ - 
+<span data-type="kbd">清空所有历史</span>
+，或者手动删除 
+<span data-type="code">工作空间/history/</span>
+ 文件夹，然后在 
+<span data-type="kbd">文件历史</span>
+ 中 
+<span data-type="kbd">重建索引</span>
+。
+</div>
+<div id="20220615112531-5yos96d" data-node-id="20220615112531-5yos96d" data-type="NodeHeading" updated="20220615112535" data-subtype="h2" class="h2"><div>数据快照
+</div></div>
+<div id="20220615113758-i2279ot" data-node-id="20220615113758-i2279ot" data-type="NodeHeading" updated="20220615113939" data-subtype="h3" class="h3"><div>初始化密钥
+</div></div>
+<div id="20220615113752-lbtlf6j" data-node-id="20220615113752-lbtlf6j" data-type="NodeParagraph" updated="20220615113952" class="p">第一次使用
+数据快照
+前需要在 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">关于</span>
+ 中初始化 
+<span data-type="kbd">数据仓库密钥</span>
+。
+</div>
+<div id="20220722001510-mtrrbj0" data-node-id="20220722001510-mtrrbj0" data-type="NodeParagraph" updated="20220722001555" class="p">初始化密钥有三种方式：
+</div>
+<div id="20220722001555-3wcanjb" data-node-id="20220722001555-3wcanjb" data-type="NodeList" updated="20220722001917" data-subtype="u" class="list"><div id="20220722001556-sjm48yn" data-node-id="20220722001556-sjm48yn" data-type="NodeListItem" updated="20220722001556" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220722001556-8sc4mqb" data-node-id="20220722001556-8sc4mqb" data-type="NodeParagraph" updated="20220722001656" class="p"><span data-type="kbd">导入密钥</span>
+：将其他设备上的密钥字符串复制到此粘贴导入
+</div>
+
+    </div>
+<div id="20220722001657-79plg0z" data-node-id="20220722001657-79plg0z" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220722001657-gh22p4n" data-node-id="20220722001657-gh22p4n" data-type="NodeParagraph" updated="20220722001831" class="p"><span data-type="kbd">自动生成密钥</span>
+：使用随机数生成密钥，该方式只需在一台设备上执行一次，其他设备使用 
+<span data-type="kbd">导入密钥</span>
+</div>
+
+    </div>
+<div id="20220722001834-8kc1pdr" data-node-id="20220722001834-8kc1pdr" data-type="NodeListItem" updated="20220722001917" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220722001834-13o5rzz" data-node-id="20220722001834-13o5rzz" data-type="NodeParagraph" updated="20220722001917" class="p"><span data-type="kbd">通过密码生成密钥</span>
+：使用自定义的密码短语生成密钥，该方式需要在所有设备上都使用相同的密码短语
+</div>
+
+    </div>
+</div>
+<div id="20220615113953-4o3uc9z" data-node-id="20220615113953-4o3uc9z" data-type="NodeParagraph" updated="20220722002029" class="p">总而言之，请务必保证所有设备都使用相同的密钥，否则数据快照将无法跨设备使用，比如无法通过云端同步数据快照。
+</div>
+<div id="20220615112535-k8n73hd" data-node-id="20220615112535-k8n73hd" data-type="NodeHeading" updated="20220615113005" data-subtype="h3" class="h3"><div>创建数据快照
+</div></div>
+<div id="20220615112933-zoh8iyg" data-node-id="20220615112933-zoh8iyg" data-type="NodeList" updated="20220625231649" data-subtype="o" class="list"><div id="20220615114246-9or7h68" data-node-id="20220615114246-9or7h68" data-type="NodeListItem" updated="20220625231649" data-subtype="o" class="li" data-marker="1.">
+      <div class="protyle-action">
+        1.
+      </div>
+      <div id="20220615114246-lr3ydl0" data-node-id="20220615114246-lr3ydl0" data-type="NodeParagraph" updated="20220625231649" class="p">点击顶部工具栏 
+<span data-type="kbd">数据历史</span>
+ 按钮或者 
+<span data-type="kbd">Alt+H</span>
+ 可打开数据历史界面
+</div>
+
+    </div>
+<div id="20220615114251-72kaaxr" data-node-id="20220615114251-72kaaxr" data-type="NodeListItem" data-subtype="o" class="li" data-marker="2.">
+      <div class="protyle-action">
+        2.
+      </div>
+      <div id="20220615114251-2y9unt4" data-node-id="20220615114251-2y9unt4" data-type="NodeParagraph" updated="20220615114252" class="p">切换到最后一个页签 
+<span data-type="kbd">数据快照</span>
+</div>
+
+    </div>
+<div id="20220615114253-k4a3tg5" data-node-id="20220615114253-k4a3tg5" data-type="NodeListItem" updated="20220615120214" data-subtype="o" class="li" data-marker="3.">
+      <div class="protyle-action">
+        3.
+      </div>
+      <div id="20220615114253-70sfmtn" data-node-id="20220615114253-70sfmtn" data-type="NodeParagraph" updated="20220615120214" class="p">点击 
+<span data-type="kbd">创建快照</span>
+，填写 
+<span data-type="kbd">备注</span>
+ 并确认
+</div>
+
+    </div>
+</div>
+<div id="20220615114908-0y5tfv9" data-node-id="20220615114908-0y5tfv9" data-type="NodeParagraph" updated="20220615115114" class="p">浏览数据快照时只能通过快照创建时间和备注进行区别，所以备注信息应该尽量详细一些，以备后续能够准确识别不同的数据快照。
+</div>
+<div id="20220615114301-099icf4" data-node-id="20220615114301-099icf4" data-type="NodeHeading" updated="20220615114632" data-subtype="h3" class="h3"><div>浏览数据快照
+</div></div>
+<div id="20220615114706-5wy741l" data-node-id="20220615114706-5wy741l" data-type="NodeParagraph" updated="20220615115247" class="p">创建完数据快照后可以在左侧看到快照时间列表，点击不同快照以后可以浏览其备注。
+</div>
+<div id="20220615115212-kjebrv4" data-node-id="20220615115212-kjebrv4" data-type="NodeHeading" updated="20220615115226" data-subtype="h3" class="h3"><div>回滚数据快照
+</div></div>
+<div id="20220615115227-oxdlcxq" data-node-id="20220615115227-oxdlcxq" data-type="NodeParagraph" updated="20220615115452" class="p">在快照时间列表条目右侧都有一个回滚按钮，点击以后将弹出确认对话框，如果确认回滚的话将使用快照数据完全替换现有数据。
+</div>
+<div id="20220615115126-z62p36j" data-node-id="20220615115126-z62p36j" data-type="NodeHeading" updated="20220615115532" data-subtype="h3" class="h3"><div>清理数据快照
+</div></div>
+<div id="20220615115758-ajl5l83" data-node-id="20220615115758-ajl5l83" data-type="NodeList" updated="20230422102226" data-subtype="u" class="list"><div id="20230422101107-ihb3kxp" data-node-id="20230422101107-ihb3kxp" data-type="NodeListItem" updated="20230422102226" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230422101107-zxq6qh2" data-node-id="20230422101107-zxq6qh2" data-type="NodeParagraph" updated="20230422102226" class="p">​
+<span data-type="kbd">设置</span>
+​ - 
+<span data-type="kbd">关于</span>
+​ - 
+<span data-type="kbd">数据仓库清理</span>
+​ 将删除所有未引用的快照和相关数据对象。“引用的快照”指的是 repo/refs/ 下指向的快照：
+</div>
+<div id="20230422101343-wvt2y4r" data-node-id="20230422101343-wvt2y4r" data-type="NodeList" updated="20230422101936" data-subtype="u" class="list"><div id="20230422101343-obxopx6" data-node-id="20230422101343-obxopx6" data-type="NodeListItem" updated="20230422101934" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230422101343-f5w2p8p" data-node-id="20230422101343-f5w2p8p" data-type="NodeParagraph" updated="20230422101934" class="p">​
+<span data-type="code">latest</span>
+​ 指向最新一个快照
+</div>
+
+    </div>
+<div id="20230422101357-4ugrbw1" data-node-id="20230422101357-4ugrbw1" data-type="NodeListItem" updated="20230422101936" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230422101357-istm02i" data-node-id="20230422101357-istm02i" data-type="NodeParagraph" updated="20230422101936" class="p">​
+<span data-type="code">tags/*</span>
+​ 指向手动标记的快照
+</div>
+
+    </div>
+</div>
+
+    </div>
+<div id="20230422101105-vdd9m4g" data-node-id="20230422101105-vdd9m4g" data-type="NodeListItem" updated="20230422101105" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230422101105-0csmuf6" data-node-id="20230422101105-0csmuf6" data-type="NodeParagraph" updated="20230422101106" class="p">手动删除 
+<span data-type="code">工作空间/repo/</span>
+​​ 文件夹可以清空全部
+数据快照
+</div>
+
+    </div>
+</div>
+<div id="20210928094544-vg2c2ts" data-node-id="20210928094544-vg2c2ts" data-type="NodeHeading" updated="20210928094608" data-subtype="h3" class="h3"><div>忽略文件
+</div></div>
+<div id="20210928094612-rymbb43" data-node-id="20210928094612-rymbb43" data-type="NodeParagraph" updated="20220708101301" class="p">如果需要在创建快照时忽略一些文件，请在文件系统上创建或编辑文本文件 
+<span data-type="code"> 工作空间/data/.siyuan/syncignore</span>
+， 其中每一行使用 data 文件夹的相对路径进行配置，表示忽略文件或文件夹的路径，支持通配符。例如：
+</div>
+<div id="20210928094821-syjcgbp" data-node-id="20210928094821-syjcgbp" data-type="NodeList" updated="20211222185741" data-subtype="u" class="list"><div id="20210928094822-nn422ie" data-node-id="20210928094822-nn422ie" data-type="NodeListItem" updated="20211222185741" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210928094822-ipyjn3n" data-node-id="20210928094822-ipyjn3n" data-type="NodeParagraph" updated="20211222185741" class="p"><span data-type="code">20210808180117-6v0mkxr/**/*</span>
+： 忽略 data/20210808180117-6v0mkxr 笔记本
+</div>
+
+    </div>
+<div id="20210928095121-tyfox35" data-node-id="20210928095121-tyfox35" data-type="NodeListItem" updated="20210928095254" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210928095121-tng5faj" data-node-id="20210928095121-tng5faj" data-type="NodeParagraph" updated="20210928095254" class="p"><span data-type="code">assets/*.pdf</span>
+：忽略 data/assets/ 下的 PDF 文件
+</div>
+
+    </div>
+</div>
+<div id="20220708101225-a2lxbp0" data-node-id="20220708101225-a2lxbp0" data-type="NodeHeading" updated="20220807180307" data-subtype="h3" class="h3"><div><span data-type="tag">注意</span>
+</div></div>
+<div id="20220807180308-7hyw96s" data-node-id="20220807180308-7hyw96s" data-type="NodeList" updated="20220807180341" data-subtype="u" class="list"><div id="20220807180328-2km55lx" data-node-id="20220807180328-2km55lx" data-type="NodeListItem" updated="20220807180341" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220807180328-x8lpi2n" data-node-id="20220807180328-x8lpi2n" data-type="NodeParagraph" updated="20220807180341" class="p">符号链接和隐藏文件不会被快照
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

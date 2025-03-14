@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>引用内容块</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20200813013559-sgbzl5k" data-node-id="20200813013559-sgbzl5k" data-type="NodeDocument" updated="20230820103525" data-subtype="h1" class="h1" type="doc"></div><div id="20200813013559-sgbzl5k" data-node-id="20200813013559-sgbzl5k" data-type="NodeDocument" updated="20230820103525" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">引用内容块</div><div id="20200817123136-in6y5m1" data-node-id="20200817123136-in6y5m1" data-type="NodeHeading" updated="20210512154105" data-subtype="h2" class="h2"><div>
+概述
+</div></div>
+<div id="20210104090557-575kpbp" data-node-id="20210104090557-575kpbp" data-type="NodeParagraph" updated="20220623200602" class="p">输入 
+<span data-type="code">((</span>
+ 后将触发内容块引用搜索，继续输入作为搜索关键字，在搜索结果中使用上下键选定后回车就可以完成内容块的引用了。建立好内容块引用后，鼠标悬浮在锚文本上后将弹出预览浮层，展现被引用的内容块（定义块）。
+<span data-type="tag">内容块/引用</span>
+</div>
+<div id="20210104090557-841hf2w" data-node-id="20210104090557-841hf2w" data-type="NodeHeading" updated="20210512154248" data-subtype="h2" class="h2"><div>
+链接方向
+</div></div>
+<div id="20210104090557-jjkb0dx" data-node-id="20210104090557-jjkb0dx" data-type="NodeList" data-subtype="u" class="list" data-marker="*"><div id="20210104090557-b5ngr4n" data-node-id="20210104090557-b5ngr4n" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223302-qqrbyfr" data-node-id="20210302223302-qqrbyfr" data-type="NodeParagraph" class="p">正向链接（Forwardlink），即当前内容块使用了哪些其他内容块
+</div>
+
+    </div>
+<div id="20210104090557-v1h50ji" data-node-id="20210104090557-v1h50ji" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223302-0o8gbmc" data-node-id="20210302223302-0o8gbmc" data-type="NodeParagraph" class="p">反向链接（Backlink），即当前内容块被那些其他内容块使用了
+</div>
+
+    </div>
+</div>
+<div id="20210104090557-gyj2den" data-node-id="20210104090557-gyj2den" data-type="NodeParagraph" class="p">正向链接包含在当前块的内容中，我们可以很直观的看到。反向链接需要在其他文档中搜索才能知道，而恰恰是这些信息对我们比较有价值。我们可以通过以下两种方式来帮助我们更好的掌握知识点或者发散思路：
+</div>
+<div id="20210104090557-7zvf09v" data-node-id="20210104090557-7zvf09v" data-type="NodeList" updated="20220623195720" data-subtype="u" class="list"><div id="20210104090557-oiry1d1" data-node-id="20210104090557-oiry1d1" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223302-njoyflf" data-node-id="20210302223302-njoyflf" data-type="NodeParagraph" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20210104090757-xwom8ia">
+          <a href="./../../请从这里开始/内容块/在内容块中遨游.html#20210104090757-xwom8ia">关系图</a>
+  </span>
+：浏览
+内容块
+之间的正向和
+反向链接
+关系
+</div>
+
+    </div>
+<div id="20210104090557-2qggmq4" data-node-id="20210104090557-2qggmq4" data-type="NodeListItem" updated="20220623195720" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223302-ifcbul4" data-node-id="20210302223302-ifcbul4" data-type="NodeParagraph" updated="20220623195720" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20200920194146-psjundj">
+          <a href="./../../请从这里开始/内容块/在内容块中遨游.html#20200920194146-psjundj">反向链接</a>
+  </span>
+：以文本列表的方式展现当前
+内容块
+的
+反向链接
+</div>
+
+    </div>
+</div>
+<div id="20220623194755-30vtsr7" data-node-id="20220623194755-30vtsr7" data-type="NodeHeading" updated="20220623194758" data-subtype="h2" class="h2"><div>锚文本
+</div></div>
+<div id="20220623194759-un63o8s" data-node-id="20220623194759-un63o8s" data-type="NodeParagraph" updated="20220623195050" class="p">锚文本即渲染引用时看到的文本，分为静态锚文本和动态锚文本：
+</div>
+<div id="20220623195050-mpcd3br" data-node-id="20220623195050-mpcd3br" data-type="NodeList" updated="20220623195233" data-subtype="u" class="list"><div id="20220623195051-q6iegdm" data-node-id="20220623195051-q6iegdm" data-type="NodeListItem" updated="20220623195135" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623195051-ijrhvi2" data-node-id="20220623195051-ijrhvi2" data-type="NodeParagraph" updated="20220623195417" class="p">静态锚文本：不会跟随定义块内容变化，即固定展现指定的内容
+</div>
+
+    </div>
+<div id="20220623195125-kapn1my" data-node-id="20220623195125-kapn1my" data-type="NodeListItem" updated="20220623195233" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623195125-51yt5os" data-node-id="20220623195125-51yt5os" data-type="NodeParagraph" updated="20220623195328" class="p">动态锚文本：跟随定义块内容变化，最大长度可在 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">编辑器</span>
+ - 
+<span data-type="kbd">块引动态锚文本最大长度</span>
+ 中设置，最长支持 
+<span data-type="code">5120</span>
+ 个字符
+</div>
+
+    </div>
+</div>
+<div id="20220623195419-mc5y2rl" data-node-id="20220623195419-mc5y2rl" data-type="NodeParagraph" updated="20220623195748" class="p">修改锚文本的方式如下：
+</div>
+<div id="20220623195559-r0greck" data-node-id="20220623195559-r0greck" data-type="NodeList" updated="20230420185816" data-subtype="u" class="list"><div id="20220623195600-uawu5gj" data-node-id="20220623195600-uawu5gj" data-type="NodeListItem" updated="20220623195600" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623195600-7hw6t6b" data-node-id="20220623195600-7hw6t6b" data-type="NodeParagraph" updated="20220623195659" class="p">将光标插入符移入
+引用
+元素，直接修改内容，这样会将该
+引用
+的锚文本设置为静态锚文本
+</div>
+
+    </div>
+<div id="20220623195701-obv1sdb" data-node-id="20220623195701-obv1sdb" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623195701-akeq453" data-node-id="20220623195701-akeq453" data-type="NodeParagraph" updated="20220623195737" class="p">右键单击
+引用
+元素后在弹出的菜单中修改锚文本，这样得到的锚文本也是静态锚文本
+</div>
+
+    </div>
+<div id="20220623195738-5zwao6z" data-node-id="20220623195738-5zwao6z" data-type="NodeListItem" updated="20220623195906" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623195738-7bxe56c" data-node-id="20220623195738-7bxe56c" data-type="NodeParagraph" updated="20220623195906" class="p">右键单击
+引用
+元素后在弹出的菜单中清空锚文本，这样将使用动态锚文本
+</div>
+
+    </div>
+</div>
+<div id="20230420185651-fqx6ww6" data-node-id="20230420185651-fqx6ww6" data-type="NodeParagraph" updated="20230420185832" class="p">在 
+<span data-type="code">((</span>
+​ 搜索结果列表中：
+</div>
+<div id="20230420185742-g0vtyx7" data-node-id="20230420185742-g0vtyx7" data-type="NodeList" updated="20230420190027" data-subtype="u" class="list"><div id="20230420185742-14djxj3" data-node-id="20230420185742-14djxj3" data-type="NodeListItem" updated="20230420190025" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230420185742-brqgayg" data-node-id="20230420185742-brqgayg" data-type="NodeParagraph" updated="20230420190025" class="p">直接 
+<span data-type="kbd">Enter</span>
+​ 或者 
+<span data-type="kbd">Click</span>
+​ 将使用动态锚文本
+</div>
+
+    </div>
+<div id="20230420185748-ehr9h7w" data-node-id="20230420185748-ehr9h7w" data-type="NodeListItem" updated="20230420190027" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230420185748-sb1thir" data-node-id="20230420185748-sb1thir" data-type="NodeParagraph" updated="20230420190027" class="p">按住 
+<span data-type="kbd">Ctrl+Enter</span>
+​ 或者 
+<span data-type="kbd">Ctrl+Click</span>
+​ 将使用静态锚文本
+</div>
+
+    </div>
+</div>
+<div id="20230420122954-zw10k6f" data-node-id="20230420122954-zw10k6f" data-type="NodeHeading" updated="20230420122957" data-subtype="h2" class="h2"><div>筛选
+</div></div>
+<div id="20230518100357-4wadf96" data-node-id="20230518100357-4wadf96" data-type="NodeParagraph" updated="20230518100526" class="p">在 
+<span data-type="kbd">设置</span>
+​ - 
+<span data-type="kbd">编辑器</span>
+​ 中启用 
+<span data-type="kbd">[[ 仅搜索文档</span>
+​ 后：
+</div>
+<div id="20230420123112-keq7tik" data-node-id="20230420123112-keq7tik" data-type="NodeList" updated="20230820103525" data-subtype="u" class="list"><div id="20230420123137-dju5jji" data-node-id="20230420123137-dju5jji" data-type="NodeListItem" updated="20230820102949" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230420123137-61yxpkv" data-node-id="20230420123137-61yxpkv" data-type="NodeParagraph" updated="20230820102949" class="p">使用 
+<span data-type="code">((</span>
+​​ 在
+<span data-type="block-ref"     data-subtype="s"     data-id="20200905090211-2vixtlf">
+          <a href="./../../请从这里开始/内容块/内容块类型.html#20200905090211-2vixtlf">所有类型的块</a>
+  </span>
+中进行搜索
+</div>
+
+    </div>
+<div id="20230420123140-08i801q" data-node-id="20230420123140-08i801q" data-type="NodeListItem" updated="20230820103525" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230420123140-ghbasee" data-node-id="20230420123140-ghbasee" data-type="NodeParagraph" updated="20230820103525" class="p">使用 
+<span data-type="code">[[</span>
+​ 仅搜索
+<span data-type="block-ref"     data-subtype="s"     data-id="20210104090624-5abfwla">
+          <a href="./../../请从这里开始/内容块/内容块类型.html#20210104090624-5abfwla">文档块</a>
+  </span>
+</div>
+
+    </div>
+</div>
+<div id="20220623194610-9i15h8j" data-node-id="20220623194610-9i15h8j" data-type="NodeHeading" updated="20220623194926" data-subtype="h2" class="h2"><div>语法
+</div></div>
+<div id="20220623194617-93ho3r1" data-node-id="20220623194617-93ho3r1" data-type="NodeParagraph" updated="20220623200842" class="p">除了使用 
+<span data-type="code">((</span>
+ 触发引用搜索外，也可以直接使用语法 
+<span data-type="code">((id "锚文本"))</span>
+。
+</div>
+<div id="20220623200042-wi0fnoq" data-node-id="20220623200042-wi0fnoq" data-type="NodeList" updated="20221007175038" data-subtype="u" class="list"><div id="20220623200048-ksp1pha" data-node-id="20220623200048-ksp1pha" data-type="NodeListItem" updated="20220623200048" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623200048-khk1tas" data-node-id="20220623200048-khk1tas" data-type="NodeParagraph" updated="20220623200105" class="p">使用 
+<span data-type="code">"</span>
+ 包裹锚文为静态锚文本
+</div>
+
+    </div>
+<div id="20220623200105-p2p4qu7" data-node-id="20220623200105-p2p4qu7" data-type="NodeListItem" updated="20221007175038" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220623200105-fpr7anp" data-node-id="20220623200105-fpr7anp" data-type="NodeParagraph" updated="20221007175038" class="p">使用 
+<span data-type="code">&apos;</span>
+ 包裹锚文本为动态锚文本，会在重建索引时自动重写
+</div>
+
+    </div>
+</div>
+<div id="20220623200140-527rg7n" data-node-id="20220623200140-527rg7n" data-type="NodeParagraph" updated="20220623200426" class="p">直接使用语法的主要场景是通过外部工具或者 API 建立
+引用
+，大部分情况下我们主要还是直接使用 
+<span data-type="code">((</span>
+​ 触发
+引用
+搜索来建立
+引用
+。
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

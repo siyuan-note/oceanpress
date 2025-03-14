@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="appearance/oceanpress.css"/>
+  <title>数据安全</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20210117211155-56n4odu" data-node-id="20210117211155-56n4odu" data-type="NodeDocument" updated="20230828111922" data-subtype="h1" class="h1" icon="1f50f" type="doc"></div><div id="20210117211155-56n4odu" data-node-id="20210117211155-56n4odu" data-type="NodeDocument" updated="20230828111922" data-subtype="h1" class="h1" icon="1f50f" type="doc" data-type="NodeHeading" class="h1">数据安全</div><div id="20210117212652-vpmkfab" data-node-id="20210117212652-vpmkfab" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+概述
+</div></div>
+<div id="20210117212533-b9xm7h6" data-node-id="20210117212533-b9xm7h6" data-type="NodeParagraph" updated="20210302223432" class="p">数据安全主要分为两方面：
+</div>
+<div id="20210302223430-kskwppo" data-node-id="20210302223430-kskwppo" data-type="NodeList" updated="20230422123357" data-subtype="u" class="list"><div id="20210525220618-mb42ynt" data-node-id="20210525220618-mb42ynt" data-type="NodeListItem" updated="20230422123357" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210525220618-ctad9jk" data-node-id="20210525220618-ctad9jk" data-type="NodeParagraph" updated="20230422123357" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20230422103807-d46wjhs">
+          <a href="./数据安全/数据可用性保障.html#20230422103807-d46wjhs">可用性</a>
+  </span>
+：数据不丢失，保持数据的完整和一致
+</div>
+
+    </div>
+<div id="20210525220623-i1o11y5" data-node-id="20210525220623-i1o11y5" data-type="NodeListItem" updated="20210525220623" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210525220623-f3ugyow" data-node-id="20210525220623-f3ugyow" data-type="NodeParagraph" updated="20210525220623" class="p">机密性：数据不被泄漏、不被篡改
+</div>
+
+    </div>
+</div>
+<div id="20210117213032-48sgu29" data-node-id="20210117213032-48sgu29" data-type="NodeParagraph" updated="20210525214350" class="p">思源对这两方面都进行了一定支持，下面是关于数据安全方面的说明。
+</div>
+<div id="20210117213252-rjh6iu2" data-node-id="20210117213252-rjh6iu2" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+明文存储
+</div></div>
+<div id="20210525214530-69ml3fo" data-node-id="20210525214530-69ml3fo" data-type="NodeParagraph" updated="20210525214719" class="p">思源使用明文方式将数据存储在本地文件系统上，这意味着：
+</div>
+<div id="20210117213258-m2gevi3" data-node-id="20210117213258-m2gevi3" data-type="NodeList" data-subtype="u" class="list" data-marker="*"><div id="20210117213526-cy3oj8v" data-node-id="20210117213526-cy3oj8v" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223430-44dbhvt" data-node-id="20210302223430-44dbhvt" data-type="NodeParagraph" updated="20210525214730" class="p">任何能够使用操作系统的人或软件都读取其中的数据
+</div>
+
+    </div>
+<div id="20210117213528-fp23mvh" data-node-id="20210117213528-fp23mvh" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223430-1hpa148" data-node-id="20210302223430-1hpa148" data-type="NodeParagraph" updated="20210501163203" class="p">数据的可用性依赖于硬件磁盘和操作系统的可用性
+</div>
+
+    </div>
+</div>
+<div id="20210117211513-nelhsjf" data-node-id="20210117211513-nelhsjf" data-type="NodeHeading" updated="20210721110530" data-subtype="h2" class="h2"><div>端到端加密
+</div></div>
+<div id="20210721110555-81sqopb" data-node-id="20210721110555-81sqopb" data-type="NodeParagraph" updated="20230828111922" class="p">思源云端同步使用
+<span data-type="block-ref"     data-subtype="s"     data-id="20230808120347-lael5oq">
+          <a href="./请从这里开始/会员特权/云端服务/存储空间.html#20230808120347-lael5oq">端到端加密</a>
+  </span>
+，密码在本地通过内置密钥加密保存，除使用者之外的任何第三方均无法在云端获得明文数据。
+</div>
+<div id="20210117212440-bkk6f95" data-node-id="20210117212440-bkk6f95" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+建议
+</div></div>
+<div id="20210117214728-szj3mg9" data-node-id="20210117214728-szj3mg9" data-type="NodeList" updated="20220703223831" data-subtype="u" class="list" data-marker="*"><div id="20210117215237-1mbl2ly" data-node-id="20210117215237-1mbl2ly" data-type="NodeListItem" updated="20220703223831" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223430-wz2k547" data-node-id="20210302223430-wz2k547" data-type="NodeParagraph" updated="20220703223831" class="p">定期备份数据，参考 321 备份原则（至少 3 个副本、2 种介质和 1 个异地存储）
+</div>
+
+    </div>
+<div id="20210117214814-lm8tmiq" data-node-id="20210117214814-lm8tmiq" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210302223430-u4v0huy" data-node-id="20210302223430-u4v0huy" data-type="NodeParagraph" updated="20210524220935" class="p">重要密码、密钥或者核心机密等建议使用专用软件、设备或者离线保存
+</div>
+
+    </div>
+</div>
+<div id="20220626205507-zakjqo5" data-node-id="20220626205507-zakjqo5" data-type="NodeHeading" updated="20220626205745" data-subtype="h2" class="h2"><div>威胁模型
+</div></div>
+<div id="20220626210804-d1iir4r" data-node-id="20220626210804-d1iir4r" data-type="NodeParagraph" updated="20220626213925" class="p">主要针对本地数据安全和思源云端存储安全进行评估。
+</div>
+<div id="20220626210024-c045aps" data-node-id="20220626210024-c045aps" data-type="NodeHeading" updated="20220626213021" data-subtype="h3" class="h3"><div>前提假设
+</div></div>
+<div id="20220626210038-joi74n0" data-node-id="20220626210038-joi74n0" data-type="NodeList" updated="20220626211139" data-subtype="u" class="list"><div id="20220626210038-412dnfz" data-node-id="20220626210038-412dnfz" data-type="NodeListItem" updated="20220626210038" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210038-us3tpf5" data-node-id="20220626210038-us3tpf5" data-type="NodeParagraph" updated="20220626210326" class="p">本地操作系统是完全受信任的环境。这是数据安全最基础的前提，基于该前提才能保证
+</div>
+<div id="20220626210254-707f04m" data-node-id="20220626210254-707f04m" data-type="NodeList" data-subtype="u" class="list"><div id="20220626210254-fr4kbsa" data-node-id="20220626210254-fr4kbsa" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210254-ldlvsgr" data-node-id="20220626210254-ldlvsgr" data-type="NodeParagraph" updated="20220626210532" class="p">原始数据的可用性
+</div>
+
+    </div>
+<div id="20220626210411-15gniy2" data-node-id="20220626210411-15gniy2" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210411-abr4ep7" data-node-id="20220626210411-abr4ep7" data-type="NodeParagraph" updated="20220626210723" class="p">原始数据不被泄漏
+</div>
+
+    </div>
+<div id="20220626210401-9o0os4g" data-node-id="20220626210401-9o0os4g" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210401-64ngms3" data-node-id="20220626210401-64ngms3" data-type="NodeParagraph" updated="20220626210417" class="p">密钥的安全性
+</div>
+
+    </div>
+</div>
+
+    </div>
+<div id="20220626210629-dleyp1j" data-node-id="20220626210629-dleyp1j" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210629-7yee6s7" data-node-id="20220626210629-7yee6s7" data-type="NodeParagraph" updated="20220626210707" class="p">用户不泄漏密钥给攻击者
+</div>
+
+    </div>
+<div id="20220626210739-9bgfjnr" data-node-id="20220626210739-9bgfjnr" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626210739-2zabs74" data-node-id="20220626210739-2zabs74" data-type="NodeParagraph" updated="20220626210932" class="p">云端存储中的数据不被删除
+</div>
+
+    </div>
+<div id="20220626211010-vq0mwwm" data-node-id="20220626211010-vq0mwwm" data-type="NodeListItem" updated="20220626211025" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626211010-6k8ivhp" data-node-id="20220626211010-6k8ivhp" data-type="NodeParagraph" updated="20220626211025" class="p">AES-GCM 加密算法未被攻破
+</div>
+
+    </div>
+<div id="20220626211022-6h7y6bs" data-node-id="20220626211022-6h7y6bs" data-type="NodeListItem" updated="20220626211139" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626211022-3n1z0hp" data-node-id="20220626211022-3n1z0hp" data-type="NodeParagraph" updated="20220626211139" class="p">攻击者无法提供暴力破解所需算力
+</div>
+
+    </div>
+</div>
+<div id="20220626210027-hhtc2a6" data-node-id="20220626210027-hhtc2a6" data-type="NodeHeading" updated="20220626213850" data-subtype="h3" class="h3"><div>云端存储能够保证
+</div></div>
+<div id="20220626211230-el1oox9" data-node-id="20220626211230-el1oox9" data-type="NodeList" updated="20220626211249" data-subtype="u" class="list"><div id="20220626211249-wrkarxp" data-node-id="20220626211249-wrkarxp" data-type="NodeListItem" updated="20220626211249" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626211249-2ovxrgo" data-node-id="20220626211249-2ovxrgo" data-type="NodeParagraph" updated="20220626211503" class="p">只有通过正确的密钥才能解密数据
+</div>
+
+    </div>
+<div id="20220626211459-k8c0zvf" data-node-id="20220626211459-k8c0zvf" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626211459-w4e8ch7" data-node-id="20220626211459-w4e8ch7" data-type="NodeParagraph" updated="20220626211539" class="p">数据被篡改后无法解密
+</div>
+
+    </div>
+</div>
+<div id="20220626213039-vc4f1ts" data-node-id="20220626213039-vc4f1ts" data-type="NodeHeading" updated="20220626213102" data-subtype="h3" class="h3"><div>正常示例
+</div></div>
+<div id="20220626211621-yw8d4zb" data-node-id="20220626211621-yw8d4zb" data-type="NodeParagraph" updated="20220626211919" class="p">基于上述假设和保证，下面是攻击者能够达成的目标示例。
+</div>
+<div id="20220626211754-ftwoqz4" data-node-id="20220626211754-ftwoqz4" data-type="NodeParagraph" updated="20220626212025" class="p">如果攻击者对云端存储具有只读权限，那么他能够：
+</div>
+<div id="20220626212000-iri4fhz" data-node-id="20220626212000-iri4fhz" data-type="NodeList" updated="20220626212909" data-subtype="u" class="list"><div id="20220626212007-152nmb6" data-node-id="20220626212007-152nmb6" data-type="NodeListItem" updated="20220626212007" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626212007-sj2d1y0" data-node-id="20220626212007-sj2d1y0" data-type="NodeParagraph" updated="20220626212245" class="p">获取到已经加密的数据，尝试暴力破解
+</div>
+
+    </div>
+<div id="20220626212247-3ldjbn9" data-node-id="20220626212247-3ldjbn9" data-type="NodeListItem" updated="20220626212909" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626212247-bdfgh5c" data-node-id="20220626212247-bdfgh5c" data-type="NodeParagraph" updated="20220626212909" class="p">通过索引信息推断出数据大小
+</div>
+
+    </div>
+</div>
+<div id="20220626212515-ap79woa" data-node-id="20220626212515-ap79woa" data-type="NodeParagraph" updated="20220626212650" class="p">如果攻击者能够劫持网络，那么他能够：
+</div>
+<div id="20220626212651-jmsl9e0" data-node-id="20220626212651-jmsl9e0" data-type="NodeList" updated="20220626212914" data-subtype="u" class="list"><div id="20220626212658-td3mom4" data-node-id="20220626212658-td3mom4" data-type="NodeListItem" updated="20220626212658" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626212658-cil0rtv" data-node-id="20220626212658-cil0rtv" data-type="NodeParagraph" updated="20220626212759" class="p">篡改数据造成数据不可用
+</div>
+
+    </div>
+<div id="20220626212804-op12pak" data-node-id="20220626212804-op12pak" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626212804-2kb2439" data-node-id="20220626212804-2kb2439" data-type="NodeParagraph" updated="20220626212836" class="p">获得用户 ID 信息
+</div>
+
+    </div>
+<div id="20220626212854-jn95j1j" data-node-id="20220626212854-jn95j1j" data-type="NodeListItem" updated="20220626212914" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626212854-4vfflua" data-node-id="20220626212854-4vfflua" data-type="NodeParagraph" updated="20220626212914" class="p">通过流量推断出数据大小
+</div>
+
+    </div>
+</div>
+<div id="20220626211209-ok2rvht" data-node-id="20220626211209-ok2rvht" data-type="NodeHeading" updated="20220626213125" data-subtype="h3" class="h3"><div>异常示例
+</div></div>
+<div id="20220626213125-y4dolh0" data-node-id="20220626213125-y4dolh0" data-type="NodeParagraph" updated="20220626213144" class="p">如果违反了上述假设或保证，下面是攻击者能够达成的目标和示例。
+</div>
+<div id="20220626213144-2t86jkw" data-node-id="20220626213144-2t86jkw" data-type="NodeParagraph" updated="20220626213227" class="p">如果攻击者能够入侵本地操作系统，那么他能够：
+</div>
+<div id="20220626213227-y3lsr2u" data-node-id="20220626213227-y3lsr2u" data-type="NodeList" updated="20220626213836" data-subtype="u" class="list"><div id="20220626213228-5y4ooc5" data-node-id="20220626213228-5y4ooc5" data-type="NodeListItem" updated="20220626213653" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626213228-mcfm0xy" data-node-id="20220626213228-mcfm0xy" data-type="NodeParagraph" updated="20220626213653" class="p">修改或删除原始数据，造成原始数据不可用
+</div>
+
+    </div>
+<div id="20220626213330-4qecgfd" data-node-id="20220626213330-4qecgfd" data-type="NodeListItem" updated="20220626213831" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626213330-ycd3hae" data-node-id="20220626213330-ycd3hae" data-type="NodeParagraph" updated="20220626213831" class="p">获得原始数据
+</div>
+
+    </div>
+<div id="20220626213347-bm66fsj" data-node-id="20220626213347-bm66fsj" data-type="NodeListItem" updated="20220626213836" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626213347-6a376wm" data-node-id="20220626213347-6a376wm" data-type="NodeParagraph" updated="20220626213836" class="p">获得密钥
+</div>
+
+    </div>
+</div>
+<div id="20220626213353-klg8vw5" data-node-id="20220626213353-klg8vw5" data-type="NodeParagraph" updated="20220626213537" class="p">如果攻击者对云端存储具有写入权限，那么他能够：
+</div>
+<div id="20220626213507-6er6cfn" data-node-id="20220626213507-6er6cfn" data-type="NodeList" updated="20220626213935" data-subtype="u" class="list"><div id="20220626213541-93non0e" data-node-id="20220626213541-93non0e" data-type="NodeListItem" updated="20220626213935" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220626213541-t09iiuw" data-node-id="20220626213541-t09iiuw" data-type="NodeParagraph" updated="20220626213935" class="p">修改或删除云端存储，造成云端存储数据不可用
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

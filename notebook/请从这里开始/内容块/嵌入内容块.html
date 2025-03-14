@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>嵌入内容块</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20201117101902-2ewjjum" data-node-id="20201117101902-2ewjjum" data-type="NodeDocument" updated="20211223192455" data-subtype="h1" class="h1" type="doc"></div><div id="20201117101902-2ewjjum" data-node-id="20201117101902-2ewjjum" data-type="NodeDocument" updated="20211223192455" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">嵌入内容块</div><div id="20210111224435-y1fesd1" data-node-id="20210111224435-y1fesd1" data-type="NodeHeading" updated="20210512154656" data-subtype="h2" class="h2"><div>
+概述
+</div></div>
+<div id="20201224120447-1ros46z" data-node-id="20201224120447-1ros46z" data-type="NodeParagraph" updated="20210512154659" class="p">嵌入内容块主要用于汇总所需内容块，通过 
+<span data-type="code">{{</span>
+ 和 
+<span data-type="code">}}</span>
+ 将 SQL 脚本包裹起来并独占一行：
+<span data-type="code">{{ SELECT * FROM blocks WHERE content LIKE '%关键字%' }}</span>
+，数据库表请参考
+<span data-type="block-ref"     data-subtype="s"     data-id="20201117103851-l9cahuc">
+          <a href="./../../请从这里开始/搜索进阶/数据库表.html#20201117103851-l9cahuc">这里</a>
+  </span>
+。
+<span data-type="tag">内容块/嵌入</span>
+</div>
+<div id="20201224120447-e6zyfti" data-node-id="20201224120447-e6zyfti" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+示例
+</div></div>
+<div id="20201224120447-znjkoy5" data-node-id="20201224120447-znjkoy5" data-type="NodeList" updated="20210503152123" data-subtype="u" class="list" data-marker="*"><div id="20201224120447-n30ybcs" data-node-id="20201224120447-n30ybcs" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20201224120447-qmgtpok" data-node-id="20201224120447-qmgtpok" data-type="NodeParagraph" class="p">查询内容中包含 
+<span data-type="code">内容块</span>
+ 的列表项：
+</div>
+<div id="20201224120447-7zxu4l5" data-node-id="20201224120447-7zxu4l5" data-type="NodeCodeBlock" class="code-block">
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
+        </div>
+        <div class="hljs" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND type = 'i' }}
+</div>
+      </div>
+
+    </div>
+<div id="20201224120447-s8m8new" data-node-id="20201224120447-s8m8new" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20201224120447-5c10xrv" data-node-id="20201224120447-5c10xrv" data-type="NodeParagraph" class="p">查询内容中同时包含 
+<span data-type="code">内容块</span>
+ 和 
+<span data-type="code">引用</span>
+ 段落块：
+</div>
+<div id="20201224120447-0y91i5d" data-node-id="20201224120447-0y91i5d" data-type="NodeCodeBlock" class="code-block">
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
+        </div>
+        <div class="hljs" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%引用%' AND type = 'p') }}
+</div>
+      </div>
+
+    </div>
+<div id="20201224120447-7lzhgko" data-node-id="20201224120447-7lzhgko" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20201224120447-pnqwe31" data-node-id="20201224120447-pnqwe31" data-type="NodeParagraph" updated="20210503151034" class="p">查询内容中同时包含 
+<span data-type="code">内容块</span>
+ 和 
+<span data-type="code">嵌入</span>
+ 的标题块并按更新时间降序结果取前 2 条：
+</div>
+<div id="20201224120447-zgg5lvx" data-node-id="20201224120447-zgg5lvx" data-type="NodeCodeBlock" class="code-block">
+        <div class="protyle-action">
+          <span class="protyle-action--first protyle-action__language">sql</span>
+          <span class="fn__flex-1"></span><span class="protyle-icon protyle-icon--only protyle-action__copy"><svg><use xlink:href="#iconCopy"></use></svg></span>
+        </div>
+        <div class="hljs" spellcheck="false">{{ SELECT * FROM blocks WHERE content LIKE '%内容块%' AND content LIKE '%嵌入%' AND type = 'h' ORDER BY updated DESC LIMIT 2 }}
+</div>
+      </div>
+
+    </div>
+</div>
+<div id="20201224120447-fnapz6h" data-node-id="20201224120447-fnapz6h" data-type="NodeHeading" data-subtype="h3" class="h3"><div>
+案例一
+</div></div>
+<div id="20201224120447-acd7hwp" data-node-id="20201224120447-acd7hwp" data-type="NodeParagraph" class="p">查询同时包含 
+<span data-type="code">在思源中</span>
+ 和 
+<span data-type="code">核心概念</span>
+ 文本的段落块，并排除当前文档（否则当段落块也会包含到结果集中，因为当前段落同样包含了这两个文本，下面的案例类似）：
+</div>
+<div id="20210111224926-ju1sd4d" data-node-id="20210111224926-ju1sd4d" data-type="NodeBlockQueryEmbed" updated="20211222185346" data-type="NodeBlockquote" class="bq">
+
+<div id="20210604222515-ggpd5hs" data-node-id="20210604222515-ggpd5hs" data-type="NodeBlockQueryEmbed" updated="20210604222515" data-type="NodeBlockquote" class="bq">
+
+<div id="20210428212840-8rqwn5o" data-node-id="20210428212840-8rqwn5o" data-type="NodeParagraph" updated="20230415112508" class="p" style="color: var(--b3-card-info-color); background-color: var(--b3-card-info-background);">在
+<span data-type="block-ref"     data-subtype="s"     data-id="20230415111858-vgohvf3">
+          <a href="./../../常见问题.html#20230415111858-vgohvf3">思源</a>
+  </span>
+
+中，唯一重要的核心概念是
+<span data-type="block-ref"     data-subtype="s"     data-id="20200813004931-q4cu8na">
+          <a href="./../../请从这里开始/内容块/什么是内容块.html#20200813004931-q4cu8na">内容块</a>
+  </span>
+
+。通过排版格式即可形成内容块，这样我们就能在块级粒度上对思绪和知识进行整理，同时也能方便长文阅读和输出。
+</div>
+
+
+</div><div id="20210428212840-8rqwn5o" data-node-id="20210428212840-8rqwn5o" data-type="NodeParagraph" updated="20230415112508" class="p" style="color: var(--b3-card-info-color); background-color: var(--b3-card-info-background);">在
+<span data-type="block-ref"     data-subtype="s"     data-id="20230415111858-vgohvf3">
+          <a href="./../../常见问题.html#20230415111858-vgohvf3">思源</a>
+  </span>
+
+中，唯一重要的核心概念是
+<span data-type="block-ref"     data-subtype="s"     data-id="20200813004931-q4cu8na">
+          <a href="./../../请从这里开始/内容块/什么是内容块.html#20200813004931-q4cu8na">内容块</a>
+  </span>
+
+。通过排版格式即可形成内容块，这样我们就能在块级粒度上对思绪和知识进行整理，同时也能方便长文阅读和输出。
+</div>
+
+
+</div>
+<div id="20201224120447-ickbh88" data-node-id="20201224120447-ickbh88" data-type="NodeHeading" data-subtype="h3" class="h3"><div>
+案例二
+</div></div>
+<div id="20201224120447-53y8c84" data-node-id="20201224120447-53y8c84" data-type="NodeParagraph" class="p">查询同时包含标签 
+<span data-type="code">#内容块/嵌入#</span>
+ 和 
+<span data-type="code">#内容块/引用#</span>
+ 的段落块：
+</div>
+<div id="20201224120447-veyqmvr" data-node-id="20201224120447-veyqmvr" data-type="NodeBlockQueryEmbed" updated="20211222185428" data-type="NodeBlockquote" class="bq">
+
+<div id="20210104090557-575kpbp" data-node-id="20210104090557-575kpbp" data-type="NodeParagraph" updated="20220623200602" class="p">输入 
+<span data-type="code">((</span>
+ 后将触发内容块引用搜索，继续输入作为搜索关键字，在搜索结果中使用上下键选定后回车就可以完成内容块的引用了。建立好内容块引用后，鼠标悬浮在锚文本上后将弹出预览浮层，展现被引用的内容块（定义块）。
+<span data-type="tag">内容块/引用</span>
+</div>
+
+
+</div>
+<div id="20201224120447-v7yfh5v" data-node-id="20201224120447-v7yfh5v" data-type="NodeHeading" data-subtype="h3" class="h3"><div>
+案例三
+</div></div>
+<div id="20201224120447-s5zmpsa" data-node-id="20201224120447-s5zmpsa" data-type="NodeParagraph" class="p">有时候我们可能需要随机漫游显示内容块，以方便回顾。
+</div>
+<div id="20201224120447-kewa9nr" data-node-id="20201224120447-kewa9nr" data-type="NodeBlockQueryEmbed" data-type="NodeBlockquote" class="bq">
+
+<div id="20210803155325-spkupyu" data-node-id="20210803155325-spkupyu" data-type="NodeParagraph" updated="20210803155325" class="p"><a href="https://weibo.com/7475246694/KrkI28xGv">2021年7月31日 22:10:24</a>
+<br>
+父神baba~李贺为啥被称为“诗鬼”啊
+<span data-type="NodeImage" class="img" style="undefined"
+      ><img
+        src="./../../assets/lxh_xiudada-e99552ddb3-20210803155321-qkq61fi.png"
+        data-src="./../../assets/lxh_xiudada-e99552ddb3-20210803155321-qkq61fi.png"
+        title=""
+        style="undefined"
+        loading="lazy"
+      /><span class="protyle-action__title"></span></span
+    >
+即便不称仙，也可以称呼个别的吧
+<span data-type="NodeImage" class="img" style="undefined"
+      ><img
+        src="./../../assets/lxh_qiuguanzhu-d5e122b2f6-20210803155321-nayb2er.png"
+        data-src="./../../assets/lxh_qiuguanzhu-d5e122b2f6-20210803155321-nayb2er.png"
+        title=""
+        style="undefined"
+        loading="lazy"
+      /><span class="protyle-action__title"></span></span
+    >
+<br>
+答：鬼并无贬义，是后世人轻贱自己，所以看什么也都轻贱，江南逢李龟年，大唐的乐圣就叫李龟年，如今艺人几个敢起带龟的名字，大师营业付费起名敢起吴龟的话，估计开张大吉与闭店歇业能在同一个月份。屌丝、屁民、韭菜、趁热......识文断字表达观点的门槛越来越低，对汉语的污染愈演愈烈。
+</div><div id="20230929094802-erobvks" data-node-id="20230929094802-erobvks" data-type="NodeThematicBreak" updated="20230929094804" class="hr"><div></div></div><div id="20230808120348-jzidvij" data-node-id="20230808120348-jzidvij" data-type="NodeHeading" updated="20220708095359" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20230808120348-t1mk2y9" data-node-id="20230808120348-t1mk2y9" data-type="NodeParagraph" updated="20220708103950" class="p">数据备份指的是将
+<span data-type="block-ref"     data-subtype="s"     data-id="20220615112531-5yos96d">
+          <a href="./../../请从这里开始/通用操作/数据历史.html#20220615112531-5yos96d">数据快照</a>
+  </span>
+上传到云端。
+</div>
+<div id="20230808120348-zi8ct0p" data-node-id="20230808120348-zi8ct0p" data-type="NodeHeading" updated="20220708100015" data-subtype="h2" class="h2"><div>使用方式
+</div></div>
+<div id="20230808120348-645onmt" data-node-id="20230808120348-645onmt" data-type="NodeList" updated="20220708102922" data-subtype="o" class="list"><div id="20230808120348-mq3qxqd" data-node-id="20230808120348-mq3qxqd" data-type="NodeListItem" updated="20220708100929" data-subtype="o" class="li" data-marker="1.">
+      <div class="protyle-action">
+        1.
+      </div>
+      <div id="20230808120348-ktnbdwv" data-node-id="20230808120348-ktnbdwv" data-type="NodeParagraph" updated="20220708100937" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20220615113758-i2279ot">
+          <a href="./../../请从这里开始/通用操作/数据历史.html#20220615113758-i2279ot">初始化数据仓库密钥</a>
+  </span>
+后如果一切正常就已经配置好备份了
+</div>
+
+    </div>
+<div id="20230808120348-totosr9" data-node-id="20230808120348-totosr9" data-type="NodeListItem" updated="20220708102811" data-subtype="o" class="li" data-marker="2.">
+      <div class="protyle-action">
+        2.
+      </div>
+      <div id="20230808120348-td2yby1" data-node-id="20230808120348-td2yby1" data-type="NodeParagraph" updated="20220708102811" class="p">打开 
+<span data-type="kbd">数据历史</span>
+ - 
+<span data-type="kbd">数据快照</span>
+ 页签，选择需要备份的快照点击 
+<span data-type="kbd">标记快照</span>
+</div>
+
+    </div>
+<div id="20230808120348-pa30615" data-node-id="20230808120348-pa30615" data-type="NodeListItem" data-subtype="o" class="li" data-marker="3.">
+      <div class="protyle-action">
+        3.
+      </div>
+      <div id="20230808120348-d2nxsko" data-node-id="20230808120348-d2nxsko" data-type="NodeParagraph" updated="20220708101018" class="p">筛选下拉列表中选择 
+<span data-type="kbd">本地标记的快照</span>
+，选择需要上传的快照点击 
+<span data-type="kbd">上传</span>
+</div>
+
+    </div>
+<div id="20230808120348-jybz6et" data-node-id="20230808120348-jybz6et" data-type="NodeListItem" updated="20220708102922" data-subtype="o" class="li" data-marker="4.">
+      <div class="protyle-action">
+        4.
+      </div>
+      <div id="20230808120348-m0re4pa" data-node-id="20230808120348-m0re4pa" data-type="NodeParagraph" updated="20220708102922" class="p">上传完成以后，筛选下拉列表中选择 
+<span data-type="kbd">云端标记的快照</span>
+ 可以看到刚刚备份到云端的快照
+</div>
+
+    </div>
+<div id="20230808120348-ag2s56w" data-node-id="20230808120348-ag2s56w" data-type="NodeListItem" data-subtype="o" class="li" data-marker="5.">
+      <div class="protyle-action">
+        5.
+      </div>
+      <div id="20230808120348-tbzcgy7" data-node-id="20230808120348-tbzcgy7" data-type="NodeParagraph" updated="20220708101644" class="p">云端备份的快照下载到本地后可以通过
+<span data-type="block-ref"     data-subtype="s"     data-id="20220615115212-kjebrv4">
+          <a href="./../../请从这里开始/通用操作/数据历史.html#20220615115212-kjebrv4">回滚数据快照</a>
+  </span>
+恢复数据
+</div>
+
+    </div>
+</div>
+<div id="20230808120348-5qkf6po" data-node-id="20230808120348-5qkf6po" data-type="NodeParagraph" updated="20220708101922" class="p">另外：
+</div>
+<div id="20230808120348-3h1cxja" data-node-id="20230808120348-3h1cxja" data-type="NodeList" updated="20220708101943" data-subtype="u" class="list"><div id="20230808120348-xwlnuv3" data-node-id="20230808120348-xwlnuv3" data-type="NodeListItem" updated="20220708101943" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230808120348-tlm1dq0" data-node-id="20230808120348-tlm1dq0" data-type="NodeParagraph" updated="20220708101943" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20210928094544-vg2c2ts">
+          <a href="./../../请从这里开始/通用操作/数据历史.html#20210928094544-vg2c2ts">忽略文件</a>
+  </span>
+</div>
+
+    </div>
+<div id="20230808120348-7m3us1s" data-node-id="20230808120348-7m3us1s" data-type="NodeListItem" updated="20220708101925" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230808120348-3umvlw3" data-node-id="20230808120348-3umvlw3" data-type="NodeParagraph" updated="20220708101925" class="p">云端最多支持保存 12 个数据快照
+</div>
+
+    </div>
+</div>
+<div id="20230808120348-c017oom" data-node-id="20230808120348-c017oom" data-type="NodeParagraph" class="p"></div>
+
+
+
+</div>
+<div id="20210630172050-m3pgmkt" data-node-id="20210630172050-m3pgmkt" data-type="NodeHeading" updated="20210630172057" data-subtype="h3" class="h3"><div>案例四
+</div></div>
+<div id="20210630172058-rpr2p31" data-node-id="20210630172058-rpr2p31" data-type="NodeParagraph" updated="20210630172500" class="p">查询未完成的任务列表项，这里需要使用 
+<span data-type="code">markdown</span>
+ 字段而不是 
+<span data-type="code">content</span>
+ 字段：
+</div>
+<div id="20210630172118-iu2hsz3" data-node-id="20210630172118-iu2hsz3" data-type="NodeBlockQueryEmbed" updated="20211008203521" data-type="NodeBlockquote" class="bq">
+
+<div id="20230921214336-3ce94gs" data-node-id="20230921214336-3ce94gs" data-type="NodeListItem" updated="20230921214502" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20230921214337-1ecfi7u" data-node-id="20230921214337-1ecfi7u" data-type="NodeBlockQueryEmbed" updated="20230921214502" data-type="NodeBlockquote" class="bq">
+
+<div id="20230917203241-3swghnf" data-node-id="20230917203241-3swghnf" data-type="NodeHeading" updated="20231011153051" data-subtype="h2" class="h2"><div>待办 准备进行的更新
+</div></div>
+<div id="20230918135512-i9whpbn" data-node-id="20230918135512-i9whpbn" data-type="NodeList" updated="20231218131627" data-subtype="u" class="list"><div id="20231215181658-ntd49u5" data-node-id="20231215181658-ntd49u5" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231215181658-urgf41o" data-node-id="20231215181658-urgf41o" data-type="NodeParagraph" updated="20231215181729" class="p">题图
+似乎没有被计入
+资源
+引用，导致不会进行复制
+</div>
+
+    </div>
+<div id="20230921215527-xnd8utt" data-node-id="20230921215527-xnd8utt" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230921215527-e3o08t3" data-node-id="20230921215527-e3o08t3" data-type="NodeParagraph" updated="20230921215531" class="p">顶端导航链接
+</div>
+<div id="20231215181810-mhcecr8" data-node-id="20231215181810-mhcecr8" data-type="NodeList" data-subtype="u" class="list"><div id="20231010182055-pp9028d" data-node-id="20231010182055-pp9028d" data-type="NodeListItem" updated="20231010182110" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231010182055-wgo5qh9" data-node-id="20231010182055-wgo5qh9" data-type="NodeParagraph" updated="20231215181807" class="p">为嵌入块导航链接
+</div>
+
+    </div>
+</div>
+
+    </div>
+<div id="20230921204113-ronajeq" data-node-id="20230921204113-ronajeq" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230921204113-cw1rku6" data-node-id="20230921204113-cw1rku6" data-type="NodeParagraph" class="p">memo显示
+</div>
+
+    </div>
+<div id="20230921204138-c4d3y1x" data-node-id="20230921204138-c4d3y1x" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230921204138-7ll43l8" data-node-id="20230921204138-7ll43l8" data-type="NodeParagraph" updated="20230922230004" class="p">反链功能
+</div>
+
+    </div>
+<div id="20230922230023-mbr9jsc" data-node-id="20230922230023-mbr9jsc" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230922230023-13fvf79" data-node-id="20230922230023-13fvf79" data-type="NodeParagraph" class="p">空文档的子文档列表
+</div>
+
+    </div>
+<div id="20231005180733-3zlrbh2" data-node-id="20231005180733-3zlrbh2" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231005180733-rtd1bsc" data-node-id="20231005180733-rtd1bsc" data-type="NodeParagraph" updated="20231005180745" class="p"><span data-type="block-ref"     data-subtype="d"     data-id="20230916192515-c8i46eu">
+          <a href="./../../想法/项目/OceanPress_js.html#20230916192515-c8i46eu">支持 RSS，例如:最近更新.rss、推荐阅读.rss</a>
+  </span>
+</div>
+
+    </div>
+<div id="20231008163918-fvziqgq" data-node-id="20231008163918-fvziqgq" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231008163918-cswlkx8" data-node-id="20231008163918-cswlkx8" data-type="NodeParagraph" updated="20231008163931" class="p">数据库渲染（等稳定了再说）
+</div>
+
+    </div>
+<div id="20231008172424-5cec5bn" data-node-id="20231008172424-5cec5bn" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231008172424-1ydcsl8" data-node-id="20231008172424-1ydcsl8" data-type="NodeParagraph" updated="20231215181753" class="p">优化html结构：修改li、ul 等的渲染实现，使其复制到其他编辑器依然能够正常解析
+</div>
+
+    </div>
+<div id="20231008174730-iqwly3i" data-node-id="20231008174730-iqwly3i" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231008174730-n8cimf1" data-node-id="20231008174730-n8cimf1" data-type="NodeParagraph" updated="20231010181304" class="p">浮窗功能 
+</div>
+
+    </div>
+<div id="20231009124838-dfjhy7m" data-node-id="20231009124838-dfjhy7m" data-type="NodeListItem" updated="20231009124838" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231009124838-kb21r49" data-node-id="20231009124838-kb21r49" data-type="NodeParagraph" updated="20231009124838" class="p"><span data-type="block-ref"     data-subtype="d"     data-id="20230916192555-d0tonxe">
+          <a href="./../../想法/项目/OceanPress_js.html#20230916192555-d0tonxe">基于块id的永久链接</a>
+  </span>
+</div>
+
+    </div>
+<div id="20231010182033-deadpmu" data-node-id="20231010182033-deadpmu" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231010182033-bpoicya" data-node-id="20231010182033-bpoicya" data-type="NodeParagraph" updated="20231010182043" class="p">为标题块提供可复制的链接指向
+</div>
+
+    </div>
+</div>
+
+
+</div>
+
+    </div><div id="20201125140510-xmfx58p" data-node-id="20201125140510-xmfx58p" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210521142712-g6nxrp4" data-node-id="20210521142712-g6nxrp4" data-type="NodeParagraph" class="p">我再尝试的时候遇到了一个问题，那就是我渲染出来的 ID 都是空不知道为什么
+</div>
+
+    </div><div id="20210523182259-otywn8t" data-node-id="20210523182259-otywn8t" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523182259-rn7nogb" data-node-id="20210523182259-rn7nogb" data-type="NodeParagraph" updated="20210523182302" class="p">1
+</div>
+<div id="20210523182305-yc5ault" data-node-id="20210523182305-yc5ault" data-type="NodeList" data-subtype="t" class="list"><div id="20210523182302-a7a5yff" data-node-id="20210523182302-a7a5yff" data-type="NodeListItem" data-subtype="t" class="li protyle-task--done " data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconCheck"></use></svg>
+      </div>
+      
+<div id="20210523182302-vi3zzl6" data-node-id="20210523182302-vi3zzl6" data-type="NodeParagraph" updated="20210523182307" class="p">2
+</div>
+<div id="20210523182308-9jay95n" data-node-id="20210523182308-9jay95n" data-type="NodeList" data-subtype="t" class="list"><div id="20210523182307-sh9s3ns" data-node-id="20210523182307-sh9s3ns" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523182307-n77uzag" data-node-id="20210523182307-n77uzag" data-type="NodeParagraph" updated="20210523191150" class="p">3
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div><div id="20210523182302-a7a5yff" data-node-id="20210523182302-a7a5yff" data-type="NodeListItem" data-subtype="t" class="li protyle-task--done " data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconCheck"></use></svg>
+      </div>
+      
+<div id="20210523182302-vi3zzl6" data-node-id="20210523182302-vi3zzl6" data-type="NodeParagraph" updated="20210523182307" class="p">2
+</div>
+<div id="20210523182308-9jay95n" data-node-id="20210523182308-9jay95n" data-type="NodeList" data-subtype="t" class="list"><div id="20210523182307-sh9s3ns" data-node-id="20210523182307-sh9s3ns" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523182307-n77uzag" data-node-id="20210523182307-n77uzag" data-type="NodeParagraph" updated="20210523191150" class="p">3
+</div>
+
+    </div>
+</div>
+
+    </div><div id="20210523182307-sh9s3ns" data-node-id="20210523182307-sh9s3ns" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523182307-n77uzag" data-node-id="20210523182307-n77uzag" data-type="NodeParagraph" updated="20210523191150" class="p">3
+</div>
+
+    </div><div id="20210523191718-xx6jl8j" data-node-id="20210523191718-xx6jl8j" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523191718-zppx6y1" data-node-id="20210523191718-zppx6y1" data-type="NodeParagraph" updated="20210523191722" class="p">任务1
+</div>
+
+    </div><div id="20210523191722-67vxyyk" data-node-id="20210523191722-67vxyyk" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210523191722-z0g80qv" data-node-id="20210523191722-z0g80qv" data-type="NodeParagraph" updated="20210523191725" class="p">任务2
+</div>
+
+    </div><div id="20201121144434-p6t3uhn" data-node-id="20201121144434-p6t3uhn" data-type="NodeListItem" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210410111356-4kbarqg" data-node-id="20210410111356-4kbarqg" data-type="NodeParagraph" class="p">还有嵌入内容块的渲染需要实现
+</div>
+
+    </div><div id="20210827081313-6a8w7bw" data-node-id="20210827081313-6a8w7bw" data-type="NodeListItem" updated="20210827081319" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210827081313-81cq7fl" data-node-id="20210827081313-81cq7fl" data-type="NodeParagraph" updated="20210827081319" class="p">自定义 emoji表情支持
+</div>
+
+    </div><div id="20210823160230-udnc4te" data-node-id="20210823160230-udnc4te" data-type="NodeListItem" updated="20210823160253" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210823160230-4ujwtqd" data-node-id="20210823160230-4ujwtqd" data-type="NodeParagraph" updated="20210823160253" class="p">路径重合的文档的处理方案
+</div>
+
+    </div><div id="20210816212905-usodksd" data-node-id="20210816212905-usodksd" data-type="NodeListItem" updated="20210816212912" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210816212905-12wnfo0" data-node-id="20210816212905-12wnfo0" data-type="NodeParagraph" updated="20210816212912" class="p">支持 hexo post 模式
+</div>
+
+    </div><div id="20210806111216-ovfkb3m" data-node-id="20210806111216-ovfkb3m" data-type="NodeListItem" updated="20210806111234" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210806111216-w4nb200" data-node-id="20210806111216-w4nb200" data-type="NodeParagraph" updated="20210816194905" class="p">重构嵌入块的样式，保持和思源一致
+</div>
+
+    </div><div id="20210714154958-8chwhks" data-node-id="20210714154958-8chwhks" data-type="NodeListItem" updated="20210805180404" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210714154958-6dm48cm" data-node-id="20210714154958-6dm48cm" data-type="NodeParagraph" updated="20210805180404" class="p"><span data-type="block-ref"     data-subtype="s"     data-id="20210703160856-as7pzbk">
+          <a href="./../../record/每日总结/2021/7月.html#20210703160856-as7pzbk">这里的两个链接</a>
+  </span>
+ 编译后变成了 iframe ，不应该这样
+</div>
+
+    </div><div id="20210623145805-rdp3zsl" data-node-id="20210623145805-rdp3zsl" data-type="NodeListItem" updated="20210623145825" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210623145805-mo33jqf" data-node-id="20210623145805-mo33jqf" data-type="NodeParagraph" updated="20210623145825" class="p">增量编译，不用每次全部编译一遍
+</div>
+
+    </div><div id="20210602183428-jmc88ha" data-node-id="20210602183428-jmc88ha" data-type="NodeListItem" updated="20210605145539" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210602183428-e9e0f0l" data-node-id="20210602183428-e9e0f0l" data-type="NodeParagraph" updated="20210605145539" class="p">对于底部反链中的块引用解析发出的警告 添加对应的描述
+</div>
+
+    </div><div id="20210817181506-spidqtg" data-node-id="20210817181506-spidqtg" data-type="NodeListItem" updated="20210817181518" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210817181506-5rfrgwi" data-node-id="20210817181506-5rfrgwi" data-type="NodeParagraph" updated="20210817181518" class="p">重构资源 copy 逻辑
+</div>
+
+    </div><div id="20210527121800-ow5f9km" data-node-id="20210527121800-ow5f9km" data-type="NodeListItem" updated="20210626180125" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210527121800-y79g36b" data-node-id="20210527121800-y79g36b" data-type="NodeParagraph" updated="20210626180125" class="p">利用 
+<span data-type="code">go:embed</span>
+ 将静态资源嵌入到二进制文件
+</div>
+
+    </div><div id="20231008232904-znqwj0u" data-node-id="20231008232904-znqwj0u" data-type="NodeListItem" updated="20231008232943" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20231008232904-7j35k4o" data-node-id="20231008232904-7j35k4o" data-type="NodeParagraph" updated="20231008232943" class="p">攥写文章 如何实现增量编译/更新功能
+</div>
+
+    </div><div id="20210104091228-emgg0f6" data-node-id="20210104091228-emgg0f6" data-type="NodeListItem" updated="20210604230227" data-subtype="t" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210201202130-jhil31u" data-node-id="20210201202130-jhil31u" data-type="NodeParagraph" updated="20210604230227" class="p">预约牙医
+</div>
+
+    </div><div id="20210104090624-cwdnfkv" data-node-id="20210104090624-cwdnfkv" data-type="NodeListItem" data-subtype="t" class="li" data-marker="-">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconUncheck"></use></svg>
+      </div>
+      
+<div id="20210302223257-dquwv97" data-node-id="20210302223257-dquwv97" data-type="NodeParagraph" class="p">待办二
+</div>
+
+    </div>
+
+
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

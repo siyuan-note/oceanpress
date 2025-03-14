@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>工作空间</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20230106101434-e6g4av3" data-node-id="20230106101434-e6g4av3" data-type="NodeDocument" updated="20230117000600" data-subtype="h1" class="h1"></div><div id="20230106101434-e6g4av3" data-node-id="20230106101434-e6g4av3" data-type="NodeDocument" updated="20230117000600" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">工作空间</div><div id="20230106101434-otjrwff" data-node-id="20230106101434-otjrwff" data-type="NodeHeading" updated="20230106102148" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20230106102148-fhchfw0" data-node-id="20230106102148-fhchfw0" data-type="NodeParagraph" updated="20230106103611" class="p">工作空间用于保存数据、历史、配置和运行时所需要的文件。
+</div>
+<div id="20230106102403-hass9ht" data-node-id="20230106102403-hass9ht" data-type="NodeList" updated="20230106102404" data-subtype="u" class="list"><div id="20230106102404-3sbp4dm" data-node-id="20230106102404-3sbp4dm" data-type="NodeListItem" updated="20230106102404" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106102404-herwk9b" data-node-id="20230106102404-herwk9b" data-type="NodeParagraph" updated="20230106102404" class="p">不同工作空间通过文件系统文件夹相互隔离
+</div>
+
+    </div>
+<div id="20230106102409-dkh9txo" data-node-id="20230106102409-dkh9txo" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106102409-rwz43qi" data-node-id="20230106102409-rwz43qi" data-type="NodeParagraph" updated="20230106102430" class="p">一个工作空间只能被一个内核进程伺服
+</div>
+
+    </div>
+</div>
+<div id="20230109113547-eg7zbrh" data-node-id="20230109113547-eg7zbrh" data-type="NodeHeading" updated="20230109113551" data-subtype="h2" class="h2"><div>切换工作空间
+</div></div>
+<div id="20230106104300-j6nj9t2" data-node-id="20230106104300-j6nj9t2" data-type="NodeList" updated="20230117000600" data-subtype="u" class="list"><div id="20230109113554-izjti9n" data-node-id="20230109113554-izjti9n" data-type="NodeListItem" updated="20230117000600" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230109113554-4ie5f15" data-node-id="20230109113554-4ie5f15" data-type="NodeParagraph" updated="20230109113624" class="p">桌面端可以在顶栏左侧下拉菜单中打开多个工作空间
+</div>
+<div id="20230109113909-5dp3vml" data-node-id="20230109113909-5dp3vml" data-type="NodeParagraph" updated="20230117000600" class="p">如果你的多个工作空间需要经常启动，可以考虑为每个工作空间创建不同的启动入口并指定启动参数 
+<span data-type="code">--workspace=工作空间绝对路径</span>
+​。比如 Windows 系统上可以复制多个快捷方式，并在每个快捷方式 - 属性 - 目标后跟随工作空间路径参数，例如 
+<span data-type="code">--workspace=F:\SiYuan</span>
+​。除此以外，还可以通过 
+<span data-type="code">--port=12345</span>
+​ 来指定内核监听的端口。
+</div>
+
+    </div>
+<div id="20230109113624-du5o3e3" data-node-id="20230109113624-du5o3e3" data-type="NodeListItem" updated="20230109113641" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230109113624-zjqzh5l" data-node-id="20230109113624-zjqzh5l" data-type="NodeParagraph" updated="20230109113641" class="p">移动端可以在右侧栏 
+<span data-type="kbd">关于</span>
+​​ 中切换不同的工作空间
+</div>
+
+    </div>
+</div>
+<div id="20230106104118-wtvw42w" data-node-id="20230106104118-wtvw42w" data-type="NodeHeading" updated="20230106104127" data-subtype="h2" class="h2"><div>文件系统结构
+</div></div>
+<div id="20230106103624-ueba648" data-node-id="20230106103624-ueba648" data-type="NodeParagraph" updated="20230106103649" class="p">文件系统上工作空间下的结构：
+</div>
+<div id="20230106103650-61q8v8i" data-node-id="20230106103650-61q8v8i" data-type="NodeList" updated="20230106104112" data-subtype="u" class="list"><div id="20230106103705-pkx4x41" data-node-id="20230106103705-pkx4x41" data-type="NodeListItem" updated="20230106103705" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106103705-00g0plf" data-node-id="20230106103705-00g0plf" data-type="NodeParagraph" updated="20230106103718" class="p">​
+<span data-type="code">conf</span>
+​ 用于保存工作空间配置
+</div>
+
+    </div>
+<div id="20230106103718-oib4hy1" data-node-id="20230106103718-oib4hy1" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106103718-0adtij4" data-node-id="20230106103718-0adtij4" data-type="NodeParagraph" updated="20230106103744" class="p">​
+<span data-type="code">corrupted</span>
+​ 用于保存已经损坏的数据文件
+</div>
+
+    </div>
+<div id="20230106103744-8u9ew8y" data-node-id="20230106103744-8u9ew8y" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106103744-93cbakm" data-node-id="20230106103744-93cbakm" data-type="NodeParagraph" updated="20230106103930" class="p">​
+<span data-type="code">data</span>
+​ 用于保存数据，具体结构请参考
+<span data-type="block-ref"     data-subtype="s"     data-id="20210428213927-rbcfx2y">
+          <a href="./../../常见问题.html#20210428213927-rbcfx2y">这里</a>
+  </span>
+</div>
+
+    </div>
+<div id="20230106103839-9csp7l8" data-node-id="20230106103839-9csp7l8" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106103839-0pp1p1g" data-node-id="20230106103839-0pp1p1g" data-type="NodeParagraph" updated="20230106103951" class="p">​
+<span data-type="code">history</span>
+​ 用于保存文件历史
+</div>
+
+    </div>
+<div id="20230106103948-9qgwhg5" data-node-id="20230106103948-9qgwhg5" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106103948-dp7uyzl" data-node-id="20230106103948-dp7uyzl" data-type="NodeParagraph" updated="20230106104007" class="p">​
+<span data-type="code">repo</span>
+​ 用于保存数据仓库数据
+</div>
+
+    </div>
+<div id="20230106104007-r35r46f" data-node-id="20230106104007-r35r46f" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106104007-y85brhy" data-node-id="20230106104007-y85brhy" data-type="NodeParagraph" updated="20230106104035" class="p">​
+<span data-type="code">temp</span>
+​ 用于保存运行时所需的临时文件
+</div>
+
+    </div>
+<div id="20230106104045-554cvut" data-node-id="20230106104045-554cvut" data-type="NodeListItem" updated="20230106104112" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230106104045-in5r3ot" data-node-id="20230106104045-in5r3ot" data-type="NodeParagraph" updated="20230106104112" class="p">​
+<span data-type="code">.lock</span>
+​ 内核进程启动后会创建该文件，用于锁定工作空间
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

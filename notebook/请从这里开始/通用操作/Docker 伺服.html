@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>Docker 伺服</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20201227173504-847cs1q" data-node-id="20201227173504-847cs1q" data-type="NodeDocument" updated="20231108220452" data-subtype="h1" class="h1" type="doc"></div><div id="20201227173504-847cs1q" data-node-id="20201227173504-847cs1q" data-type="NodeDocument" updated="20231108220452" data-subtype="h1" class="h1" type="doc" data-type="NodeHeading" class="h1">Docker 伺服</div><div id="20220518213304-k4jos4j" data-node-id="20220518213304-k4jos4j" data-type="NodeHeading" updated="20220518213306" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20220521230037-88non27" data-node-id="20220521230037-88non27" data-type="NodeParagraph" updated="20220521230037" class="p">在服务器上伺服思源最简单的方案是通过 Docker 部署。
+</div>
+<div id="20220521230037-om41ir0" data-node-id="20220521230037-om41ir0" data-type="NodeList" updated="20220521230037" data-subtype="u" class="list"><div id="20220521230037-eywv3c8" data-node-id="20220521230037-eywv3c8" data-type="NodeListItem" updated="20220521230037" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220521230037-gbdcmqs" data-node-id="20220521230037-gbdcmqs" data-type="NodeParagraph" updated="20220521230037" class="p">镜像名称 
+<span data-type="code">b3log/siyuan</span>
+</div>
+
+    </div>
+<div id="20220521230037-cgc39jg" data-node-id="20220521230037-cgc39jg" data-type="NodeListItem" updated="20220521230037" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20220521230037-ssjdnm5" data-node-id="20220521230037-ssjdnm5" data-type="NodeParagraph" updated="20220521230037" class="p"><a href="https://hub.docker.com/r/b3log/siyuan">镜像地址</a>
+</div>
+
+    </div>
+</div>
+<div id="20201227174700-39dg7ur" data-node-id="20201227174700-39dg7ur" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+文件结构
+</div></div>
+<div id="20201227174134-hptryqy" data-node-id="20201227174134-hptryqy" data-type="NodeParagraph" class="p">整体程序位于 
+<span data-type="code">/opt/siyuan/</span>
+ 下，基本上就是 Electron 安装包 resources 文件夹下的结构：
+</div>
+<div id="20201227174705-0hl54vz" data-node-id="20201227174705-0hl54vz" data-type="NodeList" data-subtype="u" class="list" data-marker="*"><div id="20201227174714-t7ew8rk" data-node-id="20201227174714-t7ew8rk" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-jwvzb91" data-node-id="20210208145140-jwvzb91" data-type="NodeParagraph" class="p">appearance：图标、主题、多语言
+</div>
+
+    </div>
+<div id="20201227174726-zztkpj2" data-node-id="20201227174726-zztkpj2" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-em39k3o" data-node-id="20210208145140-em39k3o" data-type="NodeParagraph" class="p">guide：帮助文档
+</div>
+
+    </div>
+<div id="20201227174744-z7qo4j2" data-node-id="20201227174744-z7qo4j2" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-1tyrmez" data-node-id="20210208145140-1tyrmez" data-type="NodeParagraph" class="p">stage：界面和静态资源
+</div>
+
+    </div>
+<div id="20201227174842-tr8u7q0" data-node-id="20201227174842-tr8u7q0" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-99h8xv0" data-node-id="20210208145140-99h8xv0" data-type="NodeParagraph" class="p">kernel：内核程序
+</div>
+
+    </div>
+</div>
+<div id="20201227174908-s19h988" data-node-id="20201227174908-s19h988" data-type="NodeHeading" data-subtype="h2" class="h2"><div>
+启动入口
+</div></div>
+<div id="20201227180709-rglrztt" data-node-id="20201227180709-rglrztt" data-type="NodeParagraph" updated="20210301202239" class="p">构建 Docker 镜像时设置了入口：
+<span data-type="code">ENTRYPOINT [ "/opt/siyuan/kernel" ]</span>
+，使用 
+<span data-type="code">docker run b3log/siyuan</span>
+ 并带参即可启动：
+</div>
+<div id="20201227201453-yh75kqd" data-node-id="20201227201453-yh75kqd" data-type="NodeList" updated="20210502164159" data-subtype="u" class="list"><div id="20201227201514-c7brkss" data-node-id="20201227201514-c7brkss" data-type="NodeListItem" updated="20210502164159" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-7f45i9c" data-node-id="20210208145140-7f45i9c" data-type="NodeParagraph" updated="20210502164159" class="p"><span data-type="code">--workspace</span>
+ 指定工作空间文件夹路径，在宿主机上通过 
+<span data-type="code">-v</span>
+ 挂载到容器中
+</div>
+
+    </div>
+</div>
+<div id="20210301201353-sffb1m7" data-node-id="20210301201353-sffb1m7" data-type="NodeParagraph" updated="20231108220447" class="p">更多的参数可参考
+<span data-type="block-ref"     data-subtype="s"     data-id="20200828105441-r76vmu5">
+          <a href="./../../请从这里开始/通用操作/内核参数.html#20200828105441-r76vmu5">这里</a>
+  </span>
+。下面是一条启动命令示例：
+<span data-type="code">docker run -d -v workspace_dir_host:workspace_dir_container -p 6806:6806 b3log/siyuan --workspace=workspace_dir_container</span>
+​
+</div>
+<div id="20201227174657-0k1ruhd" data-node-id="20201227174657-0k1ruhd" data-type="NodeList" data-subtype="u" class="list" data-marker="*"><div id="20201227193950-dp2hioi" data-node-id="20201227193950-dp2hioi" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-w9i02jr" data-node-id="20210208145140-w9i02jr" data-type="NodeParagraph" updated="20210502164152" class="p"><span data-type="code">workspace_dir_host</span>
+：宿主机上的工作空间文件夹路径
+</div>
+
+    </div>
+<div id="20201227194032-68h45ue" data-node-id="20201227194032-68h45ue" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210208145140-2ave4tv" data-node-id="20210208145140-2ave4tv" data-type="NodeParagraph" updated="20210502164311" class="p"><span data-type="code">workspace_dir_container</span>
+：容器内工作空间文件夹路径，和后面 
+<span data-type="code">--workspace</span>
+ 指定成一样的
+</div>
+
+    </div>
+</div>
+<div id="20201227194509-hdnzkry" data-node-id="20201227194509-hdnzkry" data-type="NodeParagraph" updated="20231108220452" class="p">为了简化，建议将 workspace 文件夹路径在宿主机和容器上配置为一致的，比如将 
+<span data-type="code">workspace_dir_host</span>
+​ 和 
+<span data-type="code">workspace_dir_container</span>
+​ 都配置为 
+<span data-type="code">/siyuan/workspace</span>
+​，对应的启动命令示例：
+<span data-type="code">docker run -d -v /siyuan/workspace:/siyuan/workspace -p 6806:6806 -u 1000:1000 b3log/siyuan --workspace=/siyuan/workspace/</span>
+​。
+</div>
+<div id="20211112102027-wpzhq6h" data-node-id="20211112102027-wpzhq6h" data-type="NodeHeading" updated="20211112102725" data-subtype="h2" class="h2"><div>用户权限
+</div></div>
+<div id="20211112102355-akc01dd" data-node-id="20211112102355-akc01dd" data-type="NodeParagraph" updated="20211112103316" class="p">镜像中是使用默认创建的普通用户 
+<span data-type="code">siyuan</span>
+（uid 1000/gid 1000）来启动内核进程的，所以在宿主机创建工作空间文件夹时请注意设置该文件夹所属用户组：
+<span data-type="code">chown -R 1000:1000 /siyuan/workspace</span>
+，在启动容器时需要带参数 
+<span data-type="code">-u 1000:1000</span>
+。
+</div>
+<div id="20210930091350-4oy2gq8" data-node-id="20210930091350-4oy2gq8" data-type="NodeHeading" updated="20210930091414" data-subtype="h2" class="h2"><div>隐藏端口
+</div></div>
+<div id="20210930091415-2hpf0dh" data-node-id="20210930091415-2hpf0dh" data-type="NodeParagraph" updated="20210930092037" class="p">使用 NGINX 反向代理可以隐藏 6806 端口，请注意：
+</div>
+<div id="20210930091550-c9aemmk" data-node-id="20210930091550-c9aemmk" data-type="NodeList" updated="20211112103359" data-subtype="u" class="list"><div id="20210930091552-6ng73bf" data-node-id="20210930091552-6ng73bf" data-type="NodeListItem" updated="20211112103359" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20210930091552-81uy57d" data-node-id="20210930091552-81uy57d" data-type="NodeParagraph" updated="20211112103359" class="p">配置 WebSocket 反代 
+<span data-type="code">/ws</span>
+​
+</div>
+
+    </div>
+</div>
+<div id="20230406104726-hhdyre4" data-node-id="20230406104726-hhdyre4" data-type="NodeHeading" updated="20230406104734" data-subtype="h2" class="h2"><div><span data-type="tag">注意</span>
+​
+</div></div>
+<div id="20230406104729-slpoivj" data-node-id="20230406104729-slpoivj" data-type="NodeList" updated="20230406105236" data-subtype="u" class="list"><div id="20230406104740-m2vmsfl" data-node-id="20230406104740-m2vmsfl" data-type="NodeListItem" updated="20230406104740" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230406104740-fv49tp9" data-node-id="20230406104740-fv49tp9" data-type="NodeParagraph" updated="20230406105003" class="p">请务必确认挂载卷的正确性，否则容器删除后数据会丢失
+</div>
+
+    </div>
+<div id="20230406105020-zfsb9jk" data-node-id="20230406105020-zfsb9jk" data-type="NodeListItem" updated="20230406105236" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230406105020-lxhhaqe" data-node-id="20230406105020-lxhhaqe" data-type="NodeParagraph" updated="20230406105236" class="p">不要使用 URL 重写进行重定向，否则鉴权可能会有问题，建议配置反向代理
+</div>
+
+    </div>
+</div>
+<div id="20230406104141-6o5jpu6" data-node-id="20230406104141-6o5jpu6" data-type="NodeHeading" updated="20230406104144" data-subtype="h2" class="h2"><div>限制
+</div></div>
+<div id="20230406104201-nbfn2p9" data-node-id="20230406104201-nbfn2p9" data-type="NodeList" updated="20230406104451" data-subtype="u" class="list"><div id="20230406104217-8m58gpo" data-node-id="20230406104217-8m58gpo" data-type="NodeListItem" updated="20230406104217" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230406104217-42a91na" data-node-id="20230406104217-42a91na" data-type="NodeParagraph" updated="20230406104310" class="p">不支持桌面端和移动端应用连接，仅支持在浏览器上使用
+</div>
+
+    </div>
+<div id="20230406104247-qyrt1tz" data-node-id="20230406104247-qyrt1tz" data-type="NodeListItem" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230406104247-vrslzoi" data-node-id="20230406104247-vrslzoi" data-type="NodeParagraph" updated="20230406104438" class="p">不支持导出 PDF、HTML 和 Word 格式
+</div>
+
+    </div>
+<div id="20230406104438-kqz2pl7" data-node-id="20230406104438-kqz2pl7" data-type="NodeListItem" updated="20230406104451" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230406104438-b4m8fen" data-node-id="20230406104438-b4m8fen" data-type="NodeParagraph" updated="20230406104451" class="p">不支持导入 Markdown 文件
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

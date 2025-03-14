@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../../appearance/oceanpress.css"/>
+  <title>对接第三方云端存储</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20230805230131-sn7obzb" data-node-id="20230805230131-sn7obzb" data-type="NodeDocument" updated="20231217111041" data-subtype="h1" class="h1"></div><div id="20230805230131-sn7obzb" data-node-id="20230805230131-sn7obzb" data-type="NodeDocument" updated="20231217111041" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">对接第三方云端存储</div><div id="20230805230131-14bfide" data-node-id="20230805230131-14bfide" data-type="NodeParagraph" updated="20230805230825" class="p">请在 
+<span data-type="kbd">设置</span>
+​ - 
+<span data-type="kbd">云端</span>
+​ - 
+<span data-type="kbd">云端存储服务提供商</span>
+​ 中进行选择和配置，目前已经支持：
+</div>
+<div id="20230805230746-4q9cmrb" data-node-id="20230805230746-4q9cmrb" data-type="NodeList" updated="20230805230746" data-subtype="u" class="list"><div id="20230805230746-7xcfbue" data-node-id="20230805230746-7xcfbue" data-type="NodeListItem" updated="20230805230746" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805230746-fejfd76" data-node-id="20230805230746-fejfd76" data-type="NodeParagraph" updated="20230805230746" class="p">S3 兼容的对象存储服务，比如
+<a href="https://s.qiniu.com/VbQfeu">七牛云</a>
+、
+<a href="https://www.aliyun.com/product/oss?userCode=yqovuas2">阿里云 OSS</a>
+、
+<a href="https://www.cloudflare.com/">Cloudflare R2</a>
+</div>
+
+    </div>
+<div id="20230805230746-zb33erf" data-node-id="20230805230746-zb33erf" data-type="NodeListItem" updated="20230805230746" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805230746-i9fzmzi" data-node-id="20230805230746-i9fzmzi" data-type="NodeParagraph" updated="20230805230746" class="p">WebDAV 协议，比如 
+<a href="https://infini-cloud.net/">InfiniCLOUD</a>
+</div>
+
+    </div>
+</div>
+<div id="20230805230746-pq0po1p" data-node-id="20230805230746-pq0po1p" data-type="NodeParagraph" updated="20230828111951" class="p">通过第三方云端存储服务同步数据同样是
+<span data-type="block-ref"     data-subtype="s"     data-id="20230808120347-lael5oq">
+          <a href="./../../../请从这里开始/会员特权/云端服务/存储空间.html#20230808120347-lael5oq">端到端加密</a>
+  </span>
+的，第三方云端存储服务提供商无法获得我们的明文数据。
+</div>
+<div id="20230805233629-s9vc1t4" data-node-id="20230805233629-s9vc1t4" data-type="NodeParagraph" updated="20230805233629" class="p">​
+<span data-type="tag">注意</span>
+​：为了保障数据同步的可用性，请确保：
+</div>
+<div id="20230805233629-cefelxe" data-node-id="20230805233629-cefelxe" data-type="NodeList" updated="20231217111041" data-subtype="u" class="list"><div id="20230805233629-74eufrs" data-node-id="20230805233629-74eufrs" data-type="NodeListItem" updated="20230805233629" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805233629-sednxlz" data-node-id="20230805233629-sednxlz" data-type="NodeParagraph" updated="20230805233629" class="p">多设备系统时间一致，误差请控制在一分钟以内
+</div>
+
+    </div>
+<div id="20230805233629-ojkqvj5" data-node-id="20230805233629-ojkqvj5" data-type="NodeListItem" updated="20230805233629" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805233629-av1keyv" data-node-id="20230805233629-av1keyv" data-type="NodeParagraph" updated="20230805233629" class="p">网络稳定（比如中国大陆地区请勿使用非中大陆地区的服务）
+</div>
+
+    </div>
+<div id="20231217110937-uwz2itr" data-node-id="20231217110937-uwz2itr" data-type="NodeListItem" updated="20231217111041" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20231217110937-wnrtb66" data-node-id="20231217110937-wnrtb66" data-type="NodeParagraph" updated="20231217111041" class="p">不要启用 CDN
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

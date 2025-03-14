@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../appearance/oceanpress.css"/>
+  <title>会员特权</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20230805222417-2lj3dvk" data-node-id="20230805222417-2lj3dvk" data-type="NodeDocument" updated="20230817114518" data-subtype="h1" class="h1" icon="1f451"></div><div id="20230805222417-2lj3dvk" data-node-id="20230805222417-2lj3dvk" data-type="NodeDocument" updated="20230817114518" data-subtype="h1" class="h1" icon="1f451" data-type="NodeHeading" class="h1">会员特权</div><div id="20230805222417-rqoy1zq" data-node-id="20230805222417-rqoy1zq" data-type="NodeParagraph" updated="20230805225040" class="p">会员特权分为两个部分：
+</div>
+<div id="20230805225040-mq394af" data-node-id="20230805225040-mq394af" data-type="NodeList" updated="20230817114518" data-subtype="u" class="list"><div id="20230805225041-vbfv9l9" data-node-id="20230805225041-vbfv9l9" data-type="NodeListItem" updated="20230817114518" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805225041-vcse7tk" data-node-id="20230805225041-vcse7tk" data-type="NodeParagraph" updated="20230817114518" class="p">年付订阅
+<span data-type="block-ref"     data-subtype="s"     data-id="20230808120348-orm8sjf">
+          <a href="./../请从这里开始/会员特权/云端服务.html#20230808120348-orm8sjf">云端服务</a>
+  </span>
+</div>
+
+    </div>
+<div id="20230805225044-sqtip7p" data-node-id="20230805225044-sqtip7p" data-type="NodeListItem" updated="20230805225216" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20230805225044-mokisye" data-node-id="20230805225044-mokisye" data-type="NodeParagraph" updated="20230805225216" class="p">一次性付费
+<span data-type="block-ref"     data-subtype="s"     data-id="20230805225107-qm1m2f5">
+          <a href="./../请从这里开始/会员特权/功能特性.html#20230805225107-qm1m2f5">功能特性</a>
+  </span>
+</div>
+
+    </div>
+</div>
+<div id="20230805225346-ncsvr78" data-node-id="20230805225346-ncsvr78" data-type="NodeParagraph" updated="20230805225639" class="p">这两部分需要分别购买，其中年付订阅包含了一次性付费功能特性，即在订阅期内可以使用所有付费功能特性。
+</div>
+
+  </div>
+  <script src="../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>

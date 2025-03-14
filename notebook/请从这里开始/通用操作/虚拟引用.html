@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" type="text/css" id="baseStyle" href="../../stage/build/export/base.css?2.10.5"/>
+  <script>
+  function isNightTime() {
+    const currentHour = new Date().getHours();
+    return currentHour >= 18 || currentHour < 6;
+  }
+  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="../../appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?2.10.5"/>');
+  </script>
+  <link rel="stylesheet" type="text/css" href="../../appearance/oceanpress.css"/>
+  <title>虚拟引用</title>
+</head>
+<body>
+  
+  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div style="min-height: 150px;" id="20211010211311-ffz0wbu" data-node-id="20211010211311-ffz0wbu" data-type="NodeDocument" updated="20221003214924" data-subtype="h1" class="h1"></div><div id="20211010211311-ffz0wbu" data-node-id="20211010211311-ffz0wbu" data-type="NodeDocument" updated="20221003214924" data-subtype="h1" class="h1" data-type="NodeHeading" class="h1">虚拟引用</div><div id="20211010211311-p49lqrm" data-node-id="20211010211311-p49lqrm" data-type="NodeHeading" updated="20211010211345" data-subtype="h2" class="h2"><div>概述
+</div></div>
+<div id="20211010211345-ewlmf4o" data-node-id="20211010211345-ewlmf4o" data-type="NodeParagraph" updated="20211010212407" class="p">虚拟引用是一种根据已有块链的锚文本或者块命名等来自动探测的“块链”，但它并不会真实链接到块上，而是仅在编辑器内标记，并支持浮窗预览。
+</div>
+<div id="20211010211443-fekufvk" data-node-id="20211010211443-fekufvk" data-type="NodeHeading" updated="20211010211450" data-subtype="h2" class="h2"><div>使用方式
+</div></div>
+<div id="20211010211616-b5kzfqf" data-node-id="20211010211616-b5kzfqf" data-type="NodeParagraph" updated="20211010211707" class="p">打开 
+<span data-type="kbd">设置</span>
+ - 
+<span data-type="kbd">编辑器</span>
+ - 
+<span data-type="kbd">虚拟引用</span>
+ 开关即可。
+</div>
+<div id="20211010211708-0qn8cpl" data-node-id="20211010211708-0qn8cpl" data-type="NodeHeading" updated="20211010211737" data-subtype="h2" class="h2"><div>探测规则
+</div></div>
+<div id="20211010211712-g08nujc" data-node-id="20211010211712-g08nujc" data-type="NodeParagraph" updated="20211010212520" class="p">根据已有块引的锚文本/定义块文本、块的命名和别名作为关键字搜索，如果在当前内容块的纯文本元素上搜索到这些关键字，那么就会作为虚拟引用。
+</div>
+<div id="20221003214348-710vren" data-node-id="20221003214348-710vren" data-type="NodeHeading" updated="20221003214410" data-subtype="h2" class="h2"><div><span data-type="tag">注意</span>
+</div></div>
+<div id="20221003214411-d3c0jte" data-node-id="20221003214411-d3c0jte" data-type="NodeList" updated="20221003214924" data-subtype="u" class="list"><div id="20221003214412-j7wcb07" data-node-id="20221003214412-j7wcb07" data-type="NodeListItem" updated="20221003214924" data-subtype="u" class="li" data-marker="*">
+      <div class="protyle-action">
+        <svg><use xlink:href="#iconDot"></use></svg>
+      </div>
+      <div id="20221003214412-uixysyj" data-node-id="20221003214412-uixysyj" data-type="NodeParagraph" updated="20221003214924" class="p">出于性能考虑，虚拟引用并不是即时生效的，如果没有显示，可以尝试通过 
+<span data-type="kbd">F5</span>
+​ 刷新当前文档
+</div>
+
+    </div>
+</div>
+
+  </div>
+  <script src="../../appearance/icons/material/icon.js?2.10.5"></script>
+  <script src="../../stage/build/export/protyle-method.js?2.10.5"></script>
+  <script src="../../stage/protyle/js/lute/lute.min.js?2.10.5"></script>
+  <script>
+    window.siyuan = {
+      config: {
+        appearance: {
+          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          codeBlockThemeDark: "base16/dracula",
+          codeBlockThemeLight: "github",
+        },
+        editor: {
+          codeLineWrap: true,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: true,
+          katexMacros: JSON.stringify({}),
+        },
+      },
+      languages: { copy: "复制" },
+    };
+    const cdn = "../../stage/protyle";
+    const previewElement = document.getElementById("preview");
+
+    Protyle.highlightRender(previewElement, cdn);
+    Protyle.mathRender(previewElement, cdn, false);
+    Protyle.mermaidRender(previewElement, cdn);
+    Protyle.flowchartRender(previewElement, cdn);
+    Protyle.graphvizRender(previewElement, cdn);
+    Protyle.chartRender(previewElement, cdn);
+    Protyle.mindmapRender(previewElement, cdn);
+    Protyle.abcRender(previewElement, cdn);
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, cdn);
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(
+          item.parentElement.nextElementSibling.textContent.trimEnd(),
+        );
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  </script>
+  <footer>
+<p style="text-align:center;margin:15px 0;">
+  技术支持：
+  <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
+  开发者：
+  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+</p>
+</footer>
+</body>
+</html>
