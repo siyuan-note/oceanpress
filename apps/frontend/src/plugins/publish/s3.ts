@@ -4,35 +4,22 @@ import { S3 } from '@aws-sdk/client-s3'
 
 /** 上传数据到 s3 适配云端 */
 export const s3Upload_plugin: OceanPressPlugin = {
-  build: async function* ([config, other], next) {
-    // 两个辅助变量，通过他们来将 s3 上传的异步流程转为 build 函数的 yield 返回值
-    let resolve: (p: string) => void
-    let p = new Promise<string>((r) => {
-      resolve = r
-    })
-    const res = next(config, {
+  build: async function ([config, effect, other], next) {
+    const res = await next(config, effect, {
       ...other,
+
       onFileTree: async (tree) => {
         if (other?.onFileTree) {
           // 维持原有其他监听程序
           await other.onFileTree(tree)
         }
         for await (const [fileName, ETag] of s3_uploads(tree, config)) {
-          await resolve(`上传： ${fileName} ${ETag}`)
-          p = new Promise<string>((r) => {
-            resolve = r
-          })
+          effect.log(`上传： ${fileName} ${ETag}`)
         }
       },
     })
-    for await (const iterator of res) {
-      yield iterator
-    }
-    while (1) {
-      if (p === undefined) break
-      yield await p
-    }
-    yield `s3 上传完毕`
+    effect.log(`s3 上传完毕`)
+    return res
   },
 }
 const s3_uploads: uploadFiles = async function* (tree, config) {

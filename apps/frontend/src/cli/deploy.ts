@@ -69,23 +69,16 @@ program
       },
     })
 
-    const res = await ocean_press.build()
-
-    const obj = (await res.next()).value
-    if (typeof obj === 'object' && !(obj instanceof Error)) {
-      obj.log = (...arg) => {
-        console.log(...arg)
-      }
-    }
-    for await (const iterator of res) {
-      if (typeof iterator === 'string') {
-        if (iterator.startsWith('渲染：')) {
-          process.stdout.write(`\r\x1b[K${iterator}`)
+    await ocean_press.build({
+      log: (msg) => {
+        if (msg.startsWith('渲染：')) {
+          process.stdout.write(`\r\x1b[K${msg}`)
         } else {
-          process.stdout.write(`\n${iterator}`)
+          process.stdout.write(`\n${msg}`)
         }
-      } else {
-        console.log(iterator + '\n')
-      }
-    }
+      },
+      percentage: (n) => {
+        process.stdout.write(`\r\x1b[K进度：${n}%`)
+      },
+    })
   })

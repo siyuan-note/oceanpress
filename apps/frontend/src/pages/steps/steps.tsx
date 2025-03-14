@@ -1,14 +1,12 @@
-import Config_tab from '~/pages/config_tab.tsx'
-import { currentConfig } from '~/core/config.ts'
-import { DocTree, build } from '~/core/build.ts'
-import { vApi } from '~/core/siyuan_api.ts'
 import { NButton, NInput, NInputGroup, NStep, NSteps } from 'naive-ui'
 import { computed, defineComponent, ref } from 'vue'
+import { currentConfig } from '~/core/config.ts'
+import { OceanPress } from '~/core/ocean_press.ts'
+import { vApi } from '~/core/siyuan_api.ts'
+import Config_tab from '~/pages/config_tab.tsx'
 import Step1_selectNote from './step1_selectNote.tsx'
-import Step2_preview from './step2_preview.tsx'
 import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
-import { OceanPress } from '~/core/ocean_press.ts'
 
 export default defineComponent({
   setup() {
@@ -23,7 +21,6 @@ export default defineComponent({
     const percentage = ref(0)
     const genHTML_status = ref(false)
     const log = ref('')
-    const docTree = ref<DocTree>({})
     async function genHTML(otherConfig?: {
       /** 实验性api https://github.com/WICG/file-system-access/blob/main/EXPLAINER.md */
       dir_ref: any
@@ -41,23 +38,14 @@ export default defineComponent({
           },
         })
       }
-
-      let res: ReturnType<typeof build> = await ocean_press.build()
-      const emitRes = res.next()
-      const emit = (await emitRes).value
-      if (emit instanceof Object && !(emit instanceof Error)) {
-        emit.percentage = (s) => {
-          percentage.value = s
-        }
-      }
-      for await (const r of res) {
-        log.value += r + '\n'
-      }
-
-      if (emit instanceof Object && !(emit instanceof Error)) {
-        docTree.value = emit.docTree
-        console.log(emit)
-      }
+      await ocean_press.build({
+        log: (msg) => {
+          log.value += msg + '\n'
+        },
+        percentage: (n) => {
+          percentage.value = n
+        },
+      })
       genHTML_status.value = false
       percentage.value = 100
     }

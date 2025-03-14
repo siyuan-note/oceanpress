@@ -26,8 +26,12 @@ export type Build = typeof build
 /** 根据配置文件进行编译
  * TODO 将浏览器写文件的部分抽离出去，也改成使用 onFileTree
  */
-export async function* build(
+export async function build(
   config: Config,
+  effect:{
+    log: (msg:string)=>void,
+    percentage:(_n: number)=>void,
+  },
   otherConfig?: {
     // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
     onFileTree?: (tree: FileTree) => void
@@ -38,11 +42,7 @@ export async function* build(
   const book = config.notebook
   const docTree: DocTree = {}
   const skipBuilds = useSkipBuilds()
-  const emit = {
-    log(_s: string) {},
-    percentage(_n: number) {},
-    docTree,
-  }
+
   let oldPercentage = 0
   let total = 0
   /** 较为精准的估计进度 */
@@ -52,11 +52,10 @@ export async function* build(
     total += oldPercentage
     return (/** 0~1 的小数 */ process: number) => {
       oldPercentage = process * percentage
-      emit.percentage((total + oldPercentage) * 100)
+      effect.percentage((total + oldPercentage) * 100)
     }
   }
-  yield emit
-  yield `=== 开始编译 ${book.name} ===`
+  effect.log( `=== 开始编译 ${book.name} ===`)
   let process = processPercentage(0.4)
   /** 查询所有文档级block
    * TODO 增量编译时不应该全部获取
@@ -82,7 +81,7 @@ export async function* build(
     /** 引用的都没有更新 */
     return true
   }
-  yield `=== 查询文档级block完成 ===`
+  effect.log (`=== 查询文档级block完成 ===`)
   let i = 0
   await Promise.all(
     Doc_blocks.map(async (docBlock) => {
@@ -98,14 +97,14 @@ export async function* build(
 
   const enableIncrementalCompilation_doc = (() => {
     if (packageJson.version !== config.OceanPress.version) {
-      emit.log(
+      effect.log(
         `配置文件版本号[${config.OceanPress.version}]与OceanPress版本[${packageJson.version}]不一致，将进行文档全量编译`,
       )
       return false
     }
     return config.enableIncrementalCompilation_doc
   })()
-  yield `=== 开始渲染文档 ===`
+  effect.log (`=== 开始渲染文档 ===`)
   await Promise.all(
     Object.entries(docTree).map(async ([path, { sy, docBlock }]) => {
       if (
@@ -140,7 +139,7 @@ export async function* build(
         if (config.sitemap.rss && path.endsWith('.rss.xml')) {
           const rssPath = path
           fileTree[rssPath] =await generateRSSXML(rssPath, renderInstance, config)
-          emit.log(`渲染 rss.xml:${rssPath} 完毕`)
+          effect.log(`渲染 rss.xml:${rssPath} 完毕`)
         }
         if (
           config.enableIncrementalCompilation &&
@@ -156,20 +155,20 @@ export async function* build(
           refs: /** 保存引用 */ [...renderInstance.refs.values()],
         })
       } catch (error) {
-        emit.log(`${path} 渲染失败:${error}`)
+        effect.log(`${path} 渲染失败:${error}`)
         console.log(error)
       }
       process(i / Doc_blocks.length)
-      emit.log(`渲染完毕:${path}`)
+      effect.log(`渲染完毕:${path}`)
     }),
   )
-  yield `=== 渲染文档完成 ===`
-  yield `=== 开始生成 sitemap.xml ===`
+  effect.log( `=== 渲染文档完成 ===`)
+  effect.log( `=== 开始生成 sitemap.xml ===`)
   if (config.sitemap.enable) {
     fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
   }
   if (config.excludeAssetsCopy === false) {
-    yield `=== 开始复制资源文件 ===`
+    effect.log( `=== 开始复制资源文件 ===`)
     const assets: {
       box: string
       docpath: string
@@ -199,7 +198,7 @@ export async function* build(
         }
       }),
     )
-    yield `=== 开始复制挂件资源文件 ===`
+    effect.log( `=== 开始复制挂件资源文件 ===`)
     const widgetList: DB_block[] = await API.query_sql({
       stmt: `
       SELECT *
@@ -247,7 +246,7 @@ export async function* build(
     otherConfig.onFileTree(fileTree)
   }
   if (config.compressedZip) {
-    yield `=== 开始生成压缩包 ===`
+    effect.log( `=== 开始生成压缩包 ===`)
     await downloadZIP(fileTree, {
       // TODO 这里应该移出来成为全局的写选项
       withoutZip: config.withoutPublicZip,
@@ -257,8 +256,10 @@ export async function* build(
   config.OceanPress.version = packageJson.version
   /** 更新跳过编译的资源 */
   skipBuilds.write()
-  emit.percentage(100)
-  yield '编译完毕'
+  effect.percentage(100)
+  effect.log( '编译完毕')
+
+  return {fileTree}
 }
 
 
