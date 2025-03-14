@@ -43,6 +43,9 @@ export default defineComponent({
         description="请先选择一个笔记本"
       >
         {'可点击文件名预览效果'}
+        {import.meta.env.DEV
+          ? '（开发模式下 firefox 浏览器无法生效的，要用 edge）'
+          : ''}
         <Data_loading p={this.toRef(this.filetree)}>
           <NScrollbar style="max-height: 220px" trigger="none">
             <NList hoverable>

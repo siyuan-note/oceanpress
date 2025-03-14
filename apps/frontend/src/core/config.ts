@@ -78,6 +78,12 @@ const defaultConfig = {
     accessKeyId: '',
     secretAccessKey: '',
   },
+  /** 部署到 oceanPressServer 的配置  */
+  oceanPressServer:{
+    enable: false,
+    apiBase:'',
+    apiKey:'',
+  },
   meilisearch: {
     enable: false,
     host: '',

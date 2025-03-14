@@ -10,21 +10,16 @@ import {
 import { currentConfig } from '~/core/config.ts'
 
 export default defineComponent({
-  setup() {
-    return {
-      currentConfig,
-    }
-  },
   render() {
     return (
       <NStep title="其他配置">
         <NCollapse>
           <NCollapseItem title="打包选项" name="1" style="text-align: start">
-            <NCheckbox v-model:checked={this.currentConfig.compressedZip}>
+            <NCheckbox v-model:checked={currentConfig.value.compressedZip}>
               打包成 zip(在浏览器端打包完毕后会弹出保存对话窗口)
             </NCheckbox>
             <NDivider />
-            <NCheckbox v-model:checked={this.currentConfig.withoutPublicZip}>
+            <NCheckbox v-model:checked={currentConfig.value.withoutPublicZip}>
               不打包appearance、stage 等公共资源（开启了cdn就选这个不打包，
               <br />
               这些资源将近19mb「下载只需要6~7mb」，
@@ -34,18 +29,16 @@ export default defineComponent({
               这些资源一般没有变化所以部署一次即可。）
             </NCheckbox>
             <NDivider />
-            <NCheckbox v-model:checked={this.currentConfig.excludeAssetsCopy}>
+            <NCheckbox v-model:checked={currentConfig.value.excludeAssetsCopy}>
               不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
             </NCheckbox>
             <NDivider />
-            <NCheckbox v-model:checked={this.currentConfig.sitemap.enable}>
+            <NCheckbox v-model:checked={currentConfig.value.sitemap.enable}>
               输出 sitemap.xml 文件
             </NCheckbox>
             <br />
             <h4>路径前缀</h4>
-            <NInput v-model:value={this.currentConfig.sitemap.sitePrefix}>
-              {' '}
-            </NInput>
+            <NInput v-model:value={currentConfig.value.sitemap.sitePrefix} />
             默认值为 "." 生成路径例如 "./record/思源笔记.html" <br />
             但 sitemap 并不建议采用相对路径所以应该替换成例如
             "https://shenzilong.cn" <br />
@@ -54,7 +47,7 @@ export default defineComponent({
             参见 https://www.sitemaps.org/protocol.html#escaping
             <NDivider />
             <NCheckbox
-              v-model:checked={this.currentConfig.enableIncrementalCompilation}
+              v-model:checked={currentConfig.value.enableIncrementalCompilation}
             >
               开启增量编译，当资源的 hash 值没有变化时不会编译
               <br />
@@ -64,7 +57,7 @@ export default defineComponent({
             <br />
             <NCheckbox
               v-model:checked={
-                this.currentConfig.enableIncrementalCompilation_doc
+                currentConfig.value.enableIncrementalCompilation_doc
               }
             >
               增量编译文档，当需要重新全量编译文档时不勾选此项，需要上方选项勾选，此选项才能生效
@@ -73,21 +66,21 @@ export default defineComponent({
             <h3>head</h3>
             此处的代码将添加至 head 标签顶部
             <NInput
-              v-model:value={this.currentConfig.embedCode.head}
+              v-model:value={currentConfig.value.embedCode.head}
               type="textarea"
-            ></NInput>
+            />
             <h3>beforeBody</h3>
             此处的代码将添加至 body 标签顶部
             <NInput
-              v-model:value={this.currentConfig.embedCode.beforeBody}
+              v-model:value={currentConfig.value.embedCode.beforeBody}
               type="textarea"
-            ></NInput>
+            />
             <h3>afterBody</h3>
             此处的代码将添加至 body 标签底部
             <NInput
-              v-model:value={this.currentConfig.embedCode.afterBody}
+              v-model:value={currentConfig.value.embedCode.afterBody}
               type="textarea"
-            ></NInput>
+            />
           </NCollapseItem>
           <NCollapseItem title="CDN 配置" name="2">
             公共资源的cdn前缀
@@ -95,68 +88,85 @@ export default defineComponent({
             删除掉下方文本框内所有文本即关闭了此功能
             <br />
             <NInput
-              v-model:value={this.currentConfig.cdn.siyuanPrefix}
+              v-model:value={currentConfig.value.cdn.siyuanPrefix}
               type="textarea"
               placeholder="公共资源的cdn前缀"
             />
           </NCollapseItem>
-          <NCollapseItem title="S3 配置" name="3">
-            OceanPress 的运算都是在本地，不会收集密钥，请确保网址是 https 加密的
-            oceanpress.heartstack.space
-            <br />
-            {/* 推荐自身的技术支持服务 */}
-            <NCheckbox v-model:checked={this.currentConfig.s3.enable}>
-              启用 s3
-            </NCheckbox>
-            <NInput
-              v-model:value={this.currentConfig.s3.region}
-              placeholder="s3.region"
-            />
-            <NDivider />
-            <NInput
-              v-model:value={this.currentConfig.s3.bucket}
-              placeholder="s3.bucket"
-            />
-            <NDivider />
-            <NInput
-              v-model:value={this.currentConfig.s3.pathPrefix}
-              placeholder="s3.pathPrefix"
-            />
-            <NDivider />
-            <NInput
-              v-model:value={this.currentConfig.s3.endpoint}
-              placeholder="s3.endpoint"
-            />
-            <NDivider />
-            <NInput
-              v-model:value={this.currentConfig.s3.accessKeyId}
-              placeholder="s3.accessKeyId"
-            />
-            <NDivider />
-            <NInput
-              v-model:value={this.currentConfig.s3.secretAccessKey}
-              type="password"
-              placeholder="s3.secretAccessKey"
-            />
-          </NCollapseItem>
-          <NCollapseItem title="meilisearch 配置" name="4">
-            <NCheckbox v-model:checked={this.currentConfig.meilisearch.enable}>
+
+          <NCollapseItem title="meilisearch 配置" name="3">
+            <NCheckbox v-model:checked={currentConfig.value.meilisearch.enable}>
               启用 meilisearch 搜索引擎
             </NCheckbox>
             <NDivider />
             <NInput
-              v-model:value={this.currentConfig.meilisearch.host}
+              v-model:value={currentConfig.value.meilisearch.host}
               placeholder="meilisearch.host"
             />
             <NDivider />
             <NInput
-              v-model:value={this.currentConfig.meilisearch.apiKey}
+              v-model:value={currentConfig.value.meilisearch.apiKey}
               placeholder="meilisearch.apiKey"
             />
             <NDivider />
             <NInput
-              v-model:value={this.currentConfig.meilisearch.indexName}
+              v-model:value={currentConfig.value.meilisearch.indexName}
               placeholder="meilisearch.indexName"
+            />
+          </NCollapseItem>
+          <NCollapseItem title="部署到 S3  配置" name="4">
+            OceanPress 的运算都是在本地，不会收集密钥，请确保网址是 https 加密的
+            oceanpress.heartstack.space
+            <br />
+            <NCheckbox v-model:checked={currentConfig.value.s3.enable}>
+              启用 s3
+            </NCheckbox>
+            <NInput
+              v-model:value={currentConfig.value.s3.region}
+              placeholder="s3.region"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.s3.bucket}
+              placeholder="s3.bucket"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.s3.pathPrefix}
+              placeholder="s3.pathPrefix"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.s3.endpoint}
+              placeholder="s3.endpoint"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.s3.accessKeyId}
+              placeholder="s3.accessKeyId"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.s3.secretAccessKey}
+              type="password"
+              placeholder="s3.secretAccessKey"
+            />
+          </NCollapseItem>
+          <NCollapseItem title="部署到 OceanPress Server 配置" name="5">
+            <NCheckbox
+              v-model:checked={currentConfig.value.oceanPressServer.enable}
+            >
+              启用 OceanPress Server
+            </NCheckbox>
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.oceanPressServer.apiBase}
+              placeholder="apiBase"
+            />
+            <NDivider />
+            <NInput
+              v-model:value={currentConfig.value.oceanPressServer.apiKey}
+              placeholder="apiKey"
             />
           </NCollapseItem>
         </NCollapse>
