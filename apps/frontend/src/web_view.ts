@@ -6,7 +6,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from '~/pages/App.tsx'
 import steps from '~/pages/steps/steps.tsx'
 import { configs } from './core/config.ts'
-import { swConfigsPrefix } from './sw/const.ts'
+import { swConfigsPrefix, swPrefix } from './sw/const.ts'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -20,20 +20,20 @@ app.mount('#app')
 
 navigator.serviceWorker
   /** 开发模式下 Firefox 还不支持 module，只能在 chrome 系下调试 */
-  .register(import.meta.env.PROD ? 'sw.iife.js' : '/sw.ts', {
-    scope: '/',
+  .register(import.meta.env.PROD ? 'sw.iife.js' : '/oceanpress_preview/sw.ts', {
+    scope: swPrefix,
     // 使用了 import 语句的必须要是 module 类型。
     type: import.meta.env.PROD ? 'classic' : 'module',
   })
   .then(async (sw: ServiceWorkerRegistration) => {
     await sw.update() // 当之前缓存的 sw 与现有的存在不一致时会重新安装
     watchEffect(async () => {
-      await (
-        await fetch(swConfigsPrefix, {
-          body: JSON.stringify(configs),
-          method: 'POST',
-        })
-      ).json()
+      // await (
+      //   await fetch(swConfigsPrefix, {
+      //     body: JSON.stringify(configs),
+      //     method: 'POST',
+      //   })
+      // ).json()
     })
   })
   .catch((e) => {

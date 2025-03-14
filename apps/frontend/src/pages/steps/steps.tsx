@@ -65,7 +65,7 @@ export default defineComponent({
     return () => (
       <>
         <Config_tab></Config_tab>
-        <NSteps vertical current={current.value} status={'process'} >
+        <NSteps vertical current={current.value} status={'process'}>
           <NStep title="鉴权配置">
             http apiPrefix:
             <NInput
@@ -89,7 +89,8 @@ export default defineComponent({
           {_notebooks.value.fulfilled && (
             <Step1_selectNote notebooks={_notebooks.value.data.notebooks} />
           )}
-          <Step2_preview />
+          {/* sw 存在很大的问题，暂时取消预览功能 */}
+          {/* <Step2_preview /> */}
           <Step3_config />
           <Step4_generate
             percentage={percentage.value}

@@ -4,6 +4,7 @@ import { PluginCenter } from './plugin.ts'
 import { s3Upload_plugin } from '~/plugins/publish/s3.ts'
 import { FileTree, build } from './build.ts'
 import { renderHTML } from './render.ts'
+import { deployOceanPressServer_plugin } from '~/plugins/publish/OceanPressServer.ts'
 
 export type OceanPressPlugin = PluginCenter<OceanPress['funMap']>['pluginType']
 
@@ -36,6 +37,11 @@ export class OceanPress {
     }
     if (config.s3.enable) {
       this.pluginCenter.registerPlugin(s3Upload_plugin)
+    }
+    if (config.oceanPressServer.enable) {
+      this.pluginCenter.registerPlugin(
+        deployOceanPressServer_plugin(this.config),
+      )
     }
   }
 }

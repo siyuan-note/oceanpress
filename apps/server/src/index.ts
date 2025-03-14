@@ -1,13 +1,13 @@
+import fastifyCors from '@fastify/cors';
 import fastifyStatic from '@fastify/static';
 import Fastify from 'fastify';
 import { createRPC } from 'oceanpress-rpc';
+import { isAbsolute, resolve } from 'path/posix';
 import { Readable } from 'stream';
+import { deserialize, type SuperJSONResult } from 'superjson';
 import { apis } from './apis';
 import { config } from './config';
 import { getCtx, setCtx } from './ctx';
-import { isAbsolute, resolve } from 'path/posix';
-import { stringify, serialize, deserialize, type SuperJSONResult } from 'superjson';
-
 export type API = typeof apis;
 
 const serverRPC = createRPC('apiProvider', {
@@ -28,6 +28,10 @@ const serverRPC = createRPC('apiProvider', {
 
 const fastify = Fastify({
   logger: false,
+});
+fastify.register(fastifyCors, {
+  origin: '*', // 允许所有来源
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允许的 HTTP 方法
 });
 
 /** 对于 application/octet-stream 类型的请求转换为 web 兼容的 ReadableStream 供接口处理 */

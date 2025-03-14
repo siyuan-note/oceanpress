@@ -35,7 +35,10 @@ export class PluginCenter<T extends Record<string, (...args: any[]) => any>> {
   } = 0 as any
   /** 对需要调用的函数进行代理,完成插件hook介入。 */
   fun: PluginCenter<T>['_funMap']
-  constructor(public _funMap: T) {
+  constructor(
+    /** 原始函数映射表，这里的函数全部可以被插件处理  */
+    public _funMap: T,
+  ) {
     const that = this
     // 可以改成生成对象 {} 的方式，比 proxy 开销要小
     this.fun = new Proxy({} as T, {
