@@ -8,6 +8,7 @@ export const config = {
   UPLOAD_DIR: c.UPLOAD_DIR ?? './uploads',
   /** 静态文件存储目录 */
   STATIC_DIR: c.STATIC_DIR ?? 'static',
+  SERVER_PORT: Number(c.SERVER_PORT ?? 80),
 };
 
 if (c.API_KEY === undefined) {

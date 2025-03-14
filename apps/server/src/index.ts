@@ -73,8 +73,8 @@ fastify.register(fastifyStatic, {
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 });
-    console.log('Server listening on http://localhost:3000');
+    const listening = await fastify.listen({ port: config.SERVER_PORT, host: '0.0.0.0' });
+    console.log(`Server listening on ${listening}`);
   } catch (err) {
     console.log('[err]', err);
     process.exit(1);
