@@ -16,11 +16,19 @@
 
 ## 配置 .env
 
-```env
+```bash
 # 自定义api鉴权密钥
 API_KEY=api-key-test
 ```
 
+deploy.json
+```json
+{
+    "api-key-test7777": {
+        "deployDir": "./test"
+    }
+}
+```
 ## 技术栈
 
 fastify , nodejs , typescript 使用 pnpm 包管理
