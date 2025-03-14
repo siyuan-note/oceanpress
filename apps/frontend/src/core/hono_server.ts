@@ -4,6 +4,7 @@ import { get_doc_by_hpath } from './cache.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { stream } from 'hono/streaming'
+import type { StatusCode } from 'hono/utils/http-status'
 
 export function createHonoApp() {
   const app = new Hono()
@@ -54,7 +55,7 @@ async function assetsHandle(c: Context) {
   if (!body) {
     return c.text('响应体为 null', 500, { 'Content-Type': 'text/plain' })
   }
-  c.status(r.status)
+  c.status(r.status as StatusCode)
   return stream(c, async (writeStream) => {
     const reader = body.getReader()
     while (true) {

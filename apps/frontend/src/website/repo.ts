@@ -160,10 +160,10 @@ function getMimeType(uint8Array: Uint8Array): string {
   }
 }
 
-function decodeUint8Array(uint8Array: Uint8Array, encoding: string) {
-  const decoder = new TextDecoder(encoding)
-  return decoder.decode(uint8Array)
-}
+// function decodeUint8Array(uint8Array: Uint8Array, encoding: string) {
+//   const decoder = new TextDecoder(encoding)
+//   return decoder.decode(uint8Array)
+// }
 
 function mergeUint8Arrays(arrays: Uint8Array[]) {
   // 计算所有 Uint8Array 的总长度

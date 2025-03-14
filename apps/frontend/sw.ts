@@ -22,7 +22,7 @@ function getItem(_key: string): string | undefined {
 const renderServer = createHonoApp()
 const app = new Hono()
 
-app.use('*', async (c, next) => {
+app.use('*', async (_, next) => {
   await next()
 })
 // 从主线程接收配置文件
