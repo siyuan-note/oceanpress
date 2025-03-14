@@ -98,6 +98,12 @@ export default defineComponent({
             <NCheckbox v-model:checked={currentConfig.value.meilisearch.enable}>
               启用 meilisearch 搜索引擎
             </NCheckbox>
+            <a
+              target="_blank"
+              href="https://shenzilong.cn/%E6%83%B3%E6%B3%95/%E9%A1%B9%E7%9B%AE/OceanPress_js/%E8%87%AA%E5%BB%BAmeilisearch%E6%90%9C%E7%B4%A2"
+            >
+              自建meilisearch搜索
+            </a>
             <NDivider />
             <NInput
               v-model:value={currentConfig.value.meilisearch.host}
@@ -114,7 +120,7 @@ export default defineComponent({
               placeholder="meilisearch.indexName"
             />
           </NCollapseItem>
-          <NCollapseItem title="部署到 S3  配置" name="4">
+          <NCollapseItem title="部署到 S3" name="4">
             OceanPress 的运算都是在本地，不会收集密钥，请确保网址是 https 加密的
             oceanpress.heartstack.space
             <br />
@@ -152,7 +158,7 @@ export default defineComponent({
               placeholder="s3.secretAccessKey"
             />
           </NCollapseItem>
-          <NCollapseItem title="部署到 OceanPress Server 配置" name="5">
+          <NCollapseItem title="部署到 OceanPress Server" name="5">
             <NCheckbox
               v-model:checked={currentConfig.value.oceanPressServer.enable}
             >

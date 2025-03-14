@@ -3,8 +3,8 @@ import type { uploadFiles } from './interface.ts'
 import { S3 } from '@aws-sdk/client-s3'
 
 /** 上传数据到 s3 适配云端 */
-export class s3Upload_plugin implements OceanPressPlugin {
-  build: OceanPressPlugin['build'] = async function* ([config, other], next) {
+export const s3Upload_plugin: OceanPressPlugin = {
+  build: async function* ([config, other], next) {
     // 两个辅助变量，通过他们来将 s3 上传的异步流程转为 build 函数的 yield 返回值
     let resolve: (p: string) => void
     let p = new Promise<string>((r) => {
@@ -33,7 +33,7 @@ export class s3Upload_plugin implements OceanPressPlugin {
       yield await p
     }
     yield `s3 上传完毕`
-  }
+  },
 }
 const s3_uploads: uploadFiles = async function* (tree, config) {
   // https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3

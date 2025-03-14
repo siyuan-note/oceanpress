@@ -35,7 +35,7 @@ export class OceanPress {
       )
     }
     if (config.s3.enable) {
-      this.pluginCenter.registerPlugin(new s3Upload_plugin())
+      this.pluginCenter.registerPlugin(s3Upload_plugin)
     }
   }
 }

@@ -60,6 +60,7 @@ export default defineComponent({
             type="line"
             percentage={props.percentage}
             indicator-placement="inside"
+            style={{ marginTop: '12px' }}
           />
           <pre>{props.log}</pre>
         </div>
