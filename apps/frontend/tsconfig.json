@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "jsxImportSource": "vue",
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -36,6 +36,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "public/dev/http.js",
-    "store/api_test.ts"
-, "sw.ts"  ],
+    "store/api_test.ts",
+    "sw.ts"
+  ],
 }

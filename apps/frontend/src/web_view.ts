@@ -1,5 +1,5 @@
-import '~/util/store.bower.dep'
-import '~/core/render.api.dep'
+import '~/util/store.bower.dep.ts'
+import '~/core/render.api.dep.ts'
 
 import { createApp, watchEffect } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'

@@ -26,21 +26,20 @@
     "oceanpress-rpc": "workspace:*",
     "oceanpress-server": "workspace:*",
     "octokit": "^4.1.2",
-    "solid-js": "^1.9.5",
     "superjson": "^2.2.2",
     "tsx": "^4.19.3",
     "vditor": "^3.10.9",
-    "vite-plugin-solid": "^2.11.6",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "naive-ui": "^2.41.0",
+    "zstd-codec": "^0.1.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "dependency-cruiser": "^16.10.0",
-    "naive-ui": "^2.41.0",
     "typescript": "^5.8.2",
-    "vite": "^6.2.1",
-    "vue-tsc": "^1.8.27"
+    "vite": "^6.2.2",
+    "vue-tsc": "^2.2.8"
   }
 }
