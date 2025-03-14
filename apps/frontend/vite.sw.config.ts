@@ -10,7 +10,7 @@ export default defineConfig({
     outDir: './dist/',
     emptyOutDir: false,
     lib: {
-      entry: ['./sw.ts'],
+      entry: ['oceanpress_preview/sw.ts'],
       name: 'sw',
       fileName: 'sw',
       formats: ['iife'],
