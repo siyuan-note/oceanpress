@@ -4,13 +4,11 @@ import '~/core/render.api.dep.ts'
 import { createApp, watchEffect } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from '~/pages/App.tsx'
-import steps from '~/pages/steps/steps.tsx'
-import { configs } from './core/config.ts'
-import { swConfigsPrefix, swPrefix } from './sw/const.ts'
+import { swPrefix } from './sw/const.ts'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [{ path: '/', component: steps }],
+  routes: [{ path: '/', component: () => import('~/pages/steps/steps.tsx') }],
 })
 
 const app = createApp(App)

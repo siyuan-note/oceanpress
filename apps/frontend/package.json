@@ -9,6 +9,8 @@
     "cli_watch": "tsx watch ./src/cli.ts",
     "build": "vite build && npm run build_lib",
     "build_lib": "vite build --config vite.sw.config.ts",
+    "build_plugin_ui": "vite build --config vite.plugin.config.ts",
+    "dev_plugin_ui": "vite build --watch --config vite.plugin.config.ts",
     "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
   },

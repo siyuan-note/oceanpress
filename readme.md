@@ -17,4 +17,4 @@
 
 ## 开发备忘
 
-部署在 cloudflare webworker
+部署在 cloudflare webworker ,通过 https://github.com/2234839/oceanpress/ 库触发

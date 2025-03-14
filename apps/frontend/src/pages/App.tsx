@@ -1,5 +1,6 @@
 import { NMessageProvider } from 'naive-ui'
 import { FunctionalComponent } from 'vue'
+import { isSiyuanPlugin } from './config.ts'
 const app: FunctionalComponent = () => {
   return (
     <>
@@ -13,21 +14,23 @@ const app: FunctionalComponent = () => {
         </a>
         获取最新进展
       </div>
-      <div>
-        查看OceanPress生成的效果：
-        <a href="/notebook/请从这里开始.html#20210428212840-859h45j">
-          《思源笔记用户指南》： 请从这里开始.html
-        </a>
-        <br />
-        <a href="/notebook/请从这里开始/编辑器/排版元素.html">
-          《思源笔记用户指南》： 排版元素.html
-        </a>
-      </div>
+      {isSiyuanPlugin ? null : (
+        <div>
+          查看OceanPress生成的效果：
+          <a href="/notebook/请从这里开始.html#20210428212840-859h45j">
+            《思源笔记用户指南》： 请从这里开始.html
+          </a>
+          <br />
+          <a href="/notebook/请从这里开始/编辑器/排版元素.html">
+            《思源笔记用户指南》： 排版元素.html
+          </a>
+        </div>
+      )}
       <hr />
       <div>
         <div>
           由
-          <a href="https://heartstack.space/user/%E5%AD%90%E8%99%9A">
+          <a href="https://shenzilong.cn">
             崮生（子虚
           </a>
           开发
