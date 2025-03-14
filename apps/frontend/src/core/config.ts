@@ -99,7 +99,7 @@ const defaultConfig = {
   技术支持：
   <a target="_blank" href="https://github.com/2234839/oceanPress_js">OceanPress</a> |
   开发者：
-  <a target="_blank" href="https://heartstack.space/user/%E5%AD%90%E8%99%9A/posts">崮生（子虚）</a>
+  <a target="_blank" href="https://shenzilong.cn">崮生（子虚）</a>
 </p>
 </footer>`,
   },

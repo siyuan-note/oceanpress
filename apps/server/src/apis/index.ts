@@ -5,7 +5,7 @@ import { config } from '../config';
 import { mkdir, readdir, stat, unlink } from 'fs/promises';
 import { open } from 'yauzl-promise';
 import { pipeline } from 'stream/promises';
-/** 清理上传目录中超过 24 小时的文件 */
+/** 清理上传目录中超过超过一定时间的文件 */
 export async function cleanupUploads(cleanFileAge = 24 * 60 * 60 * 1000) {
   const now = Date.now();
   const files = await readdir(config.UPLOAD_DIR);
@@ -22,6 +22,10 @@ export async function cleanupUploads(cleanFileAge = 24 * 60 * 60 * 1000) {
     }
   }
 }
+
+setInterval(() => {
+  cleanupUploads(1 * 60 * 60 * 1000);
+}, 60_000);
 
 /** 接受客户端上传的文件，并保存到本地临时文件存储目录中。返回对应的文件编号 */
 export async function upload(readStream: ReadableStream) {
