@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "前端dev": "pnpm --filter oceanpress dev",
+    "rpc_build": "pnpm --filter oceanpress-rpc build",
     "frontend_build": "pnpm --filter oceanpress build",
     "后端dev": "pnpm --filter backend start",
     "deploy:prod": "pnpm --filter frontend build && pnpm --filter backend deploy:prod"

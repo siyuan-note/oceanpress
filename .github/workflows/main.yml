@@ -33,11 +33,11 @@ jobs:
 
       # 安装依赖
       - name: Install Dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
 
       # 构建项目
       - name: Build with tsup
-        run: pnpm frontend_build
+        run: pnpm rpc_build && pnpm frontend_build
 
       # 部署到自定义分支
       - name: Deploy to Custom Branch

@@ -13,3 +13,8 @@
 | 网站\工具 | 描述 | 链接 |
 | :------ | :------ | :------ |
 |[崮生 一些随笔](https://shenzilong.cn)| 记录学习笔记 | https://shenzilong.cn|
+
+
+## 开发备忘
+
+部署在 cloudflare webworker
