@@ -6,7 +6,7 @@ import { isAbsolute, resolve } from 'path/posix';
 import { Readable } from 'stream';
 import { deserialize, type SuperJSONResult } from 'superjson';
 import { apis } from './apis';
-import { config } from './config';
+import { config, deployConfig } from './config';
 import { getCtx, setCtx } from './ctx';
 export type API = typeof apis;
 
@@ -18,7 +18,11 @@ const serverRPC = createRPC('apiProvider', {
     /** 实现 apiKey 的验证中间件 */
     async (method, data, next) => {
       const ctx = getCtx();
-      if (ctx?.apiKey !== config.API_KEY) {
+      if (ctx?.apiKey === undefined) {
+        throw new Error('Unauthorized apiKey 未提供');
+      }
+      if (ctx.apiKey !== config.API_KEY && deployConfig[ctx.apiKey] === undefined) {
+        console.log('[ctx.apiKey]', ctx.apiKey);
         throw new Error('Unauthorized 不正确的 apiKey');
       }
       return next();
@@ -52,10 +56,8 @@ fastify.all('/api/*', async (request, reply) => {
     data = [request.body];
   }
 
-  const apiKey = request.headers['x-api-key'] as string;
-
+  const apiKey = (request.headers['x-api-key'] as string)?.trim();
   setCtx({ apiKey });
-  console.log('[data]', data);
   const result = await (await serverRPC).RC(method.slice(5), data);
   reply.send({ result });
 });
@@ -65,7 +67,7 @@ fastify.all('/api/*', async (request, reply) => {
 const absoluteStaticDir = isAbsolute(config.STATIC_DIR)
   ? config.STATIC_DIR
   : resolve(config.STATIC_DIR);
-console.log('[absoluteStaticDir]', absoluteStaticDir);
+
 fastify.register(fastifyStatic, {
   root: absoluteStaticDir,
   prefix: '/',

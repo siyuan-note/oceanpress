@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { existsSync, mkdirSync } from 'fs';
+import { readFile } from 'fs/promises';
 // 加载环境变量
 const c = dotenv.config().parsed ?? {};
 
@@ -22,3 +23,15 @@ if (!existsSync(config.STATIC_DIR)) {
 if (!existsSync(config.UPLOAD_DIR)) {
   mkdirSync(config.UPLOAD_DIR, { recursive: true });
 }
+
+export let deployConfig = {} as {
+  [key: string]: {
+    deployDir: string;
+  };
+};
+readFile('./deploy.json')
+  .then((r) => JSON.parse(r.toString()))
+  .then((r) => {
+    deployConfig = r;
+    console.log('[deployConfig]', deployConfig);
+  });

@@ -1,3 +1,4 @@
+import { config, deployConfig } from '@/config';
 import { AsyncLocalStorage } from 'async_hooks';
 
 // 创建一个 AsyncLocalStorage 实例来存储上下文
@@ -18,3 +19,16 @@ export const getCtx = () => {
 export const runWithCtx = (ctx: { apiKey: string }, callback: () => void) => {
   asyncLocalStorage.run(ctx, callback);
 };
+
+export function ctxGetConfig() {
+  const ctx = getCtx();
+  if (!ctx) {
+    throw new Error('Context not found');
+  }
+  const uploadDir = config.UPLOAD_DIR;
+  const extractPath = deployConfig[ctx.apiKey]?.deployDir || config.STATIC_DIR; // 使用 apiKey 从 deployConfig 中获取 deployDir
+  return {
+    uploadDir,
+    extractPath,
+  };
+}

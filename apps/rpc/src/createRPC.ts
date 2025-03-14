@@ -55,7 +55,6 @@ export async function createRPC<API_TYPE>(
           return await remoteCall!(method, data);
         }
       } catch (error) {
-        console.error('API call failed:', error);
         throw error;
       }
     }
