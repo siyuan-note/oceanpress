@@ -9,12 +9,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '~': './src/',
+      '~': '/src',
     },
   },
   server: {
     port: 8080,
-    fs: {},
   },
   base: './',
 })
