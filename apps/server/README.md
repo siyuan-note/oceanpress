@@ -6,8 +6,9 @@
 
 大致流程：
 
-1. 安装 OceanPress server 程序
-2. 配置 apiKey
+1. 安装 OceanPress server 程序 : `pnpm i -g oceanpress-server`
+2. 配置 apiKey ： 在运行程序的目录中创建文件 .env 并写入配置 `API_KEY=api-key-test` ,请注意不要泄露 apiKey，另外创建复杂度高一些的
+3. 运行 OceanPress server 程序 : 命令行执行 `oceanpress_server`
 3. OceanPress 中配置 OceanPress server apiBase 和 ApiKey
 4. OceanPress 发起部署请求（需要部署的笔记本配置和笔记本静态化内容 zip）
 5. 处理部署请求并将 zip 解压部署到本地磁盘
