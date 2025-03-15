@@ -19,7 +19,7 @@ export default defineComponent({
               打包成 zip(在浏览器端打包完毕后会弹出保存对话窗口)
             </NCheckbox>
             <NDivider />
-            <NCheckbox v-model:checked={currentConfig.value.withoutPublicZip}>
+            {/* <NCheckbox v-model:checked={currentConfig.value.withoutPublicZip}>
               不打包appearance、stage 等公共资源（开启了cdn就选这个不打包，
               <br />
               这些资源将近19mb「下载只需要6~7mb」，
@@ -28,7 +28,7 @@ export default defineComponent({
               <br />
               这些资源一般没有变化所以部署一次即可。）
             </NCheckbox>
-            <NDivider />
+            <NDivider /> */}
             <NCheckbox v-model:checked={currentConfig.value.excludeAssetsCopy}>
               不复制 assets/ 资源，勾选此选项则需要自行处理资源文件
             </NCheckbox>
@@ -82,7 +82,7 @@ export default defineComponent({
               type="textarea"
             />
           </NCollapseItem>
-          <NCollapseItem title="CDN 配置" name="2">
+          {/* <NCollapseItem title="CDN 配置" name="2">
             公共资源的cdn前缀
             <br />
             删除掉下方文本框内所有文本即关闭了此功能
@@ -92,7 +92,7 @@ export default defineComponent({
               type="textarea"
               placeholder="公共资源的cdn前缀"
             />
-          </NCollapseItem>
+          </NCollapseItem> */}
 
           <NCollapseItem title="meilisearch 配置" name="3">
             <NCheckbox v-model:checked={currentConfig.value.meilisearch.enable}>

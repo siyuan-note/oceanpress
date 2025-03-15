@@ -17,7 +17,7 @@ const defaultConfig = {
   /** 打包成 zip */
   compressedZip: true,
   /** 不将 publicZip 打包到 zip 包中 */
-  withoutPublicZip: true,
+  // withoutPublicZip: true,
   /** 不复制 assets/ ，勾选此选项则需要自行处理资源文件 */
   excludeAssetsCopy: false,
   /** 输出站点地图相关 */
@@ -58,14 +58,14 @@ const defaultConfig = {
       | undefined
   },
 
-  cdn: {
-    /** 思源 js、css等文件的前缀 */
-    siyuanPrefix:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/notebook/',
-    /** 思源 js、css等文件zip包地址  */
-    publicZip:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
-  },
+  // cdn: {
+  //   /** 思源 js、css等文件的前缀 */
+  //   siyuanPrefix:
+  //     'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/notebook/',
+  //   /** 思源 js、css等文件zip包地址  */
+  //   publicZip:
+  //     'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
+  // },
   /** s3 上传配置
    * https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3
    */
@@ -143,6 +143,19 @@ export const loadConfigFile = (c?: typeof configs) => {
     })
 }
 export const currentConfig = computed(() => configs[configs.__current__])
+
+/** 应该要给用户配置的，但目前没有什么好方法，所以暂时不给配置 */
+export const tempConfig = {
+  cdn:  {
+    /** 思源 js、css等文件的前缀 */
+    siyuanPrefix:
+      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/notebook/',
+    /** 思源 js、css等文件zip包地址  */
+    publicZip:
+      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
+  },
+  withoutPublicZip:true,
+}
 
 export const saveConfig = () => {
   if (configs.__init__ === false)

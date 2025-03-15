@@ -1,4 +1,4 @@
-import { Config, currentConfig } from '~/core/config.ts'
+import { Config, currentConfig, tempConfig } from '~/core/config.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { getRender, renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
@@ -130,7 +130,7 @@ export async function build(
             level: rootLevel,
           },
           {
-            ...config.cdn,
+            ...tempConfig.cdn,
             embedCode: config.embedCode,
           },
         )
@@ -249,8 +249,8 @@ export async function build(
     effect.log( `=== 开始生成压缩包 ===`)
     await downloadZIP(fileTree, {
       // TODO 这里应该移出来成为全局的写选项
-      withoutZip: config.withoutPublicZip,
-      publicZip: config.cdn.publicZip,
+      withoutZip: tempConfig.withoutPublicZip,
+      publicZip: tempConfig.cdn.publicZip,
     })
   }
   config.OceanPress.version = packageJson.version

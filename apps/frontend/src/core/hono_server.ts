@@ -1,5 +1,5 @@
 import { Context, Hono } from 'hono'
-import { currentConfig } from './config.ts'
+import { currentConfig, tempConfig } from './config.ts'
 import { get_doc_by_hpath } from './cache.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
@@ -82,7 +82,7 @@ async function renderHtmlByUriPath(path: string): Promise<string | Error> {
       level: path.split('/').length - 1 /** 最开头有一个 /  */,
     },
     {
-      ...currentConfig.value.cdn,
+      ...tempConfig.cdn,
       embedCode: currentConfig.value.embedCode,
     },
   )
