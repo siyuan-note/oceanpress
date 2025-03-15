@@ -12,7 +12,7 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
       },
       (info) => {
         resolve({ info, app })
-        console.log(`Listening on :${JSON.stringify(info)}`)
+        console.log(`Listening on http://${info.address}:${info.port}`)
       },
     )
   })
