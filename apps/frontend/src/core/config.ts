@@ -149,7 +149,7 @@ export const tempConfig = {
   cdn:  {
     /** 思源 js、css等文件的前缀 */
     siyuanPrefix:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/notebook/',
+      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v1.0.1/apps/frontend/public/notebook/',
     /** 思源 js、css等文件zip包地址  */
     publicZip:
       'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
