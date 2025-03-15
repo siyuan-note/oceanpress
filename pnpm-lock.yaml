@@ -30,9 +30,6 @@ importers:
       cheerio:
         specifier: 1.0.0
         version: 1.0.0
-      client-zip:
-        specifier: ^2.4.6
-        version: 2.4.6
       commander:
         specifier: ^13.1.0
         version: 13.1.0
@@ -1829,9 +1826,6 @@ packages:
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
-
-  client-zip@2.4.6:
-    resolution: {integrity: sha512-e7t1u14h/yT0A12qBwFsaus8UZZ8+MCaNAEn/z53mrukLq/LFcKX7TkbntAppGu8he2p8pz9vc5NEGE/h4ohlw==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -5167,8 +5161,6 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
-
-  client-zip@2.4.6: {}
 
   color-convert@2.0.1:
     dependencies:

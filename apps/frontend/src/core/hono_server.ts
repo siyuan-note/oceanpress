@@ -6,8 +6,7 @@ import { renderHTML } from './render.ts'
 import { stream } from 'hono/streaming'
 import type { StatusCode } from 'hono/utils/http-status'
 
-export function createHonoApp() {
-  const app = new Hono()
+export function createHonoApp(app: Hono = new Hono()) {
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', assetsHandle)
   app.get('*', async (c) => {

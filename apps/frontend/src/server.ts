@@ -1,8 +1,24 @@
 import { serve } from '@hono/node-server'
 import { createHonoApp } from './core/hono_server.ts'
+import { serveStatic } from '@hono/node-server/serve-static'
+import { Hono } from 'hono'
+import { join, resolve } from 'path/posix'
+console.log(join(import.meta.url.slice(5), '../../public/'))
 
 export function server(config = { port: 80, hostname: '0.0.0.0' }) {
-  const app = createHonoApp()
+  const app = new Hono()
+
+  // 方便开发调试样式
+  app.use(
+    '/notebook/*',
+    serveStatic({
+      root: './public/',
+      onNotFound(path, c) {
+        console.log('[onNotFound notebook path]', path)
+      },
+    }),
+  )
+  createHonoApp(app)
   return new Promise((resolve, _reject) => {
     serve(
       {
