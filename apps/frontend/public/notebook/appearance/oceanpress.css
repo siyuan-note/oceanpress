@@ -98,3 +98,9 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+
+/* 临时修复代码块错乱的问题 */
+.protyle-wysiwyg div.hljs{
+  display: block !important;
+}
