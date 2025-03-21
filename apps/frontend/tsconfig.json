@@ -37,6 +37,7 @@
     "src/**/*.vue",
     "public/dev/http.js",
     "store/api_test.ts",
-    "oceanpress_preview/sw.ts"
+    "oceanpress_preview/sw.ts",
+    "tsup.config.ts"
   ],
 }

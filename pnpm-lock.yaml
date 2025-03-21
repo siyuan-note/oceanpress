@@ -85,6 +85,9 @@ importers:
       dependency-cruiser:
         specifier: ^16.10.0
         version: 16.10.0
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(postcss@8.5.3)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
