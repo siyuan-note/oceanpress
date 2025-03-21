@@ -12,7 +12,7 @@ import {
 } from 'naive-ui';
 import { configs, addConfig, loadConfigFile } from '~/core/config.ts';
 import { Effect } from 'effect';
-import { EffectDep } from '~/core/EffectDep.ts';
+import { EffectDep, EffectLocalStorageDep } from '~/core/EffectDep.ts';
 import { renderApiDep } from '~/core/render.api.dep.ts';
 import { bowerApiDep } from '~/util/store.bower.dep.ts';
 
@@ -81,11 +81,7 @@ export default defineComponent({
       const contents = await file.text();
       const config = JSON.parse(contents);
       if (typeof config === 'object') {
-        const p = Effect.provideService(loadConfigFile(config), EffectDep, {
-          ...renderApiDep,
-          ...bowerApiDep,
-
-        })
+        const p = Effect.provideService(loadConfigFile(config), EffectLocalStorageDep, bowerApiDep)
         await Effect.runPromise(p)
         message.success('导入成功');
       }

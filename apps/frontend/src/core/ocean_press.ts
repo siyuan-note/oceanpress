@@ -1,11 +1,11 @@
 import { MeilisearchPlugin } from '~/plugins/meilisearch_plugin/meilisearch_upload.ts'
-import { Config } from './config.ts'
-import { PluginCenter } from './plugin.ts'
+import { deployOceanPressServer_plugin } from '~/plugins/publish/OceanPressServer.ts'
 import { s3Upload_plugin } from '~/plugins/publish/s3.ts'
 import { FileTree, build } from './build.ts'
+import { Config } from './config.ts'
+import type { effectLog } from './EffectDep.ts'
+import { PluginCenter } from './plugin.ts'
 import { renderHTML } from './render.ts'
-import { deployOceanPressServer_plugin } from '~/plugins/publish/OceanPressServer.ts'
-import type { effectDepApi } from './EffectDep.ts'
 
 export type OceanPressPlugin = PluginCenter<OceanPress['funMap']>['pluginType']
 
@@ -24,7 +24,7 @@ export class OceanPress {
     /** 用于渲染文档的函数 */
     build_renderHTML: renderHTML,
     /** 编译完成后文件树的处理回调函数 */
-    build_onFileTree: (_tree: FileTree, _effectApi: effectDepApi) => {},
+    build_onFileTree: (_tree: FileTree, _effectApi: effectLog) => {},
   }
   pluginCenter: PluginCenter<OceanPress['funMap']> = new PluginCenter(
     this.funMap,

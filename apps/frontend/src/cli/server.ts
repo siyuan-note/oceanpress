@@ -3,8 +3,8 @@ import { setCache } from '~/core/cache.ts'
 import { loadConfigFile } from '~/core/config.ts'
 import { server } from '~/server.ts'
 import { program } from './common.ts'
-import { Effect } from 'effect'
-import { EffectDep } from '~/core/EffectDep.ts'
+import { Context, Effect } from 'effect'
+import { EffectDep, EffectLocalStorageDep, EffectLogDep } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
 program
@@ -31,18 +31,10 @@ program
       const config = await readFile(opt.config, 'utf-8')
       setCache(opt.cache !== 'false')
 
-      const p = Effect.provideService(
-        Effect.gen(function* () {
-          yield* loadConfigFile(JSON.parse(config))
-          return yield* server({
-            hostname: opt.host,
-            port: Number(opt.port),
-          })
-        }),
-        EffectDep,
-        {
-          ...renderApiDep,
-          ...nodeApiDep,
+      const context = Context.empty().pipe(
+        Context.add(EffectDep, renderApiDep),
+        Context.add(EffectLocalStorageDep, nodeApiDep),
+        Context.add(EffectLogDep, {
           log: (msg) => {
             if (msg.startsWith('渲染：')) {
               process.stdout.write(`\r\x1b[K${msg}`)
@@ -53,8 +45,20 @@ program
           percentage: (n) => {
             process.stdout.write(`\r\x1b[K进度：${n}%`)
           },
-        },
+        }),
       )
+
+      const p = Effect.provide(
+        Effect.gen(function* () {
+          yield* loadConfigFile(JSON.parse(config))
+          return yield* server({
+            hostname: opt.host,
+            port: Number(opt.port),
+          })
+        }),
+        context,
+      )
+
       await Effect.runPromise(p)
     },
   )

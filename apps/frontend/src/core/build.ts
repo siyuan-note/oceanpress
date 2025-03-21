@@ -13,7 +13,7 @@ import packageJson from '~/../package.json' with { type: 'json' };
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'
 import { Effect } from 'effect'
-import {  EffectDep, type effectDepApi } from './EffectDep.ts'
+import {  EffectDep, EffectLogDep, type effectDepApi, type effectLog } from './EffectDep.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -30,11 +30,12 @@ export type Build = typeof build
  */
 export function build (config:Config,otherConfig?: {
   // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
-  onFileTree?: (tree: FileTree,effectApi:effectDepApi) => void
+  onFileTree?: (tree: FileTree,effectApi:effectLog) => void
   renderHtmlFn?: typeof renderHTML
 },){
   return Effect.gen(function*(){
     const effectApi = yield* EffectDep
+    const effectLog = yield* EffectLogDep
 
     const _renderHTML = otherConfig?.renderHtmlFn ?? renderHTML
     const book = config.notebook
@@ -50,10 +51,10 @@ export function build (config:Config,otherConfig?: {
       total += oldPercentage
       return (/** 0~1 的小数 */ process: number) => {
         oldPercentage = process * percentage
-        effectApi.percentage((total + oldPercentage) * 100)
+        effectLog.percentage((total + oldPercentage) * 100)
       }
     }
-    effectApi.log( `=== 开始编译 ${book.name} ===`)
+    effectLog.log( `=== 开始编译 ${book.name} ===`)
     let process = processPercentage(0.4)
     /** 查询所有文档级block
      * TODO 增量编译时不应该全部获取
@@ -79,7 +80,7 @@ export function build (config:Config,otherConfig?: {
       /** 引用的都没有更新 */
       return true
     }
-    effectApi.log (`=== 查询文档级block完成 ===`)
+    effectLog.log (`=== 查询文档级block完成 ===`)
     let i = 0
     yield* Effect.tryPromise(()=>Promise.all(
       Doc_blocks.map(async (docBlock) => {
@@ -95,14 +96,14 @@ export function build (config:Config,otherConfig?: {
 
     const enableIncrementalCompilation_doc = (() => {
       if (packageJson.version !== config.OceanPress.version) {
-        effectApi.log(
+        effectLog.log(
           `配置文件版本号[${config.OceanPress.version}]与OceanPress版本[${packageJson.version}]不一致，将进行文档全量编译`,
         )
         return false
       }
       return config.enableIncrementalCompilation_doc
     })()
-    effectApi.log (`=== 开始渲染文档 ===`)
+    effectLog.log (`=== 开始渲染文档 ===`)
 
     yield* Effect.forEach(Object.entries(docTree), ([path, { sy, docBlock }]) => {
       return Effect.gen(function*(){
@@ -136,7 +137,7 @@ export function build (config:Config,otherConfig?: {
           if (config.sitemap.rss && path.endsWith('.rss.xml')) {
             const rssPath = path
             fileTree[rssPath] =yield* Effect.tryPromise(()=> generateRSSXML(rssPath, renderInstance, config,effectApi.getHPathByID_Node))
-            effectApi.log(`渲染 rss.xml:${rssPath} 完毕`)
+            effectLog.log(`渲染 rss.xml:${rssPath} 完毕`)
           }
           if (
             config.enableIncrementalCompilation &&
@@ -151,9 +152,9 @@ export function build (config:Config,otherConfig?: {
           skipBuilds.add(docBlock.id, {
             refs: /** 保存引用 */ [...renderInstance.refs.values()],
           })
-          effectApi.log(`渲染完毕:${path}`)
+          effectLog.log(`渲染完毕:${path}`)
         } catch (error) {
-          effectApi.log(`${path} 渲染失败:${error}`)
+          effectLog.log(`${path} 渲染失败:${error}`)
           console.log(error)
         }
         process(i / Doc_blocks.length)
@@ -164,13 +165,13 @@ export function build (config:Config,otherConfig?: {
 
     })
 
-    effectApi.log( `=== 渲染文档完成 ===`)
-    effectApi.log( `=== 开始生成 sitemap.xml ===`)
+    effectLog.log( `=== 渲染文档完成 ===`)
+    effectLog.log( `=== 开始生成 sitemap.xml ===`)
     if (config.sitemap.enable) {
       fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
     }
     if (config.excludeAssetsCopy === false) {
-      effectApi.log( `=== 开始复制资源文件 ===`)
+      effectLog.log( `=== 开始复制资源文件 ===`)
       const assets: {
         box: string
         docpath: string
@@ -200,7 +201,7 @@ export function build (config:Config,otherConfig?: {
           }
         }),
       ))
-      effectApi.log( `=== 开始复制挂件资源文件 ===`)
+      effectLog.log( `=== 开始复制挂件资源文件 ===`)
       const widgetList: DB_block[] =yield* Effect.tryPromise( ()=>API.query_sql({
         stmt: `
         SELECT *
@@ -245,10 +246,10 @@ export function build (config:Config,otherConfig?: {
 
     // === 输出编译成果 ===
     if (otherConfig?.onFileTree) {
-      otherConfig.onFileTree(fileTree,effectApi)
+      otherConfig.onFileTree(fileTree,effectLog)
     }
     if (config.compressedZip) {
-      effectApi.log( `=== 开始生成压缩包 ===`)
+      effectLog.log( `=== 开始生成压缩包 ===`)
       yield* Effect.tryPromise(() =>
         downloadZIP(fileTree, {
           // TODO 这里应该移出来成为全局的写选项
@@ -260,8 +261,8 @@ export function build (config:Config,otherConfig?: {
     config.OceanPress.version = packageJson.version
     /** 更新跳过编译的资源 */
     skipBuilds.write()
-    effectApi.percentage(100)
-    effectApi.log( '编译完毕')
+    effectLog.percentage(100)
+    effectLog.log( '编译完毕')
 
     return {fileTree}
   })

@@ -6,8 +6,12 @@ import { currentConfig, loadConfigFile } from '~/core/config.ts'
 import { genZIP } from '~/core/genZip.ts'
 import { OceanPress } from '~/core/ocean_press.ts'
 import { program } from './common.ts'
-import { Effect } from 'effect'
-import { EffectDep } from '~/core/EffectDep.ts'
+import { Context, Effect } from 'effect'
+import {
+  EffectDep,
+  EffectLocalStorageDep,
+  EffectLogDep,
+} from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
 
@@ -72,15 +76,11 @@ program
         console.log('[deploy res]', res)
       },
     })
-    const p = Effect.provideService(
-      Effect.gen(function* () {
-        yield* loadConfigFile(JSON.parse(config))
-        return yield* ocean_press.build()
-      }),
-      EffectDep,
-      {
-        ...renderApiDep,
-        ...nodeApiDep,
+
+    const context = Context.empty().pipe(
+      Context.add(EffectDep, renderApiDep),
+      Context.add(EffectLocalStorageDep, nodeApiDep),
+      Context.add(EffectLogDep, {
         log: (msg) => {
           if (msg.startsWith('渲染：')) {
             process.stdout.write(`\r\x1b[K${msg}`)
@@ -91,7 +91,15 @@ program
         percentage: (n) => {
           process.stdout.write(`\r\x1b[K进度：${n}%`)
         },
-      },
+      }),
     )
+    const p = Effect.provide(
+      Effect.gen(function* () {
+        yield* loadConfigFile(JSON.parse(config))
+        return yield* ocean_press.build()
+      }),
+      context,
+    )
+
     await Effect.runPromise(p)
   })

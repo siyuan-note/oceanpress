@@ -7,8 +7,12 @@ import Config_tab from '~/pages/config_tab.tsx'
 import Step1_selectNote from './step1_selectNote.tsx'
 import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
-import { Effect } from 'effect'
-import { EffectDep } from '~/core/EffectDep.ts'
+import { Context, Effect } from 'effect'
+import {
+  EffectDep,
+  EffectLocalStorageDep,
+  EffectLogDep,
+} from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { bowerApiDep } from '~/util/store.bower.dep.ts'
 
@@ -42,16 +46,19 @@ export default defineComponent({
           },
         })
       }
-      const p = Effect.provideService(ocean_press.build(), EffectDep, {
-        ...renderApiDep,
-        ...bowerApiDep,
-        log: (msg) => {
-          log.value += msg + '\n'
-        },
-        percentage: (n) => {
-          percentage.value = n
-        },
-      })
+      const context = Context.empty().pipe(
+        Context.add(EffectDep, renderApiDep),
+        Context.add(EffectLocalStorageDep, bowerApiDep),
+        Context.add(EffectLogDep, {
+          log: (msg) => {
+            log.value += msg + '\n'
+          },
+          percentage: (n) => {
+            percentage.value = n
+          },
+        }),
+      )
+      const p = Effect.provide(ocean_press.build(), context)
       await Effect.runPromise(p)
 
       genHTML_status.value = false
