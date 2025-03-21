@@ -39,6 +39,7 @@ export function build (config:Config,otherConfig?: {
 
     const _renderHTML = otherConfig?.renderHtmlFn ?? renderHTML
     const book = config.notebook
+    console.log('[book]',book);
     const docTree: DocTree = {}
     const skipBuilds = useSkipBuilds()
 

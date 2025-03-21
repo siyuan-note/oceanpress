@@ -130,6 +130,7 @@ export const loadConfigFile = (c?: typeof configs) => {
     const effectDep = yield* EffectLocalStorageDep
     if (c) {
       deepAssign(configs, c)
+
     } else {
       const localConfig = effectDep.getItem('configs')
       if (localConfig) {

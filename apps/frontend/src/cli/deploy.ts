@@ -60,22 +60,6 @@ program
           })
       },
     })
-    const ocean_press = new OceanPress(currentConfig.value)
-
-    ocean_press.pluginCenter.registerPlugin({
-      async build_onFileTree([tree], next) {
-        const zip = await genZIP(tree, { withoutZip: true })
-        const sizeInMB = zip.size / (1024 * 1024)
-        console.log('[zip.size in MB]', sizeInMB.toFixed(2))
-        // 将 Blob 转换为 ReadableStream
-        const readableStream = zip.stream()
-        const { chunkCount, fileId } = await client.API.upload(readableStream)
-
-        console.log('[res]', { chunkCount, fileId })
-        const res = await client.API.deploy({ zipFileId: fileId })
-        console.log('[deploy res]', res)
-      },
-    })
 
     const context = Context.empty().pipe(
       Context.add(EffectDep, renderApiDep),
@@ -96,6 +80,25 @@ program
     const p = Effect.provide(
       Effect.gen(function* () {
         yield* loadConfigFile(JSON.parse(config))
+        const ocean_press = new OceanPress(currentConfig.value)
+
+        ocean_press.pluginCenter.registerPlugin({
+          async build_onFileTree([tree], next) {
+            const zip = await genZIP(tree, { withoutZip: true })
+            const sizeInMB = zip.size / (1024 * 1024)
+            console.log('[zip.size in MB]', sizeInMB.toFixed(2))
+            // 将 Blob 转换为 ReadableStream
+            const readableStream = zip.stream()
+            const { chunkCount, fileId } = await client.API.upload(
+              readableStream,
+            )
+
+            console.log('[res]', { chunkCount, fileId })
+            const res = await client.API.deploy({ zipFileId: fileId })
+            console.log('[deploy res]', res)
+          },
+        })
+
         return yield* ocean_press.build()
       }),
       context,
