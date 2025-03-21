@@ -18,13 +18,15 @@ export default defineConfig(({ mode }) => {
             name: 'OceanPressApp', // 库的全局变量名
           },
           rollupOptions: {
-            external: ['vue', 'fs/promises',"node:path","node:fs"],
+            external: ['vue', 'fs/promises', 'node:path', 'node:fs'],
             output: {
               globals: {
                 vue: 'Vue',
               },
             },
           },
+          outDir: './dist-app/',
+          emptyOutDir: true,
         }
       : {
           outDir: './dist/',

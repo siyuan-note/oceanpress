@@ -9,13 +9,20 @@
     "cli_watch": "tsx watch ./src/cli.ts",
     "build": "vite build && npm run build_lib",
     "build_lib": "vite build --config vite.sw.config.ts",
-    "build_npmlib": "vite build --mode library",
+    "build_app": "vite build --mode library",
     "build_plugin_ui": "vite build --config vite.plugin.config.ts",
     "dev_plugin_ui": "vite build --watch --config vite.plugin.config.ts",
     "generate_dependency_graph": "depcruise src --include-only '^src' --output-type dot > ./assets/dep.dot",
     "preview": "vite preview"
   },
-  "bin": "./dist/cli.js",
+  "bin": {
+    "oceanpress": "./dist-cli/cli.js"
+  },
+  "files": [
+    "dist",
+    "dist-*",
+    "*.md"
+  ],
   "dependencies": {
     "@aws-sdk/client-s3": "^3.758.0",
     "@hono/node-server": "^1.13.8",
