@@ -1,8 +1,9 @@
-import { storeDep } from '~/core/dependency.ts'
 import { deepAssign } from '~/util/deep_assign.ts'
 import { computed, reactive, watch } from 'vue'
 import { notebook } from './siyuan_type.ts'
 import packageJson from '~/../package.json'  with  { type: 'json' };
+import { Effect } from 'effect';
+import { EffectDep } from './EffectDep.ts';
 const version = packageJson.version
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
@@ -125,22 +126,47 @@ export function addConfig(name: string, value?: typeof defaultConfig) {
 }
 /** 加载配置文件 */
 export const loadConfigFile = (c?: typeof configs) => {
-  if (c) {
-    deepAssign(configs, c)
-  } else {
-    const localConfig = storeDep.getItem('configs')
-    if (localConfig) {
-      /** 从本地存储加载配置 */
-      deepAssign(configs, JSON.parse(localConfig))
+  return Effect.gen(function*(){
+    const effectDep = yield* EffectDep
+    if (c) {
+      deepAssign(configs, c)
+    } else {
+      const localConfig = effectDep.getItem('configs')
+      if (localConfig) {
+        /** 从本地存储加载配置 */
+        deepAssign(configs, JSON.parse(localConfig))
+      }
     }
-  }
 
-  Object.entries(configs)
-    .filter(([key]) => key.startsWith('__') === false)
-    .forEach(([_key, obj]) => {
-      /** 将新增配置项更新到旧配置上 */
-      deepAssign(obj, defaultConfig, { update: false, add: true })
-    })
+    Object.entries(configs)
+      .filter(([key]) => key.startsWith('__') === false)
+      .forEach(([_key, obj]) => {
+        /** 将新增配置项更新到旧配置上 */
+        deepAssign(obj, defaultConfig, { update: false, add: true })
+      })
+
+    // 自动更新配置文件到本地存储
+    const saveConfig = () => {
+      if (configs.__init__ === false)
+        effectDep.setItem('configs', JSON.stringify(configs, null, 2))
+    }
+
+    let timer: ReturnType<typeof setTimeout> | null = null
+    /** 防抖的保存配置 */
+    const debounceSaveConfig = () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() => {
+        saveConfig()
+        timer = null
+      }, 700)
+    }
+    watch(configs, debounceSaveConfig, { deep: true })
+
+    return configs
+  })
+
 }
 export const currentConfig = computed(() => configs[configs.__current__])
 
@@ -157,27 +183,5 @@ export const tempConfig = {
   withoutPublicZip:true,
 }
 
-export const saveConfig = () => {
-  if (configs.__init__ === false)
-    storeDep.setItem('configs', JSON.stringify(configs, null, 2))
-}
-
-let timer: ReturnType<typeof setTimeout> | null = null
-/** 防抖的保存配置 */
-export const debounceSaveConfig = () => {
-  if (timer) {
-    clearTimeout(timer)
-  }
-  timer = setTimeout(() => {
-    saveConfig()
-    timer = null
-  }, 700)
-}
-watch(configs, debounceSaveConfig, { deep: true })
 
 configs.__init__ = false
-
-/** 浏览器环境下，直接尝试加载配置 */
-if (globalThis.document) {
-  loadConfigFile()
-}

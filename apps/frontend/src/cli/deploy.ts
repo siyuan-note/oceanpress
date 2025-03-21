@@ -9,6 +9,7 @@ import { program } from './common.ts'
 import { Effect } from 'effect'
 import { EffectDep } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
+import { nodeApiDep } from '~/util/store.node.dep.ts'
 
 program
   .command('deploy')
@@ -21,7 +22,7 @@ program
       return console.error(`请配置 apiBase 和 apiKey`)
     }
     const config = await readFile(opt.config, 'utf-8')
-    loadConfigFile(JSON.parse(config))
+
     const client = await createRPC<API>('apiConsumer', {
       remoteCall(method, data) {
         let body: ReadableStream | string
@@ -71,18 +72,26 @@ program
         console.log('[deploy res]', res)
       },
     })
-    const p = Effect.provideService(ocean_press.build(), EffectDep, {
-      ...renderApiDep,
-      log: (msg) => {
-        if (msg.startsWith('渲染：')) {
-          process.stdout.write(`\r\x1b[K${msg}`)
-        } else {
-          process.stdout.write(`\n${msg}`)
-        }
+    const p = Effect.provideService(
+      Effect.gen(function* () {
+        yield* loadConfigFile(JSON.parse(config))
+        return yield* ocean_press.build()
+      }),
+      EffectDep,
+      {
+        ...renderApiDep,
+        ...nodeApiDep,
+        log: (msg) => {
+          if (msg.startsWith('渲染：')) {
+            process.stdout.write(`\r\x1b[K${msg}`)
+          } else {
+            process.stdout.write(`\n${msg}`)
+          }
+        },
+        percentage: (n) => {
+          process.stdout.write(`\r\x1b[K进度：${n}%`)
+        },
       },
-      percentage: (n) => {
-        process.stdout.write(`\r\x1b[K进度：${n}%`)
-      },
-    })
+    )
     await Effect.runPromise(p)
   })

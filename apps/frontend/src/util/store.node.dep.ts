@@ -1,8 +1,4 @@
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs'
-import { storeDep } from '~/core/dependency.ts'
-
-storeDep.getItem = getItem
-storeDep.setItem = setItem
 
 export function setItem(key: string, value: string) {
   if (!existsSync('./store/')) {
@@ -20,4 +16,8 @@ export function getItem(key: string): string | undefined {
   } catch (_) {
     return undefined
   }
+}
+export const nodeApiDep = {
+  setItem,
+  getItem,
 }

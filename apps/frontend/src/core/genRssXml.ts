@@ -1,6 +1,5 @@
 import { get_node_by_id } from './cache.ts'
 import type { Config } from './config.ts'
-import { storeDep } from './dependency.ts'
 import type { Render } from './render.ts'
 import type { DB_block, S_Node } from './siyuan_type.ts'
 

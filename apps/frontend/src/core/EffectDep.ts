@@ -1,4 +1,4 @@
-import { Effect, Context } from 'effect'
+import { Context } from 'effect'
 import type { S_Node } from './siyuan_type.ts'
 
 export type effectDepApi = {
@@ -8,7 +8,11 @@ export type effectDepApi = {
   getDocByChildID: (id: string) => Promise<S_Node | undefined>
   getHPathByID_Node: (id_node: string | S_Node) => Promise<string>
 
-  // 文件读写相关
+  // 读写配置文件所依赖的副作用
+  setItem: (key: string, value: string) => void
+  getItem: (key: string) => string | undefined
+
+  // 进度输出相关
   log: (msg: string) => void
   percentage: (_n: number) => void
 }

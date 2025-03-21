@@ -7,6 +7,7 @@ import { program } from './common.ts'
 import { Effect } from 'effect'
 import { EffectDep } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
+import { nodeApiDep } from '~/util/store.node.dep.ts'
 
 program
   .command('build')
@@ -19,7 +20,6 @@ program
       throw new Error('请设置配置文件位置和输出目录位置')
     }
     const config = await readFile(opt.config, 'utf-8')
-    loadConfigFile(JSON.parse(config))
     const filePath = resolve(opt.output)
     const ocean_press = new OceanPress(currentConfig.value)
 
@@ -44,10 +44,14 @@ program
       },
     })
     const p = Effect.provideService(
-      ocean_press.build(),
+      Effect.gen(function* () {
+        yield* loadConfigFile(JSON.parse(config))
+        return yield* ocean_press.build()
+      }),
       EffectDep,
       {
         ...renderApiDep,
+        ...nodeApiDep,
         log(_msg) {
           // 这里不输出进度
         },
