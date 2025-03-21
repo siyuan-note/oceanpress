@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['src/cli.ts'], // 入口文件
@@ -9,6 +9,5 @@ export default defineConfig({
   minify: false, // 是否压缩代码
   outDir: 'dist-cli', // 输出目录
   bundle: true, // 是否打包依赖
-  // external: ['react'],
-
-});
+  noExternal: ['oceanpress-rpc', 'oceanpress-server'],
+})
