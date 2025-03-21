@@ -5,7 +5,7 @@ import { type Config } from '~/core/config.ts'
 import { genZIP } from '~/core/genZip.ts'
 import type { OceanPressPlugin } from '~/core/ocean_press.ts'
 
-/** 上传数据到 s3 适配云端 */
+/** 上传数据到 OceanPressServer 适配云端  */
 export function deployOceanPressServer_plugin(config: Config) {
   const plugin: OceanPressPlugin = {
     async build_onFileTree([tree], next) {

@@ -13,7 +13,7 @@ import packageJson from '~/../package.json' with { type: 'json' };
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'
 import { Effect } from 'effect'
-import {  EffectDep } from './EffectDep.ts'
+import {  EffectDep, type effectDepApi } from './EffectDep.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -30,7 +30,7 @@ export type Build = typeof build
  */
 export function build (config:Config,otherConfig?: {
   // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
-  onFileTree?: (tree: FileTree) => void
+  onFileTree?: (tree: FileTree,effectApi:effectDepApi) => void
   renderHtmlFn?: typeof renderHTML
 },){
   return Effect.gen(function*(){
@@ -245,7 +245,7 @@ export function build (config:Config,otherConfig?: {
 
     // === 输出编译成果 ===
     if (otherConfig?.onFileTree) {
-      otherConfig.onFileTree(fileTree)
+      otherConfig.onFileTree(fileTree,effectApi)
     }
     if (config.compressedZip) {
       effectApi.log( `=== 开始生成压缩包 ===`)

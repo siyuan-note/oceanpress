@@ -1,25 +1,24 @@
+import { S3 } from '@aws-sdk/client-s3'
 import type { OceanPressPlugin } from '~/core/ocean_press.ts'
 import type { uploadFiles } from './interface.ts'
-import { S3 } from '@aws-sdk/client-s3'
 
 /** 上传数据到 s3 适配云端 */
 export const s3Upload_plugin: OceanPressPlugin = {
-  build: async function ([config, effect, other], next) {
-    const res = await next(config, effect, {
-      ...other,
+  build: function ([config, otherConfig], next) {
+    return next(config, {
+      ...otherConfig,
 
-      onFileTree: async (tree) => {
-        if (other?.onFileTree) {
+      onFileTree: async (tree, effectApi) => {
+        if (otherConfig?.onFileTree) {
           // 维持原有其他监听程序
-          await other.onFileTree(tree)
+          await otherConfig.onFileTree(tree, effectApi)
         }
         for await (const [fileName, ETag] of s3_uploads(tree, config)) {
-          effect.log(`上传： ${fileName} ${ETag}`)
+          effectApi.log(`上传： ${fileName} ${ETag}`)
         }
+        effectApi.log(`s3 上传完毕`)
       },
     })
-    effect.log(`s3 上传完毕`)
-    return res
   },
 }
 const s3_uploads: uploadFiles = async function* (tree, config) {

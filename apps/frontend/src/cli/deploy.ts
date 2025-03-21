@@ -6,6 +6,9 @@ import { currentConfig, loadConfigFile } from '~/core/config.ts'
 import { genZIP } from '~/core/genZip.ts'
 import { OceanPress } from '~/core/ocean_press.ts'
 import { program } from './common.ts'
+import { Effect } from 'effect'
+import { EffectDep } from '~/core/EffectDep.ts'
+import { renderApiDep } from '~/core/render.api.dep.ts'
 
 program
   .command('deploy')
@@ -68,8 +71,8 @@ program
         console.log('[deploy res]', res)
       },
     })
-
-    await ocean_press.build({
+    const p = Effect.provideService(ocean_press.build(), EffectDep, {
+      ...renderApiDep,
       log: (msg) => {
         if (msg.startsWith('渲染：')) {
           process.stdout.write(`\r\x1b[K${msg}`)
@@ -81,4 +84,5 @@ program
         process.stdout.write(`\r\x1b[K进度：${n}%`)
       },
     })
+    await Effect.runPromise(p)
   })

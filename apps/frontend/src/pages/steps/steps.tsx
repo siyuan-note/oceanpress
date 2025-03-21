@@ -7,6 +7,9 @@ import Config_tab from '~/pages/config_tab.tsx'
 import Step1_selectNote from './step1_selectNote.tsx'
 import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
+import { Effect } from 'effect'
+import { EffectDep } from '~/core/EffectDep.ts'
+import { renderApiDep } from '~/core/render.api.dep.ts'
 
 export default defineComponent({
   setup() {
@@ -38,7 +41,8 @@ export default defineComponent({
           },
         })
       }
-      await ocean_press.build({
+      const p = Effect.provideService(ocean_press.build(), EffectDep, {
+        ...renderApiDep,
         log: (msg) => {
           log.value += msg + '\n'
         },
@@ -46,6 +50,8 @@ export default defineComponent({
           percentage.value = n
         },
       })
+      await Effect.runPromise(p)
+
       genHTML_status.value = false
       percentage.value = 100
     }

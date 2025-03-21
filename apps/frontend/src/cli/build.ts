@@ -46,7 +46,12 @@ program
     const p = Effect.provideService(
       ocean_press.build(),
       EffectDep,
-      renderApiDep,
+      {
+        ...renderApiDep,
+        log(_msg) {
+          // 这里不输出进度
+        },
+      },
     )
     await Effect.runPromise(p)
   })
