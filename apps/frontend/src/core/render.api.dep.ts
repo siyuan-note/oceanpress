@@ -40,4 +40,11 @@ export const renderApiDep = {
       }
     }
   },
+
+  log(msg: string) {
+    console.log(msg)
+  },
+  percentage: (n: number) => {
+    console.log(n)
+  },
 }

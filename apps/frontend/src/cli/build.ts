@@ -4,6 +4,9 @@ import { join } from 'path/posix'
 import { currentConfig, loadConfigFile } from '~/core/config.ts'
 import { OceanPress } from '~/core/ocean_press.ts'
 import { program } from './common.ts'
+import { Effect } from 'effect'
+import { EffectDep } from '~/core/EffectDep.ts'
+import { renderApiDep } from '~/core/render.api.dep.ts'
 
 program
   .command('build')
@@ -40,17 +43,10 @@ program
         }
       },
     })
-
-    await ocean_press.build({
-      log: (msg) => {
-        if (msg.startsWith('渲染：')) {
-          process.stdout.write(`\r\x1b[K${msg}`)
-        } else {
-          process.stdout.write(`\n${msg}`)
-        }
-      },
-      percentage: (n) => {
-        process.stdout.write(`\r\x1b[K进度：${n}%`)
-      },
-    })
+    const p = Effect.provideService(
+      ocean_press.build(),
+      EffectDep,
+      renderApiDep,
+    )
+    await Effect.runPromise(p)
   })

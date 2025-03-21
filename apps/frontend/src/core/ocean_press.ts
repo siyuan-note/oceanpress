@@ -10,7 +10,7 @@ export type OceanPressPlugin = PluginCenter<OceanPress['funMap']>['pluginType']
 
 /** OceanPress 核心类，用于管理插件和配置，执行构建过程。 */
 export class OceanPress {
-  async build() {
+  build() {
     const build_res = this.pluginCenter.fun.build(this.config, {
       renderHtmlFn: this.pluginCenter.fun.build_renderHTML,
       onFileTree: this.pluginCenter.fun.build_onFileTree,

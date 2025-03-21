@@ -1,6 +1,6 @@
 import { Effect } from 'effect'
 import { escaping, unescaping } from '~/util/escaping.ts'
-import { RenderApi } from './EffectDep.ts'
+import { EffectDep } from './EffectDep.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, NodeType, S_Node } from './siyuan_type.ts'
 
@@ -45,7 +45,7 @@ export const renderHTML = (
       renderObj.nodeStack.push(sy)
       /** 维护引用关系 */
       if (sy.ID && renderInstance.nodeStack[0]?.ID) {
-        const storeDep = yield* RenderApi
+        const storeDep = yield* EffectDep
         const id = sy.ID
         const targetDoc = yield* Effect.tryPromise(() =>
           storeDep.getDocByChildID(id),
@@ -194,7 +194,7 @@ export const getRender = Effect.gen(function* () {
 })
 
 const renderProgram = Effect.gen(function* () {
-  const storeDep = yield* RenderApi
+  const storeDep = yield* EffectDep
   async function callChildRender(sy: S_Node, renderInstance: Render) {
     const children = sy?.Children ?? []
 
@@ -203,7 +203,7 @@ const renderProgram = Effect.gen(function* () {
       Effect.runPromise(
         Effect.provideService(
           renderHTML(el, renderInstance),
-          RenderApi,
+          EffectDep,
           storeDep,
         ),
       ),
@@ -217,7 +217,7 @@ const renderProgram = Effect.gen(function* () {
   }
   async function callRenderHTML(sy: S_Node | undefined, render?: Render) {
     return Effect.runPromise(
-      Effect.provideService(renderHTML(sy, render), RenderApi, storeDep),
+      Effect.provideService(renderHTML(sy, render), EffectDep, storeDep),
     )
   }
 
