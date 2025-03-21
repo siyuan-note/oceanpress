@@ -1,5 +1,5 @@
-import '~/core/render.api.dep'
-import '~/util/store.node.dep'
+import '~/core/render.api.dep.ts'
+import '~/util/store.node.dep.ts'
 import { Command } from 'commander'
 
 export const program = new Command()

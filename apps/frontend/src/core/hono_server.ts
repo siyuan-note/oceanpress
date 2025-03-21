@@ -5,20 +5,33 @@ import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { stream } from 'hono/streaming'
 import type { StatusCode } from 'hono/utils/http-status'
+import { Effect } from 'effect'
+import { RenderApi, type renderApi } from './EffectDep.ts'
 
-export function createHonoApp(app: Hono = new Hono()) {
+export function createHonoApp(app: Hono = new Hono(), renderapi: renderApi) {
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
-
-    const r = await renderHtmlByUriPath(path).catch(async (err: Error) => {
-      if (err.message.includes('not doc')) {
-        return await assetsHandle(c)
-      }
-      throw err
-    })
-
+    const p = Effect.provideService(
+      renderHtmlByUriPath(path),
+      RenderApi,
+      renderapi,
+    )
+    const r = await Effect.runPromise(
+      Effect.match(p, {
+        onSuccess(value) {
+          return value
+        },
+        onFailure(err) {
+          if (err.message.includes('not doc')) {
+            return assetsHandle(c)
+          }
+          console.log('[err]', err)
+          throw err
+        },
+      }),
+    )
     if (r instanceof Error) {
       throw r
     } else if (typeof r === 'string') {
@@ -68,22 +81,26 @@ async function assetsHandle(c: Context) {
     }
   })
 }
-async function renderHtmlByUriPath(path: string): Promise<string | Error> {
-  const hpath = decodeURIComponent(path)
-    .replace(/\#(.*)?$/, '')
-    .replace(/\.html$/, '')
+function renderHtmlByUriPath(path: string) {
+  return Effect.gen(function* () {
+    const hpath = decodeURIComponent(path)
+      .replace(/\#(.*)?$/, '')
+      .replace(/\.html$/, '')
 
-  const doc = await get_doc_by_hpath(hpath)
-
-  return await htmlTemplate(
-    {
-      title: doc.Properties?.title || '',
-      htmlContent: await renderHTML(doc),
-      level: path.split('/').length - 1 /** 最开头有一个 /  */,
-    },
-    {
-      ...tempConfig.cdn,
-      embedCode: currentConfig.value.embedCode,
-    },
-  )
+    const doc = yield* Effect.tryPromise(() => get_doc_by_hpath(hpath))
+    const htmlContent = yield* renderHTML(doc)
+    return yield* Effect.tryPromise(() =>
+      htmlTemplate(
+        {
+          title: doc.Properties?.title || '',
+          htmlContent,
+          level: path.split('/').length - 1 /** 最开头有一个 /  */,
+        },
+        {
+          ...tempConfig.cdn,
+          embedCode: currentConfig.value.embedCode,
+        },
+      ),
+    )
+  })
 }

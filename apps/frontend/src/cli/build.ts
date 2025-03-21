@@ -1,10 +1,9 @@
-import { Command } from 'commander'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import { resolve } from 'path'
 import { join } from 'path/posix'
-import { program } from './common.ts'
 import { currentConfig, loadConfigFile } from '~/core/config.ts'
 import { OceanPress } from '~/core/ocean_press.ts'
+import { program } from './common.ts'
 
 program
   .command('build')

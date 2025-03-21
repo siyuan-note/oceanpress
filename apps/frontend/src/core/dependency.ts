@@ -14,8 +14,8 @@ export const storeDep = {
   getItem: nullDep as (key: string) => string | undefined,
 
   // render功能依赖的副作用
-  getNodeByID: nullDep as (id?: string) =>  Promise<S_Node | undefined>,
-  getDocPathBySY: nullDep as (sy?: S_Node) => Promise<string | undefined>,
-  getDocByChildID: nullDep as (id: string) => Promise<S_Node | undefined>,
-  getHPathByID_Node: nullDep as (id_node: string | S_Node) => Promise<string>,
+  // getNodeByID: nullDep as (id?: string) =>  Promise<S_Node | undefined>,
+  // getDocPathBySY: nullDep as (sy?: S_Node) => Promise<string | undefined>,
+  // getDocByChildID: nullDep as (id: string) => Promise<S_Node | undefined>,
+  // getHPathByID_Node: nullDep as (id_node: string | S_Node) => Promise<string>,
 }

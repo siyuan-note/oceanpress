@@ -30,12 +30,13 @@
     "*.md"
   ],
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/client-s3": "^3.772.0",
     "@hono/node-server": "^1.13.8",
     "cheerio": "1.0.0",
     "commander": "^13.1.0",
+    "effect": "^3.14.1",
     "fzstd": "^0.1.1",
-    "hono": "^4.7.4",
+    "hono": "^4.7.5",
     "jszip": "^3.10.1",
     "meilisearch": "^0.49.0",
     "naive-ui": "^2.41.0",
@@ -48,11 +49,11 @@
     "zstd-codec": "^0.1.5"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
+    "dependency-cruiser": "^16.10.0",
     "oceanpress-rpc": "workspace:*",
     "oceanpress-server": "workspace:*",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vitejs/plugin-vue-jsx": "^4.1.1",
-    "dependency-cruiser": "^16.10.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
     "vite": "^6.2.2",

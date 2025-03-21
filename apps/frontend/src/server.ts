@@ -1,13 +1,11 @@
 import { serve } from '@hono/node-server'
-import { createHonoApp } from './core/hono_server.ts'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { Hono } from 'hono'
-import { join, resolve } from 'path/posix'
-console.log(join(import.meta.url.slice(5), '../../public/'))
+import { createHonoApp } from './core/hono_server.ts'
+import { renderApiDep } from './core/render.api.dep.ts'
 
 export function server(config = { port: 80, hostname: '0.0.0.0' }) {
   const app = new Hono()
-
   // 方便开发调试样式
   app.use(
     '/notebook/*',
@@ -18,7 +16,7 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
       },
     }),
   )
-  createHonoApp(app)
+  createHonoApp(app, renderApiDep)
   return new Promise((resolve, _reject) => {
     serve(
       {

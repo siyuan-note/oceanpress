@@ -2,13 +2,14 @@ import { get_node_by_id } from './cache.ts'
 import type { Config } from './config.ts'
 import { storeDep } from './dependency.ts'
 import type { Render } from './render.ts'
-import type { DB_block } from './siyuan_type.ts'
+import type { DB_block, S_Node } from './siyuan_type.ts'
 
 /** 生成当前实例所有引用文档的RSS XML */
 export async function generateRSSXML(
   path: string,
   renderInstance: Render,
   config: Config,
+  getHPathByID_Node: (id_node: string | S_Node) => Promise<string>,
 ): Promise<string> {
   const refNode = (
     await Promise.all([...renderInstance.refs.values()].map(get_node_by_id))
@@ -30,7 +31,7 @@ export async function generateRSSXML(
         async (node) => `<item>
     <title>${node?.Properties?.title}</title>
     <link>${config.sitemap.sitePrefix}${
-          node?.ID ? (await storeDep.getHPathByID_Node(node?.ID)) + '.html' : ''
+          node?.ID ? (await getHPathByID_Node(node?.ID)) + '.html' : ''
         }</link>
     <description>${'' /** TODO 或许可以加入ai 进行摘要 */}</description>
     <pubDate>${
