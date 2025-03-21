@@ -18,7 +18,10 @@
     "oceanpress": "./dist-cli/cli.js"
   },
   "files": [
-    "dist",
+    "dist/assets",
+    "dist/dev",
+    "dist/index.html",
+    "dist/ocean_press-log.png",
     "dist-*",
     "*.md"
   ],
