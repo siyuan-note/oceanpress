@@ -22,7 +22,10 @@
     "dist/dev",
     "dist/index.html",
     "dist/ocean_press-log.png",
-    "dist-*",
+    "dist-app/assets",
+    "dist-app/dev",
+    "dist-app/app.*",
+    "dist-cli",
     "*.md"
   ],
   "dependencies": {
