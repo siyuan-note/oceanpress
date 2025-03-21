@@ -8,9 +8,8 @@ import type { OceanPressPlugin } from '~/core/ocean_press.ts'
 /** 上传数据到 OceanPressServer 适配云端  */
 export function deployOceanPressServer_plugin(config: Config) {
   const plugin: OceanPressPlugin = {
-    async build_onFileTree([tree], next) {
-      next(tree)
-
+    async build_onFileTree([tree,effectApi], next) {
+      next(tree,effectApi)
       const client = await createRPC<API>('apiConsumer', {
         async remoteCall(method, data) {
           let body: ReadableStream | string | Blob

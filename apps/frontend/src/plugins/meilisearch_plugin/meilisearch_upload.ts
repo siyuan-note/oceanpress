@@ -86,6 +86,6 @@ export class MeilisearchPlugin implements OceanPressPlugin {
       if (path.endsWith('index.html')) break
     }
     this.updateDocument()
-    return next(tree)
+    return next(...c)
   }
 }
