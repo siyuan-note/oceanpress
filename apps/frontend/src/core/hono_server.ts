@@ -11,20 +11,29 @@ import {
   EffectRender,
   type EffectRenderApi,
 } from './EffectDep.ts'
+import { renderDocTree } from './renderDocTree.ts'
 
 export function createHonoApp(
   app: Hono = new Hono(),
   renderapi: EffectRenderApi,
 ) {
+  const context = Context.empty().pipe(
+    Context.add(EffectRender, renderapi),
+    Context.add(EffectConfigDep, currentConfig.value),
+  )
+  /** 处理文档树的接口 */
+  app.get('/__oceanpress/docTree.html', async (c, next) => {
+    const p = Effect.provide(renderDocTree(), context)
+    const r = await Effect.runPromise(p)
+    return c.html(r)
+  })
   app.get('/', (c) => c.redirect('/index.html'))
+
   app.get('/assets/*', assetsHandle)
   app.get('/favicon.ico', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
-    const context = Context.empty().pipe(
-      Context.add(EffectRender, renderapi),
-      Context.add(EffectConfigDep, currentConfig.value),
-    )
+
     const p = Effect.provide(renderHtmlByUriPath(path), context)
     const r = await Effect.runPromise(p)
     return c.html(r)
@@ -72,7 +81,7 @@ async function assetsHandle(c: HonoContext) {
 }
 /** 渲染文档，通过 path 路径 */
 function renderHtmlByUriPath(path: string) {
-  console.log('[path]', path)
+  console.log('[render path]', path)
 
   return Effect.gen(function* () {
     const hpath = decodeURIComponent(path)

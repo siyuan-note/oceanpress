@@ -82,11 +82,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
 }
 #preview > [data-type='NodeDocument'] {
   padding: 0;
   max-width: 850px;
   flex: 1;
+  min-height: 850px;
 }
 
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
@@ -104,6 +106,7 @@ body {
 }
 
 #oceanpress-left-sidebar > iframe {
-  width: 100px;
+  width: 300px;
+  min-height: 800px;
   border: 0;
 }

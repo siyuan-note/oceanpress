@@ -1,7 +1,6 @@
 import { Context, Effect } from 'effect'
 import { escaping, unescaping } from '~/util/escaping.ts'
 import { EffectConfigDep, EffectRender } from './EffectDep.ts'
-import { renderDocTree } from './renderDocTree.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, NodeType, S_Node } from './siyuan_type.ts'
 
@@ -21,11 +20,6 @@ export const renderHTML = (
     if (sy === undefined) return ''
     const defaultRender = yield* getRender
     const renderInstance = render ?? defaultRender
-    if (render?.nodeStack.length === 1) {
-      // TODO 测试用
-      yield* renderDocTree()
-    }
-
     const renderObj: Render = {
       ...renderInstance,
       nodeStack: [
@@ -298,7 +292,7 @@ const renderProgram = Effect.gen(function* () {
     ${config.sidebarCode.leftCode}
     ${
       config.sidebarCode.enableDocTree
-        ? `<iframe src="${await this.getTopPathPrefix()}/assets/oceanpress/docTree.html"></iframe>`
+        ? `<iframe src="${await this.getTopPathPrefix()}/__oceanpress/docTree.html"></iframe>`
         : ''
     }
   </div>

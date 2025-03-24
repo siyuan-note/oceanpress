@@ -3,6 +3,7 @@ import { EffectConfigDep } from './EffectDep.ts'
 import type { DB_block } from './siyuan_type.ts'
 import { allDocBlock_by_bookId } from './cache.ts'
 import { API } from './siyuan_api.ts'
+import { tempConfig } from './config.ts'
 
 /** 生成文档树 */
 export function renderDocTree() {
@@ -11,7 +12,7 @@ export function renderDocTree() {
     const Doc_blocks: DB_block[] = yield* Effect.tryPromise(() =>
       allDocBlock_by_bookId(config.notebook.id),
     )
-    /** 获取排序信息 */
+    /** 获取文档树排序信息 */
     const sortJSON: { [id: string]: number | undefined } =
       yield* Effect.tryPromise(() =>
         API.file_getFile({
@@ -32,12 +33,47 @@ export function renderDocTree() {
       sort: sortJSON[el.id],
     }))
     const tree = buildTree(docs)
-    console.log(
-      '[tree]',
-      tree.map((e) => [e.title, e.sort, sortJSON[e.id], e.id]),
-    )
+    console.log('[generateHTMLTree(tree)]', generateHTMLTree(tree))
+    //根据 tree 生成对应的 html 目录树
+    const contentHtml = generateHTMLTree(tree)
+    return `
+     <link rel="stylesheet" type="text/css" href="${tempConfig.cdn.siyuanPrefix}appearance/docTree.css"/>
+    ${contentHtml}
+    `
   })
 }
+
+/** 生成可点击的HTML目录树（使用details标签实现折叠，全页面跳转） */
+function generateHTMLTree(nodes: DocNode[], level = 0): string {
+  let html = ''
+  for (const node of nodes) {
+    if (node.children && node.children.length > 0) {
+      // 有子节点时使用details/summary实现折叠
+      html += `
+          <details class="folder">
+            <summary class="folder-summary">
+              <a href="${node.hpath}" class="folder-link" target="_top">${
+        node.title
+      }</a>
+            </summary>
+            <div class="folder-children" style="padding:0 0 0 10px;">
+              ${generateHTMLTree(node.children, level + 1)}
+            </div>
+          </details>
+        `
+    } else {
+      // 没有子节点的普通项目
+      html += `
+          <div class="file">
+            <a href="${node.hpath}" class="file-link" target="_top">${node.title}</a>
+          </div>
+        `
+    }
+  }
+
+  return html
+}
+
 interface DocNode {
   id: string
   hpath: string
