@@ -4,7 +4,7 @@ import { loadConfigFile } from '~/core/config.ts'
 import { server } from '~/server.ts'
 import { program } from './common.ts'
 import { Context, Effect } from 'effect'
-import { EffectDep, EffectLocalStorageDep, EffectLogDep } from '~/core/EffectDep.ts'
+import { EffectRender, EffectLocalStorageDep, EffectLogDep } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
 program
@@ -32,7 +32,7 @@ program
       setCache(opt.cache !== 'false')
 
       const context = Context.empty().pipe(
-        Context.add(EffectDep, renderApiDep),
+        Context.add(EffectRender, renderApiDep),
         Context.add(EffectLocalStorageDep, nodeApiDep),
         Context.add(EffectLogDep, {
           log: (msg) => {

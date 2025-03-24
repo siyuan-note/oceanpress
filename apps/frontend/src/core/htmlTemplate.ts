@@ -1,3 +1,4 @@
+/** 添加对应的 html 模板 */
 export async function htmlTemplate(
   p: { htmlContent: string; title: string; level: number },
   config?: {
@@ -40,9 +41,7 @@ export async function htmlTemplate(
 </head>
 <body>
   ${config?.embedCode?.beforeBody ?? ''}
-  <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
   ${p.htmlContent}
-  </div>
   <script src="${prePath}appearance/icons/material/icon.js?${version}"></script>
   <script src="${prePath}stage/build/export/protyle-method.js?${version}"></script>
   <script src="${prePath}stage/protyle/js/lute/lute.min.js?${version}"></script>

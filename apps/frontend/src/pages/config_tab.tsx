@@ -12,7 +12,7 @@ import {
 } from 'naive-ui';
 import { configs, addConfig, loadConfigFile } from '~/core/config.ts';
 import { Effect } from 'effect';
-import { EffectDep, EffectLocalStorageDep } from '~/core/EffectDep.ts';
+import { EffectRender, EffectLocalStorageDep } from '~/core/EffectDep.ts';
 import { renderApiDep } from '~/core/render.api.dep.ts';
 import { bowerApiDep } from '~/util/store.bower.dep.ts';
 

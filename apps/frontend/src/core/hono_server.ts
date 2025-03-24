@@ -6,9 +6,9 @@ import { renderHTML } from './render.ts'
 import { stream } from 'hono/streaming'
 import type { StatusCode } from 'hono/utils/http-status'
 import { Effect } from 'effect'
-import { EffectDep, type effectDepApi } from './EffectDep.ts'
+import { EffectRender, type EffectRenderApi } from './EffectDep.ts'
 
-export function createHonoApp(app: Hono = new Hono(), renderapi: effectDepApi) {
+export function createHonoApp(app: Hono = new Hono(), renderapi: EffectRenderApi) {
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', assetsHandle)
   app.get('/favicon.ico', assetsHandle)
@@ -16,7 +16,7 @@ export function createHonoApp(app: Hono = new Hono(), renderapi: effectDepApi) {
     const path = decodeURIComponent(c.req.path)
     const p = Effect.provideService(
       renderHtmlByUriPath(path),
-      EffectDep,
+      EffectRender,
       renderapi,
     )
     const r = await Effect.runPromise(p)

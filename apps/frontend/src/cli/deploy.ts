@@ -8,7 +8,7 @@ import { OceanPress } from '~/core/ocean_press.ts'
 import { program } from './common.ts'
 import { Context, Effect } from 'effect'
 import {
-  EffectDep,
+  EffectRender,
   EffectLocalStorageDep,
   EffectLogDep,
 } from '~/core/EffectDep.ts'
@@ -62,7 +62,7 @@ program
     })
 
     const context = Context.empty().pipe(
-      Context.add(EffectDep, renderApiDep),
+      Context.add(EffectRender, renderApiDep),
       Context.add(EffectLocalStorageDep, nodeApiDep),
       Context.add(EffectLogDep, {
         log: (msg) => {

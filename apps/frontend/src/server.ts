@@ -2,7 +2,7 @@ import { serve } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { Effect } from 'effect'
 import { Hono } from 'hono'
-import { EffectDep } from './core/EffectDep.ts'
+import { EffectRender } from './core/EffectDep.ts'
 import { createHonoApp } from './core/hono_server.ts'
 
 export function server(config = { port: 80, hostname: '0.0.0.0' }) {
@@ -18,7 +18,7 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
         },
       }),
     )
-    const effectDep = yield* EffectDep
+    const effectDep = yield* EffectRender
     createHonoApp(app, effectDep)
     return new Promise((resolve, _reject) => {
       serve(

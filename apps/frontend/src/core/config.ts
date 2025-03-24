@@ -3,7 +3,7 @@ import { computed, reactive, watch } from 'vue'
 import { notebook } from './siyuan_type.ts'
 import packageJson from '~/../package.json'  with  { type: 'json' };
 import { Effect } from 'effect';
-import { EffectDep, EffectLocalStorageDep } from './EffectDep.ts';
+import { EffectRender, EffectLocalStorageDep } from './EffectDep.ts';
 const version = packageJson.version
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */

@@ -9,7 +9,7 @@ import Step3_config from './step3_config.tsx'
 import Step4_generate from './step4_generate.tsx'
 import { Context, Effect } from 'effect'
 import {
-  EffectDep,
+  EffectRender,
   EffectLocalStorageDep,
   EffectLogDep,
 } from '~/core/EffectDep.ts'
@@ -47,7 +47,7 @@ export default defineComponent({
         })
       }
       const context = Context.empty().pipe(
-        Context.add(EffectDep, renderApiDep),
+        Context.add(EffectRender, renderApiDep),
         Context.add(EffectLocalStorageDep, bowerApiDep),
         Context.add(EffectLogDep, {
           log: (msg) => {

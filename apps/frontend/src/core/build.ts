@@ -13,7 +13,7 @@ import packageJson from '~/../package.json' with { type: 'json' };
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'
 import { Effect } from 'effect'
-import {  EffectDep, EffectLogDep, type effectDepApi, type effectLog } from './EffectDep.ts'
+import {  EffectRender, EffectLogDep, type EffectRenderApi, type effectLog } from './EffectDep.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -34,7 +34,7 @@ export function build (config:Config,otherConfig?: {
   renderHtmlFn?: typeof renderHTML
 },){
   return Effect.gen(function*(){
-    const effectApi = yield* EffectDep
+    const effectApi = yield* EffectRender
     const effectLog = yield* EffectLogDep
 
     const _renderHTML = otherConfig?.renderHtmlFn ?? renderHTML
