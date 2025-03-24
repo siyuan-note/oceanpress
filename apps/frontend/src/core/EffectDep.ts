@@ -1,5 +1,6 @@
 import { Context } from 'effect'
 import type { S_Node } from './siyuan_type.ts'
+import type { Config } from './config.ts'
 
 export type EffectRenderApi = {
   // 渲染相关
@@ -34,4 +35,9 @@ export type effectLog = {
 export class EffectLogDep extends Context.Tag('EffectLogDep')<
   EffectLogDep,
   effectLog
+>() {}
+
+export class EffectConfigDep extends Context.Tag('EffectConfigDep')<
+  EffectConfigDep,
+  Config
 >() {}

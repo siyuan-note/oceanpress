@@ -1,9 +1,9 @@
-import { deepAssign } from '~/util/deep_assign.ts'
-import { computed, reactive, watch } from 'vue'
-import { notebook } from './siyuan_type.ts'
-import packageJson from '~/../package.json'  with  { type: 'json' };
 import { Effect } from 'effect';
-import { EffectRender, EffectLocalStorageDep } from './EffectDep.ts';
+import { computed, reactive, watch } from 'vue';
+import packageJson from '~/../package.json' with { type: 'json' };
+import { deepAssign } from '~/util/deep_assign.ts';
+import { EffectLocalStorageDep } from './EffectDep.ts';
+import { notebook } from './siyuan_type.ts';
 const version = packageJson.version
 
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
@@ -67,7 +67,7 @@ const defaultConfig = {
   //   publicZip:
   //     'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
   // },
-  /** s3 上传配置
+  /** 部署到 s3 上传配置
    * https://help.aliyun.com/zh/oss/developer-reference/use-amazon-s3-sdks-to-access-oss#section-2ri-suq-pb3
    */
   s3: {
@@ -103,6 +103,10 @@ const defaultConfig = {
   <a target="_blank" href="https://shenzilong.cn">崮生（子虚）</a>
 </p>
 </footer>`,
+  },
+  sidebarCode:{
+    leftCode: '',
+    rightCode: '',
   },
   OceanPress: {
     /** 此配置文件编译时的版本 */

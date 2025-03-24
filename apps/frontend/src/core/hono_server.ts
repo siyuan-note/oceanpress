@@ -1,30 +1,37 @@
-import { Context, Hono } from 'hono'
+import { Context as HonoContext, Hono } from 'hono'
 import { currentConfig, tempConfig } from './config.ts'
 import { get_doc_by_hpath } from './cache.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
 import { renderHTML } from './render.ts'
 import { stream } from 'hono/streaming'
 import type { StatusCode } from 'hono/utils/http-status'
-import { Effect } from 'effect'
-import { EffectRender, type EffectRenderApi } from './EffectDep.ts'
+import { Effect, Context } from 'effect'
+import {
+  EffectConfigDep,
+  EffectRender,
+  type EffectRenderApi,
+} from './EffectDep.ts'
 
-export function createHonoApp(app: Hono = new Hono(), renderapi: EffectRenderApi) {
+export function createHonoApp(
+  app: Hono = new Hono(),
+  renderapi: EffectRenderApi,
+) {
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', assetsHandle)
   app.get('/favicon.ico', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
-    const p = Effect.provideService(
-      renderHtmlByUriPath(path),
-      EffectRender,
-      renderapi,
+    const context = Context.empty().pipe(
+      Context.add(EffectRender, renderapi),
+      Context.add(EffectConfigDep, currentConfig.value),
     )
+    const p = Effect.provide(renderHtmlByUriPath(path), context)
     const r = await Effect.runPromise(p)
     return c.html(r)
   })
   return app
 }
-async function assetsHandle(c: Context) {
+async function assetsHandle(c: HonoContext) {
   // TODO 处于安全考虑应该防范 file 跳出 assets
   const file = c.req.path
   const widgetPrefix = '/assets/widget/'

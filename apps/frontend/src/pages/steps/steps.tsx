@@ -12,6 +12,7 @@ import {
   EffectRender,
   EffectLocalStorageDep,
   EffectLogDep,
+  EffectConfigDep,
 } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { bowerApiDep } from '~/util/store.bower.dep.ts'
@@ -49,6 +50,7 @@ export default defineComponent({
       const context = Context.empty().pipe(
         Context.add(EffectRender, renderApiDep),
         Context.add(EffectLocalStorageDep, bowerApiDep),
+        Context.add(EffectConfigDep, currentConfig.value),
         Context.add(EffectLogDep, {
           log: (msg) => {
             log.value += msg + '\n'

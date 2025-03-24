@@ -1,6 +1,6 @@
-import { Effect } from 'effect'
+import { Context, Effect } from 'effect'
 import { escaping, unescaping } from '~/util/escaping.ts'
-import { EffectRender } from './EffectDep.ts'
+import { EffectConfigDep, EffectRender } from './EffectDep.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, NodeType, S_Node } from './siyuan_type.ts'
 
@@ -196,17 +196,18 @@ export const getRender = Effect.gen(function* () {
 
 const renderProgram = Effect.gen(function* () {
   const storeDep = yield* EffectRender
+  const config = yield* EffectConfigDep
+  const context = Context.empty().pipe(
+    Context.add(EffectRender, storeDep),
+    Context.add(EffectConfigDep, config),
+  )
   async function callChildRender(sy: S_Node, renderInstance: Render) {
     const children = sy?.Children ?? []
 
     // 1. 创建所有子节点的渲染任务（并发启动）
     const promises = children.map((el) =>
       Effect.runPromise(
-        Effect.provideService(
-          renderHTML(el, renderInstance),
-          EffectRender,
-          storeDep,
-        ),
+        Effect.provide(renderHTML(el, renderInstance), context),
       ),
     )
 
@@ -217,9 +218,7 @@ const renderProgram = Effect.gen(function* () {
     return results.join('')
   }
   async function callRenderHTML(sy: S_Node | undefined, render?: Render) {
-    return Effect.runPromise(
-      Effect.provideService(renderHTML(sy, render), EffectRender, storeDep),
-    )
+    return Effect.runPromise(Effect.provide(renderHTML(sy, render), context))
   }
 
   const render: {
@@ -289,7 +288,11 @@ const renderProgram = Effect.gen(function* () {
       }\n${await callChildRender(sy, this)}</div>`
       /** 添加 protyle-wysiwyg 容器和侧边栏，这里面的才会得到对应的样式效果 */
       if (isTopDoc) {
-        html = `<div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">\n<div id="oceanpress-sidebar">侧边栏测试</div>\n${html}\n</div>`
+        html = `<div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
+  <div id="oceanpress-left-sidebar">${config.sidebarCode.leftCode}</div>
+  ${html}
+  <div id="oceanpress-right-sidebar">${config.sidebarCode.rightCode}</div>
+</div>`
       }
       return html
     },

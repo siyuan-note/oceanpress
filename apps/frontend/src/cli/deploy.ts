@@ -11,6 +11,7 @@ import {
   EffectRender,
   EffectLocalStorageDep,
   EffectLogDep,
+  EffectConfigDep,
 } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
@@ -64,6 +65,7 @@ program
     const context = Context.empty().pipe(
       Context.add(EffectRender, renderApiDep),
       Context.add(EffectLocalStorageDep, nodeApiDep),
+      Context.add(EffectConfigDep, currentConfig.value),
       Context.add(EffectLogDep, {
         log: (msg) => {
           if (msg.startsWith('渲染：')) {
