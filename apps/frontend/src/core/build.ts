@@ -1,19 +1,19 @@
+import { Effect } from 'effect'
+import packageJson from '~/../package.json' with { type: 'json' }
 import { Config, currentConfig, tempConfig } from '~/core/config.ts'
-import { htmlTemplate } from './htmlTemplate.ts'
-import { getRender, renderHTML } from './render.ts'
-import { API } from './siyuan_api.ts'
-import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import { deepAssign } from '~/util/deep_assign.ts'
 import {
   allDocBlock_by_bookId,
   get_doc_by_SyPath,
   get_node_by_id,
 } from './cache.ts'
-import packageJson from '~/../package.json' with { type: 'json' };
+import { EffectLogDep, EffectRender, type effectLog } from './EffectDep.ts'
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'
-import { Effect } from 'effect'
-import {  EffectRender, EffectLogDep, type EffectRenderApi, type effectLog } from './EffectDep.ts'
+import { htmlTemplate } from './htmlTemplate.ts'
+import { getRender, renderHTML } from './render.ts'
+import { API } from './siyuan_api.ts'
+import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -39,7 +39,6 @@ export function build (config:Config,otherConfig?: {
 
     const _renderHTML = otherConfig?.renderHtmlFn ?? renderHTML
     const book = config.notebook
-    console.log('[book]',book);
     const docTree: DocTree = {}
     const skipBuilds = useSkipBuilds()
 

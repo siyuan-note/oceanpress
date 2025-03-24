@@ -16,9 +16,9 @@ const sqlCacheMap = new Map<string, any>()
 /** hpath->S_Node文档节点 */
 const hpathCacheMap = new Map<string, S_Node>()
 /** id->S_Node */
-const idCacheMap = new Map</** id */ string, S_Node>()
+const idCacheMap = new Map<string, S_Node>()
 /** id->DB_block */
-const blockCacheMap = new Map</** id */ string, DB_block>()
+const blockCacheMap = new Map<string, DB_block>()
 
 export async function getIDsByHPath(p: {
   path: string

@@ -1,12 +1,12 @@
 import { Ref } from 'vue'
+import { currentConfig } from '~/core/config.ts'
 import {
   PromiseObj,
   usePromiseComputed,
 } from '../components/data_promise/index.ts'
-import { NodeDocument, S_Node, file, notebook } from './siyuan_type.ts'
-import { currentConfig } from '~/core/config.ts'
+import { S_Node, file, notebook } from './siyuan_type.ts'
 
-/** https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md */
+/** oceanpress 所依赖的相关 api https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md */
 export interface api {
   /**
    *  列出笔记本
@@ -14,42 +14,16 @@ export interface api {
   notebook_lsNotebooks(): {
     notebooks: notebook[]
   }
-  block_getBlockInfo(p: { id: string }): {
-    box: '20210816161940-zo21go1'
-    path: '/20201104153359-sk9a3yg.sy'
-    rootChildID: '20201104153359-sk9a3yg'
-    rootID: '20201104153359-sk9a3yg'
-    rootIcon: ''
-    rootTitle: 'markdown'
-  }
   filetree_listDocsByPath(p: { notebook: notebook['id']; path: '/' }): {
     box: '20210816161940-zo21go1'
     files: file[]
     path: '/'
   }
-  filetree_getHPathByID(p: { id: file['id'] }): '/foo/bar'
-  filetree_getDoc(p: {
-    id: file['id']
-    isBacklink: false
-    mode: 0
-    size: 48
-  }): NodeDocument
-  export_exportHTML(p: {
-    id: file['id']
-    pdf: false
-    /** 为空时思源不会写文件 https://github.com/siyuan-note/siyuan/blob/master/kernel/model/export.go ：ExportHTML */
-    savePath: ''
-  }): {
-    content: '<html>'
-    id: '20200825162036-4dx365o'
-    name: '排版元素'
-  }
   /** 执行 SQL 查询 https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#执行-sql-查询 */
   query_sql(p: {
     /** SELECT * FROM blocks WHERE content LIKE'%content%' LIMIT 7 */ stmt: string
   }): any[]
-  /** 获取文件 https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#获取文件
-   */
+  /** 获取文件 https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#获取文件 */
   file_getFile(p: { path: string }): S_Node | ArrayBuffer
   get_assets(p: { path: string }): ArrayBuffer
   /** 根据人类可读路径获取 IDs https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md#根据人类可读路径获取-ids */
