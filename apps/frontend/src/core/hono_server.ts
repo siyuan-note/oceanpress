@@ -63,27 +63,16 @@ async function assetsHandle(c: Context) {
     }
   })
 }
+/** 渲染文档，通过 path 路径 */
 function renderHtmlByUriPath(path: string) {
+  console.log('[path]', path)
+
   return Effect.gen(function* () {
     const hpath = decodeURIComponent(path)
       .replace(/\#(.*)?$/, '')
       .replace(/\.html$/, '')
 
-    const doc = yield* Effect.match(
-      Effect.tryPromise(() => get_doc_by_hpath(hpath)),
-      {
-        onSuccess(value) {
-          return value
-        },
-        onFailure(error) {
-          console.error('获取文档失败: ', error)
-          return 'not found' as const
-        },
-      },
-    )
-    if (doc === 'not found') {
-      return doc
-    }
+    const doc = yield* Effect.tryPromise(() => get_doc_by_hpath(hpath))
     const htmlContent = yield* renderHTML(doc)
     return yield* Effect.tryPromise(() =>
       htmlTemplate(
