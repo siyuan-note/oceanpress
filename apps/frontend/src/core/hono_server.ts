@@ -19,27 +19,8 @@ export function createHonoApp(app: Hono = new Hono(), renderapi: effectDepApi) {
       EffectDep,
       renderapi,
     )
-    const r = await Effect.runPromise(
-      Effect.match(p, {
-        onSuccess(value) {
-          return value
-        },
-        onFailure(err) {
-          if (err.message.includes('not doc')) {
-            return assetsHandle(c)
-          }
-          console.log('[err]', err)
-          throw err
-        },
-      }),
-    )
-    if (r instanceof Error) {
-      throw r
-    } else if (typeof r === 'string') {
-      return c.html(r)
-    } else {
-      return r
-    }
+    const r = await Effect.runPromise(p)
+    return c.html(r)
   })
   return app
 }
