@@ -27,6 +27,14 @@ program
     const config = await readFile(opt.config, 'utf-8')
     const filePath = resolve(opt.output)
 
+    /** 先加载配置 */
+    await Effect.runPromise(
+      Effect.provideService(
+        loadConfigFile(JSON.parse(config)),
+        EffectLocalStorageDep,
+        nodeApiDep,
+      ),
+    )
     const context = Context.empty().pipe(
       Context.add(EffectRender, renderApiDep),
       Context.add(EffectLocalStorageDep, nodeApiDep),
@@ -44,9 +52,9 @@ program
         },
       }),
     )
+
     const p = Effect.provide(
       Effect.gen(function* () {
-        yield* loadConfigFile(JSON.parse(config))
         const ocean_press = new OceanPress(currentConfig.value)
 
         // node 端写磁盘插件
