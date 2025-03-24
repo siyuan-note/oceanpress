@@ -104,8 +104,13 @@ const defaultConfig = {
 </p>
 </footer>`,
   },
+  /** 侧边栏配置 */
   sidebarCode:{
+    /** 启用文档树，则 leftCode 将插入在文档树上方 */
+    enableDocTree:true,
+    /** 将插入主文档的左侧div中的html代码 */
     leftCode: '',
+    /** 将插入主文档的右侧div中的html代码  */
     rightCode: '',
   },
   OceanPress: {

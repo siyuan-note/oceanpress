@@ -102,3 +102,8 @@ body {
 .protyle-wysiwyg div.hljs {
   display: block !important;
 }
+
+#oceanpress-left-sidebar > iframe {
+  width: 100px;
+  border: 0;
+}

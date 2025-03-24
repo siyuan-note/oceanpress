@@ -1,6 +1,7 @@
 import { Context, Effect } from 'effect'
 import { escaping, unescaping } from '~/util/escaping.ts'
 import { EffectConfigDep, EffectRender } from './EffectDep.ts'
+import { renderDocTree } from './renderDocTree.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, NodeType, S_Node } from './siyuan_type.ts'
 
@@ -20,6 +21,10 @@ export const renderHTML = (
     if (sy === undefined) return ''
     const defaultRender = yield* getRender
     const renderInstance = render ?? defaultRender
+    if (render?.nodeStack.length === 1) {
+      // TODO 测试用
+      yield* renderDocTree()
+    }
 
     const renderObj: Render = {
       ...renderInstance,
@@ -289,7 +294,14 @@ const renderProgram = Effect.gen(function* () {
       /** 添加 protyle-wysiwyg 容器和侧边栏，这里面的才会得到对应的样式效果 */
       if (isTopDoc) {
         html = `<div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">
-  <div id="oceanpress-left-sidebar">${config.sidebarCode.leftCode}</div>
+  <div id="oceanpress-left-sidebar">
+    ${config.sidebarCode.leftCode}
+    ${
+      config.sidebarCode.enableDocTree
+        ? `<iframe src="${await this.getTopPathPrefix()}/assets/oceanpress/docTree.html"></iframe>`
+        : ''
+    }
+  </div>
   ${html}
   <div id="oceanpress-right-sidebar">${config.sidebarCode.rightCode}</div>
 </div>`

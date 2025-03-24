@@ -1,0 +1,120 @@
+import { Effect } from 'effect'
+import { EffectConfigDep } from './EffectDep.ts'
+import type { DB_block } from './siyuan_type.ts'
+import { allDocBlock_by_bookId } from './cache.ts'
+import { API } from './siyuan_api.ts'
+
+/** 生成文档树 */
+export function renderDocTree() {
+  return Effect.gen(function* () {
+    const config = yield* EffectConfigDep
+    const Doc_blocks: DB_block[] = yield* Effect.tryPromise(() =>
+      allDocBlock_by_bookId(config.notebook.id),
+    )
+    /** 获取排序信息 */
+    const sortJSON: { [id: string]: number | undefined } =
+      yield* Effect.tryPromise(() =>
+        API.file_getFile({
+          path: `/data/${config.notebook.id}/.siyuan/sort.json`,
+        }).then((r) => {
+          // 1. 将 ArrayBuffer 转为字符串
+          const decoder = new TextDecoder('utf-8')
+          const jsonString = decoder.decode(r as ArrayBuffer)
+          // 2. 解析字符串为 JSON 对象
+          return JSON.parse(jsonString)
+        }),
+      )
+    const docs = Doc_blocks.map((el) => ({
+      id: el.id,
+      /** 类似 '/record/cssFlex' */
+      hpath: el.hpath,
+      title: el.content,
+      sort: sortJSON[el.id],
+    }))
+    const tree = buildTree(docs)
+    console.log(
+      '[tree]',
+      tree.map((e) => [e.title, e.sort, sortJSON[e.id], e.id]),
+    )
+  })
+}
+interface DocNode {
+  id: string
+  hpath: string
+  title: string
+  sort: number | undefined
+  children?: DocNode[]
+}
+
+function buildTree(docs: DocNode[]): DocNode[] {
+  // 1. 创建根节点和路径映射
+  const root: DocNode[] = []
+  const pathMap: Record<string, DocNode> = {}
+
+  // 2. 先按 hpath 排序，确保父节点先处理
+  docs.sort((a, b) => a.hpath.localeCompare(b.hpath))
+
+  // 3. 构建树结构
+  for (const doc of docs) {
+    const pathParts = doc.hpath.split('/').filter((part) => part !== '')
+    let currentPath = ''
+    let parentNode: DocNode | undefined = undefined
+
+    // 逐级查找或创建父节点
+    for (let i = 0; i < pathParts.length - 1; i++) {
+      currentPath += '/' + pathParts[i]
+      if (!pathMap[currentPath]) {
+        // 创建虚拟父节点
+        pathMap[currentPath] = {
+          id: 'virtual_' + currentPath,
+          hpath: currentPath,
+          title: pathParts[i],
+          sort: undefined,
+          children: [],
+        }
+        // 添加到父节点的children中
+        if (parentNode) {
+          parentNode.children = parentNode.children || []
+          parentNode.children.push(pathMap[currentPath])
+        } else {
+          root.push(pathMap[currentPath])
+        }
+      }
+      parentNode = pathMap[currentPath]
+    }
+
+    // 添加当前节点
+    if (parentNode) {
+      parentNode.children = parentNode.children || []
+      parentNode.children.push(doc)
+    } else {
+      root.push(doc)
+    }
+    pathMap[doc.hpath] = doc
+  }
+
+  // 4. 递归排序
+  function sortNodes(nodes: DocNode[]): DocNode[] {
+    return nodes
+      .map((node) => {
+        if (node.children) {
+          node.children = sortNodes(node.children)
+        }
+        return node
+      })
+      .sort((a, b) => {
+        // 有sort值的优先按sort排序，没有sort值的按title排序
+        if (a.sort !== undefined && b.sort !== undefined) {
+          return a.sort - b.sort
+        } else if (a.sort !== undefined) {
+          return -1
+        } else if (b.sort !== undefined) {
+          return 1
+        } else {
+          return (a.title || '').localeCompare(b.title || '')
+        }
+      })
+  }
+
+  return sortNodes(root)
+}
