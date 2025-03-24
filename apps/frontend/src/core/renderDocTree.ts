@@ -5,6 +5,7 @@ import { allDocBlock_by_bookId } from './cache.ts'
 import { API } from './siyuan_api.ts'
 import { tempConfig } from './config.ts'
 
+export const renderDocTreeHtmlPath = `/__oceanpress/docTree.html`
 /** 生成文档树 */
 export function renderDocTree() {
   return Effect.gen(function* () {
@@ -33,7 +34,6 @@ export function renderDocTree() {
       sort: sortJSON[el.id],
     }))
     const tree = buildTree(docs)
-    console.log('[generateHTMLTree(tree)]', generateHTMLTree(tree))
     //根据 tree 生成对应的 html 目录树
     const contentHtml = generateHTMLTree(tree)
     return `

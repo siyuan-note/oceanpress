@@ -14,6 +14,7 @@ import { htmlTemplate } from './htmlTemplate.ts'
 import { getRender, renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
+import { renderDocTree, renderDocTreeHtmlPath } from './renderDocTree.ts'
 
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
@@ -243,7 +244,11 @@ export function build (config:Config,otherConfig?: {
         })
         yield* Effect.tryPromise( ()=> Promise.all(widgetNode))
     }
-
+    if(config.sidebarCode.enableDocTree){
+      effectLog.log( `=== 开始生成文档树 ===`)
+      fileTree[renderDocTreeHtmlPath]=yield* renderDocTree()
+      effectLog.log( `=== 文档树生成完成 ===`)
+    }
     // === 输出编译成果 ===
     if (otherConfig?.onFileTree) {
       otherConfig.onFileTree(fileTree,effectLog)
@@ -258,6 +263,7 @@ export function build (config:Config,otherConfig?: {
         })
       )
     }
+
     config.OceanPress.version = packageJson.version
     /** 更新跳过编译的资源 */
     skipBuilds.write()

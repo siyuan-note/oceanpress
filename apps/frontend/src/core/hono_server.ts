@@ -11,7 +11,7 @@ import {
   EffectRender,
   type EffectRenderApi,
 } from './EffectDep.ts'
-import { renderDocTree } from './renderDocTree.ts'
+import { renderDocTree, renderDocTreeHtmlPath } from './renderDocTree.ts'
 
 export function createHonoApp(
   app: Hono = new Hono(),
@@ -22,7 +22,7 @@ export function createHonoApp(
     Context.add(EffectConfigDep, currentConfig.value),
   )
   /** 处理文档树的接口 */
-  app.get('/__oceanpress/docTree.html', async (c, next) => {
+  app.get(renderDocTreeHtmlPath, async (c) => {
     const p = Effect.provide(renderDocTree(), context)
     const r = await Effect.runPromise(p)
     return c.html(r)
@@ -81,7 +81,6 @@ async function assetsHandle(c: HonoContext) {
 }
 /** 渲染文档，通过 path 路径 */
 function renderHtmlByUriPath(path: string) {
-  console.log('[render path]', path)
 
   return Effect.gen(function* () {
     const hpath = decodeURIComponent(path)
