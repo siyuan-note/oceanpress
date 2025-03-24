@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "cli": "tsx ./src/cli.ts",
-    "cli_watch": "tsx watch ./src/cli.ts",
+    "cli-w": "tsx watch ./src/cli.ts",
     "build": "vite build && npm run build_lib",
     "build_lib": "vite build --config vite.sw.config.ts",
     "build_app": "vite build --mode library",
@@ -30,8 +30,8 @@
     "*.md"
   ],
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.772.0",
-    "@hono/node-server": "^1.13.8",
+    "@aws-sdk/client-s3": "^3.774.0",
+    "@hono/node-server": "^1.14.0",
     "cheerio": "1.0.0",
     "commander": "^13.1.0",
     "effect": "^3.14.1",
@@ -56,7 +56,7 @@
     "oceanpress-server": "workspace:*",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vite": "^6.2.2",
+    "vite": "^6.2.3",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.8"
   }

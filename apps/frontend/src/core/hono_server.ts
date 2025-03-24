@@ -11,6 +11,7 @@ import { EffectDep, type effectDepApi } from './EffectDep.ts'
 export function createHonoApp(app: Hono = new Hono(), renderapi: effectDepApi) {
   app.get('/', (c) => c.redirect('/index.html'))
   app.get('/assets/*', assetsHandle)
+  app.get('/favicon.ico', assetsHandle)
   app.get('*', async (c) => {
     const path = decodeURIComponent(c.req.path)
     const p = Effect.provideService(
@@ -87,7 +88,21 @@ function renderHtmlByUriPath(path: string) {
       .replace(/\#(.*)?$/, '')
       .replace(/\.html$/, '')
 
-    const doc = yield* Effect.tryPromise(() => get_doc_by_hpath(hpath))
+    const doc = yield* Effect.match(
+      Effect.tryPromise(() => get_doc_by_hpath(hpath)),
+      {
+        onSuccess(value) {
+          return value
+        },
+        onFailure(error) {
+          console.error('获取文档失败: ', error)
+          return 'not found' as const
+        },
+      },
+    )
+    if (doc === 'not found') {
+      return doc
+    }
     const htmlContent = yield* renderHTML(doc)
     return yield* Effect.tryPromise(() =>
       htmlTemplate(
