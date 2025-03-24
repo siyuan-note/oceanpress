@@ -15,6 +15,8 @@ export function server(config = { port: 80, hostname: '0.0.0.0' }) {
         root: './public/',
         onNotFound(path, c) {
           console.log('[onNotFound notebook path]', path)
+          // ./public/notebook/appearance/fonts/JetBrainsMono-2.304/JetBrainsMono-Regular.woff2
+          // ./public/notebook/appearance/fonts\JetBrainsMono-2.304/JetBrainsMono-Regular.woff2
         },
       }),
     )

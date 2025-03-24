@@ -39,8 +39,6 @@ body {
 .protyle-wysiwyg [data-node-id] [spellcheck] {
   min-height: 26px;
 }
-.protyle-wysiwyg [data-node-id] {
-}
 .protyle-wysiwyg .li {
   min-height: 34px;
 }
@@ -81,26 +79,25 @@ body {
 }
 #preview {
   padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 #preview > [data-type='NodeDocument'] {
   padding: 0;
-  margin: 0 auto;
-  max-width: 800px;
+  max-width: 850px;
 }
-#preview > * {
-  width: 100%;
-  margin: 0 auto;
-  max-width: 800px;
-}
+
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
   max-width: 100%;
   width: 100vw;
   background-position: center;
   background-size: cover;
 }
-
-
+#oceanpress-sidebar {
+  width: 50px;
+}
 /* 临时修复代码块错乱的问题 */
-.protyle-wysiwyg div.hljs{
+.protyle-wysiwyg div.hljs {
   display: block !important;
 }

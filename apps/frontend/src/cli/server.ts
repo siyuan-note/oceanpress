@@ -1,10 +1,14 @@
 import { readFile } from 'fs/promises'
 import { setCache } from '~/core/cache.ts'
-import { loadConfigFile } from '~/core/config.ts'
+import { loadConfigFile, tempConfig } from '~/core/config.ts'
 import { server } from '~/server.ts'
 import { program } from './common.ts'
 import { Context, Effect } from 'effect'
-import { EffectRender, EffectLocalStorageDep, EffectLogDep } from '~/core/EffectDep.ts'
+import {
+  EffectRender,
+  EffectLocalStorageDep,
+  EffectLogDep,
+} from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
 program
@@ -51,6 +55,8 @@ program
       const p = Effect.provide(
         Effect.gen(function* () {
           yield* loadConfigFile(JSON.parse(config))
+          /** 使用本地的文件，方便调试 */
+          tempConfig.cdn.siyuanPrefix = '/notebook/'
           return yield* server({
             hostname: opt.host,
             port: Number(opt.port),

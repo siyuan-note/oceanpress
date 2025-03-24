@@ -111,7 +111,7 @@ function strAttr(
           ? /** 任务列表 */ 't'
           : /** 无序列表 */ 'u'
 
-      if (sy.Type === 'NodeDocument') return 'h1'
+      if (sy.Type === 'NodeDocument') return ''
       else if (sy.Type === 'NodeHeading') return `h${sy.HeadingLevel}`
       else if (sy.Type === 'NodeList') return [typ_subtype, 'list']
       else if (sy.Type === 'NodeListItem') return [typ_subtype, 'li']
@@ -262,38 +262,34 @@ const renderProgram = Effect.gen(function* () {
       }
     },
     async NodeDocument(sy) {
-      let html = ''
       /** 对于顶层文档，也就是当前html的主要内容，渲染题头图和标题等其他信息，相比被嵌入的 doc 块需要做一些特殊处理  */
       const isTopDoc = this.nodeStack.length === 1
 
-      if (/** 只有顶层的文档块才渲染题头图 */ isTopDoc) {
-        html += `<div style="min-height: 150px;" ${strAttr(sy)}>`
-        if (sy.Properties?.['title-img']) {
-          html += `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${sy.Properties?.[
-            'title-img'
-          ].replace(
-            /assets/,
-            //  修改为相对路径
-            (await this.getTopPathPrefix()) + '/assets',
-          )}"/>${
-            sy.Properties?.['icon']
-              ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.['icon']} </div>`
-              : ''
-          }</div>`
-        }
-        html += '</div>'
-        /** h1 文档标题 */
-        html += `<h1 ${strAttr(sy)} data-type="NodeHeading" class="h1">${
-          sy.Properties?.title
-        }</h1>`
-      }
-      html += await callChildRender(sy, this)
-      /** 添加 protyle-wysiwyg 容器，这里面的才会得到对应的样式效果 */
-      if(isTopDoc){
-        html = ` <div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">\n${html}\n</div>`
-      }
-      if (/** 渲染侧边栏 */ isTopDoc) {
-        html = `<div id="preview"></div>${html}`
+      let html = `<div style="min-height: 150px;" ${strAttr(sy)}>\n${
+        /** 题头图 */
+        isTopDoc && sy.Properties?.['title-img']
+          ? `<div class="protyle-background__img" style="margin-bottom: 30px;position: relative;height: 16vh;${sy.Properties?.[
+              'title-img'
+            ].replace(
+              /assets/,
+              //  修改为相对路径
+              (await this.getTopPathPrefix()) + '/assets',
+            )}"/>${
+              sy.Properties?.['icon']
+                ? `<div style="position: absolute;bottom:-10px;left:15px;height: 80px;width: 80px;transition: var(--b3-transition);cursor: pointer;font-size: 68px;line-height: 80px;text-align: center;font-family: var(--b3-font-family-emoji);margin-right: 16px;"> &#x${sy.Properties?.['icon']} </div>`
+                : ''
+            }</div>`
+          : ''
+      }\n${
+        /** h1 文档标题 */ isTopDoc
+          ? `<h1 ${strAttr(sy)} data-type="NodeHeading" class="h1">${
+              sy.Properties?.title
+            }</h1>`
+          : ''
+      }\n${await callChildRender(sy, this)}</div>`
+      /** 添加 protyle-wysiwyg 容器和侧边栏，这里面的才会得到对应的样式效果 */
+      if (isTopDoc) {
+        html = `<div class="protyle-wysiwyg protyle-wysiwyg--attr" id="preview">\n<div id="oceanpress-sidebar">侧边栏测试</div>\n${html}\n</div>`
       }
       return html
     },
