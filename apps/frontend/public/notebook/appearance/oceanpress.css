@@ -86,6 +86,7 @@ body {
 #preview > [data-type='NodeDocument'] {
   padding: 0;
   max-width: 850px;
+  flex: 1;
 }
 
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
