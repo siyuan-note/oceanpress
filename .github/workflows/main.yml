@@ -3,11 +3,11 @@ name: Build and Deploy
 permissions:
   contents: write
 
-# 触发条件：在 push 到 main 分支后
+# 触发条件：在推送 tag 时触发
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 # 任务
 jobs:
