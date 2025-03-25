@@ -82,10 +82,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
 }
 #preview > [data-type='NodeDocument'] {
   padding: 0;
   max-width: 850px;
+  flex: 1;
+  min-height: 850px;
 }
 
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
@@ -100,4 +103,10 @@ body {
 /* 临时修复代码块错乱的问题 */
 .protyle-wysiwyg div.hljs {
   display: block !important;
+}
+
+#oceanpress-left-sidebar > iframe {
+  width: 300px;
+  min-height: 800px;
+  border: 0;
 }

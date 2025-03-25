@@ -1,0 +1,86 @@
+/* 基础样式重置 */
+.folder,
+.file {
+  margin: 4px 0;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+/* 文件夹样式 */
+.folder {
+  border-left: 2px solid #e1e4e8;
+  padding-left: 12px;
+  transition: all 0.2s ease;
+}
+
+.folder[open] {
+  border-left-color: #0366d6;
+}
+
+.folder-summary {
+  cursor: pointer;
+  outline: none;
+  list-style: none; /* 移除默认的三角标记 */
+  position: relative;
+  padding-left: 20px;
+}
+
+/* 自定义折叠图标 */
+.folder-summary::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #586069;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.folder[open] > .folder-summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* 链接样式 */
+.folder-link,
+.file-link {
+  color: #24292e;
+  text-decoration: none;
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.folder-link:hover,
+.file-link:hover {
+  color: #0366d6;
+  background-color: #f6f8fa;
+}
+
+/* 文件样式 */
+.file {
+  padding-left: 20px;
+  position: relative;
+}
+
+/* 文件图标 */
+.file::before {
+  content: '📄';
+  position: absolute;
+  left: 0;
+}
+
+/* 子文件夹缩进 */
+.folder-children {
+  margin-top: 4px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .folder,
+  .file {
+    font-size: 14px;
+  }
+}
