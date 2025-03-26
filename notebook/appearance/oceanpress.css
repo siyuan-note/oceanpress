@@ -82,10 +82,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 #preview > [data-type='NodeDocument'] {
-  padding: 0;
+  padding: 0 5px;
   max-width: 850px;
   flex: 1;
   min-height: 850px;
@@ -107,6 +106,50 @@ body {
 
 #oceanpress-left-sidebar > iframe {
   width: 300px;
-  min-height: 800px;
+  height: 100vh;
   border: 0;
+}
+#oceanpress-left-sidebar {
+  position: sticky;
+  top: 20px;
+  transition: transform 0.3s ease;
+}
+#oceanpress-left-sidebar > iframe {
+  width: 300px;
+  height: 100vh;
+  border: 0;
+}
+
+/* 小屏幕时隐藏侧边栏，并添加悬浮触发按钮 */
+@media (max-width: 768px) {
+  #oceanpress-left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: 1000;
+    background: #fff;
+  }
+
+  /* 悬浮伪元素（触发按钮） */
+  #oceanpress-left-sidebar::before {
+    content: '》'; /* 可以替换为图标或自定义样式 */
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 50px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+  }
+
+  /* 悬停时显示侧边栏 */
+  #oceanpress-left-sidebar:hover {
+    transform: translateX(0);
+  }
 }
