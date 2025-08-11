@@ -5,7 +5,7 @@ import { deepAssign } from '~/util/deep_assign.ts';
 import { EffectLocalStorageDep } from './EffectDep.ts';
 import { notebook } from './siyuan_type.ts';
 const version = packageJson.version
-
+console.log('[version]',version);
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
   name: 'default',
