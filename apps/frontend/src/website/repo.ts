@@ -66,6 +66,7 @@ export async function newSiyuanRepo(options: {
 
       if (isMatch) {
         const newData = decompress(data)
+        // @ts-expect-error - TypeScript type compatibility issue with newer versions
         data = newData
       }
       return data
@@ -129,11 +130,6 @@ export type fileMeta = {
   size: number
   updated: number
   chunks: string[]
-}
-
-function uint8ArrayToFile(uint8Array: Uint8Array, filename: string): File {
-  const blob = new Blob([uint8Array], { type: getMimeType(uint8Array) }) // 创建 Blob 对象
-  return new File([blob], filename, { type: blob.type }) // 创建 File 对象
 }
 
 function getMimeType(uint8Array: Uint8Array): string {
