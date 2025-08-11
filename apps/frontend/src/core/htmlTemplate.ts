@@ -1,6 +1,18 @@
+import { generateSeoContent } from './seo.ts'
+
 /** 添加对应的 html 模板 */
 export async function htmlTemplate(
-  p: { htmlContent: string; title: string; level: number },
+  p: { 
+    htmlContent: string; 
+    title: string; 
+    level: number;
+    seoData?: {
+      doc: any;
+      config: any;
+      pageUrl: string;
+      breadcrumbs?: Array<{ name: string; url: string }>;
+    }
+  },
   config?: {
     siyuanPrefix: string
     embedCode?: { head?: string; beforeBody?: string; afterBody?: string }
@@ -28,6 +40,13 @@ export async function htmlTemplate(
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  ${p.seoData ? generateSeoContent({
+    doc: p.seoData.doc,
+    config: p.seoData.config,
+    pageUrl: p.seoData.pageUrl,
+    content: p.htmlContent,
+    breadcrumbs: p.seoData.breadcrumbs
+  }).metaTags : ''}
   <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?${version}"/>
   <script>
   function isNightTime() {
@@ -38,6 +57,13 @@ export async function htmlTemplate(
   </script>
   <link rel="stylesheet" type="text/css" href="${prePath}appearance/oceanpress.css"/>
   <title>${p.title}</title>
+  ${p.seoData ? generateSeoContent({
+    doc: p.seoData.doc,
+    config: p.seoData.config,
+    pageUrl: p.seoData.pageUrl,
+    content: p.htmlContent,
+    breadcrumbs: p.seoData.breadcrumbs
+  }).jsonLd : ''}
 </head>
 <body>
   ${config?.embedCode?.beforeBody ?? ''}

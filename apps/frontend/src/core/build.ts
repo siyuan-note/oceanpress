@@ -16,6 +16,35 @@ import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import { renderDocTree, renderDocTreeHtmlPath } from './renderDocTree.ts'
 
+/**
+ * 生成面包屑导航数据
+ */
+function generateBreadcrumbs(path: string, config: any): Array<{ name: string; url: string }> {
+  const breadcrumbs: Array<{ name: string; url: string }> = []
+  
+  // 添加首页
+  if (config.sitemap?.siteLink) {
+    breadcrumbs.push({
+      name: config.sitemap?.title || '首页',
+      url: config.sitemap.siteLink
+    })
+  }
+  
+  // 解析路径
+  const pathSegments = path.split('/').filter(segment => segment.length > 0)
+  
+  let currentPath = ''
+  for (const segment of pathSegments) {
+    currentPath += '/' + segment
+    breadcrumbs.push({
+      name: segment,
+      url: `${config.sitemap?.siteLink || ''}${currentPath}.html`
+    })
+  }
+  
+  return breadcrumbs
+}
+
 export interface DocTree {
   [/** "/计算机基础课/自述" */ docPath: string]: {
     sy: S_Node
@@ -123,11 +152,21 @@ export function build (config:Config,otherConfig?: {
           const rootLevel = path.split('/').length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */
           const htmlContent = yield* _renderHTML(sy, renderInstance)
 
+          const pageUrl = config.sitemap.siteLink 
+            ? `${config.sitemap.siteLink}${path}.html`
+            : `${path}.html`
+          
           fileTree[path + '.html'] = yield* Effect.tryPromise( ()=>htmlTemplate(
             {
               title: sy.Properties?.title || '',
               htmlContent,
               level: rootLevel,
+              seoData: {
+                doc: sy,
+                config: config,
+                pageUrl: pageUrl,
+                breadcrumbs: generateBreadcrumbs(path, config)
+              },
             },
             {
               ...tempConfig.cdn,

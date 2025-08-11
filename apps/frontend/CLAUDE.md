@@ -1,0 +1,3 @@
+- 可以先运行 pnpm tsc 检查你的程序是否在类型上正确
+- 应该使用 tsx 直接运行 ts 文件
+- 可以在当前目录下运行 `pnpm cli build --config "./store/configs" --output "/home/gs/opensource_code/doc/docs"` 查看你的修改是否能够正常运行
