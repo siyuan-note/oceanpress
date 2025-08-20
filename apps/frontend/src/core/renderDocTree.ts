@@ -5,8 +5,8 @@ import { allDocBlock_by_bookId } from './cache.ts'
 import { API } from './siyuan_api.ts'
 import { tempConfig } from './config.ts'
 
-export const renderDocTreeHtmlPath = `/__oceanpress/docTree.html`
-/** 生成文档树 */
+export const renderDocTreeJsPath = `/__oceanpress/docTree.js`
+/** 生成文档树 JS 文件 */
 export function renderDocTree() {
   return Effect.gen(function* () {
     const config = yield* EffectConfigDep
@@ -34,13 +34,127 @@ export function renderDocTree() {
       sort: sortJSON[el.id],
     }))
     const tree = buildTree(docs)
-    //根据 tree 生成对应的 html 目录树
-    const contentHtml = generateHTMLTree(tree)
+    
+    // 生成 JS 代码
+    const jsCode = generateJSTree(tree)
     return `
-     <link rel="stylesheet" type="text/css" href="${tempConfig.cdn.siyuanPrefix}appearance/docTree.css"/>
-    ${contentHtml}
+// OceanPress DocTree - 动态加载的文档树
+(function() {
+  'use strict';
+  
+  // 文档树数据
+  const docTreeData = ${jsCode};
+  
+  // 渲染函数
+  function renderDocTree(containerId, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+      console.error('Container not found:', containerId);
+      return;
+    }
+    
+    const currentPath = options.currentPath || window.location.pathname.replace(/\\.html$/, '');
+    
+    // 生成 HTML
+    const html = generateHTMLTree(docTreeData, currentPath);
+    container.innerHTML = html;
+    
+    // 加载样式
+    loadStyles();
+    
+    // 初始化交互
+    initInteractions(container, currentPath);
+  }
+  
+  // 生成 HTML 树
+  function generateHTMLTree(nodes, currentPath, level = 0) {
+    let html = '';
+    for (const node of nodes) {
+      const isCurrent = node.hpath === currentPath;
+      const isActive = isCurrent || (currentPath && node.hpath && currentPath.startsWith(node.hpath));
+      
+      if (node.children && node.children.length > 0) {
+        // 有子节点时使用 details/summary
+        const isExpanded = isActive ? 'open' : '';
+        html += \`
+          <details class="folder" \${isExpanded}>
+            <summary class="folder-summary">
+              <a href="\${node.hpath}.html" class="folder-link \${isCurrent ? 'current' : ''}" target="_top">\${node.title}</a>
+            </summary>
+            <div class="folder-children" style="padding:0 0 0 10px;">
+              \${generateHTMLTree(node.children, currentPath, level + 1)}
+            </div>
+          </details>
+        \`;
+      } else {
+        // 没有子节点的普通项目
+        html += \`
+          <div class="file \${isCurrent ? 'current' : ''}">
+            <a href="\${node.hpath}.html" class="file-link" target="_top">\${node.title}</a>
+          </div>
+        \`;
+      }
+    }
+    return html;
+  }
+  
+  // 加载样式
+  function loadStyles() {
+    if (document.getElementById('oceanpress-doctree-styles')) return;
+    
+    const link = document.createElement('link');
+    link.id = 'oceanpress-doctree-styles';
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = '${tempConfig.cdn.siyuanPrefix}appearance/docTree.css';
+    document.head.appendChild(link);
+  }
+  
+  // 初始化交互
+  function initInteractions(container, currentPath) {
+    // 为当前页面项添加高亮样式
+    const currentItems = container.querySelectorAll('.current');
+    currentItems.forEach(item => {
+      item.style.backgroundColor = '#f6f8fa';
+      item.style.borderLeft = '3px solid #0366d6';
+      item.style.paddingLeft = '7px';
+    });
+    
+    // 自动滚动到当前页面
+    const firstCurrent = container.querySelector('.current');
+    if (firstCurrent) {
+      setTimeout(() => {
+        firstCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }
+  
+  // 暴露到全局
+  window.OceanPressDocTree = {
+    render: renderDocTree,
+    data: docTreeData
+  };
+  
+  // 自动渲染（如果容器存在）
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('oceanpress-doctree')) {
+        renderDocTree('oceanpress-doctree');
+      }
+    });
+  } else {
+    if (document.getElementById('oceanpress-doctree')) {
+      renderDocTree('oceanpress-doctree');
+    }
+  }
+})();
     `
   })
+}
+
+/** 生成 JavaScript 格式的文档树数据 */
+function generateJSTree(nodes: DocNode[]): string {
+  return JSON.stringify(nodes, null, 2);
 }
 
 /** 生成可点击的HTML目录树（使用details标签实现折叠，全页面跳转） */

@@ -3,7 +3,7 @@ import { escaping, unescaping } from '~/util/escaping.ts'
 import { EffectConfigDep, EffectRender } from './EffectDep.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, NodeType, S_Node } from './siyuan_type.ts'
-import { renderDocTreeHtmlPath } from './renderDocTree.ts'
+import { renderDocTreeJsPath } from './renderDocTree.ts'
 
 export type RenderHTML = typeof renderHTML
 export type Render = Effect.Effect.Success<typeof renderProgram>
@@ -293,7 +293,8 @@ const renderProgram = Effect.gen(function* () {
     ${config.sidebarCode.leftCode}
     ${
       config.sidebarCode.enableDocTree
-        ? `<iframe src="${await this.getTopPathPrefix()}${renderDocTreeHtmlPath}"></iframe>`
+        ? `<div id="oceanpress-doctree"></div>
+           <script src="${await this.getTopPathPrefix()}${renderDocTreeJsPath}" async></script>`
         : ''
     }
   </div>

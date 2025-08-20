@@ -104,20 +104,17 @@ body {
   display: block !important;
 }
 
-#oceanpress-left-sidebar > iframe {
-  width: 300px;
-  height: 100vh;
-  border: 0;
-}
 #oceanpress-left-sidebar {
   position: sticky;
   top: 20px;
   transition: transform 0.3s ease;
-}
-#oceanpress-left-sidebar > iframe {
   width: 300px;
-  height: 100vh;
-  border: 0;
+  min-height: 400px;
+}
+#oceanpress-doctree {
+  width: 300px;
+  min-height: 400px;
+  padding: 10px 0;
 }
 
 /* 小屏幕时隐藏侧边栏，并添加悬浮触发按钮 */

@@ -14,7 +14,7 @@ import { htmlTemplate } from './htmlTemplate.ts'
 import { getRender, renderHTML } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
-import { renderDocTree, renderDocTreeHtmlPath } from './renderDocTree.ts'
+import { renderDocTree, renderDocTreeJsPath } from './renderDocTree.ts'
 
 /**
  * 生成面包屑导航数据
@@ -285,7 +285,7 @@ export function build (config:Config,otherConfig?: {
     }
     if(config.sidebarCode.enableDocTree){
       effectLog.log( `=== 开始生成文档树 ===`)
-      fileTree[renderDocTreeHtmlPath]=yield* renderDocTree()
+      fileTree[renderDocTreeJsPath]=yield* renderDocTree()
       effectLog.log( `=== 文档树生成完成 ===`)
     }
     // === 输出编译成果 ===

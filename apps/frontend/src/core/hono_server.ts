@@ -11,7 +11,7 @@ import {
   EffectRender,
   type EffectRenderApi,
 } from './EffectDep.ts'
-import { renderDocTree, renderDocTreeHtmlPath } from './renderDocTree.ts'
+import { renderDocTree, renderDocTreeJsPath } from './renderDocTree.ts'
 
 export function createHonoApp(
   app: Hono = new Hono(),
@@ -22,10 +22,13 @@ export function createHonoApp(
     Context.add(EffectConfigDep, currentConfig.value),
   )
   /** 处理文档树的接口 */
-  app.get(renderDocTreeHtmlPath, async (c) => {
+  app.get(renderDocTreeJsPath, async (c) => {
     const p = Effect.provide(renderDocTree(), context)
     const r = await Effect.runPromise(p)
-    return c.html(r)
+    return c.text(r, 200, {
+      'Content-Type': 'application/javascript',
+      'Cache-Control': 'public, max-age=3600'
+    })
   })
   app.get('/', (c) => c.redirect('/index.html'))
 
