@@ -65,12 +65,12 @@
   position: relative;
 }
 
-/* 文件图标 */
-.file::before {
+/* 文件图标 - 已移至 oceanpress.css 统一管理 */
+/* .file::before {
   content: '📄';
   position: absolute;
   left: 0;
-}
+} */
 
 /* 子文件夹缩进 */
 .folder-children {
