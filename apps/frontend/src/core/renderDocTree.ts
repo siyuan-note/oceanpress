@@ -66,12 +66,71 @@ export function renderDocTree() {
     initInteractions(container, currentPath);
   }
   
+  // 检查是否为单一路径（只有单个子节点的文件夹）
+  function isSinglePath(node) {
+    if (!node.children || node.children.length !== 1) {
+      return false;
+    }
+    
+    let current = node;
+    while (current.children && current.children.length === 1) {
+      current = current.children[0];
+    }
+    
+    // 如果最终节点没有子节点，说明是单一路径
+    return !current.children || current.children.length === 0;
+  }
+
+  // 获取单一路径的所有节点
+  function getSinglePathNodes(node) {
+    const pathNodes = [node];
+    let current = node;
+    
+    while (current.children && current.children.length === 1) {
+      current = current.children[0];
+      pathNodes.push(current);
+    }
+    
+    return pathNodes;
+  }
+
+  // 生成面包屑路径
+  function generateBreadcrumb(pathNodes, currentPath) {
+    const lastNode = pathNodes[pathNodes.length - 1];
+    const isCurrent = lastNode.hpath === currentPath;
+    
+    let breadcrumbHtml = '<div class="breadcrumb-path">';
+    
+    pathNodes.forEach((node, index) => {
+      if (index > 0) {
+        breadcrumbHtml += '<span class="breadcrumb-separator">/</span>';
+      }
+      
+      const isLast = index === pathNodes.length - 1;
+      const nodeCurrent = node.hpath === currentPath;
+      
+      breadcrumbHtml += \`
+        <a href="\${node.hpath}.html" class="breadcrumb-part \${(isLast && isCurrent) ? 'current' : ''}" target="_top">\${node.title}</a>
+      \`;
+    });
+    
+    breadcrumbHtml += '</div>';
+    return breadcrumbHtml;
+  }
+
   // 生成 HTML 树
   function generateHTMLTree(nodes, currentPath, level = 0) {
     let html = '';
     for (const node of nodes) {
       const isCurrent = node.hpath === currentPath;
       const isActive = isCurrent || (currentPath && node.hpath && currentPath.startsWith(node.hpath));
+      
+      // 检查是否为单一路径，如果是则显示为面包屑
+      if (isSinglePath(node)) {
+        const pathNodes = getSinglePathNodes(node);
+        html += generateBreadcrumb(pathNodes, currentPath);
+        continue;
+      }
       
       if (node.children && node.children.length > 0) {
         // 有子节点时使用 details/summary
@@ -115,9 +174,16 @@ export function renderDocTree() {
     // 为当前页面项添加高亮样式
     const currentItems = container.querySelectorAll('.current');
     currentItems.forEach(item => {
-      item.style.backgroundColor = '#f6f8fa';
-      item.style.borderLeft = '3px solid #0366d6';
-      item.style.paddingLeft = '7px';
+      // 如果是面包屑路径中的当前项，需要特殊处理
+      if (item.classList.contains('breadcrumb-part')) {
+        item.style.fontWeight = 'bold';
+        item.style.color = 'var(--oceanpress-sidebar-current-border)';
+      } else {
+        // 使用 CSS 变量而不是硬编码颜色
+        item.style.backgroundColor = 'var(--oceanpress-sidebar-current-bg)';
+        item.style.borderLeft = '3px solid var(--oceanpress-sidebar-current-border)';
+        item.style.paddingLeft = '7px';
+      }
     });
     
     // 自动滚动到当前页面
@@ -127,6 +193,19 @@ export function renderDocTree() {
         firstCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
     }
+    
+    // 监听主题变化事件，更新高亮样式
+    window.addEventListener('oceanpress-theme-changed', function(e) {
+      currentItems.forEach(item => {
+        if (item.classList.contains('breadcrumb-part')) {
+          item.style.fontWeight = 'bold';
+          item.style.color = 'var(--oceanpress-sidebar-current-border)';
+        } else {
+          item.style.backgroundColor = 'var(--oceanpress-sidebar-current-bg)';
+          item.style.borderLeft = '3px solid var(--oceanpress-sidebar-current-border)';
+        }
+      });
+    });
   }
   
   // 暴露到全局
@@ -157,36 +236,6 @@ function generateJSTree(nodes: DocNode[]): string {
   return JSON.stringify(nodes, null, 2);
 }
 
-/** 生成可点击的HTML目录树（使用details标签实现折叠，全页面跳转） */
-function generateHTMLTree(nodes: DocNode[], level = 0): string {
-  let html = ''
-  for (const node of nodes) {
-    if (node.children && node.children.length > 0) {
-      // 有子节点时使用details/summary实现折叠
-      html += `
-          <details class="folder">
-            <summary class="folder-summary">
-              <a href="${node.hpath}" class="folder-link" target="_top">${
-        node.title
-      }</a>
-            </summary>
-            <div class="folder-children" style="padding:0 0 0 10px;">
-              ${generateHTMLTree(node.children, level + 1)}
-            </div>
-          </details>
-        `
-    } else {
-      // 没有子节点的普通项目
-      html += `
-          <div class="file">
-            <a href="${node.hpath}" class="file-link" target="_top">${node.title}</a>
-          </div>
-        `
-    }
-  }
-
-  return html
-}
 
 interface DocNode {
   id: string

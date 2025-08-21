@@ -2,15 +2,15 @@ import { generateSeoContent } from './seo.ts'
 
 /** 添加对应的 html 模板 */
 export async function htmlTemplate(
-  p: { 
-    htmlContent: string; 
-    title: string; 
-    level: number;
+  p: {
+    htmlContent: string
+    title: string
+    level: number
     seoData?: {
-      doc: any;
-      config: any;
-      pageUrl: string;
-      breadcrumbs?: Array<{ name: string; url: string }>;
+      doc: any
+      config: any
+      pageUrl: string
+      breadcrumbs?: Array<{ name: string; url: string }>
     }
   },
   config?: {
@@ -40,30 +40,186 @@ export async function htmlTemplate(
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  ${p.seoData ? generateSeoContent({
-    doc: p.seoData.doc,
-    config: p.seoData.config,
-    pageUrl: p.seoData.pageUrl,
-    content: p.htmlContent,
-    breadcrumbs: p.seoData.breadcrumbs
-  }).metaTags : ''}
+  ${
+    p.seoData
+      ? generateSeoContent({
+          doc: p.seoData.doc,
+          config: p.seoData.config,
+          pageUrl: p.seoData.pageUrl,
+          content: p.htmlContent,
+          breadcrumbs: p.seoData.breadcrumbs,
+        }).metaTags
+      : ''
+  }
   <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?${version}"/>
   <script>
-  function isNightTime() {
-    const currentHour = new Date().getHours();
-    return currentHour >= 18 || currentHour < 6;
-  }
-  document.write('<link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="${prePath}appearance/themes/'+(isNightTime()?'midnight':'daylight')+'/theme.css?${version}"/>');
+  // 更好的主题切换方案
+  (function() {
+    // 主题配置
+    const themes = {
+      light: {
+        name: 'daylight',
+        mode: 'light',
+        icon: '☀️'
+      },
+      dark: {
+        name: 'midnight',
+        mode: 'dark',
+        icon: '🌙'
+      },
+      auto: {
+        name: 'auto',
+        mode: 'auto',
+        icon: '🌗',
+        getTheme: function() {
+          const currentHour = new Date().getHours();
+          return currentHour >= 18 || currentHour < 6 ? 'dark' : 'light';
+        }
+      }
+    };
+
+    // 获取当前主题设置
+    function getCurrentTheme() {
+      // 优先级：localStorage > 系统偏好 > auto
+      const savedTheme = localStorage.getItem('oceanpress-theme');
+      if (savedTheme && themes[savedTheme]) {
+        return savedTheme;
+      }
+
+      // 检测系统偏好
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+      }
+
+      return 'auto';
+    }
+
+    // 应用主题
+    function applyTheme(themeName) {
+      const theme = themes[themeName] || themes.auto;
+      const actualTheme = themeName === 'auto' ? theme.getTheme() : themeName;
+      const themeConfig = themes[actualTheme];
+
+      // 设置 CSS 变量
+      document.documentElement.setAttribute('data-theme-mode', themeConfig.mode);
+      document.documentElement.setAttribute('data-light-theme', 'daylight');
+      document.documentElement.setAttribute('data-dark-theme', 'midnight');
+
+      // 加载对应的 CSS
+      const themeStyle = document.getElementById('themeDefaultStyle');
+      if (themeStyle) {
+        themeStyle.href = '${prePath}appearance/themes/' + themeConfig.name + '/theme.css?${version}';
+      } else {
+        // 如果元素不存在，创建它
+        const link = document.createElement('link');
+        link.id = 'themeDefaultStyle';
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '${prePath}appearance/themes/' + themeConfig.name + '/theme.css?${version}';
+        document.head.appendChild(link);
+      }
+
+      // 更新主题切换按钮
+      updateThemeToggle(themeName);
+
+      // 保存到 localStorage
+      localStorage.setItem('oceanpress-theme', themeName);
+
+      // 触发自定义事件
+      window.dispatchEvent(new CustomEvent('oceanpress-theme-changed', {
+        detail: { theme: themeName, actualTheme: actualTheme }
+      }));
+    }
+
+    // 创建主题切换按钮
+    function createThemeToggle() {
+      const toggle = document.createElement('div');
+      toggle.id = 'oceanpress-theme-toggle';
+      toggle.innerHTML = '<span class="theme-icon">🌗</span><span class="theme-text">自动</span>';
+      toggle.addEventListener('click', toggleTheme);
+      (document.querySelector('[data-type="NodeDocument"]')||document.body).appendChild(toggle);
+    }
+
+    // 更新主题切换按钮
+    function updateThemeToggle(themeName) {
+      const toggle = document.getElementById('oceanpress-theme-toggle');
+      if (!toggle) return;
+
+      const theme = themes[themeName] || themes.auto;
+      toggle.innerHTML = '<span class="theme-icon">' + theme.icon + '</span><span class="theme-text">' +
+        (themeName === 'auto' ? '自动' : (themeName === 'dark' ? '深色' : '浅色')) + '</span>';
+    }
+
+    // 切换主题
+    function toggleTheme() {
+      const currentTheme = getCurrentTheme();
+      const themeOrder = ['auto', 'light', 'dark'];
+      const currentIndex = themeOrder.indexOf(currentTheme);
+      const nextIndex = (currentIndex + 1) % themeOrder.length;
+      const nextTheme = themeOrder[nextIndex];
+
+      applyTheme(nextTheme);
+    }
+
+    // 监听系统主题变化
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const currentTheme = getCurrentTheme();
+        if (currentTheme === 'auto') {
+          applyTheme('auto');
+        }
+      });
+    }
+
+    // 监听自定义主题变化事件（用于侧边栏等组件）
+    window.addEventListener('oceanpress-theme-changed', function(e) {
+      // 这里可以添加其他组件需要响应主题变化的逻辑
+      console.log('Theme changed to:', e.detail);
+    });
+
+    // 初始化主题
+    function initTheme() {
+      const themeName = getCurrentTheme();
+      const theme = themes[themeName] || themes.auto;
+      const actualTheme = themeName === 'auto' ? theme.getTheme() : themeName;
+      const themeConfig = themes[actualTheme];
+
+      // 立即设置基础主题，避免闪烁
+      document.documentElement.setAttribute('data-theme-mode', themeConfig.mode);
+      document.documentElement.setAttribute('data-light-theme', 'daylight');
+      document.documentElement.setAttribute('data-dark-theme', 'midnight');
+
+      // 创建主题切换按钮
+      createThemeToggle();
+
+      // 应用完整主题
+      applyTheme(themeName);
+    }
+
+    // 页面加载完成后初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTheme);
+    } else {
+      initTheme();
+    }
+  })();
   </script>
   <link rel="stylesheet" type="text/css" href="${prePath}appearance/oceanpress.css"/>
   <title>${p.title}</title>
-  ${p.seoData ? generateSeoContent({
-    doc: p.seoData.doc,
-    config: p.seoData.config,
-    pageUrl: p.seoData.pageUrl,
-    content: p.htmlContent,
-    breadcrumbs: p.seoData.breadcrumbs
-  }).jsonLd : ''}
+  ${
+    p.seoData
+      ? generateSeoContent({
+          doc: p.seoData.doc,
+          config: p.seoData.config,
+          pageUrl: p.seoData.pageUrl,
+          content: p.htmlContent,
+          breadcrumbs: p.seoData.breadcrumbs,
+        }).jsonLd
+      : ''
+  }
 </head>
 <body>
   ${config?.embedCode?.beforeBody ?? ''}
@@ -75,7 +231,7 @@ export async function htmlTemplate(
     window.siyuan = {
       config: {
         appearance: {
-          mode: isNightTime()?1:0,//主题 明亮=0 暗黑=1
+          mode: document.documentElement.getAttribute('data-theme-mode') === 'dark' ? 1 : 0,//主题 明亮=0 暗黑=1
           codeBlockThemeDark: "base16/dracula",
           codeBlockThemeLight: "github",
         },
