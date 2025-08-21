@@ -82,12 +82,15 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 20px;
 }
 #preview > [data-type='NodeDocument'] {
   padding: 0 5px;
   max-width: 850px;
   flex: 1;
   min-height: 850px;
+  overflow-x: hidden;
+  word-wrap: break-word;
 }
 
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
@@ -308,8 +311,33 @@ body {
   font-size: 16px;
 }
 
+/* 中等屏幕时调整布局 */
+@media (max-width: 1024px) {
+  #preview {
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  #preview > [data-type='NodeDocument'] {
+    max-width: none;
+    flex: 1;
+  }
+}
+
 /* 小屏幕时隐藏侧边栏，并添加悬浮触发按钮 */
 @media (max-width: 768px) {
+  #preview {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  #preview > [data-type='NodeDocument'] {
+    max-width: none;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  
   #oceanpress-left-sidebar {
     position: fixed;
     left: 0;
