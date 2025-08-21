@@ -183,12 +183,12 @@ body {
   color: var(--oceanpress-sidebar-text);
   text-decoration: none;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 #oceanpress-doctree .folder-link:hover,
@@ -232,10 +232,11 @@ body {
 #oceanpress-doctree .breadcrumb-path .breadcrumb-part {
   color: var(--oceanpress-sidebar-text);
   text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 120px;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
 }
 
 #oceanpress-doctree .breadcrumb-path .breadcrumb-part:hover {
@@ -357,7 +358,7 @@ body {
     content: '☰';
     position: absolute;
     right: -40px;
-    top: 20px;
+    top: 60px;
     width: 40px;
     height: 40px;
     background: var(--oceanpress-toggle-bg);

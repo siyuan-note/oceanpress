@@ -186,6 +186,19 @@ export function renderDocTree() {
       }
     });
     
+    // 确保当前页面的所有父文件夹都展开
+    const currentElements = container.querySelectorAll('.current');
+    currentElements.forEach(currentElement => {
+      // 向上遍历所有父级 details 元素并展开
+      let parent = currentElement.parentElement;
+      while (parent) {
+        if (parent.tagName === 'DETAILS') {
+          parent.setAttribute('open', 'open');
+        }
+        parent = parent.parentElement;
+      }
+    });
+    
     // 自动滚动到当前页面
     const firstCurrent = container.querySelector('.current');
     if (firstCurrent) {
