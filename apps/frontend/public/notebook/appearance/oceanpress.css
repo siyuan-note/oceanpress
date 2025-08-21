@@ -209,7 +209,8 @@ body {
 /* 级联展开的面包屑样式 */
 #oceanpress-doctree .breadcrumb-path {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 4px;
   padding: 6px 12px;
   margin: 2px 8px;
@@ -217,6 +218,7 @@ body {
   transition: all 0.2s ease;
   cursor: pointer;
   user-select: none;
+  min-width: 0;
 }
 
 #oceanpress-doctree .breadcrumb-path:hover {
@@ -232,11 +234,8 @@ body {
 #oceanpress-doctree .breadcrumb-path .breadcrumb-part {
   color: var(--oceanpress-sidebar-text);
   text-decoration: none;
-  white-space: normal;
-  word-wrap: break-word;
+  white-space: nowrap;
   line-height: 1.4;
-  flex: 1;
-  min-width: 0;
 }
 
 #oceanpress-doctree .breadcrumb-path .breadcrumb-part:hover {
