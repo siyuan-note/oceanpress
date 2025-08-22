@@ -28,6 +28,10 @@
     "dist-cli",
     "*.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siyuan-note/oceanpress.git"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.873.0",
     "@hono/node-server": "^1.19.0",
