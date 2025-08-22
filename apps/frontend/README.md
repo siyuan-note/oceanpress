@@ -81,3 +81,8 @@ OceanPress 使用 JSON 格式的配置文件来定义站点的基本信息和构
 - Hono
 - Effect
 - Commander.js
+
+
+## 开发相关
+
+可以使用 claude 执行 /full-release 命令自动更新依赖并推送npm
