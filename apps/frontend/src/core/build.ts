@@ -201,11 +201,13 @@ export function build (config:Config,otherConfig?: {
         // process(i / Doc_blocks.length)
         return
       })
-    }), { concurrency: 5 })
+    }), {
+    /** 这里设置为 6 会比 'unbounded' 更快，猜测是并发太高会导致栈切换不过来. 在我的电脑上测试 6 是一个最佳数值 */
+      concurrency: 6 })
 
     const renderEndTime = Date.now()
     const renderDuration = ((renderEndTime - renderStartTime) / 1000).toFixed(2)
-    effectLog.log( `=== 文档渲染完毕，耗时: ${renderDuration}秒 ===`)
+    effectLog.log( `=== 文档渲染完毕，共 ${Object.keys(docTree).length+1}篇，耗时: ${renderDuration}秒 ===`)
     effectLog.log( `=== 开始生成 sitemap.xml ===`)
     if (config.sitemap.enable) {
       fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
