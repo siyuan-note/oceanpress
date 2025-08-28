@@ -21,7 +21,7 @@ import { renderDocTree, renderDocTreeJsPath } from './renderDocTree.ts'
  */
 function generateBreadcrumbs(path: string, config: any): Array<{ name: string; url: string }> {
   const breadcrumbs: Array<{ name: string; url: string }> = []
-  
+
   // 添加首页
   if (config.sitemap?.siteLink) {
     breadcrumbs.push({
@@ -29,10 +29,10 @@ function generateBreadcrumbs(path: string, config: any): Array<{ name: string; u
       url: config.sitemap.siteLink
     })
   }
-  
+
   // 解析路径
   const pathSegments = path.split('/').filter(segment => segment.length > 0)
-  
+
   let currentPath = ''
   for (const segment of pathSegments) {
     currentPath += '/' + segment
@@ -41,7 +41,7 @@ function generateBreadcrumbs(path: string, config: any): Array<{ name: string; u
       url: `${config.sitemap?.siteLink || ''}${currentPath}.html`
     })
   }
-  
+
   return breadcrumbs
 }
 
@@ -152,10 +152,10 @@ export function build (config:Config,otherConfig?: {
           const rootLevel = path.split('/').length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */
           const htmlContent = yield* _renderHTML(sy, renderInstance)
 
-          const pageUrl = config.sitemap.siteLink 
+          const pageUrl = config.sitemap.siteLink
             ? `${config.sitemap.siteLink}${path}.html`
             : `${path}.html`
-          
+
           fileTree[path + '.html'] = yield* Effect.tryPromise( ()=>htmlTemplate(
             {
               title: sy.Properties?.title || '',
@@ -197,12 +197,9 @@ export function build (config:Config,otherConfig?: {
           effectLog.log(`${path} 渲染失败:${error}`)
           console.log(error)
         }
-        process(i / Doc_blocks.length)
+        // process(i / Doc_blocks.length)
         return `渲染完毕:${path}`
       })
-
-
-
     })
 
     effectLog.log( `=== 渲染文档完成 ===`)
