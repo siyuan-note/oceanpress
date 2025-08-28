@@ -134,8 +134,9 @@ export function build (config:Config,otherConfig?: {
       return config.enableIncrementalCompilation_doc
     })()
     effectLog.log (`=== 开始渲染文档 ===`)
+    const renderStartTime = Date.now()
 
-    yield* Effect.forEach(Object.entries(docTree), ([path, { sy, docBlock }]) => {
+    yield* Effect.all(Object.entries(docTree).map( ([path, { sy, docBlock }]) => {
       return Effect.gen(function*(){
         if (
           config.enableIncrementalCompilation &&
@@ -192,17 +193,19 @@ export function build (config:Config,otherConfig?: {
           skipBuilds.add(docBlock.id, {
             refs: /** 保存引用 */ [...renderInstance.refs.values()],
           })
-          effectLog.log(`渲染完毕:${path}`)
+          // effectLog.log(`渲染完毕:${path}`)
         } catch (error) {
           effectLog.log(`${path} 渲染失败:${error}`)
           console.log(error)
         }
         // process(i / Doc_blocks.length)
-        return `渲染完毕:${path}`
+        return
       })
-    })
+    }), { concurrency: 5 })
 
-    effectLog.log( `=== 渲染文档完成 ===`)
+    const renderEndTime = Date.now()
+    const renderDuration = ((renderEndTime - renderStartTime) / 1000).toFixed(2)
+    effectLog.log( `=== 文档渲染完毕，耗时: ${renderDuration}秒 ===`)
     effectLog.log( `=== 开始生成 sitemap.xml ===`)
     if (config.sitemap.enable) {
       fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
