@@ -27,14 +27,23 @@ program
     const config = await readFile(opt.config, 'utf-8')
     const filePath = resolve(opt.output)
 
+    let parsedConfig
+    try {
+      parsedConfig = JSON.parse(config)
+    } catch (error) {
+      console.error('配置文件解析失败:', error)
+      throw new Error('配置文件格式错误')
+    }
+
     /** 先加载配置 */
     await Effect.runPromise(
       Effect.provideService(
-        loadConfigFile(JSON.parse(config)),
+        loadConfigFile(parsedConfig),
         EffectLocalStorageDep,
         nodeApiDep,
       ),
     )
+
     const context = Context.empty().pipe(
       Context.add(EffectRender, renderApiDep),
       Context.add(EffectLocalStorageDep, nodeApiDep),
@@ -60,11 +69,18 @@ program
         // node 端写磁盘插件
         ocean_press.pluginCenter.registerPlugin({
           async build_onFileTree([tree]) {
+            const dirPromises = new Set<string>()
+
             for (const [path, data] of Object.entries(tree)) {
-              const fullPath = join(filePath, './', path)
-              const pathArray = fullPath.split('/').slice(0, -1)
-              const dirPath = pathArray.join('/')
-              mkdir(dirPath, { recursive: true })
+              const fullPath = join(filePath, path)
+              const dirPath = resolve(fullPath, '..')
+
+              // 避免重复创建目录
+              if (!dirPromises.has(dirPath)) {
+                dirPromises.add(dirPath)
+                await mkdir(dirPath, { recursive: true })
+              }
+
               try {
                 if (typeof data === 'string') {
                   await writeFile(fullPath, data, 'utf-8')
@@ -72,13 +88,13 @@ program
                   await writeFile(fullPath, new DataView(data))
                 }
               } catch (error) {
-                console.log(`${fullPath} 无法写入`)
+                console.error(`${fullPath} 无法写入:`, error)
               }
             }
           },
         })
 
-        console.log('[config.__current__]', JSON.parse(config).__current__)
+        console.log('[config.__current__]', parsedConfig.__current__)
         console.log('[currentConfig.value.name]', currentConfig.value.name)
         return yield* ocean_press.build()
       }),

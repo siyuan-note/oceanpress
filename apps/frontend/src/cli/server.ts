@@ -11,6 +11,14 @@ import {
 } from '~/core/EffectDep.ts'
 import { renderApiDep } from '~/core/render.api.dep.ts'
 import { nodeApiDep } from '~/util/store.node.dep.ts'
+
+function validatePort(port: string): number {
+  const portNum = Number(port)
+  if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
+    throw new Error(`端口号必须在 1-65535 之间，当前值: ${port}`)
+  }
+  return portNum
+}
 program
   .command('server')
   .description('启动动态代理')
@@ -27,12 +35,19 @@ program
       config: string
       host: string
       port: string
-      cache: 'false'
+      cache: string
     }) => {
       if (!opt.config) {
         console.log(`请设置配置文件位置`)
+        throw new Error('请设置配置文件位置')
       }
-      const config = await readFile(opt.config, 'utf-8')
+      let config
+      try {
+        config = await readFile(opt.config, 'utf-8')
+      } catch (error) {
+        console.error('配置文件读取失败:', error)
+        throw new Error('配置文件读取失败')
+      }
       setCache(opt.cache !== 'false')
 
       const context = Context.empty().pipe(
@@ -54,12 +69,19 @@ program
 
       const p = Effect.provide(
         Effect.gen(function* () {
-          yield* loadConfigFile(JSON.parse(config))
+          let parsedConfig
+        try {
+          parsedConfig = JSON.parse(config)
+        } catch (error) {
+          console.error('配置文件解析失败:', error)
+          throw new Error('配置文件格式错误')
+        }
+        yield* loadConfigFile(parsedConfig)
           /** 使用本地的文件，方便调试 */
           tempConfig.cdn.siyuanPrefix = '/notebook/'
           return yield* server({
             hostname: opt.host,
-            port: Number(opt.port),
+            port: validatePort(opt.port),
           })
         }),
         context,

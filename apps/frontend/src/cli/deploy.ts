@@ -24,9 +24,16 @@ program
   .option('-k, --apiKey <string>', 'OceanPress server Api 密钥')
   .action(async (opt: { config: string; apiBase: string; apiKey: string }) => {
     if (!opt.apiBase || !opt.apiKey) {
-      return console.error(`请配置 apiBase 和 apiKey`)
+      console.error(`请配置 apiBase 和 apiKey`)
+      throw new Error('请配置 apiBase 和 apiKey')
     }
-    const config = await readFile(opt.config, 'utf-8')
+    let config
+    try {
+      config = await readFile(opt.config, 'utf-8')
+    } catch (error) {
+      console.error('配置文件读取失败:', error)
+      throw new Error('配置文件读取失败')
+    }
 
     const client = await createRPC<API>('apiConsumer', {
       remoteCall(method, data) {
@@ -38,7 +45,9 @@ program
           content_type = 'application/octet-stream'
         } else {
           body = stringify(data)
-          console.log('[body]', body)
+          if (process.env.NODE_ENV !== 'production') {
+            console.log('[body]', body)
+          }
           content_type = 'application/json'
         }
         return fetch(`${opt.apiBase}/api/${method}`, {
@@ -55,7 +64,7 @@ program
           .then((r) => {
             if (r.error) {
               console.log('[r]', r)
-              throw new Error()
+              throw new Error(r.error.message || 'API请求失败')
             }
             return r.result
           })
@@ -81,7 +90,14 @@ program
     )
     const p = Effect.provide(
       Effect.gen(function* () {
-        yield* loadConfigFile(JSON.parse(config))
+        let parsedConfig
+        try {
+          parsedConfig = JSON.parse(config)
+        } catch (error) {
+          console.error('配置文件解析失败:', error)
+          throw new Error('配置文件格式错误')
+        }
+        yield* loadConfigFile(parsedConfig)
         const ocean_press = new OceanPress(currentConfig.value)
 
         ocean_press.pluginCenter.registerPlugin({
