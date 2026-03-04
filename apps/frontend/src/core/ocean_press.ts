@@ -1,6 +1,7 @@
 import { MeilisearchPlugin } from '~/plugins/meilisearch_plugin/meilisearch_upload.ts'
 import { deployOceanPressServer_plugin } from '~/plugins/publish/OceanPressServer.ts'
 import { s3Upload_plugin } from '~/plugins/publish/s3.ts'
+import { MarkdownMirrorPlugin } from '~/plugins/markdown_mirror/plugin.ts'
 import { FileTree, build } from './build.ts'
 import { Config } from './config.ts'
 import type { effectLog } from './EffectDep.ts'
@@ -42,6 +43,11 @@ export class OceanPress {
     if (config.oceanPressServer.enable) {
       this.pluginCenter.registerPlugin(
         deployOceanPressServer_plugin(this.config),
+      )
+    }
+    if (config.markdownMirror.enable) {
+      this.pluginCenter.registerPlugin(
+        new MarkdownMirrorPlugin(config.markdownMirror),
       )
     }
   }

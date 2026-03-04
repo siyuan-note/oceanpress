@@ -91,6 +91,17 @@ const defaultConfig = {
     apiKey: '',
     indexName: '',
   },
+  /** Markdown 镜像导出配置 */
+  markdownMirror: {
+    enable: false,
+    outputDir: '',
+    includeAssets: false,
+    watchMode: false,
+    /** 定时同步间隔（毫秒） */
+    watchInterval: 60000,
+    /** 是否移除头部和底部（侧边栏、导航、footer 等） */
+    removeTemplate: false,
+  },
   /** html模板嵌入代码块，会将此处配置中的代码嵌入到生成的html所对应的位置 */
   embedCode: {
     head: '',

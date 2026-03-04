@@ -59,8 +59,10 @@ export type Build = typeof build
  * TODO 将浏览器写文件的部分抽离出去，也改成使用 onFileTree
  */
 export function build (config:Config,otherConfig?: {
+  // 在文件树构建完成后、写入磁盘前调用，可以修改文件树
+  beforeFileTree?: (tree: FileTree,effectApi:effectLog) => void | Promise<void>
   // 监听文件准备完毕 TODO：应该修改实现，而非目前直接全量加载到内存
-  onFileTree?: (tree: FileTree,effectApi:effectLog) => void
+  onFileTree?: (tree: FileTree,effectApi:effectLog) => void | Promise<void>
   renderHtmlFn?: typeof renderHTML
 },){
   return Effect.gen(function*(){
@@ -291,8 +293,11 @@ export function build (config:Config,otherConfig?: {
       effectLog.log( `=== 文档树生成完成 ===`)
     }
     // === 输出编译成果 ===
+    if (otherConfig?.beforeFileTree) {
+      yield* Effect.tryPromise(() => Promise.resolve(otherConfig.beforeFileTree!(fileTree,effectLog)))
+    }
     if (otherConfig?.onFileTree) {
-      otherConfig.onFileTree(fileTree,effectLog)
+      yield* Effect.tryPromise(() => Promise.resolve(otherConfig.onFileTree!(fileTree,effectLog)))
     }
     if (config.compressedZip) {
       effectLog.log( `=== 开始生成压缩包 ===`)
