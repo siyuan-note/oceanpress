@@ -1,4 +1,4 @@
-name: npm Publish
+name: npm Publish (OIDC)
 
 permissions:
   contents: read
@@ -45,8 +45,12 @@ jobs:
           pnpm server_build
           cd apps/frontend && pnpm build
 
-      # 发布到 npm (使用 provenance)
-      - name: Publish to npm
-        run: cd apps/frontend && npm publish --provenance --access public
+      # 配置 npm OIDC 认证
+      - name: Configure npm OIDC
+        run: npm config set //registry.npmjs.org/:_authToken ${NODE_AUTH_TOKEN}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # 发布到 npm (使用 OIDC + provenance)
+      - name: Publish to npm with OIDC
+        run: cd apps/frontend && npm publish --provenance --access public
