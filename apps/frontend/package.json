@@ -2,6 +2,20 @@
   "name": "oceanpress",
   "version": "1.0.12",
   "type": "module",
+  "description": "从思源笔记本生成静态站点的工具",
+  "author": "siyuan-note",
+  "license": "MIT",
+  "keywords": [
+    "siyuan",
+    "static-site-generator",
+    "markdown",
+    "blog",
+    "ssg"
+  ],
+  "homepage": "https://github.com/siyuan-note/oceanpress#readme",
+  "bugs": {
+    "url": "https://github.com/siyuan-note/oceanpress/issues"
+  },
   "scripts": {
     "dev": "vite",
     "cli": "tsx ./src/cli.ts",

@@ -1,0 +1,27 @@
+# 源代码
+src/
+tsconfig.json
+vite.config.ts
+vite*.config.ts
+tsup.config.ts
+
+# 开发文件
+.vscode/
+.claude/
+test_configs/
+store/
+
+# 构建缓存
+node_modules/
+dist-ssr/
+*.local
+
+# 测试文件
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+coverage/
+
+# 文档开发文件
+CLAUDE.md
+TODO.md
