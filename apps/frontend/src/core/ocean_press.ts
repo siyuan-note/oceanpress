@@ -46,7 +46,9 @@ export class OceanPress {
       )
     }
     // MarkdownMirror 插件：根据配置文件自动注册
+    console.log('[OceanPress constructor] config.markdownMirror?.enable:', config.markdownMirror?.enable)
     if (config.markdownMirror?.enable) {
+      console.log('[OceanPress] 注册 MarkdownMirror 插件')
       this.pluginCenter.registerPlugin(
         new MarkdownMirrorPlugin(config.markdownMirror),
       )

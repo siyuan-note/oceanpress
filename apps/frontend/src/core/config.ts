@@ -94,11 +94,7 @@ const defaultConfig = {
   /** Markdown 镜像导出配置 */
   markdownMirror: {
     enable: false,
-    outputDir: '',
     includeAssets: false,
-    watchMode: false,
-    /** 定时同步间隔（毫秒） */
-    watchInterval: 60000,
     /** 是否移除头部和底部（侧边栏、导航、footer 等） */
     removeTemplate: false,
   },

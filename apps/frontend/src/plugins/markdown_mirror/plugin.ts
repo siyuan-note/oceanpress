@@ -27,6 +27,9 @@ export class MarkdownMirrorPlugin implements OceanPressPlugin {
           await otherConfig.beforeFileTree(tree, effectApi)
         }
 
+        // 调试：输出 markdownMirror 配置状态
+        console.log('[MarkdownMirrorPlugin] config.markdownMirror?.enable:', config.markdownMirror?.enable)
+
         // 执行 Markdown 镜像导出
         if (config.markdownMirror?.enable) {
           effectApi.log('\n=== 开始 Markdown 镜像导出 ===')
