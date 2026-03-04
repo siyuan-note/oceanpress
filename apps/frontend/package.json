@@ -1,6 +1,6 @@
 {
   "name": "oceanpress",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "type": "module",
   "description": "从思源笔记本生成静态站点的工具",
   "author": "siyuan-note",

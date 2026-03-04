@@ -1,80 +1,25 @@
 import type { OceanPressPlugin } from '~/core/ocean_press.ts'
 import type { FileTree } from '~/core/build.ts'
-import { promises as fs } from 'fs'
-import path from 'path'
 // @ts-ignore - turndown 类型定义问题
 import TurndownService from 'turndown'
 
 export interface MarkdownMirrorConfig {
   /** 是否启用 Markdown 镜像导出 */
   enable: boolean
-  /** 镜像输出目录（绝对路径） */
-  outputDir: string
   /** 是否同步资源文件 */
   includeAssets: boolean
-  /** 是否启用定时同步（利用增量编译） */
-  watchMode: boolean
-  /** 定时同步间隔（毫秒），默认 60 秒 */
-  watchInterval?: number
-  /** 是否移除头部和底部（侧边栏、导航、footer 等） */
-  removeTemplate?: boolean
 }
 
 export class MarkdownMirrorPlugin implements OceanPressPlugin {
   name = 'MarkdownMirrorPlugin'
-  private watchTimer?: ReturnType<typeof setInterval>
 
   constructor(private config: MarkdownMirrorConfig) {
-    // 如果启用监听模式，启动定时任务
-    if (this.config.watchMode) {
-      this.startWatchMode()
-    }
-  }
-
-  /** 启动定时监听模式 */
-  private startWatchMode() {
-    const interval = this.config.watchInterval || 60000 // 默认 60 秒
-
-    console.log(`\n🔄 Markdown 镜像监听模式已启动，每 ${interval / 1000} 秒同步一次\n`)
-
-    this.watchTimer = setInterval(() => {
-      console.log('\n⏰ 定时任务触发，开始同步...')
-      // 注意：这里需要触发重新构建，实际使用时需要从外部调用 build
-      console.log('💡 请使用定时任务（如 cron）定期执行 oceanpress build 命令')
-    }, interval)
-  }
-
-  /** 停止监听模式 */
-  stopWatchMode() {
-    if (this.watchTimer) {
-      clearInterval(this.watchTimer)
-      this.watchTimer = undefined
-      console.log('🛑 Markdown 镜像监听模式已停止')
-    }
+    // 无需初始化操作
   }
 
   /** 拦截 build，添加 Markdown 导出回调 */
   build: OceanPressPlugin['build'] = function ([config, otherConfig], next) {
-    // 如果启用了 Markdown 镜像且要求移除模板，临时修改配置
-    const modifiedConfig = config.markdownMirror?.enable && config.markdownMirror.removeTemplate
-      ? {
-          ...config,
-          sidebarCode: {
-            ...config.sidebarCode,
-            enableDocTree: false,
-            leftCode: '',
-            rightCode: '',
-          },
-          embedCode: {
-            ...config.embedCode,
-            head: '',
-            beforeBody: '',
-            afterBody: '',
-          },
-        }
-      : config
-
-    return next(modifiedConfig, {
+    return next(config, {
       ...otherConfig,
       beforeFileTree: async (tree: FileTree, effectApi: any) => {
         // 先执行原有的 beforeFileTree 回调（如果有的话）
@@ -83,29 +28,15 @@ export class MarkdownMirrorPlugin implements OceanPressPlugin {
         }
 
         // 执行 Markdown 镜像导出
-        if (modifiedConfig.markdownMirror?.enable) {
+        if (config.markdownMirror?.enable) {
           effectApi.log('\n=== 开始 Markdown 镜像导出 ===')
 
           try {
-            await exportMarkdown(
+            convertHtmlToMarkdown(
               tree,
-              modifiedConfig.markdownMirror.outputDir,
-              modifiedConfig.markdownMirror.includeAssets
+              config.markdownMirror.includeAssets
             )
             effectApi.log('=== Markdown 镜像导出完成 ===\n')
-
-            // 如果是监听模式，显示下次同步时间
-            if (modifiedConfig.markdownMirror.watchMode) {
-              const interval = modifiedConfig.markdownMirror.watchInterval || 60000
-              effectApi.log(`⏰ 下次同步: ${new Date(Date.now() + interval).toLocaleTimeString()}\n`)
-            }
-
-            // 从文件树中删除所有 HTML 文件（不包括 assets 目录下的），这样它们不会被写入磁盘
-            const allHtmlFiles = Object.keys(tree).filter(path => path.endsWith('.html') && !path.startsWith('assets/'))
-            allHtmlFiles.forEach(htmlPath => {
-              delete tree[htmlPath]
-            })
-            effectApi.log(`🗑️  已从文件树中移除 ${allHtmlFiles.length} 个 HTML 文件（不写入磁盘）\n`)
           } catch (error) {
             effectApi.log('❌ Markdown 镜像导出失败: ' + error)
           }
@@ -175,10 +106,14 @@ function normalizePath(relativePath: string): string {
   return normalized
 }
 
-/** 从 HTML 文件树导出 Markdown 文件 */
-async function exportMarkdown(tree: FileTree, outputDir: string, includeAssets: boolean = false) {
-  // 确保输出目录存在
-  await fs.mkdir(outputDir, { recursive: true })
+/** 在文件树中将 HTML 转换为 Markdown */
+function convertHtmlToMarkdown(tree: FileTree, includeAssets: boolean = false) {
+  // 调试：输出文件树中的所有文件
+  const allFiles = Object.keys(tree)
+  console.log(`📂 文件树中共有 ${allFiles.length} 个文件`)
+  if (allFiles.length > 0) {
+    console.log('📂 前 10 个文件:', allFiles.slice(0, 10))
+  }
 
   // 第一阶段：扫描所有 HTML 文件，建立全局的 ID 到标题映射
   const globalIdToHeading = new Map<string, string>()
@@ -368,17 +303,12 @@ async function exportMarkdown(tree: FileTree, outputDir: string, includeAssets: 
 
   console.log(`📄 找到 ${htmlFiles.length} 个 HTML 文件\n`)
 
-  // 转换每个 HTML 文件为 Markdown
-  let exportedCount = 0
-  let skippedCount = 0
+  // 转换每个 HTML 文件为 Markdown，直接在文件树上操作
+  let convertedCount = 0
 
   for (const [htmlPath, htmlContent] of htmlFiles) {
     try {
-      // 计算对应的 Markdown 文件路径
       const mdPath = htmlPath.replace(/\.html$/, '.md')
-      const outputPath = path.join(outputDir, mdPath)
-
-      // 增量更新：检查文件是否已存在且内容相同
       const htmlStr = htmlContent.toString()
       let markdown = turndownService.turndown(htmlStr)
 
@@ -386,112 +316,31 @@ async function exportMarkdown(tree: FileTree, outputDir: string, includeAssets: 
       markdown = markdown.trimStart()
 
       // 后处理：移除代码块前的单独语言标识行
-      // Turndown 将思源的代码块语言标识转换成了单独的一行
-      // 格式：\n语言名\n\n```语言名\n
-      // 我们需要把它移除
       markdown = markdown.replace(/\n([a-z]+)\n\n(```[a-z]+\n)/g, '\n$2')
 
-      try {
-        const existingContent = await fs.readFile(outputPath, 'utf-8')
-        if (existingContent === markdown) {
-          skippedCount++
-          continue
-        }
-      } catch {
-        // 文件不存在，需要创建
-      }
+      // 在文件树中添加 Markdown 文件
+      tree[mdPath] = markdown
 
-      // 确保目录存在
-      const dir = path.dirname(outputPath)
-      await fs.mkdir(dir, { recursive: true })
+      // 删除原来的 HTML 文件
+      delete tree[htmlPath]
 
-      // 写入 Markdown 文件
-      await fs.writeFile(outputPath, markdown, 'utf-8')
-      exportedCount++
-
-      console.log(`✅ [${exportedCount}] ${mdPath}`)
+      convertedCount++
+      console.log(`✅ [${convertedCount}] ${htmlPath} → ${mdPath}`)
     } catch (error) {
       console.error(`❌ 转换失败: ${htmlPath}`, error)
     }
   }
 
-  if (skippedCount > 0) {
-    console.log(`⏭️  跳过 ${skippedCount} 个未变更的文件`)
-  }
+  console.log(`\n🎉 成功转换 ${convertedCount} 个 HTML 文件为 Markdown`)
 
-  console.log(`\n🎉 成功导出 ${exportedCount} 个 Markdown 文件到: ${outputDir}`)
-
-  // 同步资源文件（如果启用）
-  if (includeAssets) {
-    await syncAssets(tree, outputDir)
-  }
-}
-
-/** 同步资源文件 */
-async function syncAssets(tree: FileTree, outputDir: string) {
-  console.log('\n📦 开始同步资源文件...')
-
-  const assetsDir = path.join(outputDir, 'assets')
-  await fs.mkdir(assetsDir, { recursive: true })
-
-  // 筛选出所有资源文件
-  const assetFiles = Object.entries(tree).filter(([filePath]) =>
-    filePath.startsWith('assets/')
-  )
-
-  console.log(`📦 找到 ${assetFiles.length} 个资源文件\n`)
-
-  // 复制资源文件（增量更新）
-  let copiedCount = 0
-  let skippedCount = 0
-
-  for (const [assetPath, assetContent] of assetFiles) {
-    try {
-      const outputPath = path.join(outputDir, assetPath)
-
-      // 检查文件是否已存在
-      try {
-        const existingStats = await fs.stat(outputPath)
-        const existingContent = await fs.readFile(outputPath)
-
-        let currentContent: Buffer
-        if (typeof assetContent === 'string') {
-          currentContent = Buffer.from(assetContent, 'utf-8')
-        } else {
-          currentContent = Buffer.from(assetContent)
-        }
-
-        // 比较文件大小和内容
-        if (existingStats.size === currentContent.length &&
-            existingContent.equals(currentContent)) {
-          skippedCount++
-          continue
-        }
-      } catch {
-        // 文件不存在，需要创建
-      }
-
-      // 确保目录存在
-      const dir = path.dirname(outputPath)
-      await fs.mkdir(dir, { recursive: true })
-
-      // 写入资源文件
-      if (typeof assetContent === 'string') {
-        await fs.writeFile(outputPath, assetContent, 'utf-8')
-      } else {
-        await fs.writeFile(outputPath, Buffer.from(assetContent))
-      }
-
-      copiedCount++
-      console.log(`📦 [${copiedCount}] ${assetPath}`)
-    } catch (error) {
-      console.error(`❌ 复制失败: ${assetPath}`, error)
+  // 如果不同步资源文件，删除 assets 目录
+  if (!includeAssets) {
+    const assetPaths = Object.keys(tree).filter(path => path.startsWith('assets/'))
+    assetPaths.forEach(assetPath => {
+      delete tree[assetPath]
+    })
+    if (assetPaths.length > 0) {
+      console.log(`🗑️  已从文件树中移除 ${assetPaths.length} 个资源文件`)
     }
   }
-
-  if (skippedCount > 0) {
-    console.log(`⏭️  跳过 ${skippedCount} 个未变更的资源文件`)
-  }
-
-  console.log(`\n🎉 成功同步 ${copiedCount} 个资源文件`)
 }
