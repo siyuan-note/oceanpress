@@ -78,7 +78,7 @@ body {
   margin: 0;
 }
 #preview {
-  padding: 16px 20px;
+  padding: 24px 20px 48px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -88,13 +88,26 @@ body {
   max-width: 1280px;
   margin: 0 auto;
 }
+/** 中文阅读最佳行宽约 720~800px（35~45 字/行） */
 #preview > [data-type='NodeDocument'] {
   padding: 0 5px;
-  max-width: 850px;
+  max-width: 760px;
   flex: 1;
   min-height: 850px;
   overflow-x: hidden;
   word-wrap: break-word;
+}
+
+/** 文档标题下的更新时间 meta */
+.oceanpress-doc-meta {
+  margin: -14px 0 28px;
+  font-size: 13px;
+  color: var(--b3-theme-on-surface-light, #9099a6);
+  letter-spacing: 0.2px;
+  user-select: none;
+}
+#preview > [data-type='NodeDocument'] > .h1 {
+  margin-bottom: 4px;
 }
 
 #preview > [data-type='NodeDocument'] > .protyle-background__img {
@@ -111,24 +124,23 @@ body {
   display: block !important;
 }
 
-/* 主题切换按钮：使用思源 b3 变量 */
+/* 主题切换按钮：使用思源 b3 变量。
+   优先挂在 .header-container 内随导航排版；无导航时回退为 fixed 悬浮 */
 #oceanpress-theme-toggle {
-  position: fixed;
-  top: 16px;
-  right: 20px;
-  z-index: 1000;
-  background-color: var(--b3-theme-surface);
-  border: 1px solid var(--b3-border-color);
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--b3-theme-on-surface);
-  display: flex;
+  flex: none;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  box-shadow: var(--b3-point-shadow, 0 0 0.1rem rgba(0, 0, 0, 0.15));
+  background-color: transparent;
+  border: 1px solid var(--b3-border-color);
+  border-radius: var(--b3-border-radius-round, 999px);
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--b3-theme-on-surface);
   user-select: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 #oceanpress-theme-toggle:hover {
@@ -137,6 +149,16 @@ body {
 
 #oceanpress-theme-toggle .theme-icon {
   font-size: 15px;
+}
+
+/** 回退形态：未挂在 header 时悬浮在右上角 */
+body > #oceanpress-theme-toggle {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 1000;
+  background-color: var(--b3-theme-surface);
+  box-shadow: var(--b3-point-shadow, 0 0 0.1rem rgba(0, 0, 0, 0.15));
 }
 
 /* 右侧边栏窄屏隐藏 */
@@ -174,10 +196,10 @@ body {
     box-sizing: border-box;
   }
 
-  #oceanpress-theme-toggle {
-    top: 10px;
+  body > #oceanpress-theme-toggle {
+    top: 8px;
     right: 10px;
-    padding: 5px 12px;
+    padding: 3px 10px;
     font-size: 12px;
   }
 }
