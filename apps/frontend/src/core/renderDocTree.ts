@@ -67,6 +67,9 @@ export function renderDocTree() {
     if (/(^|\\/)index\\.html$/.test(p)) {
       /** 站点根的 index.html：hpath 为 /index（思源文档树的根节点） */
       p = p.replace(/index\\.html$/, 'index');
+    } else if (p === '/' || p === '') {
+      /** 以目录形式访问站点根：同样映射到 /index */
+      p = '/index';
     } else {
       /** 普通文档页：去掉 .html 后缀 */
       p = p.replace(/\\.html$/, '');
