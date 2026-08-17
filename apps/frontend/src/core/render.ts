@@ -184,6 +184,15 @@ function strAttr(
 const _emptyString = async (_sy: S_Node) => ''
 const _dataString = async (sy: S_Node) => sy.Data ?? ''
 
+/** 将思源 updated 时间串（20230820185054）格式化为可读日期 */
+function formatSYDate(syDate: string): string {
+  const y = syDate.slice(0, 4)
+  const m = syDate.slice(4, 6)
+  const d = syDate.slice(6, 8)
+  if (!y || !m || !d) return syDate
+  return `${y}-${m}-${d}`
+}
+
 /** 对一些数据常量进行处理 */
 export const getRender = Effect.gen(function* () {
   const render = yield* renderProgram
@@ -283,7 +292,14 @@ const renderProgram = Effect.gen(function* () {
         /** h1 文档标题 */ isTopDoc
           ? `<h1 ${strAttr(sy)} data-type="NodeHeading" class="h1">${
               sy.Properties?.title
-            }</h1>`
+            }</h1>${
+              /** 标题下的更新时间 meta（思源 updated 格式 20230820185054） */
+              sy.Properties?.updated
+                ? `<div class="oceanpress-doc-meta">更新于 ${formatSYDate(
+                    sy.Properties.updated,
+                  )}</div>`
+                : ''
+            }`
           : ''
       }\n${await callChildRender(sy, this)}</div>`
       /** 添加 protyle-wysiwyg 容器和侧边栏，这里面的才会得到对应的样式效果 */

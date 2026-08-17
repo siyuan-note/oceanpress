@@ -134,13 +134,19 @@ export async function htmlTemplate(
       }));
     }
 
-    // 创建主题切换按钮
+    // 创建主题切换按钮：优先挂在顶部导航（.header-container）里，与搜索按钮同排；
+    // 没有导航时回退为 body 下的 fixed 悬浮按钮（配合 oceanpress.css 的 body > #oceanpress-theme-toggle）
     function createThemeToggle() {
       const toggle = document.createElement('div');
       toggle.id = 'oceanpress-theme-toggle';
       toggle.innerHTML = '<span class="theme-icon">🌗</span><span class="theme-text">自动</span>';
       toggle.addEventListener('click', toggleTheme);
-      (document.querySelector('[data-type="NodeDocument"]')||document.body).appendChild(toggle);
+      const header = document.querySelector('.header-container');
+      if (header) {
+        header.appendChild(toggle);
+      } else {
+        document.body.appendChild(toggle);
+      }
     }
 
     // 更新主题切换按钮
