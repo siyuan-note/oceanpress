@@ -1,86 +1,261 @@
-/* 基础样式重置 */
-.folder,
-.file {
-  margin: 4px 0;
-  line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
+/**
+ * OceanPress 文档树样式 —— 对齐思源笔记本体文档树观感
+ * 依赖思源 base.css 提供的 --b3-* CSS 变量，天然适配明暗主题与自定义主题
+ */
+
+/* ---------- 侧边栏容器 ---------- */
+#oceanpress-left-sidebar {
+  position: sticky;
+  top: 16px;
+  align-self: flex-start;
+  width: 280px;
+  flex-shrink: 0;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--b3-theme-background);
+  border: 1px solid var(--b3-border-color);
+  border-radius: var(--b3-border-radius, 6px);
+  box-shadow: var(--b3-point-shadow, 0 0 0.1rem rgba(0, 0, 0, 0.15));
+  overflow: hidden;
 }
 
-/* 文件夹样式 */
-.folder {
-  border-left: 2px solid #e1e4e8;
-  padding-left: 12px;
-  transition: all 0.2s ease;
-}
-
-.folder[open] {
-  border-left-color: #0366d6;
-}
-
-.folder-summary {
-  cursor: pointer;
-  outline: none;
-  list-style: none; /* 移除默认的三角标记 */
-  position: relative;
-  padding-left: 20px;
-}
-
-/* 自定义折叠图标 */
-.folder-summary::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #586069;
+/* 侧边栏标题栏，思源 dock 风格 */
+#oceanpress-left-sidebar .oceanpress-dock-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
   font-size: 12px;
-  transition: transform 0.2s ease;
+  color: var(--b3-theme-on-surface);
+  border-bottom: 1px solid var(--b3-border-color);
+  background-color: var(--b3-theme-surface);
+  flex-shrink: 0;
+  user-select: none;
 }
 
-.folder[open] > .folder-summary::before {
-  transform: translateY(-50%) rotate(90deg);
+#oceanpress-left-sidebar .oceanpress-dock-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--b3-theme-on-surface);
 }
 
-/* 链接样式 */
-.folder-link,
-.file-link {
-  color: #24292e;
-  text-decoration: none;
-  display: inline-block;
-  padding: 2px 4px;
+/* ---------- 树容器 ---------- */
+#oceanpress-doctree {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--b3-scroll-color) transparent;
+}
+
+#oceanpress-doctree::-webkit-scrollbar {
+  width: 3px;
+}
+
+#oceanpress-doctree::-webkit-scrollbar-thumb {
+  background-color: var(--b3-scroll-color);
   border-radius: 3px;
-  transition: all 0.2s ease;
 }
 
-.folder-link:hover,
-.file-link:hover {
-  color: #0366d6;
-  background-color: #f6f8fa;
+#oceanpress-doctree::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
-/* 文件样式 */
-.file {
-  padding-left: 20px;
-  position: relative;
+/* ---------- 树节点通用 ---------- */
+#oceanpress-doctree ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* 文件图标 - 已移至 oceanpress.css 统一管理 */
-/* .file::before {
-  content: '📄';
+/* 供屏幕阅读器使用，视觉上隐藏 */
+#oceanpress-doctree .sr-only {
   position: absolute;
-  left: 0;
-} */
-
-/* 子文件夹缩进 */
-.folder-children {
-  margin-top: 4px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* 响应式调整 */
+/* 单条目：思源文档树行高 28px、hover 浅色块 */
+#oceanpress-doctree .b3-list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  margin: 0 8px;
+  padding: 0 4px 0 0;
+  border-radius: var(--b3-border-radius, 4px);
+  cursor: pointer;
+  user-select: none;
+}
+
+#oceanpress-doctree .b3-list-item:hover {
+  background-color: var(--b3-list-hover);
+}
+
+/* 当前文档：思源选中态（主题色浅底 + 主题色文字） */
+#oceanpress-doctree .b3-list-item.b3-list-item--focus {
+  background-color: var(--b3-theme-primary-lightest, rgba(53, 117, 240, .12));
+  color: var(--b3-theme-primary, #3575f0);
+}
+
+#oceanpress-doctree .b3-list-item.b3-list-item--focus .b3-list-item__text {
+  color: var(--b3-theme-primary, #3575f0);
+  font-weight: 500;
+}
+
+#oceanpress-doctree .b3-list-item.b3-list-item--focus .b3-list-item__toggle,
+#oceanpress-doctree .b3-list-item.b3-list-item--focus .b3-list-item__icon {
+  color: var(--b3-theme-primary, #3575f0);
+}
+
+/* 展开箭头：思源右侧小三角，默认指向右、展开旋转 90° */
+#oceanpress-doctree .b3-list-item__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--b3-theme-on-surface);
+  opacity: 0.65;
+  transition: transform var(--b3-transition, 0.2s);
+}
+
+#oceanpress-doctree .b3-list-item__arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+#oceanpress-doctree .b3-list-item--open > .b3-list-item__toggle .b3-list-item__arrow {
+  transform: rotate(90deg);
+}
+
+/* 占位箭头（叶子节点），保持文本对齐一致 */
+#oceanpress-doctree .b3-list-item__arrow--placeholder {
+  visibility: hidden;
+}
+
+/* 文件夹/文件图标：内联 svg，颜色跟随文字 */
+#oceanpress-doctree .b3-list-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0 4px 0 2px;
+  flex-shrink: 0;
+  color: inherit;
+  opacity: 0.8;
+}
+
+#oceanpress-doctree .b3-list-item__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 文档标题 */
+#oceanpress-doctree .b3-list-item__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--b3-theme-on-background);
+}
+
+/* 整行皆可点击跳转，箭头区域阻止冒泡用于展开/折叠 */
+#oceanpress-doctree .b3-list-item__toggle,
+#oceanpress-doctree .b3-list-item__action {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+#oceanpress-doctree a.b3-list-item__link {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 子层级缩进：思源文档树每级缩进 18px */
+#oceanpress-doctree .b3-list-item--child {
+  padding-left: 18px;
+}
+
+/* ---------- 移动端：抽屉式侧边栏 ---------- */
 @media (max-width: 768px) {
-  .folder,
-  .file {
-    font-size: 14px;
+  #oceanpress-left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: min(80vw, 300px);
+    height: 100dvh;
+    max-height: none;
+    z-index: 1001;
+    border-radius: 0;
+    border-right: 1px solid var(--b3-border-color);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  #oceanpress-left-sidebar.oceanpress-sidebar--visible {
+    transform: translateX(0);
+    box-shadow: var(--b3-dialog-shadow, 0 16px 40px rgba(0, 0, 0, 0.3));
+  }
+
+  /* 抽屉打开时锁定背景滚动 */
+  body.oceanpress-drawer-open {
+    overflow: hidden;
+  }
+
+  /* 悬浮目录按钮 */
+  #oceanpress-sidebar-fab {
+    position: fixed;
+    left: 16px;
+    bottom: 24px;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--b3-border-color);
+    border-radius: 50%;
+    background-color: var(--b3-theme-surface);
+    color: var(--b3-theme-on-surface);
+    box-shadow: var(--b3-point-shadow, 0 0 0.1rem rgba(0, 0, 0, 0.15));
+    cursor: pointer;
+  }
+
+  #oceanpress-sidebar-fab svg {
+    width: 20px;
+    height: 20px;
   }
 }
+
+/* 桌面端隐藏悬浮按钮 */
+@media (min-width: 769px) {
+  #oceanpress-sidebar-fab {
+    display: none;
+  }
+}
+
