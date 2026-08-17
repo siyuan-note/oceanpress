@@ -52,6 +52,28 @@ export async function htmlTemplate(
       : ''
   }
   <link rel="stylesheet" type="text/css" id="baseStyle" href="${prePath}stage/build/export/base.css?${version}"/>
+  <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="${prePath}appearance/themes/daylight/theme.css?${version}"/>
+  <script>
+  // 更好的主题切换方案
+  // 前置主题探测：head 内联同步执行，在任何内容渲染前把 themeDefaultStyle 指向正确主题，避免暗色用户看到闪白（FOUC）
+  (function() {
+    var preferred = localStorage.getItem('oceanpress-theme');
+    var actual;
+    if (preferred === 'light' || preferred === 'dark') {
+      actual = preferred;
+    } else if (preferred !== 'auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      actual = 'dark';
+    } else {
+      actual = (new Date().getHours() >= 18 || new Date().getHours() < 6) ? 'dark' : 'light';
+    }
+    if (actual === 'dark') {
+      document.getElementById('themeDefaultStyle').href = '${prePath}appearance/themes/midnight/theme.css?${version}';
+      document.documentElement.setAttribute('data-theme-mode', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme-mode', 'light');
+    }
+  })();
+  </script>
   <script>
   // 更好的主题切换方案
   (function() {
