@@ -61,9 +61,16 @@ export function renderDocTree() {
     menu: '<svg><use xlink:href="#iconMenu"></use></svg>'
   };
 
-  /** 获取当前页面对应的树节点 hpath（去除 index.html / .html 后缀并解码中文） */
+  /** 获取当前页面对应的树节点 hpath（去除 .html / index.html 后缀并解码中文） */
   function getCurrentPath() {
-    let p = window.location.pathname.replace(/index\\.html$/, '').replace(/\\.html$/, '');
+    let p = window.location.pathname;
+    if (/(^|\\/)index\\.html$/.test(p)) {
+      /** 站点根的 index.html：hpath 为 /index（思源文档树的根节点） */
+      p = p.replace(/index\\.html$/, 'index');
+    } else {
+      /** 普通文档页：去掉 .html 后缀 */
+      p = p.replace(/\\.html$/, '');
+    }
     try { p = decodeURIComponent(p); } catch (e) { /* 已是明文则保留原样 */ }
     return p;
   }
