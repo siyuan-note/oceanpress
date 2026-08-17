@@ -78,11 +78,15 @@ body {
   margin: 0;
 }
 #preview {
-  padding: 0;
+  padding: 16px 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  align-items: flex-start;
+  gap: 24px;
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 #preview > [data-type='NodeDocument'] {
   padding: 0 5px;
@@ -107,215 +111,46 @@ body {
   display: block !important;
 }
 
-/* 主题切换相关 CSS */
-:root {
-  --oceanpress-sidebar-bg: #ffffff;
-  --oceanpress-sidebar-border: #e9ecef;
-  --oceanpress-sidebar-text: #333333;
-  --oceanpress-sidebar-hover: #f6f8fa;
-  --oceanpress-sidebar-current-bg: #f6f8fa;
-  --oceanpress-sidebar-current-border: #0366d6;
-  --oceanpress-folder-icon: "📁";
-  --oceanpress-file-icon: "📄";
-  --oceanpress-toggle-bg: #f8f9fa;
-  --oceanpress-toggle-border: #dee2e6;
-  --oceanpress-toggle-text: #495057;
-}
-
-[data-theme-mode="dark"] {
-  --oceanpress-sidebar-bg: #1a1a1a;
-  --oceanpress-sidebar-border: #404040;
-  --oceanpress-sidebar-text: #e0e0e0;
-  --oceanpress-sidebar-hover: #2d2d2d;
-  --oceanpress-sidebar-current-bg: #2d2d2d;
-  --oceanpress-sidebar-current-border: #58a6ff;
-  --oceanpress-folder-icon: "📂";
-  --oceanpress-file-icon: "📄";
-  --oceanpress-toggle-bg: #2d2d2d;
-  --oceanpress-toggle-border: #404040;
-  --oceanpress-toggle-text: #e0e0e0;
-}
-
-#oceanpress-left-sidebar {
-  position: sticky;
-  top: 20px;
-  transition: transform 0.3s ease;
-  width: 300px;
-  min-height: 400px;
-  background-color: var(--oceanpress-sidebar-bg);
-  border-radius: 8px;
-  border: 1px solid var(--oceanpress-sidebar-border);
-  color: var(--oceanpress-sidebar-text);
-}
-
-#oceanpress-doctree {
-  width: 100%;
-  min-height: 400px;
-  padding: 10px 0;
-  overflow-y: auto;
-  max-height: calc(100vh - 100px);
-}
-
-/* 文档树样式 */
-#oceanpress-doctree .folder,
-#oceanpress-doctree .file {
-  padding: 6px 12px;
-  margin: 2px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-#oceanpress-doctree .folder:hover,
-#oceanpress-doctree .file:hover {
-  background-color: var(--oceanpress-sidebar-hover);
-}
-
-#oceanpress-doctree .folder-summary {
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#oceanpress-doctree .folder-link,
-#oceanpress-doctree .file-link {
-  color: var(--oceanpress-sidebar-text);
-  text-decoration: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  width: 100%;
-  white-space: normal;
-  word-wrap: break-word;
-  line-height: 1.4;
-}
-
-#oceanpress-doctree .folder-link:hover,
-#oceanpress-doctree .file-link:hover {
-  color: var(--oceanpress-sidebar-text);
-}
-
-#oceanpress-doctree .current {
-  background-color: var(--oceanpress-sidebar-current-bg);
-  border-left: 3px solid var(--oceanpress-sidebar-current-border);
-  padding-left: 9px;
-}
-
-#oceanpress-doctree .folder-children {
-  padding-left: 20px;
-}
-
-/* 级联展开的面包屑样式 */
-#oceanpress-doctree .breadcrumb-path {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 6px 12px;
-  margin: 2px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  user-select: none;
-  min-width: 0;
-}
-
-#oceanpress-doctree .breadcrumb-path:hover {
-  background-color: var(--oceanpress-sidebar-hover);
-}
-
-#oceanpress-doctree .breadcrumb-path .breadcrumb-separator {
-  color: var(--oceanpress-sidebar-text);
-  opacity: 0.6;
-  font-size: 12px;
-}
-
-#oceanpress-doctree .breadcrumb-path .breadcrumb-part {
-  color: var(--oceanpress-sidebar-text);
-  text-decoration: none;
-  white-space: nowrap;
-  line-height: 1.4;
-}
-
-#oceanpress-doctree .breadcrumb-path .breadcrumb-part:hover {
-  text-decoration: underline;
-}
-
-#oceanpress-doctree .breadcrumb-path .breadcrumb-part.current {
-  font-weight: bold;
-  color: var(--oceanpress-sidebar-current-border);
-}
-
-#oceanpress-doctree details {
-  margin-bottom: 4px;
-}
-
-#oceanpress-doctree summary {
-  list-style: none;
-}
-
-#oceanpress-doctree summary::-webkit-details-marker {
-  display: none;
-}
-
-/* 文件夹和文件图标 */
-#oceanpress-doctree .folder-link::before {
-  content: var(--oceanpress-folder-icon);
-  font-size: 14px;
-}
-
-#oceanpress-doctree .file-link::before {
-  content: var(--oceanpress-file-icon);
-  font-size: 14px;
-}
-
-/* 展开/折叠指示器 */
-#oceanpress-doctree .folder-summary::after {
-  content: "▶";
-  font-size: 10px;
-  margin-left: auto;
-  transition: transform 0.2s ease;
-}
-
-#oceanpress-doctree details[open] > .folder-summary::after {
-  transform: rotate(90deg);
-}
-
-/* 主题切换按钮 */
+/* 主题切换按钮：使用思源 b3 变量 */
 #oceanpress-theme-toggle {
   position: fixed;
-  top: 20px;
+  top: 16px;
   right: 20px;
   z-index: 1000;
-  background: var(--oceanpress-toggle-bg);
-  border: 1px solid var(--oceanpress-toggle-border);
+  background-color: var(--b3-theme-surface);
+  border: 1px solid var(--b3-border-color);
   border-radius: 20px;
-  padding: 8px 16px;
+  padding: 6px 14px;
   cursor: pointer;
-  font-size: 14px;
-  color: var(--oceanpress-toggle-text);
+  font-size: 13px;
+  color: var(--b3-theme-on-surface);
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  gap: 6px;
+  box-shadow: var(--b3-point-shadow, 0 0 0.1rem rgba(0, 0, 0, 0.15));
+  user-select: none;
 }
 
 #oceanpress-theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background-color: var(--b3-list-hover);
 }
 
 #oceanpress-theme-toggle .theme-icon {
-  font-size: 16px;
+  font-size: 15px;
+}
+
+/* 右侧边栏窄屏隐藏 */
+@media (max-width: 1100px) {
+  #oceanpress-right-sidebar {
+    display: none;
+  }
 }
 
 /* 中等屏幕时调整布局 */
 @media (max-width: 1024px) {
   #preview {
-    gap: 10px;
-    padding: 0px;
+    gap: 12px;
+    padding: 12px;
   }
 
   #preview > [data-type='NodeDocument'] {
@@ -324,63 +159,25 @@ body {
   }
 }
 
-/* 小屏幕时隐藏侧边栏，并添加悬浮触发按钮 */
+/* 小屏幕时侧边栏变为抽屉，具体交互由 docTree.css / docTree.js 负责 */
 @media (max-width: 768px) {
   #preview {
     flex-direction: column;
     align-items: stretch;
+    padding: 8px;
   }
 
   #preview > [data-type='NodeDocument'] {
     max-width: none;
     width: 100%;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;
-  }
-
-  #oceanpress-left-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    transform: translateX(-100%);
-    z-index: 1000;
-    background: var(--oceanpress-sidebar-bg);
-    border-radius: 0;
-    border-right: 1px solid var(--oceanpress-sidebar-border);
-    height: 100vh;
-    max-height: 100vh;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-  }
-
-  /* 悬浮伪元素（触发按钮） */
-  #oceanpress-left-sidebar::before {
-    content: '☰';
-    position: absolute;
-    right: -40px;
-    top: 60px;
-    width: 40px;
-    height: 40px;
-    background: var(--oceanpress-toggle-bg);
-    border: 1px solid var(--oceanpress-toggle-border);
-    border-radius: 0 8px 8px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    color: var(--oceanpress-toggle-text);
-    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-  }
-
-  /* 悬停时显示侧边栏 */
-  #oceanpress-left-sidebar:hover {
-    transform: translateX(0);
   }
 
   #oceanpress-theme-toggle {
     top: 10px;
     right: 10px;
-    padding: 6px 12px;
+    padding: 5px 12px;
     font-size: 12px;
   }
 }

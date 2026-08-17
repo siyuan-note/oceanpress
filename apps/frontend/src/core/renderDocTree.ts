@@ -13,19 +13,21 @@ export function renderDocTree() {
     const Doc_blocks: DB_block[] = yield* Effect.tryPromise(() =>
       allDocBlock_by_bookId(config.notebook.id),
     )
-    /** 获取文档树排序信息 */
+    /** 获取文档树排序信息（读取失败时回退为空，即按标题排序） */
     const sortJSON: { [id: string]: number | undefined } =
-      yield* Effect.tryPromise(() =>
-        API.file_getFile({
-          path: `/data/${config.notebook.id}/.siyuan/sort.json`,
-        }).then((r) => {
-          // 1. 将 ArrayBuffer 转为字符串
-          const decoder = new TextDecoder('utf-8')
-          const jsonString = decoder.decode(r as ArrayBuffer)
-          // 2. 解析字符串为 JSON 对象
-          return JSON.parse(jsonString)
-        }),
-      )
+      yield* Effect.tryPromise({
+        try: () =>
+          API.file_getFile({
+            path: `/data/${config.notebook.id}/.siyuan/sort.json`,
+          }).then((r) => {
+            // 1. 将 ArrayBuffer 转为字符串
+            const decoder = new TextDecoder('utf-8')
+            const jsonString = decoder.decode(r as ArrayBuffer)
+            // 2. 解析字符串为 JSON 对象
+            return JSON.parse(jsonString) as { [id: string]: number | undefined }
+          }),
+        catch: () => ({}) as { [id: string]: number | undefined },
+      })
     const docs = Doc_blocks.map((el) => ({
       id: el.id,
       /** 类似 '/record/cssFlex' */
@@ -34,17 +36,101 @@ export function renderDocTree() {
       sort: sortJSON[el.id],
     }))
     const tree = buildTree(docs)
-    
+
     // 生成 JS 代码
     const jsCode = generateJSTree(tree)
     return `
-// OceanPress DocTree - 动态加载的文档树
-(function() {
+// OceanPress DocTree - 动态加载的文档树（思源风格）
+(function () {
   'use strict';
-  
+
+  /** 展开状态持久化 key */
+  const STORAGE_KEY = 'oceanpress-doctree-open';
+  /** 默认展开层级（首次访问且无当前路径命中时） */
+  const DEFAULT_OPEN_LEVEL = 1;
+
   // 文档树数据
   const docTreeData = ${jsCode};
-  
+
+  /** svg 图标，与思源 material icon.js 中的 symbol id 对应 */
+  const ICONS = {
+    arrow: '<svg><use xlink:href="#iconRight"></use></svg>',
+    folder: '<svg><use xlink:href="#iconFolder"></use></svg>',
+    file: '<svg><use xlink:href="#iconFile"></use></svg>',
+    title: '<svg><use xlink:href="#iconFiles"></use></svg>',
+    menu: '<svg><use xlink:href="#iconMenu"></use></svg>'
+  };
+
+  /** 获取当前页面对应的树节点 hpath（去除 index.html / .html 后缀并解码中文） */
+  function getCurrentPath() {
+    let p = window.location.pathname.replace(/index\\.html$/, '').replace(/\\.html$/, '');
+    try { p = decodeURIComponent(p); } catch (e) { /* 已是明文则保留原样 */ }
+    return p;
+  }
+
+  /** 读取持久化的展开节点集合 */
+  function loadOpenState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return new Set(raw ? JSON.parse(raw) : []);
+    } catch (e) { return new Set(); }
+  }
+
+  /** 持久化展开节点集合 */
+  function saveOpenState(set) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(set)));
+    } catch (e) { /* 忽略存储异常（隐私模式等） */ }
+  }
+
+  /** 判断节点是否应展开：包含当前路径的祖先必展开；其余看用户操作记录；都没有则按默认层级 */
+  function shouldOpen(node, currentPath, openSet) {
+    if (currentPath === node.hpath || (currentPath && currentPath.startsWith(node.hpath + '/'))) {
+      return true;
+    }
+    if (openSet.size > 0 || currentPath) return openSet.has(node.hpath);
+    return (node.hpath.match(/\\//g) || []).length < DEFAULT_OPEN_LEVEL;
+  }
+
+  /** HTML 转义 */
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /** 递归生成 ul/li 嵌套列表 HTML */
+  function generateHTMLTree(nodes, currentPath, openSet, isChild) {
+    let html = '<ul>';
+    for (const node of nodes) {
+      const hasChildren = node.children && node.children.length > 0;
+      const isCurrent = node.hpath === currentPath;
+      const isOpen = hasChildren && shouldOpen(node, currentPath, openSet);
+
+      const classes = ['b3-list-item'];
+      if (isChild) classes.push('b3-list-item--child');
+      if (isOpen) classes.push('b3-list-item--open');
+      if (isCurrent) classes.push('b3-list-item--focus');
+
+      const arrow = hasChildren
+        ? '<span class="b3-list-item__toggle" data-op="toggle" role="button" aria-label="展开/折叠"><span class="b3-list-item__arrow">' + ICONS.arrow + '</span></span>'
+        : '<span class="b3-list-item__arrow b3-list-item__arrow--placeholder">' + ICONS.arrow + '</span>';
+
+      const icon = '<span class="b3-list-item__icon" aria-hidden="true">' + (hasChildren ? ICONS.folder : ICONS.file) + '</span>';
+      const text = '<span class="b3-list-item__text" title="' + escapeHtml(node.title) + '">' + escapeHtml(node.title) + '</span>';
+      const link = '<a class="b3-list-item__link" data-op="link" href="' + encodeURI(node.hpath) + '.html" target="_top">' + icon + text + '</a>';
+
+      html += '<li class="' + classes.join(' ') + '" data-hpath="' + escapeHtml(node.hpath) + '">' + arrow + link + '</li>';
+
+      if (hasChildren) {
+        const childrenUL = generateHTMLTree(node.children, currentPath, openSet, true)
+          .replace('<ul', '<ul data-children-of="' + escapeHtml(node.hpath) + '"');
+        html += isOpen ? childrenUL : childrenUL.replace('<ul', '<ul hidden');
+      }
+    }
+    return html + '</ul>';
+  }
+
   // 渲染函数
   function renderDocTree(containerId, options = {}) {
     const container = document.getElementById(containerId);
@@ -52,115 +138,33 @@ export function renderDocTree() {
       console.error('Container not found:', containerId);
       return;
     }
-    
-    const currentPath = options.currentPath || window.location.pathname.replace(/\\.html$/, '');
-    
+
+    const currentPath = options.currentPath !== undefined ? options.currentPath : getCurrentPath();
+    const openSet = loadOpenState();
+
     // 生成 HTML
-    const html = generateHTMLTree(docTreeData, currentPath);
-    container.innerHTML = html;
-    
+    container.innerHTML = generateHTMLTree(docTreeData, currentPath, openSet, false);
+
     // 加载样式
     loadStyles();
-    
+
     // 初始化交互
-    initInteractions(container, currentPath);
-  }
-  
-  // 检查是否为单一路径（只有单个子节点的文件夹）
-  function isSinglePath(node) {
-    if (!node.children || node.children.length !== 1) {
-      return false;
+    initInteractions(container, openSet);
+    initDrawer();
+
+    // 自动滚动到当前页面
+    const firstCurrent = container.querySelector('.b3-list-item--focus');
+    if (firstCurrent) {
+      setTimeout(function () {
+        firstCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     }
-    
-    let current = node;
-    while (current.children && current.children.length === 1) {
-      current = current.children[0];
-    }
-    
-    // 如果最终节点没有子节点，说明是单一路径
-    return !current.children || current.children.length === 0;
   }
 
-  // 获取单一路径的所有节点
-  function getSinglePathNodes(node) {
-    const pathNodes = [node];
-    let current = node;
-    
-    while (current.children && current.children.length === 1) {
-      current = current.children[0];
-      pathNodes.push(current);
-    }
-    
-    return pathNodes;
-  }
-
-  // 生成面包屑路径
-  function generateBreadcrumb(pathNodes, currentPath) {
-    const lastNode = pathNodes[pathNodes.length - 1];
-    const isCurrent = lastNode.hpath === currentPath;
-    
-    let breadcrumbHtml = '<div class="breadcrumb-path">';
-    
-    pathNodes.forEach((node, index) => {
-      if (index > 0) {
-        breadcrumbHtml += '<span class="breadcrumb-separator">/</span>';
-      }
-      
-      const isLast = index === pathNodes.length - 1;
-      const nodeCurrent = node.hpath === currentPath;
-      
-      breadcrumbHtml += \`
-        <a href="\${node.hpath}.html" class="breadcrumb-part \${(isLast && isCurrent) ? 'current' : ''}" target="_top">\${node.title}</a>
-      \`;
-    });
-    
-    breadcrumbHtml += '</div>';
-    return breadcrumbHtml;
-  }
-
-  // 生成 HTML 树
-  function generateHTMLTree(nodes, currentPath, level = 0) {
-    let html = '';
-    for (const node of nodes) {
-      const isCurrent = node.hpath === currentPath;
-      const isActive = isCurrent || (currentPath && node.hpath && currentPath.startsWith(node.hpath));
-      
-      // 检查是否为单一路径，如果是则显示为面包屑
-      if (isSinglePath(node)) {
-        const pathNodes = getSinglePathNodes(node);
-        html += generateBreadcrumb(pathNodes, currentPath);
-        continue;
-      }
-      
-      if (node.children && node.children.length > 0) {
-        // 有子节点时使用 details/summary
-        const isExpanded = isActive ? 'open' : '';
-        html += \`
-          <details class="folder" \${isExpanded}>
-            <summary class="folder-summary">
-              <a href="\${node.hpath}.html" class="folder-link \${isCurrent ? 'current' : ''}" target="_top">\${node.title}</a>
-            </summary>
-            <div class="folder-children" style="padding:0 0 0 10px;">
-              \${generateHTMLTree(node.children, currentPath, level + 1)}
-            </div>
-          </details>
-        \`;
-      } else {
-        // 没有子节点的普通项目
-        html += \`
-          <div class="file \${isCurrent ? 'current' : ''}">
-            <a href="\${node.hpath}.html" class="file-link" target="_top">\${node.title}</a>
-          </div>
-        \`;
-      }
-    }
-    return html;
-  }
-  
   // 加载样式
   function loadStyles() {
     if (document.getElementById('oceanpress-doctree-styles')) return;
-    
+
     const link = document.createElement('link');
     link.id = 'oceanpress-doctree-styles';
     link.rel = 'stylesheet';
@@ -168,76 +172,90 @@ export function renderDocTree() {
     link.href = '${tempConfig.cdn.siyuanPrefix}appearance/docTree.css';
     document.head.appendChild(link);
   }
-  
-  // 初始化交互
-  function initInteractions(container, currentPath) {
-    // 为当前页面项添加高亮样式
-    const currentItems = container.querySelectorAll('.current');
-    currentItems.forEach(item => {
-      // 如果是面包屑路径中的当前项，需要特殊处理
-      if (item.classList.contains('breadcrumb-part')) {
-        item.style.fontWeight = 'bold';
-        item.style.color = 'var(--oceanpress-sidebar-current-border)';
+
+  // 初始化交互：事件委托处理展开/折叠
+  function initInteractions(container, openSet) {
+    container.addEventListener('click', function (e) {
+      const toggle = e.target.closest('[data-op="toggle"]');
+      if (!toggle) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      const li = toggle.closest('.b3-list-item');
+      if (!li) return;
+
+      const hpath = li.getAttribute('data-hpath');
+      const childrenUL = container.querySelector('ul[data-children-of="' + CSS.escape(hpath) + '"]');
+      if (!childrenUL) return;
+
+      const willOpen = childrenUL.hasAttribute('hidden');
+      if (willOpen) {
+        childrenUL.removeAttribute('hidden');
+        li.classList.add('b3-list-item--open');
+        openSet.add(hpath);
       } else {
-        // 使用 CSS 变量而不是硬编码颜色
-        item.style.backgroundColor = 'var(--oceanpress-sidebar-current-bg)';
-        item.style.borderLeft = '3px solid var(--oceanpress-sidebar-current-border)';
-        item.style.paddingLeft = '7px';
+        childrenUL.setAttribute('hidden', '');
+        li.classList.remove('b3-list-item--open');
+        openSet.delete(hpath);
       }
-    });
-    
-    // 确保当前页面的所有父文件夹都展开
-    const currentElements = container.querySelectorAll('.current');
-    currentElements.forEach(currentElement => {
-      // 向上遍历所有父级 details 元素并展开
-      let parent = currentElement.parentElement;
-      while (parent) {
-        if (parent.tagName === 'DETAILS') {
-          parent.setAttribute('open', 'open');
-        }
-        parent = parent.parentElement;
-      }
-    });
-    
-    // 自动滚动到当前页面
-    const firstCurrent = container.querySelector('.current');
-    if (firstCurrent) {
-      setTimeout(() => {
-        firstCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
-    }
-    
-    // 监听主题变化事件，更新高亮样式
-    window.addEventListener('oceanpress-theme-changed', function(e) {
-      currentItems.forEach(item => {
-        if (item.classList.contains('breadcrumb-part')) {
-          item.style.fontWeight = 'bold';
-          item.style.color = 'var(--oceanpress-sidebar-current-border)';
-        } else {
-          item.style.backgroundColor = 'var(--oceanpress-sidebar-current-bg)';
-          item.style.borderLeft = '3px solid var(--oceanpress-sidebar-current-border)';
-        }
-      });
+      saveOpenState(openSet);
     });
   }
-  
+
+  // 移动端抽屉交互
+  function initDrawer() {
+    const sidebar = document.getElementById('oceanpress-left-sidebar');
+    if (!sidebar) return;
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    if (document.getElementById('oceanpress-sidebar-fab')) return;
+
+    const fab = document.createElement('button');
+    fab.id = 'oceanpress-sidebar-fab';
+    fab.type = 'button';
+    fab.setAttribute('aria-label', '打开目录');
+    fab.innerHTML = ICONS.menu;
+    fab.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.add('oceanpress-sidebar--visible');
+      document.body.classList.add('oceanpress-drawer-open');
+    });
+    document.body.appendChild(fab);
+
+    // 点击抽屉外区域关闭
+    document.addEventListener('click', function (e) {
+      if (sidebar.classList.contains('oceanpress-sidebar--visible') &&
+          !sidebar.contains(e.target) && e.target !== fab && !fab.contains(e.target)) {
+        sidebar.classList.remove('oceanpress-sidebar--visible');
+        document.body.classList.remove('oceanpress-drawer-open');
+      }
+    });
+  }
+
   // 暴露到全局
   window.OceanPressDocTree = {
     render: renderDocTree,
     data: docTreeData
   };
-  
-  // 自动渲染（如果容器存在）
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('oceanpress-doctree')) {
-        renderDocTree('oceanpress-doctree');
-      }
-    });
-  } else {
-    if (document.getElementById('oceanpress-doctree')) {
+
+  // 自动渲染（如果容器存在），并为侧边栏插入标题栏
+  function autoRender() {
+    const sidebar = document.getElementById('oceanpress-left-sidebar');
+    const container = document.getElementById('oceanpress-doctree');
+    if (sidebar && !sidebar.querySelector('.oceanpress-dock-title')) {
+      const title = document.createElement('div');
+      title.className = 'oceanpress-dock-title';
+      title.innerHTML = ICONS.title + '<span>目录</span>';
+      sidebar.insertBefore(title, sidebar.firstChild);
+    }
+    if (container) {
       renderDocTree('oceanpress-doctree');
     }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoRender);
+  } else {
+    autoRender();
   }
 })();
     `
