@@ -2,6 +2,8 @@
 
 OceanPress 是一款从思源笔记本生成静态站点的工具。
 
+[![扫码加入开发者社群](https://tsfullstack.heartstack.space/group/gs.svg?from=oceanpress)](https://tsfullstack.heartstack.space/group/gs?from=oceanpress)
+
 ## 安装
 
 从 npm 全局安装：
