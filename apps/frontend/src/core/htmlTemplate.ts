@@ -4,7 +4,7 @@ import { generateSeoContent } from './seo.ts'
 /** 思源导出样式/脚本的缓存版本号 */
 const version = '2.10.5'
 /** 站点样式版本号，用作 site.css 的缓存 key；改动 site.css 后需要递增 */
-const themeVersion = '16'
+const themeVersion = '60'
 
 /** html 属性值转义 */
 function attr(s: string | undefined) {
