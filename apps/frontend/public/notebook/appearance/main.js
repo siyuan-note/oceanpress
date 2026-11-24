@@ -288,10 +288,10 @@
       raf = 0;
       var dt = clamp((now - last) / 1000, 0.001, 0.05);
       last = now;
-      // 远山随滚动缓缓升起
+      // 整幅山水随滚动缓缓升起
       var diff = target - scroll;
       scroll += diff * 0.18;
-      document.documentElement.style.setProperty('--op-ink-rise', clamp(scroll / 700, 0, 1) * 150 + 'px');
+      document.documentElement.style.setProperty('--op-ink-rise', clamp(scroll / 700, 0, 1) * 70 + 'px');
       var w = window.innerWidth;
       var h = window.innerHeight;
       var drag = Math.exp(-4.6 * dt);
@@ -390,7 +390,7 @@
   /* ---------- 移动端抽屉 ---------- */
   /* ---------- 水墨小品：亭台 + 莲荷，每次刷新按随机种子重新布局 ---------- */
   /** 小品画布高：横屏宽 1600，竖屏宽 760（否则按 slice 裁切后两侧的亭子、莲荷会被裁掉） */
-  var GARDEN_HEIGHT = 420;
+  var GARDEN_HEIGHT = 560;
   var GARDEN_WIDTH = { landscape: 1600, portrait: 760 };
   var INK = 'var(--op-text)';
 
@@ -533,32 +533,139 @@
     return '<g fill="none" stroke="' + INK + '" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round">' + stems + '</g>' + out;
   }
 
-  /** 整幅小品：随机决定亭子落在哪一侧、几层，莲荷在对侧和近处各一丛。横向位置全部按画布宽 w 取比例 */
+  /** 一段平滑折线：经过 pts（[[x,y]…]），用三次贝塞尔连接，返回 path 的 d（不含 M） */
+  function smoothLine(pts) {
+    var d = '';
+    for (var k = 1; k < pts.length; k++) {
+      var p0 = pts[k - 2] || pts[k - 1];
+      var p1 = pts[k - 1];
+      var p2 = pts[k];
+      var p3 = pts[k + 1] || p2;
+      d += 'C' + num(p1[0] + (p2[0] - p0[0]) / 6) + ' ' + num(p1[1] + (p2[1] - p0[1]) / 6) + ' ' +
+        num(p2[0] - (p3[0] - p1[0]) / 6) + ' ' + num(p2[1] - (p3[1] - p1[1]) / 6) + ' ' + num(p2[0]) + ' ' + num(p2[1]);
+    }
+    return d;
+  }
+
+  /**
+   * 一层山：baseY 为山脚线，peaks 为 [{x, h, w}]（已按 x 排好序），返回山体 path 的 d。
+   * 峰顶略圆、左右肩不对称，山脚往下多铺 80 以便被岸盖住。
+   */
+  function mountainLayer(w, baseY, peaks, r) {
+    var pts = [[-60, baseY + 4]];
+    peaks.forEach(function (p) {
+      pts.push([p.x - p.w * between(r, 0.42, 0.55), baseY - p.h * between(r, 0.12, 0.2)]);
+      pts.push([p.x - p.w * 0.2, baseY - p.h * between(r, 0.72, 0.84)]);
+      pts.push([p.x, baseY - p.h]);
+      pts.push([p.x + p.w * 0.2, baseY - p.h * between(r, 0.66, 0.8)]);
+      pts.push([p.x + p.w * between(r, 0.42, 0.55), baseY - p.h * between(r, 0.1, 0.18)]);
+    });
+    pts.push([w + 60, baseY + 4]);
+    return 'M-60 ' + num(baseY + 4) + smoothLine(pts) + 'V' + num(baseY + 80) + 'H-60Z';
+  }
+
+  /**
+   * 整幅山水：山、岸、亭、荷共用一个随机源，靠“一条岸线”相互联动。
+   * 岸线：陆地在 side 侧，从画面边缘向内伸到 edge 处入水，水面在其对侧。
+   *   - 山只在陆地上方的远景里起伏，主峰靠陆地深处；
+   *   - 亭钉在岸边陆地上，紧挨主峰一侧，岸越高亭越大（近大远小）；
+   *   - 荷只长在水面上，贴着岸线往对岸铺，水面越宽丛越大、叶越多；
+   *   - 水纹散在水面，越靠近岸越密。
+   */
   function gardenMarkup(w) {
     var r = seededRandom((Math.random() * 4294967296) >>> 0);
-    var right = r() < 0.5;
-    var px = w * (right ? between(r, 0.74, 0.86) : between(r, 0.14, 0.26));
-    var lx = w * (right ? between(r, 0.075, 0.19) : between(r, 0.81, 0.925));
+    var H = 560;
+    /** 水平面的纵坐标：岸、荷、水纹都以它为基准 */
+    var water = 500;
     var narrow = w < 1000;
-    var base = 392;
+    var side = r() < 0.5 ? 1 : -1;
+    /** 陆地从画面外沿伸进来的长度（占画布比例），以及岸的高度 */
+    var landSpan = between(r, 0.3, 0.5);
+    var landH = between(r, 40, 110);
+    /** 水陆交界处的横坐标 */
+    var edge = side > 0 ? w * (1 - landSpan) : w * landSpan;
     var out = '';
-    // 远处一座小亭，若隐若现
-    if (!narrow && r() < 0.55) {
-      var fx = w * (right ? between(r, 0.325, 0.44) : between(r, 0.56, 0.675));
-      out += '<g opacity="0.38">' + pavilion(fx, base - 18, 0.45, pick(r, [1, 1, 2]), r) + '</g>';
+    /** 把“陆地深度 t（0 = 岸边，1 = 画面外沿）”换算成横坐标 */
+    function inland(t) { return side > 0 ? edge + (w - edge) * t : edge - edge * t; }
+    /** 把“离岸距离 t（0 = 岸线，1 = 对岸画面外沿）”换算成水面上的横坐标 */
+    function open(t) { return side > 0 ? edge - edge * t : edge + (w - edge) * t; }
+
+    // 三层山：远 → 近，逐层更浓；山峰只落在陆地上方，主峰在中层
+    var mainT = between(r, 0.3, 0.75);
+    var mainX = inland(mainT);
+    var mainH = between(r, 170, 260);
+    var layers = [
+      { y: water - 90, op: 0.1, scale: 1.3 },
+      { y: water - 45, op: 0.17, scale: 1.1 },
+      { y: water - 8, op: 0.26, scale: 0.85 }
+    ];
+    layers.forEach(function (L, li) {
+      var peaks = [];
+      var n = narrow ? 2 : 3;
+      for (var k = 0; k < n; k++) {
+        var main = li === 1 && k === n - 1;
+        peaks.push({
+          x: main ? mainX : inland(between(r, 0.08, 1.12)),
+          h: (main ? mainH : between(r, 80, 160)) * L.scale,
+          w: between(r, 200, 340) * L.scale
+        });
+      }
+      peaks.sort(function (a, b) { return a.x - b.x; });
+      out += '<path d="' + mountainLayer(w, L.y, peaks, r) + '" fill="' + INK + '" fill-opacity="' + L.op + '" filter="url(#op-garden-wash)"/>';
+    });
+
+    // 岸：陆地从画面外沿以 landH 高度铺进来，到 edge 处沉入水面；近岸处有起伏
+    var shorePts = side > 0
+      ? [[w + 60, water - landH], [inland(0.7), water - landH * between(r, 0.9, 1.05)], [inland(0.4), water - landH * between(r, 0.7, 0.9)], [inland(0.15), water - landH * 0.4], [edge, water + 6]]
+      : [[-60, water - landH], [inland(0.7), water - landH * between(r, 0.9, 1.05)], [inland(0.4), water - landH * between(r, 0.7, 0.9)], [inland(0.15), water - landH * 0.4], [edge, water + 6]];
+    out += '<path d="M' + num(shorePts[0][0]) + ' ' + num(shorePts[0][1]) + smoothLine(shorePts) +
+      (side > 0 ? 'V' + H + 'H' + num(w + 60) : 'V' + H + 'H-60') + 'Z" fill="url(#op-garden-shore)"/>';
+
+    // 亭：钉在岸边陆地上、主峰靠岸一侧；岸越高亭越大
+    var pavT = between(r, 0.06, 0.22);
+    var px = inland(pavT);
+    var py = water - landH * (1 - pavT * 1.6);
+    var pavScale = 0.65 + landH / 110 * 0.5;
+    out += pavilion(px, py, pavScale, pick(r, [1, 1, 2]), r);
+
+    // 水面：岸线以下一整片极淡的墨，让“水”有面积感
+    out += '<rect x="0" y="' + water + '" width="' + w + '" height="' + (H - water) + '" fill="' + INK + '" fill-opacity="0.05"/>';
+
+    // 荷：长在水面上，贴着岸线往对岸铺开；水面越宽丛越大
+    var waterW = side > 0 ? edge : w - edge;
+    var lotT = between(r, 0.08, 0.22);
+    var lx = open(lotT);
+    var spread = Math.min(120, 36 + waterW * 0.14);
+    var leaves = Math.round(3 + waterW / w * 9);
+    out += lotusCluster(lx, water + 6, spread, leaves, Math.max(1, Math.round(leaves * between(r, 0.25, 0.45))), r);
+    if (!narrow && r() < 0.5) {
+      var lx2 = open(between(r, 0.42, 0.7));
+      out += '<g opacity="0.55">' + lotusCluster(lx2, water + 10, spread * 0.6, Math.max(2, leaves - 3), Math.max(1, Math.round(leaves * 0.15)), r) + '</g>';
     }
-    out += rockMarkup(px, base + 6, between(r, 170, 230), between(r, 22, 34), r);
-    out += pavilion(px, base - between(r, 6, 14), between(r, 0.95, 1.15), pick(r, [1, 1, 2]), r);
-    out += lotusCluster(lx, base, between(r, 70, 110), Math.floor(between(r, 4, 8)), Math.floor(between(r, 1, 3.4)), r);
-    if (narrow || r() < 0.6) {
-      var nx = w * between(r, 0.39, 0.61);
-      out += lotusCluster(nx, base + 10, between(r, 40, 70), Math.floor(between(r, 2, 5)), Math.floor(between(r, 0.6, 2.2)), r);
+
+    // 水纹：散在水面上，靠岸的更密
+    var ripples = '';
+    var rippleN = Math.round(between(r, 5, 9));
+    for (var q = 0; q < rippleN; q++) {
+      var rt = Math.pow(r(), 1.8) * 0.85 + 0.06;
+      ripples += '<path d="M' + num(open(rt) - 20) + ' ' + num(water + between(r, 8, 40)) + 'h' + num(between(r, 30, 110)) + '"/>';
     }
-    return '<svg viewBox="0 0 ' + w + ' ' + GARDEN_HEIGHT + '" preserveAspectRatio="xMidYMax slice">' +
-      '<defs><filter id="op-garden-ink" x="-5%" y="-5%" width="110%" height="110%">' +
-      '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="' + Math.floor(r() * 90) + '" result="n"/>' +
-      '<feDisplacementMap in="SourceGraphic" in2="n" scale="7"/>' +
-      '<feGaussianBlur stdDeviation="0.5"/></filter></defs>' +
+    out += '<g fill="none" stroke="' + INK + '" stroke-opacity="0.4" stroke-width="1.2" stroke-linecap="round">' + ripples + '</g>';
+
+    return '<svg viewBox="0 0 ' + w + ' ' + H + '" preserveAspectRatio="xMidYMax slice">' +
+      '<defs>' +
+      '<linearGradient id="op-garden-shore" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="' + INK + '" stop-opacity="0.3"/>' +
+      '<stop offset="0.45" stop-color="' + INK + '" stop-opacity="0.22"/>' +
+      '<stop offset="1" stop-color="' + INK + '" stop-opacity="0.05"/>' +
+      '</linearGradient>' +
+      '<filter id="op-garden-wash" x="-10%" y="-40%" width="120%" height="160%">' +
+      '<feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="3" seed="' + Math.floor(r() * 90) + '"/>' +
+      '<feDisplacementMap in="SourceGraphic" scale="60"/><feGaussianBlur stdDeviation="3"/></filter>' +
+      '<filter id="op-garden-ink" x="-5%" y="-5%" width="110%" height="110%">' +
+      '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="' + Math.floor(r() * 90) + '"/>' +
+      '<feDisplacementMap in="SourceGraphic" scale="6"/><feGaussianBlur stdDeviation="0.5"/></filter>' +
+      '</defs>' +
       '<g filter="url(#op-garden-ink)">' + out + '</g></svg>';
   }
 
@@ -568,7 +675,7 @@
     garden.setAttribute('aria-hidden', 'true');
     document.body.appendChild(garden);
     var orientation = '';
-    /** 横竖屏画布不同，跨过宽高比分界时重新画一幅（同一朝向内调整窗口不重画） */
+    /** 画布宽：横屏 1600、竖屏 760；朝向变了才重画（同一朝向内调窗口不重画，画面保持稳定） */
     function draw() {
       var next = window.innerWidth < 900 ? 'portrait' : 'landscape';
       if (next === orientation) return;
