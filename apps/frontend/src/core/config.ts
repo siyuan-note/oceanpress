@@ -6,9 +6,89 @@ import { EffectLocalStorageDep } from './EffectDep.ts';
 import { notebook } from './siyuan_type.ts';
 const version = packageJson.version
 console.log('[version]',version);
+/** 顶栏导航项 */
+type SiteNavItem = { name: string; url: string }
+/** algolia docsearch 配置，字段与 https://docsearch.algolia.com/docs/docsearch-v3/v3/ 一致 */
+type SiteSearch = {
+  enable: boolean
+  appId: string
+  apiKey: string
+  indexName: string
+}
+/** giscus 评论配置，字段与 https://giscus.app/zh-CN 生成 data-* 一致 */
+type SiteComments = {
+  enable: boolean
+  repo: string
+  repoId: string
+  category: string
+  categoryId: string
+  mapping: string
+  lang: string
+}
+/** 站点外观与功能配置：头部导航、页脚、搜索、评论等模板内置能力，不再需要手写 embedCode */
+export type SiteConfig = {
+  /** 站点标题，留空则使用笔记本名 */
+  title: string
+  /** 站点描述，用于页头副标题与 SEO */
+  description: string
+  /** 作者名，用于 SEO 与文章署名 */
+  author: string
+  /** 页头 logo 图片地址，留空则显示站名首字 */
+  logo: string
+  /** 页头导航链接 */
+  nav: SiteNavItem[]
+  /** algolia docsearch 站内搜索 */
+  search: SiteSearch
+  /** giscus 评论 */
+  comments: SiteComments
+  /** 页脚版权文字，支持 html */
+  footer: string
+  /** 是否显示上一篇/下一篇导航 */
+  pager: boolean
+  /** 是否在右侧显示悬浮目录 */
+  toc: boolean
+  /** 是否显示面包屑导航 */
+  breadcrumb: boolean
+  /** 是否显示文章头部元信息（更新时间/字数/阅读时长） */
+  docMeta: boolean
+}
+
+const site = {
+  title: '',
+  description: '',
+  author: '',
+  logo: '',
+  nav: [] as SiteNavItem[],
+  search: {
+    enable: false,
+    appId: '',
+    apiKey: '',
+    indexName: '',
+  },
+  comments: {
+    enable: false,
+    repo: '',
+    repoId: '',
+    category: '',
+    categoryId: '',
+    mapping: 'pathname',
+    lang: 'zh-CN',
+  },
+  footer: '',
+  pager: true,
+  toc: true,
+  breadcrumb: true,
+  docMeta: true,
+} satisfies SiteConfig
+
+/** 资源地址配置：siyuanPrefix 不配置时按页面层级走相对路径 notebook/，构建会把运行时资源复制到产物的 notebook/ 下 */
+export type CdnConfig = { siyuanPrefix?: string; publicZip?: string }
+const emptyCdn: CdnConfig = {}
 /** 不要在运行时修改这个对象，他只应该在代码中配置 */
 const defaultConfig = {
   name: 'default',
+  cdn: emptyCdn,
+  site,
   /** 需要编译的笔记本 */
   notebook: {} as notebook,
   /** 思源的鉴权key */
@@ -187,17 +267,16 @@ export const loadConfigFile = (c?: typeof configs) => {
 }
 export const currentConfig = computed(() => configs[configs.__current__])
 
+/** 资源地址：思源 js、图表库等文件的前缀不配置时按页面层级走相对路径，资源随站点一起部署，不依赖任何 CDN */
+const cdn: { siyuanPrefix?: string; publicZip: string } = {
+  /** 思源 js、css等文件zip包地址  */
+  publicZip:
+    'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
+}
+
 /** 应该要给用户配置的，但目前没有什么好方法，所以暂时不给配置 */
 export const tempConfig = {
-  cdn:  {
-    /** 思源 js、css等文件的前缀 */
-    siyuanPrefix:
-      `https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@${version}/apps/frontend/public/notebook/`,
-      // 'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@latest/apps/frontend/public/notebook/',
-    /** 思源 js、css等文件zip包地址  */
-    publicZip:
-      'https://fastly.jsdelivr.net/gh/siyuan-note/oceanpress@v0.0.7/apps/frontend/public/public.zip',
-  },
+  cdn,
   withoutPublicZip:true,
 }
 

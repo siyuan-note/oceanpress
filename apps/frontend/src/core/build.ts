@@ -1,4 +1,4 @@
-import { Effect } from 'effect'
+import { Cause, Effect } from 'effect'
 import packageJson from '~/../package.json' with { type: 'json' }
 import { Config, currentConfig, tempConfig } from '~/core/config.ts'
 import { deepAssign } from '~/util/deep_assign.ts'
@@ -11,10 +11,11 @@ import { EffectLogDep, EffectRender, type effectLog } from './EffectDep.ts'
 import { generateRSSXML, sitemap_xml } from './genRssXml.ts'
 import { downloadZIP } from './genZip.ts'
 import { htmlTemplate } from './htmlTemplate.ts'
-import { getRender, renderHTML } from './render.ts'
+import { getRender, renderHTML, type PagerItem, warnLog } from './render.ts'
 import { API } from './siyuan_api.ts'
 import { DB_block, DB_block_path, S_Node } from './siyuan_type.ts'
 import { renderDocTree, renderDocTreeJsPath } from './renderDocTree.ts'
+import { renderTagPages } from './renderTagPage.ts'
 
 /**
  * 生成面包屑导航数据
@@ -53,6 +54,10 @@ export interface DocTree {
 }
 export interface FileTree {
   [path: string]: string | ArrayBuffer
+}
+/** 由文档树节点构造上一篇/下一篇导航项 */
+function pagerItem(doc: DocTree[string]): PagerItem {
+  return { title: doc.sy.Properties?.title ?? doc.docBlock.hpath, url: `${doc.docBlock.hpath}.html` }
 }
 export type Build = typeof build
 /** 根据配置文件进行编译
@@ -151,9 +156,24 @@ export function build (config:Config,otherConfig?: {
           return '/** skip */'
         }
         const renderInstance = yield* getRender
+        /** 上一篇/下一篇：按文档路径顺序排列，与侧边栏文档树的默认顺序一致 */
+        const docPaths = Object.keys(docTree).sort((a, b) => a.localeCompare(b))
+        const docIndex = docPaths.indexOf(path)
+        renderInstance.pager = {
+          prev: docIndex > 0 ? pagerItem(docTree[docPaths[docIndex - 1]]) : undefined,
+          next:
+            docIndex < docPaths.length - 1
+              ? pagerItem(docTree[docPaths[docIndex + 1]])
+              : undefined,
+        }
         try {
           const rootLevel = path.split('/').length - 2 /** 最开头有一个 /  还有一个 data 目录所以减二 */
-          const htmlContent = yield* _renderHTML(sy, renderInstance)
+          const htmlContent = yield* Effect.sandbox(_renderHTML(sy, renderInstance)).pipe(
+            Effect.catch((cause) => {
+              effectLog.log(`${path} 渲染失败: ${Cause.pretty(cause)}`)
+              return Effect.succeed('')
+            }),
+          )
 
           const pageUrl = config.sitemap.siteLink
             ? `${config.sitemap.siteLink}${path}.html`
@@ -172,8 +192,10 @@ export function build (config:Config,otherConfig?: {
               },
             },
             {
-              ...tempConfig.cdn,
+              publicZip: config.cdn.publicZip ?? tempConfig.cdn.publicZip,
+              siyuanPrefix: config.cdn.siyuanPrefix ?? tempConfig.cdn.siyuanPrefix,
               embedCode: config.embedCode,
+              site: config.site,
             },
           ))
           /** rss.xml 生成 */
@@ -210,6 +232,28 @@ export function build (config:Config,otherConfig?: {
     const renderEndTime = Date.now()
     const renderDuration = ((renderEndTime - renderStartTime) / 1000).toFixed(2)
     effectLog.log( `=== 文档渲染完毕，共 ${Object.keys(docTree).length+1}篇，耗时: ${renderDuration}秒 ===`)
+    /** 渲染告警汇总：相同内容合并计数，只展示前几条 */
+    if (warnLog.length) {
+      /** 按告警种类（首个空格前的关键词）分组计数 */
+      const grouped = new Map<string, number>()
+      for (const w of warnLog) {
+        const kind = w.split(/\s|\[/)[0]
+        grouped.set(kind, (grouped.get(kind) ?? 0) + 1)
+      }
+      const top = [...grouped.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10)
+      effectLog.log(`=== 渲染告警 ${warnLog.length} 条 ===`)
+      for (const [kind, count] of top) effectLog.log(`  ${kind}: ${count}`)
+      for (const w of warnLog.slice(0, 3)) effectLog.log(`  eg. ${w.slice(0, 200)}`)
+    }
+    effectLog.log( `=== 开始生成标签页 ===`)
+    const renderInstance = yield* getRender
+    Object.assign(
+      fileTree,
+      yield* Effect.tryPromise(() =>
+        renderTagPages(docTree, renderInstance, config.site),
+      ),
+    )
+    effectLog.log( `=== 标签页生成完成 ===`)
     effectLog.log( `=== 开始生成 sitemap.xml ===`)
     if (config.sitemap.enable) {
       fileTree['sitemap.xml'] = sitemap_xml(Doc_blocks, config.sitemap)
@@ -305,7 +349,7 @@ export function build (config:Config,otherConfig?: {
         downloadZIP(fileTree, {
           // TODO 这里应该移出来成为全局的写选项
           withoutZip: tempConfig.withoutPublicZip,
-          publicZip: tempConfig.cdn.publicZip,
+          publicZip: config.cdn.publicZip ?? tempConfig.cdn.publicZip,
         })
       )
     }

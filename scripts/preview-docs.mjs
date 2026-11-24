@@ -7,8 +7,13 @@ import { extname, join, normalize } from 'node:path'
 
 const port = 8931
 /** 线上站点把 public/notebook 部署在 /notebook/ 前缀下；同时模拟 jsdelivr CDN 的 gh 路径 */
+/** 思源静态资源目录：线上由 jsdelivr gh CDN 提供，本地预览一律映射到这里 */
+const notebookDir = '/home/gs/opensource_code/oceanpress/apps/frontend/public/notebook'
+/** 产物里 jsdelivr gh CDN 的任意版本地址前缀 */
+const CDN_RE = /https:\/\/(?:fastly\.)?jsdelivr\.net\/gh\/siyuan-note\/oceanpress@[\w.\-]+\/apps\/frontend\/public\/notebook\//g
+
 const roots = [
-  { prefix: '/notebook/', dir: '/home/gs/opensource_code/oceanpress/apps/frontend/public/notebook' },
+  { prefix: '/notebook/', dir: notebookDir },
   { prefix: '/public-mock/', dir: '/home/gs/opensource_code/oceanpress/apps/frontend/public' },
   { prefix: '/', dir: '/home/gs/opensource_code/doc/docs' },
 ]
@@ -40,7 +45,11 @@ createServer(async (req, res) => {
     }
     const s = await stat(filePath).catch(() => null)
     if (s?.isDirectory()) filePath = join(filePath, 'index.html')
-    const content = await readFile(filePath)
+    let content = await readFile(filePath)
+    /** html 里的 CDN 地址改写为本地 /notebook/ 前缀，未发版的主题改动也能即时预览 */
+    if (extname(filePath) === '.html') {
+      content = Buffer.from(content.toString('utf8').replace(CDN_RE, '/notebook/'))
+    }
     res.writeHead(200, {
       'content-type': MIME[extname(filePath)] ?? 'application/octet-stream',
       'cache-control': 'no-store',

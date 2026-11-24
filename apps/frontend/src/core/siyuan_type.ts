@@ -125,8 +125,26 @@ export interface S_Node {
     updated: "20230820185054";
     "parent-style"?: "max-width: 137px;";
     style?: "display: block;";
+    /** 思源插件可写入任意自定义属性（custom-*、memo、alt 等） */
+    [k: string]: string | undefined;
   };
-  TextMarkType?: "block-ref" | "a" | "tag" | "inline-math" | "inline-memo";
+  /** 行内标记类型，多个标记以空格分隔，如 `a sub`、`strong em` */
+  TextMarkType?:
+    | "block-ref"
+    | "a"
+    | "tag"
+    | "inline-math"
+    | "inline-memo"
+    | "strong"
+    | "em"
+    | "u"
+    | "s"
+    | "mark"
+    | "sup"
+    | "sub"
+    | "kbd"
+    | "code"
+    | "file-annotation-ref";
   TextMarkAHref?: string;
   TextMarkATitle?: string;
   TextMarkInlineMathContent?: string;
@@ -139,6 +157,12 @@ export interface S_Node {
   AttributeViewType?: string;
   CustomBlockFenceOffset?: number;
   CustomBlockInfo?: string;
+  /** 提示块类型：NOTE | TIP | IMPORTANT | WARNING | CAUTION 或自定义 */
+  CalloutType?: string;
+  CalloutTitle?: string;
+  CalloutIcon?: string;
+  /** 页签项标题（行级 markdown 源码） */
+  TabItemTitle?: string;
 }
 type NodeType = ValueKeys<typeof NodeType>;
 type ValueKeys<T> = keyof { [K in keyof T]: T[K] extends string ? K : never };
@@ -374,6 +398,20 @@ export const NodeType = {
   // 自定义块 https://,github.com/siyuan-note/siyuan/issues/8418 ;;;info
 
   NodeCustomBlock: 560, // 自定义块
+
+  // 提示块（GFM Alert） > [!NOTE]
+
+  NodeCallout: 565, // 提示块
+
+  // 页签块 ::: tabs / @tab
+
+  NodeTabs: 570, // 页签容器
+  NodeTabItem: 571, // 页签项
+
+  // 思维导图节点（旧版以带 custom-sy-list-mindmap 属性的列表存储）
+
+  NodeMindmap: 575, // 思维导图容器
+  NodeMindmapItem: 576, // 思维导图节点
 
   NodeTypeMaxVal: 1024, // 节点类型最大值
 };

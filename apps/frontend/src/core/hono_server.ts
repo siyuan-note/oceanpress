@@ -102,6 +102,7 @@ function renderHtmlByUriPath(path: string) {
         {
           ...tempConfig.cdn,
           embedCode: currentConfig.value.embedCode,
+          site: currentConfig.value.site,
         },
       ),
     )

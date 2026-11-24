@@ -55,10 +55,7 @@ export function renderDocTree() {
   /** svg 图标，与思源 material icon.js 中的 symbol id 对应 */
   const ICONS = {
     arrow: '<svg><use xlink:href="#iconRight"></use></svg>',
-    folder: '<svg><use xlink:href="#iconFolder"></use></svg>',
-    file: '<svg><use xlink:href="#iconFile"></use></svg>',
-    title: '<svg><use xlink:href="#iconFiles"></use></svg>',
-    menu: '<svg><use xlink:href="#iconMenu"></use></svg>'
+    title: '<svg><use xlink:href="#iconFiles"></use></svg>'
   };
 
   /** 获取当前页面对应的树节点 hpath（去除 .html / index.html 后缀并解码中文） */
@@ -122,13 +119,15 @@ export function renderDocTree() {
       if (isOpen) classes.push('b3-list-item--open');
       if (isCurrent) classes.push('b3-list-item--focus');
 
+      /** 与思源文档树一致：只用箭头表达“有子节点”，叶子节点不占位也不渲染类型图标 */
       const arrow = hasChildren
         ? '<span class="b3-list-item__toggle" data-op="toggle" role="button" aria-label="展开/折叠"><span class="b3-list-item__arrow">' + ICONS.arrow + '</span></span>'
-        : '<span class="b3-list-item__arrow b3-list-item__arrow--placeholder">' + ICONS.arrow + '</span>';
+        : '';
 
-      const icon = '<span class="b3-list-item__icon" aria-hidden="true">' + (hasChildren ? ICONS.folder : ICONS.file) + '</span>';
       const text = '<span class="b3-list-item__text" title="' + escapeHtml(node.title) + '">' + escapeHtml(node.title) + '</span>';
-      const link = '<a class="b3-list-item__link" data-op="link" href="' + encodeURI(node.hpath) + '.html" target="_top">' + icon + text + '</a>';
+      /** 站点根前缀由页面注入（如 tags/ 子目录页为 ../），保证子目录页面与子路径部署下链接正确 */
+      const root = typeof window !== 'undefined' && typeof window.__OP_ROOT__ === 'string' ? window.__OP_ROOT__ : '';
+      const link = '<a class="b3-list-item__link' + (hasChildren ? '' : ' b3-list-item__link--leaf') + '" data-op="link" href="' + root + encodeURI(node.hpath) + '.html" target="_top">' + text + '</a>';
 
       html += '<li class="' + classes.join(' ') + '" data-hpath="' + escapeHtml(node.hpath) + '">' + arrow + link + '</li>';
 
@@ -155,12 +154,8 @@ export function renderDocTree() {
     // 生成 HTML
     container.innerHTML = generateHTMLTree(docTreeData, currentPath, openSet, false);
 
-    // 加载样式
-    loadStyles();
-
-    // 初始化交互
+    // 初始化交互（样式 docTree.css 由页面模板统一引入，移动端抽屉由 main.js 负责）
     initInteractions(container, openSet);
-    initDrawer();
 
     // 自动滚动到当前页面
     const firstCurrent = container.querySelector('.b3-list-item--focus');
@@ -169,18 +164,6 @@ export function renderDocTree() {
         firstCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
     }
-  }
-
-  // 加载样式
-  function loadStyles() {
-    if (document.getElementById('oceanpress-doctree-styles')) return;
-
-    const link = document.createElement('link');
-    link.id = 'oceanpress-doctree-styles';
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = '${tempConfig.cdn.siyuanPrefix}appearance/docTree.css';
-    document.head.appendChild(link);
   }
 
   // 初始化交互：事件委托处理展开/折叠
@@ -209,35 +192,6 @@ export function renderDocTree() {
         openSet.delete(hpath);
       }
       saveOpenState(openSet);
-    });
-  }
-
-  // 移动端抽屉交互
-  function initDrawer() {
-    const sidebar = document.getElementById('oceanpress-left-sidebar');
-    if (!sidebar) return;
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
-    if (document.getElementById('oceanpress-sidebar-fab')) return;
-
-    const fab = document.createElement('button');
-    fab.id = 'oceanpress-sidebar-fab';
-    fab.type = 'button';
-    fab.setAttribute('aria-label', '打开目录');
-    fab.innerHTML = ICONS.menu;
-    fab.addEventListener('click', function (e) {
-      e.stopPropagation();
-      sidebar.classList.add('oceanpress-sidebar--visible');
-      document.body.classList.add('oceanpress-drawer-open');
-    });
-    document.body.appendChild(fab);
-
-    // 点击抽屉外区域关闭
-    document.addEventListener('click', function (e) {
-      if (sidebar.classList.contains('oceanpress-sidebar--visible') &&
-          !sidebar.contains(e.target) && e.target !== fab && !fab.contains(e.target)) {
-        sidebar.classList.remove('oceanpress-sidebar--visible');
-        document.body.classList.remove('oceanpress-drawer-open');
-      }
     });
   }
 
