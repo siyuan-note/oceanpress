@@ -388,6 +388,197 @@
   }
 
   /* ---------- 移动端抽屉 ---------- */
+  /* ---------- 水墨小品：亭台 + 莲荷，每次刷新按随机种子重新布局 ---------- */
+  /** 小品画布高：横屏宽 1600，竖屏宽 760（否则按 slice 裁切后两侧的亭子、莲荷会被裁掉） */
+  var GARDEN_HEIGHT = 420;
+  var GARDEN_WIDTH = { landscape: 1600, portrait: 760 };
+  var INK = 'var(--op-text)';
+
+  /** mulberry32：由种子生成可复现的 0~1 随机数 */
+  function seededRandom(seed) {
+    return function () {
+      seed = (seed + 0x6D2B79F5) | 0;
+      var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function pick(r, list) { return list[Math.floor(r() * list.length)]; }
+  function between(r, a, b) { return a + r() * (b - a); }
+  function num(n) { return Math.round(n * 10) / 10; }
+
+  /** 一段带飞檐的屋顶：两端翘起、中间起脊，宽 half*2，檐口在 y=0，脊高 rise */
+  function roofPath(half, rise) {
+    return 'M' + num(-half) + ' 0C' + num(-half * 0.7) + ' ' + num(-rise * 0.15) + ' ' + num(-half * 0.3) + ' ' + num(-rise * 0.85) + ' 0 ' + num(-rise) +
+      'C' + num(half * 0.3) + ' ' + num(-rise * 0.85) + ' ' + num(half * 0.7) + ' ' + num(-rise * 0.15) + ' ' + num(half) + ' 0' +
+      'L' + num(half * 0.86) + ' ' + num(rise * 0.1) +
+      'C' + num(half * 0.55) + ' ' + num(-rise * 0.25) + ' ' + num(half * 0.25) + ' ' + num(-rise * 0.38) + ' 0 ' + num(-rise * 0.38) +
+      'C' + num(-half * 0.25) + ' ' + num(-rise * 0.38) + ' ' + num(-half * 0.55) + ' ' + num(-rise * 0.25) + ' ' + num(-half * 0.86) + ' ' + num(rise * 0.1) + 'Z';
+  }
+
+  /** 一层屋身：yTop 到 yBot 之间立柱 + 窗棂，宽 half*2 */
+  function storeyMarkup(half, yTop, yBot, dense) {
+    var out = '';
+    var xs = [-half * 0.72, -half * 0.24, half * 0.24, half * 0.72];
+    xs.forEach(function (x) {
+      out += '<path d="M' + num(x) + ' ' + num(yTop) + 'V' + num(yBot) + '" stroke-width="2.6"/>';
+    });
+    if (dense) {
+      out += '<path d="M' + num(-half * 0.24) + ' ' + num(yTop + 4) + 'H' + num(half * 0.24) + 'V' + num(yBot - 3) + 'H' + num(-half * 0.24) + 'Z" stroke-width="1.3"/>';
+      for (var k = 1; k < 3; k++) {
+        out += '<path d="M' + num(-half * 0.24 + half * 0.16 * k) + ' ' + num(yTop + 4) + 'V' + num(yBot - 3) + '" stroke-width="0.9"/>';
+      }
+      out += '<path d="M' + num(-half * 0.24) + ' ' + num((yTop + yBot) / 2) + 'H' + num(half * 0.24) + '" stroke-width="0.9"/>';
+    }
+    return '<g fill="none" stroke="' + INK + '" stroke-opacity="0.9" stroke-linecap="round">' + out + '</g>';
+  }
+
+  /** 一座亭/阁：storeys 层，放在 (x, y) 处（y 为台基底）。返回 {markup, top} */
+  function pavilion(x, y, scale, storeys, r) {
+    var half = between(r, 46, 58);
+    var body = between(r, 30, 38);
+    var out = '';
+    var cursor = 0;
+    for (var k = 0; k < storeys; k++) {
+      var rise = half * between(r, 0.3, 0.38);
+      out += storeyMarkup(half, -(cursor + body), -cursor, k === 0 && storeys > 1) +
+        '<path d="' + roofPath(half * (k === 0 ? 1 : 0.92), rise) + '" transform="translate(0 ' + num(-(cursor + body)) + ')" fill="' + INK + '" fill-opacity="0.82"/>';
+      cursor += body + rise * 0.62 + 2;
+      half *= 0.68;
+      body *= 0.78;
+    }
+    out += '<path d="M0 ' + num(-cursor - 1) + 'V' + num(-cursor - 11) + '" stroke-width="1.8"/>' +
+      '<circle cx="0" cy="' + num(-cursor - 13) + '" r="2.6" fill="' + INK + '" stroke="none"/>';
+    // 台基 + 踏步
+    var base = half / 0.68 / 0.68 * 1.12;
+    out += '<path d="M' + num(-base) + ' 0H' + num(base) + 'M' + num(-base * 0.5) + ' 6H' + num(base * 0.5) + 'M' + num(-base * 0.3) + ' 12H' + num(base * 0.3) + '" stroke-width="2"/>';
+    return '<g transform="translate(' + num(x) + ' ' + num(y) + ') scale(' + num(scale) + ')" fill="none" stroke="' + INK + '" stroke-opacity="0.9" stroke-linecap="round">' +
+      out + '</g>';
+  }
+
+  /** 亭子脚下的一块坡石：轮廓不规则，内部几道皴笔 */
+  function rockMarkup(x, y, w, h, r) {
+    var d = 'M' + num(x - w / 2) + ' ' + num(y);
+    for (var k = 0; k <= 6; k++) {
+      var px = x - w / 2 + w * k / 6;
+      var py = y - h * Math.sin(Math.PI * k / 6) * between(r, 0.7, 1.1);
+      d += 'Q' + num(px - w / 14) + ' ' + num(py - between(r, 0, 8)) + ' ' + num(px) + ' ' + num(py);
+    }
+    d += 'L' + num(x + w / 2) + ' ' + num(y) + 'Z';
+    var texture = '';
+    for (var j = 0; j < 5; j++) {
+      var tx = x - w * 0.35 + w * 0.7 * r();
+      var ty = y - h * between(r, 0.15, 0.5);
+      texture += '<path d="M' + num(tx) + ' ' + num(ty) + 'l' + num(between(r, 6, 16)) + ' ' + num(between(r, 4, 10)) + '"/>';
+    }
+    return '<g fill="' + INK + '" fill-opacity="0.16" stroke="' + INK + '" stroke-opacity="0.7" stroke-linecap="round">' +
+      '<path d="' + d + '" stroke-width="1.8"/><g fill="none" stroke-width="1">' + texture + '</g></g>';
+  }
+
+  /** 一片荷叶：带缺口的波浪圆 + 放射叶脉。俯视略压扁，tilt 为倾角 */
+  function lotusLeaf(cx, cy, radius, r) {
+    var squash = between(r, 0.42, 0.6);
+    var notch = between(r, 0, Math.PI * 2);
+    var steps = 26;
+    var d = 'M0 0';
+    for (var k = 0; k <= steps; k++) {
+      var a = notch + 0.3 + (Math.PI * 2 - 0.6) * k / steps;
+      var rr = radius * (1 + 0.07 * Math.sin(a * 3 + notch));
+      d += 'L' + num(Math.cos(a) * rr) + ' ' + num(Math.sin(a) * rr);
+    }
+    var veins = '';
+    for (var j = 1; j < 9; j++) {
+      var va = notch + 0.3 + (Math.PI * 2 - 0.6) * j / 9;
+      veins += '<path d="M0 0L' + num(Math.cos(va) * radius * 0.9) + ' ' + num(Math.sin(va) * radius * 0.9) + '"/>';
+    }
+    return '<g transform="translate(' + num(cx) + ' ' + num(cy) + ') rotate(' + num(between(r, -10, 10)) + ') scale(1 ' + num(squash) + ')">' +
+      '<path d="' + d + 'Z" fill="' + INK + '" fill-opacity="' + num(between(r, 0.62, 0.85)) + '" stroke="' + INK + '" stroke-opacity="0.8" stroke-width="1.2"/>' +
+      '<g fill="none" stroke="' + INK + '" stroke-opacity="0.3" stroke-width="0.7">' + veins + '</g>' +
+      '<circle r="' + num(radius * 0.07) + '" fill="' + INK + '" fill-opacity="0.6"/></g>';
+  }
+
+  /** 一朵莲花：n 瓣展开，高约 h，底在 (0,0)，朝上 */
+  function lotusFlower(h, n, r) {
+    var out = '';
+    for (var k = 0; k < n; k++) {
+      var a = -90 + (k - (n - 1) / 2) * between(r, 20, 28);
+      var w = h * between(r, 0.26, 0.34);
+      out += '<path transform="rotate(' + num(a + 90) + ')" d="M0 0C' + num(-w) + ' ' + num(-h * 0.45) + ' ' + num(-w * 0.7) + ' ' + num(-h * 0.95) + ' 0 ' + num(-h) +
+        'C' + num(w * 0.7) + ' ' + num(-h * 0.95) + ' ' + num(w) + ' ' + num(-h * 0.45) + ' 0 0Z" fill="' + INK + '" fill-opacity="' + num(between(r, 0.85, 1)) + '"/>';
+    }
+    return out;
+  }
+
+  /** 一丛莲荷：以 x 为中心、贴着画布底边 yBot，count 片叶、flowers 朵花 */
+  function lotusCluster(x, yBot, spread, count, flowers, r) {
+    var out = '';
+    var stems = '';
+    var heads = [];
+    for (var k = 0; k < count; k++) {
+      heads.push({ x: x + between(r, -spread, spread), y: yBot - between(r, 8, 95), radius: between(r, 20, 46), flower: false });
+    }
+    for (var f = 0; f < flowers; f++) {
+      heads.push({ x: x + between(r, -spread * 0.7, spread * 0.7), y: yBot - between(r, 70, 125), radius: 0, flower: true });
+    }
+    // 远的（高且小）先画，近的盖在上面
+    heads.sort(function (a, b) { return b.radius - a.radius; });
+    heads.forEach(function (hd) {
+      var foot = hd.x + between(r, -14, 14);
+      var bend = between(r, -22, 22);
+      stems += '<path d="M' + num(foot) + ' ' + (yBot + 6) + 'Q' + num((foot + hd.x) / 2 + bend) + ' ' + num((yBot + hd.y) / 2) + ' ' + num(hd.x) + ' ' + num(hd.y) + '"/>';
+      out += hd.flower
+        ? '<g transform="translate(' + num(hd.x) + ' ' + num(hd.y + 3) + ') rotate(' + num(between(r, -12, 12)) + ')">' + lotusFlower(between(r, 20, 30), pick(r, [5, 7, 9]), r) + '</g>'
+        : lotusLeaf(hd.x, hd.y, hd.radius, r);
+    });
+    return '<g fill="none" stroke="' + INK + '" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round">' + stems + '</g>' + out;
+  }
+
+  /** 整幅小品：随机决定亭子落在哪一侧、几层，莲荷在对侧和近处各一丛。横向位置全部按画布宽 w 取比例 */
+  function gardenMarkup(w) {
+    var r = seededRandom((Math.random() * 4294967296) >>> 0);
+    var right = r() < 0.5;
+    var px = w * (right ? between(r, 0.74, 0.86) : between(r, 0.14, 0.26));
+    var lx = w * (right ? between(r, 0.075, 0.19) : between(r, 0.81, 0.925));
+    var narrow = w < 1000;
+    var base = 392;
+    var out = '';
+    // 远处一座小亭，若隐若现
+    if (!narrow && r() < 0.55) {
+      var fx = w * (right ? between(r, 0.325, 0.44) : between(r, 0.56, 0.675));
+      out += '<g opacity="0.38">' + pavilion(fx, base - 18, 0.45, pick(r, [1, 1, 2]), r) + '</g>';
+    }
+    out += rockMarkup(px, base + 6, between(r, 170, 230), between(r, 22, 34), r);
+    out += pavilion(px, base - between(r, 6, 14), between(r, 0.95, 1.15), pick(r, [1, 1, 2]), r);
+    out += lotusCluster(lx, base, between(r, 70, 110), Math.floor(between(r, 4, 8)), Math.floor(between(r, 1, 3.4)), r);
+    if (narrow || r() < 0.6) {
+      var nx = w * between(r, 0.39, 0.61);
+      out += lotusCluster(nx, base + 10, between(r, 40, 70), Math.floor(between(r, 2, 5)), Math.floor(between(r, 0.6, 2.2)), r);
+    }
+    return '<svg viewBox="0 0 ' + w + ' ' + GARDEN_HEIGHT + '" preserveAspectRatio="xMidYMax slice">' +
+      '<defs><filter id="op-garden-ink" x="-5%" y="-5%" width="110%" height="110%">' +
+      '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="' + Math.floor(r() * 90) + '" result="n"/>' +
+      '<feDisplacementMap in="SourceGraphic" in2="n" scale="7"/>' +
+      '<feGaussianBlur stdDeviation="0.5"/></filter></defs>' +
+      '<g filter="url(#op-garden-ink)">' + out + '</g></svg>';
+  }
+
+  function initInkGarden() {
+    var garden = document.createElement('div');
+    garden.id = 'op-ink-garden';
+    garden.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(garden);
+    var orientation = '';
+    /** 横竖屏画布不同，跨过宽高比分界时重新画一幅（同一朝向内调整窗口不重画） */
+    function draw() {
+      var next = window.innerWidth < 900 ? 'portrait' : 'landscape';
+      if (next === orientation) return;
+      orientation = next;
+      garden.innerHTML = gardenMarkup(GARDEN_WIDTH[next]);
+    }
+    draw();
+    window.addEventListener('resize', draw);
+  }
+
   function initDrawer() {
     var btn = $('#op-menu-toggle');
     var sidebar = $('#oceanpress-left-sidebar');
@@ -782,6 +973,7 @@
     initTheme();
     initInkWatermark();
     initInkScene();
+    initInkGarden();
     initDrawer();
     initScroll();
     initAnchors();
